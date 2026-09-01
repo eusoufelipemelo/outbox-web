@@ -32,9 +32,11 @@ export async function proxy(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const { pathname } = request.nextUrl;
+  // Rotas do admin que funcionam sem sessão: login e definição de senha
   const isLogin = pathname === "/admin/login";
+  const isPublica = isLogin || pathname === "/admin/definir-senha";
 
-  if (!user && pathname.startsWith("/admin") && !isLogin) {
+  if (!user && pathname.startsWith("/admin") && !isPublica) {
     const url = request.nextUrl.clone();
     url.pathname = "/admin/login";
     url.searchParams.set("next", pathname);
