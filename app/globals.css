@@ -186,9 +186,9 @@ body {
   transform: rotate(8deg);
   background: radial-gradient(
     ellipse at 58% 46%,
-    rgba(255, 150, 70, 0.30) 0%,
-    rgba(228, 108, 44, 0.17) 34%,
-    rgba(130, 52, 18, 0.06) 58%,
+    rgba(255, 150, 70, 0.42) 0%,
+    rgba(228, 108, 44, 0.24) 34%,
+    rgba(130, 52, 18, 0.09) 58%,
     transparent 76%
   );
 }
@@ -201,8 +201,8 @@ body {
   transform: rotate(-10deg);
   background: radial-gradient(
     ellipse at 60% 48%,
-    rgba(236, 104, 44, 0.15) 0%,
-    rgba(120, 40, 12, 0.05) 44%,
+    rgba(236, 104, 44, 0.21) 0%,
+    rgba(120, 40, 12, 0.08) 44%,
     transparent 72%
   );
 }
@@ -214,7 +214,7 @@ body {
   border-radius: 50% 50% 56% 44% / 52% 48% 52% 48%;
   background: radial-gradient(
     ellipse at 50% 60%,
-    rgba(255, 140, 66, 0.13) 0%,
+    rgba(255, 140, 66, 0.18) 0%,
     transparent 68%
   );
 }
