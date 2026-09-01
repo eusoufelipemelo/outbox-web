@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Clock } from "lucide-react";
 import { getPublishedPosts, formatDate, type Post } from "@/lib/blog";
+import RevealTitle from "@/components/ui/reveal-title";
 
 export default async function BlogSection() {
   const { posts } = await getPublishedPosts(3);
@@ -19,9 +20,12 @@ export default async function BlogSection() {
               />
               Blog
             </span>
-            <h2 className="reveal-words mt-6 font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white">
+            <RevealTitle
+              as="h2"
+              className="mt-6 font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white"
+            >
               O que a gente aprende, a gente compartilha.
-            </h2>
+            </RevealTitle>
           </div>
 
           <Link

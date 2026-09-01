@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { SERVICES } from "@/lib/site";
 import { whatsappLink } from "@/lib/site";
+import RevealTitle from "@/components/ui/reveal-title";
 
 const ICONS = {
   sistemas: Code2,
@@ -34,9 +35,12 @@ export default function Services() {
             />
             O que fazemos
           </span>
-          <h2 className="reveal-words mt-6 font-display text-[clamp(2rem,4.6vw,3.4rem)] leading-[1.06] text-white">
+          <RevealTitle
+            as="h2"
+            className="mt-6 font-display text-[clamp(2rem,4.6vw,3.4rem)] leading-[1.06] text-white"
+          >
             Quatro frentes para tirar a sua empresa do lugar comum.
-          </h2>
+          </RevealTitle>
           <p className="reveal mt-5 text-[17px] leading-relaxed text-[var(--color-fg-muted)]">
             Cada projeto começa entendendo onde está o gargalo do seu negócio.
             Depois a gente escolhe a ferramenta certa, não a mais cara.

@@ -5,7 +5,7 @@ import Services from "@/components/site/Services";
 import Process from "@/components/site/Process";
 import Comparison from "@/components/site/Comparison";
 import AboutFelipe from "@/components/site/AboutFelipe";
-import Testimonials from "@/components/site/Testimonials";
+import Testimonials3D from "@/components/site/Testimonials3D";
 import BlogSection from "@/components/site/BlogSection";
 import Faq from "@/components/site/Faq";
 import ContactForm from "@/components/site/ContactForm";
@@ -25,7 +25,7 @@ export default function Home() {
         <Process />
         <Comparison />
         <AboutFelipe />
-        <Testimonials />
+        <Testimonials3D />
         <BlogSection />
         <Faq />
         <ContactForm />

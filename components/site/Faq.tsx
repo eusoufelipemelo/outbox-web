@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import { FAQ } from "@/lib/site";
+import RevealTitle from "@/components/ui/reveal-title";
 
 export default function Faq() {
   const [open, setOpen] = useState<number | null>(0);
@@ -19,9 +20,12 @@ export default function Faq() {
               />
               Dúvidas frequentes
             </span>
-            <h2 className="reveal-words mt-6 max-w-[16ch] font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white">
+            <RevealTitle
+              as="h2"
+              className="mt-6 max-w-[16ch] font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white"
+            >
               Perguntas que sempre chegam por aqui.
-            </h2>
+            </RevealTitle>
             <p className="reveal mt-5 max-w-[42ch] leading-relaxed text-[var(--color-fg-muted)]">
               Se a sua dúvida não estiver na lista, é só chamar no WhatsApp que
               a gente responde de verdade, sem robô.

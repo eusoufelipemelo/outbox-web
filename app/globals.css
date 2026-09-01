@@ -40,14 +40,27 @@
   --radius-xl2: 28px;
 
   /* --- Animações --- */
-  --animate-marquee: marquee 42s linear infinite;
+  --animate-marquee: marquee var(--duration, 42s) linear infinite;
+  --animate-marquee-vertical: marquee-vertical var(--duration, 40s) linear infinite;
   --animate-pulse-dot: pulse-dot 2.4s ease-in-out infinite;
   --animate-float: float 7s ease-in-out infinite;
 }
 
 @keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
   to {
-    transform: translateX(-50%);
+    transform: translateX(calc(-100% - var(--gap, 1rem)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap, 1rem)));
   }
 }
 @keyframes pulse-dot {
@@ -633,4 +646,11 @@ header,
 footer {
   position: relative;
   z-index: 1;
+}
+
+/* Marquee da faixa de frases: percorre metade da lista duplicada */
+@keyframes mini-marquee {
+  to {
+    transform: translateX(-50%);
+  }
 }

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Quote } from "lucide-react";
 import { SITE } from "@/lib/site";
+import RevealTitle from "@/components/ui/reveal-title";
 
 const MARCAS = [
   "Casa46",
@@ -26,10 +27,10 @@ export default function AboutFelipe() {
               />
               <div className="relative overflow-hidden rounded-[var(--radius-xl2)] border border-white/10">
                 <Image
-                  src="/img/team-felipe.jpg"
+                  src="/img/felipe-retrato.jpg"
                   alt="Felipe Melo, fundador da OutBox Group"
-                  width={840}
-                  height={1050}
+                  width={1128}
+                  height={1400}
                   className="h-auto w-full object-cover"
                   sizes="(max-width: 1024px) 90vw, 420px"
                 />
@@ -50,7 +51,7 @@ export default function AboutFelipe() {
               {/* Selo de anos */}
               <div className="absolute -right-3 -top-3 rounded-2xl border border-[var(--color-brand)]/40 bg-black/80 px-4 py-3 text-center backdrop-blur-sm">
                 <span className="block font-display text-[26px] leading-none text-[var(--color-brand)]">
-                  10
+                  15
                 </span>
                 <span className="mt-1 block text-[10.5px] uppercase tracking-widest text-white/60">
                   anos de estrada
@@ -69,9 +70,12 @@ export default function AboutFelipe() {
               Quem está por trás
             </span>
 
-            <h2 className="reveal-words mt-6 max-w-[18ch] font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white">
+            <RevealTitle
+              as="h2"
+              className="mt-6 max-w-[18ch] font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white"
+            >
               Você não fala com um robô. Fala comigo.
-            </h2>
+            </RevealTitle>
 
             <div className="reveal mt-6 flex flex-col gap-4 text-[16.5px] leading-relaxed text-[var(--color-fg-muted)]">
               <p>

@@ -6,6 +6,7 @@ import WhatsAppFloat from "@/components/site/WhatsAppFloat";
 import ScrollEffects from "@/components/ui/ScrollEffects";
 import { PostCard } from "@/components/site/BlogSection";
 import { getPublishedPosts } from "@/lib/blog";
+import RevealTitle from "@/components/ui/reveal-title";
 
 export const revalidate = 60;
 
@@ -35,9 +36,12 @@ export default async function BlogPage() {
               />
               Blog da OutBox
             </span>
-            <h1 className="reveal-words mx-auto mt-7 max-w-[18ch] font-display text-[clamp(2.2rem,5.5vw,4rem)] leading-[1.04] text-white">
+            <RevealTitle
+              as="h1"
+              className="mx-auto mt-7 max-w-[18ch] font-display text-[clamp(2.2rem,5.5vw,4rem)] leading-[1.04] text-white"
+            >
               Ideias que fazem a sua marca crescer.
-            </h1>
+            </RevealTitle>
             <p className="reveal mx-auto mt-6 max-w-[58ch] text-[17px] leading-relaxed text-[var(--color-fg-muted)]">
               Performance, SEO, GEO, branding e tecnologia explicados sem
               jargão, do jeito que a gente conversa com os nossos clientes.

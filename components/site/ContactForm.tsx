@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowUpRight, Check, Loader2, Video } from "lucide-react";
 import { SERVICE_OPTIONS, SITE, whatsappLink } from "@/lib/site";
+import RevealTitle from "@/components/ui/reveal-title";
 
 type Status = "idle" | "sending" | "ok" | "error";
 
@@ -62,9 +63,12 @@ export default function ContactForm() {
               Vamos conversar
             </span>
 
-            <h2 className="reveal-words mt-6 max-w-[16ch] font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] text-white">
+            <RevealTitle
+              as="h2"
+              className="mt-6 max-w-[16ch] font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] text-white"
+            >
               Conte o que você precisa. A gente responde rápido.
-            </h2>
+            </RevealTitle>
 
             <p className="mt-5 max-w-[46ch] leading-relaxed text-[var(--color-fg-muted)]">
               Preencha o formulário e diga qual serviço faz sentido para o seu

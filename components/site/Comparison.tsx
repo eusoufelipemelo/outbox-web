@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Check, X } from "lucide-react";
 import { COMPARISON } from "@/lib/site";
+import RevealTitle from "@/components/ui/reveal-title";
 
 export default function Comparison() {
   return (
@@ -14,9 +15,12 @@ export default function Comparison() {
             />
             Nosso diferencial
           </span>
-          <h2 className="reveal-words mt-6 font-display text-[clamp(1.9rem,4.4vw,3.2rem)] leading-[1.07] text-white">
+          <RevealTitle
+            as="h2"
+            className="mt-6 font-display text-[clamp(1.9rem,4.4vw,3.2rem)] leading-[1.07] text-white"
+          >
             A diferença entre ter um site e ser encontrado.
-          </h2>
+          </RevealTitle>
         </div>
 
         <div className="mx-auto mt-14 grid max-w-[900px] gap-5 md:grid-cols-2">

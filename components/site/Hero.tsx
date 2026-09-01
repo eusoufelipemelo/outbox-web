@@ -4,7 +4,7 @@ import { ArrowUpRight, Sparkles } from "lucide-react";
 
 const STATS = [
   { value: "250+", label: "Projetos entregues", highlight: false },
-  { value: "10 anos", label: "De estrada em criação", highlight: true },
+  { value: "15 anos", label: "De estrada em criação", highlight: true },
   { value: "500+", label: "Clientes atendidos", highlight: false },
 ];
 

@@ -1,5 +1,6 @@
 import { PROCESS } from "@/lib/site";
 import { Zap } from "lucide-react";
+import RevealTitle from "@/components/ui/reveal-title";
 
 export default function Process() {
   return (
@@ -17,9 +18,12 @@ export default function Process() {
                 <Zap className="h-3.5 w-3.5 text-[var(--color-brand)]" />
                 Nosso compromisso
               </span>
-              <h2 className="reveal-words mt-6 max-w-[20ch] font-display text-[clamp(1.8rem,4vw,3rem)] leading-[1.08] text-white">
+              <RevealTitle
+                as="h2"
+                className="mt-6 max-w-[20ch] font-display text-[clamp(1.8rem,4vw,3rem)] leading-[1.08] text-white"
+              >
                 Material completo na mão, projeto no ar em tempo recorde.
-              </h2>
+              </RevealTitle>
               <p className="mt-5 max-w-[54ch] leading-relaxed text-[var(--color-fg-muted)]">
                 O que mais atrasa um projeto não é a produção, é a espera por
                 texto, foto e informação. Por isso a nossa regra é clara: assim
@@ -60,9 +64,12 @@ export default function Process() {
             />
             Como funciona
           </span>
-          <h2 className="reveal-words mt-6 font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white">
+          <RevealTitle
+            as="h2"
+            className="mt-6 font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white"
+          >
             Um processo simples, do briefing ao ar.
-          </h2>
+          </RevealTitle>
         </div>
 
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
