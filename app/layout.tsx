@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SITE } from "@/lib/site";
+import CookieConsent from "@/components/site/CookieConsent";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     "GEO",
     "branding",
     "apresentação de negócios",
-    "Balneário Camboriú",
+    "Santa Cruz do Rio Pardo",
   ],
   authors: [{ name: SITE.name, url: SITE.url }],
   creator: SITE.name,
@@ -59,8 +60,8 @@ export default function RootLayout({
     telephone: SITE.phoneE164,
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Balneário Camboriú",
-      addressRegion: "SC",
+      addressLocality: "Santa Cruz do Rio Pardo",
+      addressRegion: "SP",
       addressCountry: "BR",
     },
     sameAs: [SITE.instagramBrand, SITE.instagramPersonal],
@@ -100,7 +101,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
       </head>
-      <body className="grain antialiased">{children}</body>
+      <body className="grain antialiased">
+        {children}
+        <CookieConsent />
+      </body>
     </html>
   );
 }

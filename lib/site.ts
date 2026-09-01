@@ -20,7 +20,8 @@ export const SITE = {
   instagramPersonal: "https://instagram.com/eusoufelipemelo",
   instagramPersonalHandle: "@eusoufelipemelo",
 
-  city: "Balneário Camboriú, SC",
+  city: "Santa Cruz do Rio Pardo, SP",
+  cnpj: "51.174.401/0001-07",
 } as const;
 
 /** Mensagem que já vai escrita quando o lead abre o WhatsApp. */
@@ -211,7 +212,7 @@ export const FAQ = [
     a: "Sim. Todo site que fazemos com blog vem com um painel administrativo personalizado, feito na identidade da sua marca. Você entra, escreve, sobe as imagens e publica. O post aparece no site na hora, sem depender da gente.",
   },
   {
-    q: "Vocês atendem empresas de fora de Balneário Camboriú?",
+    q: "Vocês atendem empresas de fora da região?",
     a: "Atendemos o Brasil inteiro. Todo o processo funciona por videochamada, WhatsApp e link de acompanhamento, então a distância não muda a qualidade nem o prazo.",
   },
   {
@@ -222,4 +223,12 @@ export const FAQ = [
     q: "E depois que o projeto vai ao ar?",
     a: "Continuamos por perto. Oferecemos hospedagem, manutenção e suporte para o seu projeto seguir no ar com segurança e desempenho. Você não fica sozinho depois da entrega.",
   },
+] as const;
+
+/** Documentos legais publicados no site. */
+export const LEGAL_LINKS = [
+  { href: "/privacidade", label: "Política de Privacidade" },
+  { href: "/termos", label: "Termos de Uso" },
+  { href: "/cookies", label: "Política de Cookies" },
+  { href: "/lgpd", label: "LGPD" },
 ] as const;

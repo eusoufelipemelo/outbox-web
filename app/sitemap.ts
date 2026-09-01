@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { SITE } from "@/lib/site";
+import { LEGAL_LINKS, SITE } from "@/lib/site";
 import { getPublishedPosts } from "@/lib/blog";
 
 export const revalidate = 3600;
@@ -15,6 +15,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    ...LEGAL_LINKS.map((l) => ({
+      url: `${SITE.url}${l.href}`,
+      lastModified: new Date(),
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
+    })),
   ];
 
   if (isDemo) return staticRoutes;

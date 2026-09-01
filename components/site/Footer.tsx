@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
-import { SITE, whatsappLink } from "@/lib/site";
+import { LEGAL_LINKS, SITE, whatsappLink } from "@/lib/site";
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -131,9 +131,27 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/8 pt-8 text-[13.5px] text-[var(--color-fg-subtle)] sm:flex-row">
-          <p>
+        {/* Links legais */}
+        <nav
+          aria-label="Documentos legais"
+          className="mt-12 flex flex-wrap justify-center gap-x-6 gap-y-2 border-t border-white/8 pt-8 text-[13.5px]"
+        >
+          {LEGAL_LINKS.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="cursor-pointer text-[var(--color-fg-muted)] transition-colors duration-200 hover:text-[var(--color-brand)]"
+            >
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="mt-8 flex flex-col items-center justify-between gap-3 text-[13.5px] text-[var(--color-fg-subtle)] sm:flex-row">
+          <p className="text-center sm:text-left">
             © {year} {SITE.name}. Todos os direitos reservados.
+            <br className="sm:hidden" />
+            <span className="sm:ml-2">CNPJ {SITE.cnpj}</span>
           </p>
           <p>
             Desenvolvido por{" "}

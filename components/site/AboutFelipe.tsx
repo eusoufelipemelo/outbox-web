@@ -16,23 +16,23 @@ export default function AboutFelipe() {
   return (
     <section id="sobre" className="relative overflow-hidden py-24 md:py-32">
       <div className="container-outbox relative z-10">
-        <div className="grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1fr]">
           {/* Retrato */}
           <div className="reveal relative">
-            <div className="relative mx-auto max-w-[420px]">
+            <div className="group relative mx-auto max-w-[540px]">
               {/* Moldura com brilho da marca */}
               <div
                 aria-hidden
-                className="absolute -inset-4 rounded-[36px] bg-gradient-to-br from-[var(--color-brand)]/25 via-transparent to-transparent blur-2xl"
+                className="absolute -inset-4 rounded-[36px] bg-gradient-to-br from-[var(--color-brand)]/25 via-transparent to-transparent opacity-70 blur-2xl transition-opacity duration-[900ms] group-hover:opacity-100"
               />
-              <div className="relative overflow-hidden rounded-[var(--radius-xl2)] border border-white/10">
+              <div className="relative overflow-hidden rounded-[var(--radius-xl2)] border border-white/10 transition-colors duration-500 group-hover:border-[var(--color-brand)]/40">
                 <Image
                   src="/img/felipe-retrato.jpg"
                   alt="Felipe Melo, fundador da OutBox Group"
                   width={1128}
                   height={1400}
-                  className="h-auto w-full object-cover"
-                  sizes="(max-width: 1024px) 90vw, 420px"
+                  className="h-auto w-full scale-[1.02] object-cover transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] group-hover:brightness-110 group-hover:saturate-[1.08]"
+                  sizes="(max-width: 1024px) 92vw, 540px"
                 />
                 <div
                   aria-hidden
@@ -79,9 +79,8 @@ export default function AboutFelipe() {
 
             <div className="reveal mt-6 flex flex-col gap-4 text-[16.5px] leading-relaxed text-[var(--color-fg-muted)]">
               <p>
-                Meu nome é Felipe Melo e eu toco a OutBox de{" "}
-                {SITE.city.replace(", SC", ", em Santa Catarina")}. Sou designer
-                e estrategista de marca, e passei os últimos anos ajudando
+                Meu nome é Felipe Melo e eu toco a OutBox. Sou designer e
+                estrategista de marca, e passei os últimos quinze anos ajudando
                 empresas a parecerem tão boas por fora quanto já são por dentro.
               </p>
               <p>

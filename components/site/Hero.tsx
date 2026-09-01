@@ -99,7 +99,7 @@ export default function Hero() {
           <span className="hidden h-1 w-1 rounded-full bg-white/20 sm:block" />
           <span>Atendimento em todo o Brasil</span>
           <span className="hidden h-1 w-1 rounded-full bg-white/20 sm:block" />
-          <span>Balneário Camboriú, SC</span>
+          <span>Santa Cruz do Rio Pardo, SP</span>
         </div>
 
         {/* Gente de verdade: quem faz e para quem a gente faz */}
