@@ -4,10 +4,6 @@ import { Zap } from "lucide-react";
 export default function Process() {
   return (
     <section id="processo" className="relative overflow-hidden py-24 md:py-32">
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="glow glow--warm absolute -right-40 top-20 h-[460px] w-[460px]" />
-      </div>
-
       <div className="container-outbox relative z-10">
         {/* Destaque do prazo */}
         <div className="reveal card-dark relative mb-16 overflow-hidden p-8 md:p-12">

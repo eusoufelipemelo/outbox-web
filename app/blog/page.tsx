@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Ambience from "@/components/site/Ambience";
 import Navbar from "@/components/site/Navbar";
 import Footer from "@/components/site/Footer";
 import WhatsAppFloat from "@/components/site/WhatsAppFloat";
@@ -20,16 +21,12 @@ export default async function BlogPage() {
 
   return (
     <>
+      <Ambience />
       <ScrollEffects />
       <Navbar />
 
       <main>
         <section className="relative overflow-hidden pt-40 pb-16 md:pt-48">
-          <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="bg-grid absolute inset-0" />
-            <div className="glow glow--brand absolute -top-32 left-1/2 h-[520px] w-[620px] -translate-x-1/2" />
-          </div>
-
           <div className="container-outbox relative z-10 text-center">
             <span className="pill reveal">
               <span

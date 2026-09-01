@@ -7,10 +7,6 @@ export default function Testimonials() {
       id="depoimentos"
       className="relative overflow-hidden py-24 md:py-32"
     >
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="glow glow--brand absolute left-1/2 top-0 h-[420px] w-[620px] -translate-x-1/2" />
-      </div>
-
       <div className="container-outbox relative z-10">
         <div className="mx-auto max-w-[44ch] text-center">
           <span className="pill reveal">

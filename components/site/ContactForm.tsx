@@ -50,10 +50,6 @@ export default function ContactForm() {
 
   return (
     <section id="contato" className="relative overflow-hidden py-24 md:py-32">
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="glow glow--brand absolute left-1/2 top-10 h-[520px] w-[720px] -translate-x-1/2" />
-      </div>
-
       <div className="container-outbox relative z-10">
         <div className="card-dark grid gap-10 overflow-hidden p-8 md:p-12 lg:grid-cols-[1fr_1.05fr]">
           {/* Copy */}

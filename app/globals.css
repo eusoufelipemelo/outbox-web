@@ -14,7 +14,7 @@
   --color-brand-deep: #c93d1d;
 
   /* --- Superfícies (dark) --- */
-  --color-ink: #050505;
+  --color-ink: #000000;
   --color-surface: #0b0b0c;
   --color-surface-2: #121214;
   --color-elevated: #17171a;
@@ -152,6 +152,63 @@ body {
     linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, #000 40%, transparent 100%);
+}
+
+
+/* Glows ambientes: grandes, quentes, baixíssima opacidade, fixos na viewport.
+   É o que dá o clima do fundo sem competir com o conteúdo. */
+.ambient {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+}
+.ambient--top {
+  top: -34vh;
+  left: 50%;
+  width: 120vw;
+  height: 78vh;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(241, 85, 50, 0.13) 0%,
+    rgba(196, 78, 40, 0.06) 38%,
+    transparent 68%
+  );
+}
+.ambient--right {
+  top: 22vh;
+  right: -26vw;
+  width: 62vw;
+  height: 68vh;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 138, 92, 0.1) 0%,
+    rgba(160, 70, 35, 0.045) 42%,
+    transparent 70%
+  );
+}
+.ambient--left {
+  top: 48vh;
+  left: -28vw;
+  width: 58vw;
+  height: 62vh;
+  background: radial-gradient(
+    circle at center,
+    rgba(241, 85, 50, 0.075) 0%,
+    transparent 66%
+  );
+}
+.ambient--bottom {
+  bottom: -30vh;
+  left: 42%;
+  width: 90vw;
+  height: 62vh;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 120, 70, 0.07) 0%,
+    transparent 68%
+  );
 }
 
 /* ============================================================
@@ -500,4 +557,12 @@ textarea:focus-visible {
   .reveal-words .word {
     opacity: 1;
   }
+}
+
+/* Todo conteúdo fica acima da camada de atmosfera */
+main,
+header,
+footer {
+  position: relative;
+  z-index: 1;
 }

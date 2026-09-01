@@ -1,8 +1,10 @@
+import Ambience from "@/components/site/Ambience";
 import Navbar from "@/components/site/Navbar";
 import Hero from "@/components/site/Hero";
 import Services from "@/components/site/Services";
 import Process from "@/components/site/Process";
 import Comparison from "@/components/site/Comparison";
+import AboutFelipe from "@/components/site/AboutFelipe";
 import Testimonials from "@/components/site/Testimonials";
 import BlogSection from "@/components/site/BlogSection";
 import Faq from "@/components/site/Faq";
@@ -14,6 +16,7 @@ import ScrollEffects from "@/components/ui/ScrollEffects";
 export default function Home() {
   return (
     <>
+      <Ambience />
       <ScrollEffects />
       <Navbar />
       <main>
@@ -21,6 +24,7 @@ export default function Home() {
         <Services />
         <Process />
         <Comparison />
+        <AboutFelipe />
         <Testimonials />
         <BlogSection />
         <Faq />

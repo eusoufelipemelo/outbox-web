@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 
 const STATS = [
@@ -10,14 +11,6 @@ const STATS = [
 export default function Hero() {
   return (
     <section className="relative overflow-hidden pt-40 pb-24 md:pt-48 md:pb-32">
-      {/* Atmosfera */}
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="bg-grid absolute inset-0" />
-        <div className="glow glow--brand absolute -top-40 left-1/2 h-[620px] w-[620px] -translate-x-1/2" />
-        <div className="glow glow--warm absolute -right-40 top-40 h-[460px] w-[460px]" />
-        <div className="glow glow--warm absolute -left-52 top-80 h-[420px] w-[420px]" />
-      </div>
-
       <div className="container-outbox relative z-10">
         <div className="flex flex-col items-center text-center">
           <span className="pill reveal">
@@ -107,6 +100,47 @@ export default function Hero() {
           <span>Atendimento em todo o Brasil</span>
           <span className="hidden h-1 w-1 rounded-full bg-white/20 sm:block" />
           <span>Balneário Camboriú, SC</span>
+        </div>
+
+        {/* Gente de verdade: quem faz e para quem a gente faz */}
+        <div
+          className="reveal mt-16 grid gap-4 sm:grid-cols-3"
+          style={{ transitionDelay: "460ms" }}
+        >
+          {[
+            { src: "/img/hero-2.jpg", alt: "Equipe da OutBox em reunião de projeto", tall: true },
+            { src: "/img/hero-1.jpg", alt: "Processo de criação no estúdio", tall: false },
+            { src: "/img/hero-3.jpg", alt: "Desenvolvimento e acompanhamento de resultado", tall: false },
+          ].map((img, i) => (
+            <figure
+              key={img.src}
+              className={`group relative overflow-hidden rounded-[var(--radius-xl2)] border border-white/10 ${
+                i === 0 ? "sm:row-span-1" : ""
+              }`}
+            >
+              <Image
+                src={img.src}
+                alt={img.alt}
+                width={900}
+                height={640}
+                className="h-[220px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04] md:h-[260px]"
+                sizes="(max-width: 640px) 100vw, 33vw"
+              />
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"
+              />
+              {i === 1 && (
+                <figcaption className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-black/60 px-3.5 py-2 text-[12.5px] text-white backdrop-blur-sm">
+                  <span
+                    aria-hidden
+                    className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
+                  />
+                  Projetos rodando agora
+                </figcaption>
+              )}
+            </figure>
+          ))}
         </div>
       </div>
     </section>

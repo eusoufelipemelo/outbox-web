@@ -69,6 +69,7 @@ export default function Footer() {
               {[
                 { href: "/#servicos", label: "Serviços" },
                 { href: "/#processo", label: "Processo" },
+                { href: "/#sobre", label: "Sobre" },
                 { href: "/#depoimentos", label: "Clientes" },
                 { href: "/blog", label: "Blog" },
                 { href: "/#contato", label: "Contato" },
