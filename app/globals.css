@@ -155,60 +155,143 @@ body {
 }
 
 
-/* Glows ambientes: grandes, quentes, baixíssima opacidade, fixos na viewport.
-   É o que dá o clima do fundo sem competir com o conteúdo. */
-.ambient {
+
+
+/* ============================================================
+   Malha orgânica de fundo
+   Base preta, ardósia fria à esquerda/topo e âmbar da marca à
+   direita. Formas grandes e muito borradas para dar o efeito
+   de seda, sem competir com a leitura.
+   ============================================================ */
+
+.mesh {
   position: absolute;
-  border-radius: 9999px;
-  filter: blur(70px);
+  inset: -12%;
+  filter: blur(64px) saturate(118%);
 }
-.ambient--top {
-  top: -34vh;
-  left: 50%;
-  width: 120vw;
-  height: 78vh;
-  transform: translateX(-50%);
+
+.mesh__blob {
+  position: absolute;
+  display: block;
+  border-radius: 58% 42% 51% 49% / 47% 55% 45% 53%;
+}
+
+/* --- Território frio (ardósia) --- */
+.mesh__blob--slate-a {
+  top: -14%;
+  left: -8%;
+  width: 62%;
+  height: 74%;
+  transform: rotate(-14deg);
   background: radial-gradient(
-    ellipse at center,
-    rgba(241, 85, 50, 0.13) 0%,
-    rgba(196, 78, 40, 0.06) 38%,
+    ellipse at 42% 40%,
+    rgba(163, 183, 214, 0.42) 0%,
+    rgba(104, 124, 156, 0.24) 34%,
+    rgba(38, 48, 66, 0.1) 58%,
+    transparent 76%
+  );
+}
+.mesh__blob--slate-b {
+  top: 26%;
+  left: -22%;
+  width: 56%;
+  height: 66%;
+  transform: rotate(18deg);
+  border-radius: 46% 54% 62% 38% / 58% 42% 58% 42%;
+  background: radial-gradient(
+    ellipse at 55% 45%,
+    rgba(140, 162, 196, 0.3) 0%,
+    rgba(74, 92, 122, 0.16) 40%,
+    transparent 72%
+  );
+}
+.mesh__blob--slate-c {
+  top: 2%;
+  left: 16%;
+  width: 40%;
+  height: 54%;
+  transform: rotate(-6deg);
+  border-radius: 52% 48% 40% 60% / 44% 56% 44% 56%;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(126, 148, 184, 0.2) 0%,
     transparent 68%
   );
 }
-.ambient--right {
-  top: 22vh;
-  right: -26vw;
-  width: 62vw;
-  height: 68vh;
+
+/* --- Território quente (marca) --- */
+.mesh__blob--amber-a {
+  top: 2%;
+  right: -30%;
+  width: 58%;
+  height: 82%;
+  transform: rotate(10deg);
+  border-radius: 50% 50% 44% 56% / 52% 48% 52% 48%;
   background: radial-gradient(
-    circle at center,
-    rgba(255, 138, 92, 0.1) 0%,
-    rgba(160, 70, 35, 0.045) 42%,
+    ellipse at 46% 46%,
+    rgba(255, 150, 74, 0.62) 0%,
+    rgba(241, 96, 42, 0.44) 30%,
+    rgba(168, 58, 22, 0.2) 54%,
+    transparent 74%
+  );
+}
+.mesh__blob--amber-b {
+  top: 40%;
+  right: -34%;
+  width: 54%;
+  height: 70%;
+  transform: rotate(-12deg);
+  border-radius: 60% 40% 52% 48% / 42% 58% 42% 58%;
+  background: radial-gradient(
+    ellipse at 50% 44%,
+    rgba(226, 88, 36, 0.44) 0%,
+    rgba(140, 46, 16, 0.18) 44%,
+    transparent 72%
+  );
+}
+.mesh__blob--amber-c {
+  bottom: -34%;
+  left: 44%;
+  width: 48%;
+  height: 52%;
+  transform: rotate(6deg);
+  border-radius: 48% 52% 56% 44% / 54% 46% 54% 46%;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(241, 110, 52, 0.26) 0%,
     transparent 70%
   );
 }
-.ambient--left {
-  top: 48vh;
-  left: -28vw;
-  width: 58vw;
-  height: 62vh;
+
+/* Sombra central: garante contraste do texto sobre a malha */
+.mesh__center-shade {
+  position: absolute;
+  inset: 0;
   background: radial-gradient(
-    circle at center,
-    rgba(241, 85, 50, 0.075) 0%,
-    transparent 66%
+    ellipse 74% 70% at 48% 46%,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.78) 40%,
+    rgba(0, 0, 0, 0.42) 68%,
+    rgba(0, 0, 0, 0.12) 86%,
+    transparent 100%
   );
 }
-.ambient--bottom {
-  bottom: -30vh;
-  left: 42%;
-  width: 90vw;
-  height: 62vh;
-  transform: translateX(-50%);
+
+/* Vinheta apenas nos cantos extremos */
+.mesh__vignette {
+  position: absolute;
+  inset: 0;
   background: radial-gradient(
-    ellipse at center,
-    rgba(255, 120, 70, 0.07) 0%,
-    transparent 68%
+    ellipse 92% 88% at 50% 50%,
+    transparent 62%,
+    rgba(0, 0, 0, 0.55) 100%
   );
+}
+
+@media (max-width: 768px) {
+  .mesh {
+    filter: blur(46px) saturate(115%);
+  }
 }
 
 /* ============================================================
