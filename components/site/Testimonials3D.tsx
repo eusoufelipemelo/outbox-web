@@ -9,7 +9,7 @@ type Depoimento = (typeof TESTIMONIALS)[number];
 
 function CartaoDepoimento({ quote, name, role, avatar }: Depoimento) {
   return (
-    <figure className="w-[290px] shrink-0 rounded-[var(--radius-xl2)] border border-white/12 bg-[#101014] p-6 transition-colors duration-300 hover:border-[var(--color-brand)]/50">
+    <figure className="w-[290px] shrink-0 rounded-[var(--radius-xl2)] border border-white/12 bg-white/[0.055] p-6 transition-colors duration-300 hover:border-[var(--color-brand)]/50">
       <span
         aria-hidden
         className="font-display text-4xl leading-[0.3] text-[var(--color-brand)]"
@@ -73,7 +73,15 @@ export default function Testimonials3D() {
       </div>
 
       {/* Palco 3D */}
-      <div className="relative mt-16 flex h-[560px] w-full items-center justify-center overflow-hidden [perspective:340px]">
+      <div
+        className="relative mt-16 flex h-[560px] w-full items-center justify-center overflow-hidden [perspective:340px]"
+        style={{
+          maskImage:
+            "radial-gradient(ellipse 78% 66% at 50% 50%, #000 34%, rgba(0,0,0,0.55) 62%, transparent 86%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 78% 66% at 50% 50%, #000 34%, rgba(0,0,0,0.55) 62%, transparent 86%)",
+        }}
+      >
         <div
           className="flex flex-row items-center gap-4"
           style={{
@@ -96,12 +104,6 @@ export default function Testimonials3D() {
             </Marquee>
           ))}
         </div>
-
-        {/* Bordas esfumaçadas para o palco não cortar seco */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-black to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-black to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/5 bg-gradient-to-l from-black to-transparent" />
       </div>
 
       {/* Lista acessível: o palco 3D é decorativo */}

@@ -44,6 +44,7 @@
   --animate-marquee-vertical: marquee-vertical var(--duration, 40s) linear infinite;
   --animate-pulse-dot: pulse-dot 2.4s ease-in-out infinite;
   --animate-float: float 7s ease-in-out infinite;
+  --animate-troca: troca 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @keyframes marquee {
@@ -70,6 +71,16 @@
   }
   50% {
     box-shadow: 0 0 0 7px rgba(241, 85, 50, 0);
+  }
+}
+@keyframes troca {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 @keyframes float {
@@ -424,7 +435,30 @@ textarea:focus-visible {
   border-radius: 6px;
 }
 
-/* Barra de rolagem */
+/* Barra de rolagem na cor da marca */
+html {
+  scrollbar-color: var(--color-brand) rgba(255, 255, 255, 0.05);
+  scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand);
+  border: 3px solid #000;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-soft);
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 ::selection {
   background: rgba(241, 85, 50, 0.3);
 }
