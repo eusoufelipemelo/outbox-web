@@ -135,7 +135,7 @@ export const COMPARISON = {
   others: [
     "Template repetido que você já viu em outro lugar",
     "Site bonito que ninguém encontra no Google",
-    "Invisível para o ChatGPT e as IAs",
+    "Invisível para o ChatGPT e para as IAs",
     "Cada post novo depende de um orçamento",
     "Prazo indefinido, resposta a conta-gotas",
     "Proposta em PDF pesado e desatualizado",
@@ -143,7 +143,7 @@ export const COMPARISON = {
   outbox: [
     "Projeto desenhado do zero para a sua marca",
     "Construído para performance e SEO desde a base",
-    "Otimizado com GEO para as IAs recomendarem você",
+    "Otimizado com GEO para as IAs te indicarem",
     "Painel próprio: você publica quando quiser",
     "Material na mão, prazo curto e combinado",
     "Apresentação em link, atualizada em tempo real",

@@ -159,138 +159,123 @@ body {
 
 /* ============================================================
    Malha orgânica de fundo
-   Base preta, ardósia fria à esquerda/topo e âmbar da marca à
-   direita. Formas grandes e muito borradas para dar o efeito
-   de seda, sem competir com a leitura.
+   Calibrada por amostragem de pixel da referência aprovada:
+   o fundo é quase todo preto puro; o âmbar aparece discreto
+   à direita (pico medido rgb(76,49,24)) e o tom frio é
+   quase imperceptível (pico rgb(24,35,36)).
    ============================================================ */
 
 .mesh {
   position: absolute;
-  inset: -12%;
-  filter: blur(64px) saturate(118%);
+  inset: -10%;
+  filter: blur(72px);
 }
 
 .mesh__blob {
   position: absolute;
   display: block;
-  border-radius: 58% 42% 51% 49% / 47% 55% 45% 53%;
 }
 
-/* --- Território frio (ardósia) --- */
-.mesh__blob--slate-a {
-  top: -14%;
-  left: -8%;
-  width: 62%;
-  height: 74%;
-  transform: rotate(-14deg);
+/* --- Âmbar da marca: vive na borda direita --- */
+.mesh__blob--amber-a {
+  top: -8%;
+  right: -14%;
+  width: 54%;
+  height: 78%;
+  border-radius: 52% 48% 44% 56% / 50% 46% 54% 50%;
+  transform: rotate(8deg);
   background: radial-gradient(
-    ellipse at 42% 40%,
-    rgba(163, 183, 214, 0.42) 0%,
-    rgba(104, 124, 156, 0.24) 34%,
-    rgba(38, 48, 66, 0.1) 58%,
+    ellipse at 58% 46%,
+    rgba(255, 150, 70, 0.30) 0%,
+    rgba(228, 108, 44, 0.17) 34%,
+    rgba(130, 52, 18, 0.06) 58%,
     transparent 76%
   );
 }
-.mesh__blob--slate-b {
-  top: 26%;
-  left: -22%;
-  width: 56%;
-  height: 66%;
-  transform: rotate(18deg);
-  border-radius: 46% 54% 62% 38% / 58% 42% 58% 42%;
-  background: radial-gradient(
-    ellipse at 55% 45%,
-    rgba(140, 162, 196, 0.3) 0%,
-    rgba(74, 92, 122, 0.16) 40%,
-    transparent 72%
-  );
-}
-.mesh__blob--slate-c {
-  top: 2%;
-  left: 16%;
-  width: 40%;
-  height: 54%;
-  transform: rotate(-6deg);
-  border-radius: 52% 48% 40% 60% / 44% 56% 44% 56%;
-  background: radial-gradient(
-    ellipse at 50% 50%,
-    rgba(126, 148, 184, 0.2) 0%,
-    transparent 68%
-  );
-}
-
-/* --- Território quente (marca) --- */
-.mesh__blob--amber-a {
-  top: 2%;
-  right: -30%;
-  width: 58%;
-  height: 82%;
-  transform: rotate(10deg);
-  border-radius: 50% 50% 44% 56% / 52% 48% 52% 48%;
-  background: radial-gradient(
-    ellipse at 46% 46%,
-    rgba(255, 150, 74, 0.62) 0%,
-    rgba(241, 96, 42, 0.44) 30%,
-    rgba(168, 58, 22, 0.2) 54%,
-    transparent 74%
-  );
-}
 .mesh__blob--amber-b {
-  top: 40%;
-  right: -34%;
-  width: 54%;
-  height: 70%;
-  transform: rotate(-12deg);
-  border-radius: 60% 40% 52% 48% / 42% 58% 42% 58%;
+  top: 34%;
+  right: -20%;
+  width: 48%;
+  height: 66%;
+  border-radius: 58% 42% 50% 50% / 44% 56% 44% 56%;
+  transform: rotate(-10deg);
   background: radial-gradient(
-    ellipse at 50% 44%,
-    rgba(226, 88, 36, 0.44) 0%,
-    rgba(140, 46, 16, 0.18) 44%,
+    ellipse at 60% 48%,
+    rgba(236, 104, 44, 0.15) 0%,
+    rgba(120, 40, 12, 0.05) 44%,
     transparent 72%
   );
 }
 .mesh__blob--amber-c {
-  bottom: -34%;
-  left: 44%;
-  width: 48%;
-  height: 52%;
-  transform: rotate(6deg);
-  border-radius: 48% 52% 56% 44% / 54% 46% 54% 46%;
+  top: -22%;
+  right: 18%;
+  width: 40%;
+  height: 44%;
+  border-radius: 50% 50% 56% 44% / 52% 48% 52% 48%;
   background: radial-gradient(
-    ellipse at 50% 50%,
-    rgba(241, 110, 52, 0.26) 0%,
-    transparent 70%
+    ellipse at 50% 60%,
+    rgba(255, 140, 66, 0.13) 0%,
+    transparent 68%
   );
 }
 
-/* Sombra central: garante contraste do texto sobre a malha */
+/* --- Tom frio: presença mínima, no alto à esquerda do centro --- */
+.mesh__blob--slate-a {
+  top: -6%;
+  left: 12%;
+  width: 46%;
+  height: 52%;
+  border-radius: 56% 44% 48% 52% / 46% 54% 46% 54%;
+  transform: rotate(-10deg);
+  background: radial-gradient(
+    ellipse at 50% 55%,
+    rgba(150, 190, 200, 0.13) 0%,
+    rgba(70, 96, 108, 0.05) 42%,
+    transparent 70%
+  );
+}
+.mesh__blob--slate-b {
+  top: 22%;
+  left: -14%;
+  width: 40%;
+  height: 52%;
+  border-radius: 48% 52% 58% 42% / 54% 46% 54% 46%;
+  background: radial-gradient(
+    ellipse at 58% 48%,
+    rgba(132, 168, 186, 0.075) 0%,
+    transparent 68%
+  );
+}
+.mesh__blob--slate-c {
+  display: none;
+}
+
+/* Sombra central discreta: o miolo da referência já é preto */
 .mesh__center-shade {
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    ellipse 74% 70% at 48% 46%,
-    rgba(0, 0, 0, 0.9) 0%,
-    rgba(0, 0, 0, 0.78) 40%,
-    rgba(0, 0, 0, 0.42) 68%,
-    rgba(0, 0, 0, 0.12) 86%,
-    transparent 100%
+    ellipse 60% 56% at 44% 46%,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.42) 46%,
+    transparent 78%
   );
 }
 
-/* Vinheta apenas nos cantos extremos */
+/* Vinheta só nos extremos */
 .mesh__vignette {
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    ellipse 92% 88% at 50% 50%,
-    transparent 62%,
-    rgba(0, 0, 0, 0.55) 100%
+    ellipse 96% 92% at 50% 50%,
+    transparent 66%,
+    rgba(0, 0, 0, 0.5) 100%
   );
 }
 
 @media (max-width: 768px) {
   .mesh {
-    filter: blur(46px) saturate(115%);
+    filter: blur(52px);
   }
 }
 
