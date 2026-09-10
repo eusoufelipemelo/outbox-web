@@ -171,33 +171,53 @@ export const SITE_IA = {
   titulo: "O site novo não é o mesmo site mais bonito",
   linha:
     "Construímos com apoio de inteligência artificial no processo inteiro, da arquitetura ao texto. Isso muda o que sai do outro lado.",
+  /* o painel mostra, em português, o que fica legível para a máquina quando o
+     site é construído assim. É o argumento do GEO em forma visual. */
+  painel: {
+    titulo: "O que a máquina consegue ler",
+    linhas: [
+      { campo: "Tipo de negócio", valor: "declarado" },
+      { campo: "Serviços prestados", valor: "um a um" },
+      { campo: "Cidades atendidas", valor: "listadas" },
+      { campo: "Horário de atendimento", valor: "estruturado" },
+      { campo: "Telefone e WhatsApp", valor: "verificáveis" },
+      { campo: "Avaliações", valor: "conectadas" },
+    ],
+    rodape: "Um site comum entrega isso como texto solto. A IA precisa adivinhar, e quando adivinha, erra ou pula.",
+  },
   itens: [
     {
+      icone: "codigo",
       titulo: "Estruturado para ser lido por máquina",
       texto:
         "Marcação de dados em cada página: que negócio é, onde atende, que serviços presta, qual horário. É isso que a IA lê antes de citar alguém.",
     },
     {
+      icone: "raio",
       titulo: "Rápido de verdade, não rápido no papel",
       texto:
         "Página leve, sem construtor pesado por trás. Carregamento medido no celular, que é onde o seu cliente está.",
     },
     {
+      icone: "camadas",
       titulo: "Uma página por serviço",
       texto:
         "Em vez de uma página só falando de tudo, cada serviço ganha a sua, com a pergunta que o cliente faz e a resposta que ele procura.",
     },
     {
+      icone: "conversa",
       titulo: "Texto escrito para responder",
       texto:
         "Conteúdo em formato de pergunta e resposta, do jeito que a busca por voz e a IA consomem. Sem encher linguiça para parecer grande.",
     },
     {
+      icone: "elo",
       titulo: "Ligado à sua ficha do Google",
       texto:
         "Site e perfil apontando um para o outro, com a mesma informação. Divergência entre os dois derruba a confiança dos dois.",
     },
     {
+      icone: "medir",
       titulo: "Pronto para medir",
       texto:
         "Você passa a saber quantas pessoas ligaram, pediram rota ou chamaram no WhatsApp. Sem medição não existe decisão.",

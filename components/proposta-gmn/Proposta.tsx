@@ -1,6 +1,9 @@
 "use client";
 
-import { AlertTriangle, ArrowRight, Check, Minus, X } from "lucide-react";
+import {
+  AlertTriangle, ArrowRight, BarChart3, Braces, Check, Layers, Link2,
+  MessageSquareText, Minus, X, Zap,
+} from "lucide-react";
 import {
   AGENCIA, COMECO, DIAGNOSTICO, DUAS_BUSCAS, ESCOPO, FAQ, FATORES,
   FECHAMENTO, GEO, INVESTIMENTO, MENSAL, SITE_IA,
@@ -185,22 +188,74 @@ function Geo() {
   );
 }
 
+const ICONES_SITE = {
+  codigo: Braces,
+  raio: Zap,
+  camadas: Layers,
+  conversa: MessageSquareText,
+  elo: Link2,
+  medir: BarChart3,
+} as const;
+
 function SiteIA() {
   return (
     <Secao>
-      <Revelar>
-        <Titulo className="text-tinta">{SITE_IA.titulo}</Titulo>
-        <Linha>{SITE_IA.linha}</Linha>
-      </Revelar>
-      <div className="mt-12 grid gap-x-10 gap-y-9 md:grid-cols-2 lg:grid-cols-3">
-        {SITE_IA.itens.map((it, i) => (
-          <Revelar key={it.titulo} atraso={(i % 3) * 0.07}>
-            <div>
-              <h3 className="text-[19px] leading-[1.3] font-semibold text-tinta">{it.titulo}</h3>
-              <p className="mt-3 text-[16.5px] leading-[1.6] text-suave">{it.texto}</p>
+      {/* abertura em duas colunas: o argumento à esquerda, e à direita o painel
+          que mostra o argumento acontecendo. A seção era só texto em coluna. */}
+      <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+        <Revelar>
+          <Titulo className="text-tinta">{SITE_IA.titulo}</Titulo>
+          <Linha>{SITE_IA.linha}</Linha>
+        </Revelar>
+
+        <Revelar atraso={0.1}>
+          <div className="rounded-[24px] bg-tinta p-3 shadow-[0_28px_70px_rgba(20,14,10,.16)]">
+            <div className="flex items-center gap-2.5 px-4 py-3.5">
+              <span className="size-2 rounded-full bg-marca" />
+              <span className="text-[13.5px] font-semibold tracking-[.13em] text-white/55 uppercase">
+                {SITE_IA.painel.titulo}
+              </span>
             </div>
-          </Revelar>
-        ))}
+            <div className="rounded-[16px] bg-white/[.04] p-2 ring-1 ring-white/10">
+              {SITE_IA.painel.linhas.map((l, i) => (
+                <div
+                  key={l.campo}
+                  className={cn(
+                    "flex items-center justify-between gap-4 px-4 py-3.5",
+                    i > 0 && "border-t border-white/8"
+                  )}
+                >
+                  <span className="text-[15.5px] text-white/72">{l.campo}</span>
+                  <span className="flex items-center gap-2 text-[14px] font-semibold text-marca-clara">
+                    {l.valor}
+                    <Check size={15} className="text-marca" />
+                  </span>
+                </div>
+              ))}
+            </div>
+            <p className="px-4 py-4 text-[14.5px] leading-[1.55] text-white/62">{SITE_IA.painel.rodape}</p>
+          </div>
+        </Revelar>
+      </div>
+
+      {/* os seis pontos, agora como cartões com ícone em vez de texto solto */}
+      <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {SITE_IA.itens.map((it, i) => {
+          const Icone = ICONES_SITE[it.icone as keyof typeof ICONES_SITE];
+          return (
+            <Revelar key={it.titulo} atraso={(i % 3) * 0.07}>
+              <article className="flex h-full flex-col rounded-[20px] bg-superficie p-7 ring-1 ring-linha transition-shadow duration-200 hover:shadow-[0_10px_30px_rgba(20,14,10,.07)]">
+                <span className="grid size-11 place-items-center rounded-[13px] bg-marca-tenue text-marca ring-1 ring-[#f1553233]">
+                  <Icone size={21} strokeWidth={1.7} />
+                </span>
+                <h3 className="mt-5 text-[18.5px] leading-[1.3] font-bold tracking-[-.02em] text-tinta">
+                  {it.titulo}
+                </h3>
+                <p className="mt-3 text-[16px] leading-[1.6] text-suave">{it.texto}</p>
+              </article>
+            </Revelar>
+          );
+        })}
       </div>
     </Secao>
   );
