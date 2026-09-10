@@ -4,9 +4,10 @@ import {
   AlertTriangle, ArrowRight, BarChart3, Braces, Check, FileText, Layers, Link2,
   MessageSquareText, Minus, Search, ShieldCheck, X, Zap,
 } from "lucide-react";
+import Image from "next/image";
 import {
-  AGENCIA, BLOG, COMECO, DIAGNOSTICO, DUAS_BUSCAS, ESCOPO, FAQ, FATORES,
-  FECHAMENTO, GEO, INVESTIMENTO, MENSAL, SITE_IA,
+  AGENCIA, ASSINATURA, BLOG, COMECO, DIAGNOSTICO, DUAS_BUSCAS, ESCOPO, FAQ, FATORES,
+  FECHAMENTO, GEO, INVESTIMENTO, MENSAL, PROVA, SITE_IA,
 } from "./conteudo";
 import { Botao, Linha, Revelar, Rotulo, Secao, Titulo, cn } from "./base";
 import { Hero } from "./Hero";
@@ -27,7 +28,9 @@ export default function Proposta() {
       <Escopo />
       <Investimento />
       <Comeco />
+      <Prova />
       <Faq />
+      <Assinatura />
       <Fechamento />
     </>
   );
@@ -203,7 +206,7 @@ function SiteIA() {
     <Secao>
       {/* abertura em duas colunas: o argumento à esquerda, e à direita o painel
           que mostra o argumento acontecendo. A seção era só texto em coluna. */}
-      <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+      <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         <Revelar>
           <Titulo className="text-tinta">{SITE_IA.titulo}</Titulo>
           <Linha>{SITE_IA.linha}</Linha>
@@ -211,8 +214,8 @@ function SiteIA() {
 
         <Revelar atraso={0.1}>
           <div className="rounded-[24px] bg-tinta p-3 shadow-[0_28px_70px_rgba(20,14,10,.16)]">
-            <div className="flex items-center gap-2.5 px-4 py-3.5">
-              <span className="size-2 rounded-full bg-marca" />
+            <div className="flex items-start gap-2.5 px-4 py-3.5">
+              <span className="mt-[7px] size-2 shrink-0 rounded-full bg-marca" />
               <span className="text-[13.5px] font-semibold tracking-[.13em] text-white/55 uppercase">
                 {SITE_IA.painel.titulo}
               </span>
@@ -222,12 +225,12 @@ function SiteIA() {
                 <div
                   key={l.campo}
                   className={cn(
-                    "flex items-center justify-between gap-4 px-4 py-3.5",
+                    "flex items-center justify-between gap-3 px-4 py-3.5",
                     i > 0 && "border-t border-white/8"
                   )}
                 >
-                  <span className="text-[15.5px] text-white/72">{l.campo}</span>
-                  <span className="flex items-center gap-2 text-[14px] font-semibold text-marca-clara">
+                  <span className="min-w-0 text-[15px] text-white/72 sm:text-[15.5px]">{l.campo}</span>
+                  <span className="flex shrink-0 items-center gap-2 text-[13.5px] font-semibold text-marca-clara sm:text-[14px]">
                     {l.valor}
                     <Check size={15} className="text-marca" />
                   </span>
@@ -265,7 +268,7 @@ function SiteIA() {
 function Blog() {
   return (
     <Secao fundo="branco">
-      <div className="grid items-start gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
+      <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
         <Revelar>
           <Rotulo>{BLOG.selo}</Rotulo>
           <Titulo className="mt-6 text-tinta">{BLOG.titulo}</Titulo>
@@ -288,10 +291,10 @@ function Blog() {
               {BLOG.perguntas.map((q) => (
                 <div
                   key={q}
-                  className="flex items-center gap-3 rounded-full bg-superficie px-5 py-3.5 ring-1 ring-linha"
+                  className="flex min-w-0 items-center gap-3 rounded-full bg-superficie px-4 py-3.5 ring-1 ring-linha sm:px-5"
                 >
                   <Search size={16} className="shrink-0 text-mudo" />
-                  <span className="truncate text-[15.5px] text-corpo">{q}</span>
+                  <span className="min-w-0 truncate text-[15px] text-corpo sm:text-[15.5px]">{q}</span>
                 </div>
               ))}
             </div>
@@ -476,7 +479,7 @@ function Investimento() {
               <p className="text-[18px] font-bold tracking-[-.02em] text-tinta">{blog.personalizado.titulo}</p>
               <p className="mt-1.5 max-w-[62ch] text-[16px] leading-[1.55] text-suave">{blog.personalizado.texto}</p>
             </div>
-            <Botao href={AGENCIA.whats} variante="contorno" className="shrink-0 whitespace-nowrap">
+            <Botao href={AGENCIA.whats} variante="contorno" className="w-full shrink-0 text-center md:w-auto md:whitespace-nowrap">
               {blog.personalizado.cta}
             </Botao>
           </div>
@@ -559,6 +562,74 @@ function Faq() {
           </details>
         ))}
       </div>
+    </Secao>
+  );
+}
+
+function Prova() {
+  return (
+    <Secao fundo="tenue">
+      <Revelar>
+        <Rotulo>{PROVA.selo}</Rotulo>
+        <Titulo className="mt-6 text-tinta">{PROVA.titulo}</Titulo>
+      </Revelar>
+      <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
+        {PROVA.depoimentos.map((d, i) => (
+          <Revelar key={d.nome} atraso={i * 0.08}>
+            <figure className="flex h-full flex-col rounded-[24px] bg-superficie p-8 ring-1 ring-[#f1553226]">
+              <blockquote className="grow text-[17px] leading-[1.6] text-corpo">{d.texto}</blockquote>
+              <figcaption className="mt-7 flex items-center gap-4 border-t border-linha pt-6">
+                <Image
+                  src={d.foto}
+                  alt={d.nome}
+                  width={52}
+                  height={52}
+                  className="size-13 shrink-0 rounded-full object-cover ring-1 ring-linha"
+                />
+                <div className="min-w-0">
+                  <p className="text-[16px] font-bold tracking-[-.015em] text-tinta">{d.nome}</p>
+                  <p className="mt-0.5 text-[14px] leading-[1.4] text-mudo">{d.cargo}</p>
+                </div>
+              </figcaption>
+            </figure>
+          </Revelar>
+        ))}
+      </div>
+    </Secao>
+  );
+}
+
+function Assinatura() {
+  return (
+    <Secao fundo="branco">
+      <Revelar>
+        <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[auto_1fr] md:gap-14">
+          <div className="relative mx-auto w-[220px] shrink-0 md:mx-0 md:w-[260px]">
+            <div
+              aria-hidden
+              className="absolute -inset-3 rounded-[28px] bg-marca-tenue"
+            />
+            <Image
+              src={ASSINATURA.foto}
+              alt={ASSINATURA.nome}
+              width={520}
+              height={646}
+              className="relative w-full rounded-[24px] object-cover"
+            />
+          </div>
+          <div>
+            <Rotulo>{ASSINATURA.selo}</Rotulo>
+            <p className="mt-6 text-[21px] leading-[1.55] font-medium text-tinta md:text-[23px]">
+              {ASSINATURA.texto}
+            </p>
+            <p className="mt-5 max-w-[60ch] text-[17.5px] leading-[1.62] text-suave">{ASSINATURA.texto2}</p>
+            <div className="mt-8 border-t border-linha pt-6">
+              <p className="text-[18px] font-bold tracking-[-.02em] text-tinta">{ASSINATURA.nome}</p>
+              <p className="mt-1 text-[15.5px] text-mudo">{ASSINATURA.cargo}</p>
+            </div>
+          </div>
+        </div>
+      </Revelar>
     </Secao>
   );
 }

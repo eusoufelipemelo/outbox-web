@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { MapPin, Star, Sparkles, ArrowDown } from "lucide-react";
 import { AGENCIA, BUSCA_DEMO, CAPA } from "./conteudo";
@@ -95,16 +95,14 @@ function JanelaBusca({ aba, trocar }: { aba: "google" | "ia"; trocar: (a: "googl
       </div>
 
       <div className="relative min-h-[430px] px-4 pt-5 pb-4">
-        <AnimatePresence mode="wait">
+        <motion.div
+          key={aba}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+        >
           {aba === "google" ? (
-            <motion.div
-              key="g"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col gap-2.5"
-            >
+            <div className="flex flex-col gap-2.5">
               <Consulta texto={BUSCA_DEMO.termo} />
               {BUSCA_DEMO.google.map((f, i) => (
                 <div key={f.nome} className="flex items-center gap-3 rounded-[13px] bg-superficie p-3.5 ring-1 ring-linha">
@@ -113,23 +111,21 @@ function JanelaBusca({ aba, trocar }: { aba: "google" | "ia"; trocar: (a: "googl
                   </span>
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-[15.5px] font-semibold text-corpo">{f.nome}</p>
-                    <p className="mt-0.5 flex items-center gap-1.5 text-[13px] text-mudo">
-                      <Star size={12} className="fill-[#f5a623] text-[#f5a623]" />
-                      {f.nota} · {f.avaliacoes} · {f.tag}
+                    <p className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[12.5px] text-mudo sm:text-[13px]">
+                      <span className="flex items-center gap-1 whitespace-nowrap">
+                        <Star size={12} className="fill-[#f5a623] text-[#f5a623]" />
+                        {f.nota}
+                      </span>
+                      <span className="whitespace-nowrap">· {f.avaliacoes}</span>
+                      <span className="whitespace-nowrap">· {f.tag}</span>
                     </p>
                   </div>
                 </div>
               ))}
               <Ausente />
-            </motion.div>
+            </div>
           ) : (
-            <motion.div
-              key="i"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-            >
+            <div>
               <Consulta texto={BUSCA_DEMO.ia.pergunta} />
               <div className="mt-2.5 rounded-[13px] bg-elevado p-4 ring-1 ring-linha">
                 <p className="text-[15px] leading-[1.6] text-corpo">{BUSCA_DEMO.ia.resposta}</p>
@@ -146,9 +142,9 @@ function JanelaBusca({ aba, trocar }: { aba: "google" | "ia"; trocar: (a: "googl
               <div className="mt-2.5">
                 <Ausente />
               </div>
-            </motion.div>
+            </div>
           )}
-        </AnimatePresence>
+        </motion.div>
       </div>
     </div>
   );
@@ -156,9 +152,9 @@ function JanelaBusca({ aba, trocar }: { aba: "google" | "ia"; trocar: (a: "googl
 
 function Consulta({ texto }: { texto: string }) {
   return (
-    <div className="mb-3 flex items-center gap-2.5 rounded-full bg-elevado px-4 py-3 text-[14.5px] text-mudo ring-1 ring-linha">
+    <div className="mb-3 flex min-w-0 items-center gap-2.5 rounded-full bg-elevado px-4 py-3 text-[14px] text-mudo ring-1 ring-linha sm:text-[14.5px]">
       <span className="size-2 shrink-0 rounded-full bg-marca" />
-      <span className="truncate">{texto}</span>
+      <span className="min-w-0 truncate">{texto}</span>
     </div>
   );
 }

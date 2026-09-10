@@ -415,6 +415,49 @@ export const FAQ = {
   ],
 };
 
+/* Prova social real: são clientes do Felipe, com nome, cargo e foto. Nada de
+   depoimento inventado nem retrato de banco de imagem posando de cliente. */
+export const PROVA = {
+  selo: "Quem já passou por isso",
+  titulo: "Não é promessa nossa. É o que eles falaram.",
+  depoimentos: [
+    {
+      texto:
+        "Eles nos fizeram sentir como se fôssemos o cliente mais importante deles. A atenção aos detalhes, as respostas rápidas e as ideias inovadoras foram de primeira.",
+      nome: "Dr. Alexandre Paz",
+      cargo: "Médico Pediatra, Clínica Paz Pediatria",
+      foto: "/img/av-alexandre.png",
+    },
+    {
+      texto:
+        "Nossa presença online passou do zero a um sucesso num piscar de olhos. A equipe tornou o processo tão fluido que quase me esqueci que estava trabalhando em um projeto grande.",
+      nome: "Dra. Michelle Sanches",
+      cargo: "Médica Cardiopediatra",
+      foto: "/img/av-michelle.png",
+    },
+    {
+      texto:
+        "Entrei com grandes expectativas, e eles me surpreenderam completamente. Da estratégia à execução, cada detalhe foi impecável. Estou dizendo a todos que conheço: contratem eles.",
+      nome: "Patrícia Fontanive",
+      cargo: "Founder e Diretora Criativa, Couros do Valleh",
+      foto: "/img/av-patricia.png",
+    },
+  ],
+};
+
+/* Assinatura da proposta. O texto é escrito para o Felipe assinar, e ele revisa
+   antes de mandar para cliente. A foto é dele, de verdade. */
+export const ASSINATURA = {
+  selo: "Quem atende você",
+  nome: "Felipe Melo",
+  cargo: "Fundador da OutBox Soluções Digitais",
+  foto: "/img/felipe-retrato.jpg",
+  texto:
+    "Quem responde do outro lado sou eu. Cada proposta que sai daqui eu leio antes, e a dúvida que chegar no WhatsApp cai comigo, não numa central de atendimento.",
+  texto2:
+    "Se fizer sentido para o seu negócio, a gente começa pela conversa de 20 minutos. Sem compromisso e sem apresentação de slides: eu abro o Google na frente de você e mostro o que aparece hoje quando alguém procura o seu serviço.",
+};
+
 export const FECHAMENTO = {
   titulo: "A busca de amanhã já começou.",
   linha:
