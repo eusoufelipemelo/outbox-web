@@ -312,7 +312,7 @@ export const ESCOPO = {
 
 export const INVESTIMENTO = {
   titulo: "O investimento",
-  linha: "Dois serviços independentes. Você pode contratar um, o outro ou os dois.",
+  linha: "Três serviços independentes. Você contrata o que fizer sentido agora e acrescenta o resto quando quiser.",
   gmn: {
     nome: "Perfil da Empresa no Google",
     subtitulo: "Implantação e operação mensal",
@@ -337,9 +337,40 @@ export const INVESTIMENTO = {
       "Arquitetura de páginas por serviço",
       "Redação e dados estruturados para SEO e GEO",
       "Publicação, medição e ligação com a ficha do Google",
-      "Blog, quando o plano é alimentar o site com conteúdo",
     ],
     cta: "Quero uma cotação do site",
+  },
+  blog: {
+    nome: "Blog no seu site",
+    subtitulo: "Conteúdo mensal, escrito e publicado pela OutBox",
+    linha:
+      "Escolha o ritmo de publicação. Quanto mais constante, mais perguntas do seu cliente ficam respondidas no seu domínio.",
+    planos: [
+      { qtd: "4", unidade: "artigos por mês", valor: "R$ 1.200", periodo: "por mês, no Pix" },
+      { qtd: "8", unidade: "artigos por mês", valor: "R$ 1.500", periodo: "por mês, no Pix" },
+      { qtd: "12", unidade: "artigos por mês", valor: "R$ 1.800", periodo: "por mês, no Pix" },
+    ],
+    personalizado: {
+      titulo: "Precisa de mais que 12 por mês?",
+      texto: "Aí o plano é montado sob medida para o seu volume. Fale com a gente e fazemos o orçamento.",
+      cta: "Falar sobre um plano personalizado",
+    },
+    incluso: {
+      titulo: "Cada artigo sai pronto, do começo ao fim",
+      itens: [
+        "Título e subtítulo",
+        "Conteúdo escrito por inteiro",
+        "Imagens genéricas escolhidas conforme o assunto",
+        "Publicação no seu site",
+      ],
+      nota: "Tudo desenvolvido seguindo o que o Google e as IAs pedem para aproveitar melhor o conteúdo. Você não escreve uma linha nem escolhe uma imagem.",
+    },
+    garantia: {
+      titulo: "O que garantimos, e o que não dá para garantir",
+      texto:
+        "Garantimos o trabalho entregue: a quantidade de artigos combinada, no padrão que o Google e as IAs pedem, publicados no seu site dentro do mês. O que ninguém consegue garantir é o retorno exato, porque busca não é uma conta fechada. Quem promete número certo está vendendo outra coisa.",
+    },
+    cta: "Quero o blog rodando",
   },
 };
 

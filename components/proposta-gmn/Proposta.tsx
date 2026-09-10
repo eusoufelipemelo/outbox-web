@@ -2,7 +2,7 @@
 
 import {
   AlertTriangle, ArrowRight, BarChart3, Braces, Check, FileText, Layers, Link2,
-  MessageSquareText, Minus, Search, X, Zap,
+  MessageSquareText, Minus, Search, ShieldCheck, X, Zap,
 } from "lucide-react";
 import {
   AGENCIA, BLOG, COMECO, DIAGNOSTICO, DUAS_BUSCAS, ESCOPO, FAQ, FATORES,
@@ -384,13 +384,14 @@ function Escopo() {
 }
 
 function Investimento() {
-  const { gmn, site } = INVESTIMENTO;
+  const { gmn, site, blog } = INVESTIMENTO;
   return (
     <Secao id="investimento" fundo="branco">
       <Revelar>
         <Titulo className="text-tinta">{INVESTIMENTO.titulo}</Titulo>
         <Linha>{INVESTIMENTO.linha}</Linha>
       </Revelar>
+
       <div className="mt-12 grid gap-5 lg:grid-cols-2">
         <Revelar>
           <article className="flex h-full flex-col rounded-[24px] bg-tinta p-8 text-white md:p-10">
@@ -399,9 +400,7 @@ function Investimento() {
             <div className="mt-8 flex flex-col gap-5 border-y border-white/12 py-8">
               <div>
                 <p className="text-[14.5px] text-white/55">{gmn.setup.rotulo}</p>
-                <p className="mt-1 font-sans text-[44px] leading-none font-bold tracking-[-.036em]">
-                  {gmn.setup.valor}
-                </p>
+                <p className="mt-1 font-sans text-[44px] leading-none font-bold tracking-[-.036em]">{gmn.setup.valor}</p>
               </div>
               <div>
                 <p className="text-[14.5px] text-white/55">{gmn.mensal.rotulo}</p>
@@ -428,9 +427,7 @@ function Investimento() {
         <Revelar atraso={0.08}>
           <article className="flex h-full flex-col rounded-[24px] bg-papel p-8 ring-1 ring-linha md:p-10">
             <span className="text-[13px] font-semibold tracking-[.15em] text-marca-tinta uppercase">{site.subtitulo}</span>
-            <h3 className="mt-3 font-sans text-[30px] leading-[1.14] font-bold tracking-[-.03em] text-tinta">
-              {site.nome}
-            </h3>
+            <h3 className="mt-3 font-sans text-[30px] leading-[1.14] font-bold tracking-[-.03em] text-tinta">{site.nome}</h3>
             <p className="mt-8 border-t border-linha pt-8 text-[17px] leading-[1.6] text-suave">{site.texto}</p>
             <ul className="mt-7 flex grow flex-col gap-3.5">
               {site.lista.map((l) => (
@@ -446,6 +443,74 @@ function Investimento() {
           </article>
         </Revelar>
       </div>
+
+      {/* o blog tem três faixas de volume, então ganha bloco próprio em vez de
+          disputar espaço num cartão ao lado dos outros dois */}
+      <Revelar atraso={0.12}>
+        <div className="mt-5 rounded-[24px] bg-papel p-8 ring-1 ring-linha md:p-10">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <span className="text-[13px] font-semibold tracking-[.15em] text-marca-tinta uppercase">{blog.subtitulo}</span>
+              <h3 className="mt-3 font-sans text-[30px] leading-[1.14] font-bold tracking-[-.03em] text-tinta">{blog.nome}</h3>
+            </div>
+            <p className="max-w-[46ch] text-[16.5px] leading-[1.55] text-suave">{blog.linha}</p>
+          </div>
+
+          <div className="mt-9 grid gap-4 md:grid-cols-3">
+            {blog.planos.map((pl) => (
+              <div key={pl.qtd} className="rounded-[20px] bg-superficie p-7 ring-1 ring-linha">
+                <div className="flex items-baseline gap-2.5">
+                  <span className="font-sans text-[44px] leading-none font-bold tracking-[-.038em] text-tinta">{pl.qtd}</span>
+                  <span className="text-[15.5px] font-medium text-mudo">{pl.unidade}</span>
+                </div>
+                <div className="mt-6 border-t border-linha pt-6">
+                  <p className="font-sans text-[32px] leading-none font-bold tracking-[-.034em] text-marca">{pl.valor}</p>
+                  <p className="mt-1.5 text-[14.5px] text-mudo">{pl.periodo}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-4 flex flex-col gap-4 rounded-[20px] bg-elevado p-7 ring-1 ring-linha-forte md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-[18px] font-bold tracking-[-.02em] text-tinta">{blog.personalizado.titulo}</p>
+              <p className="mt-1.5 max-w-[62ch] text-[16px] leading-[1.55] text-suave">{blog.personalizado.texto}</p>
+            </div>
+            <Botao href={AGENCIA.whats} variante="contorno" className="shrink-0 whitespace-nowrap">
+              {blog.personalizado.cta}
+            </Botao>
+          </div>
+
+          <div className="mt-8 grid gap-8 border-t border-linha pt-8 md:grid-cols-2 md:gap-12">
+            <div>
+              <h4 className="text-[19px] font-bold tracking-[-.02em] text-tinta">{blog.incluso.titulo}</h4>
+              <ul className="mt-5 flex flex-col gap-3">
+                {blog.incluso.itens.map((i) => (
+                  <li key={i} className="flex gap-3 text-[16.5px] leading-[1.5] text-suave">
+                    <Check size={19} className="mt-0.5 shrink-0 text-marca" />
+                    {i}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-[16px] leading-[1.58] font-medium text-tinta">{blog.incluso.nota}</p>
+            </div>
+
+            <div className="rounded-[20px] bg-superficie p-7 ring-1 ring-[#f1553244]">
+              <div className="flex items-center gap-3">
+                <span className="grid size-9 shrink-0 place-items-center rounded-full bg-marca-tenue text-marca-tinta">
+                  <ShieldCheck size={18} strokeWidth={1.8} />
+                </span>
+                <h4 className="text-[18px] font-bold tracking-[-.02em] text-tinta">{blog.garantia.titulo}</h4>
+              </div>
+              <p className="mt-4 text-[16.5px] leading-[1.6] text-suave">{blog.garantia.texto}</p>
+            </div>
+          </div>
+
+          <Botao href={AGENCIA.whats} className="mt-8 w-full md:w-auto md:px-10">
+            {blog.cta} <ArrowRight size={17} />
+          </Botao>
+        </div>
+      </Revelar>
     </Secao>
   );
 }
