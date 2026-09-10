@@ -7,7 +7,7 @@ import {
 import Image from "next/image";
 import {
   AGENCIA, ASSINATURA, BLOG, COMECO, DIAGNOSTICO, DUAS_BUSCAS, ESCOPO, FAQ, FATORES,
-  FECHAMENTO, GEO, INVESTIMENTO, MENSAL, PROVA, SITE_IA,
+  FECHAMENTO, GEO, INVESTIMENTO, MENSAL, SITE_IA,
 } from "./conteudo";
 import { Botao, Cascata, Linha, Palavras, Revelar, Rotulo, Secao, Titulo, cn } from "./base";
 import { Hero } from "./Hero";
@@ -28,7 +28,6 @@ export default function Proposta() {
       <Escopo />
       <Investimento />
       <Comeco />
-      <Prova />
       <Faq />
       <Assinatura />
       <Fechamento />
@@ -651,41 +650,6 @@ function Faq() {
             </summary>
             <p className="max-w-[76ch] px-7 pb-7 text-[16.5px] leading-[1.62] text-suave">{f.r}</p>
           </details>
-        ))}
-      </div>
-    </Secao>
-  );
-}
-
-function Prova() {
-  return (
-    <Secao fundo="tenue">
-      <Revelar>
-        <Rotulo>{PROVA.selo}</Rotulo>
-        <Titulo className="mt-6 text-tinta">
-          <Palavras texto={PROVA.titulo} />
-        </Titulo>
-      </Revelar>
-      <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
-        {PROVA.depoimentos.map((d, i) => (
-          <Revelar key={d.nome} atraso={i * 0.08}>
-            <figure className="flex h-full flex-col rounded-[24px] bg-superficie p-8 ring-1 ring-[#f1553226]">
-              <blockquote className="grow text-[17px] leading-[1.6] text-corpo">{d.texto}</blockquote>
-              <figcaption className="mt-7 flex items-center gap-4 border-t border-linha pt-6">
-                <Image
-                  src={d.foto}
-                  alt={d.nome}
-                  width={52}
-                  height={52}
-                  className="size-13 shrink-0 rounded-full object-cover ring-1 ring-linha"
-                />
-                <div className="min-w-0">
-                  <p className="text-[16px] font-bold tracking-[-.015em] text-tinta">{d.nome}</p>
-                  <p className="mt-0.5 text-[14px] leading-[1.4] text-mudo">{d.cargo}</p>
-                </div>
-              </figcaption>
-            </figure>
-          </Revelar>
         ))}
       </div>
     </Secao>

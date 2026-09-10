@@ -420,59 +420,6 @@ export const FAQ = {
   ],
 };
 
-/* Prova social real: são clientes do Felipe, com nome, cargo e foto. Nada de
-   depoimento inventado nem retrato de banco de imagem posando de cliente. */
-export const PROVA = {
-  selo: "Quem já passou por isso",
-  titulo: "Não é promessa nossa. É o que eles falaram.",
-  depoimentos: [
-    {
-      texto:
-        "Eles nos fizeram sentir como se fôssemos o cliente mais importante deles. A atenção aos detalhes, as respostas rápidas e as ideias inovadoras foram de primeira.",
-      nome: "Dr. Alexandre Paz",
-      cargo: "Médico Pediatra, Clínica Paz Pediatria",
-      foto: "/img/av-alexandre.png",
-    },
-    {
-      texto:
-        "Nossa presença online passou do zero a um sucesso num piscar de olhos. A equipe tornou o processo tão fluido que quase me esqueci que estava trabalhando em um projeto grande.",
-      nome: "Dra. Michelle Sanches",
-      cargo: "Médica Cardiopediatra",
-      foto: "/img/av-michelle.png",
-    },
-    {
-      texto:
-        "Entrei com grandes expectativas, e eles me surpreenderam completamente. Da estratégia à execução, cada detalhe foi impecável. Estou dizendo a todos que conheço: contratem eles.",
-      nome: "Patrícia Fontanive",
-      cargo: "Founder e Diretora Criativa, Couros do Valleh",
-      foto: "/img/av-patricia.png",
-    },
-    {
-      texto:
-        "Trabalhar com essa equipe foi como ter uma arma secreta. Eles pegaram nossas ideias dispersas e as transformaram em uma estratégia que grita uau. Nossos clientes não param de elogiar.",
-      nome: "Jônas Pastore",
-      cargo: "Fundador, Casa46 e Escola de Planejados",
-      foto: "/img/av-jonas.png",
-    },
-    {
-      texto:
-        "Nossa marca passou de um sussurro a um rugido. A criatividade e a expertise da equipe fizeram toda a diferença. Estamos sendo notados como nunca antes.",
-      nome: "Dr. Fabrício Sanches",
-      cargo: "Médico Pneumologista",
-      foto: "/img/av-fabricio.png",
-    },
-    {
-      texto:
-        "Finalmente, uma agência que fala a nossa língua. Eles entenderam a nossa visão melhor do que nós e a concretizaram de uma forma que superou as expectativas. Recomendo.",
-      nome: "Nicoli Cercal Ferreira",
-      cargo: "Head, Escola de Planejados",
-      foto: "/img/av-nicoli.png",
-    },
-  ],
-};
-
-/* Assinatura da proposta. O texto é escrito para o Felipe assinar, e ele revisa
-   antes de mandar para cliente. A foto é dele, de verdade. */
 export const ASSINATURA = {
   selo: "Quem atende você",
   nome: "Felipe Melo",

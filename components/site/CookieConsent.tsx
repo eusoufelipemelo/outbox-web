@@ -68,7 +68,7 @@ export default function CookieConsent() {
         type="button"
         onClick={() => decidir("recusado")}
         aria-label="Fechar e recusar cookies opcionais"
-        className="absolute right-3 top-3 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-white/45 transition-colors hover:bg-white/8 hover:text-white"
+        className="absolute right-1.5 top-1.5 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full text-white/45 transition-colors hover:bg-white/8 hover:text-white"
       >
         <X className="h-4 w-4" />
       </button>

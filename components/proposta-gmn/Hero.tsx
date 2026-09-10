@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { MapPin, Star, Sparkles, ArrowDown } from "lucide-react";
 import { AGENCIA, BUSCA_DEMO, CAPA } from "./conteudo";
@@ -42,7 +41,7 @@ export function Hero() {
         </nav>
 
         <div className="mt-16 grid items-center gap-14 lg:mt-20 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16">
-          <div>
+          <div className="min-w-0">
             <Rotulo>{CAPA.selo}</Rotulo>
             <Titulo as="h1" className="mt-7 text-tinta">
               {CAPA.titulo}
@@ -70,7 +69,7 @@ export function Hero() {
 
 function JanelaBusca({ aba, trocar }: { aba: "google" | "ia"; trocar: (a: "google" | "ia") => void }) {
   return (
-    <div className="rounded-[24px] bg-superficie p-3 shadow-[0_28px_70px_rgba(20,14,10,.13)] ring-1 ring-linha">
+    <div className="min-w-0 rounded-[24px] bg-superficie p-3 shadow-[0_28px_70px_rgba(20,14,10,.13)] ring-1 ring-linha">
       <div className="flex gap-1.5 rounded-[14px] bg-elevado p-1.5" role="tablist" aria-label="Onde o cliente procura">
         {(
           [
@@ -94,18 +93,13 @@ function JanelaBusca({ aba, trocar }: { aba: "google" | "ia"; trocar: (a: "googl
         ))}
       </div>
 
-      <div className="relative min-h-[430px] px-4 pt-5 pb-4">
-        <motion.div
-          key={aba}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-        >
+      <div className="relative min-h-[500px] px-3.5 pt-5 pb-4 sm:min-h-[436px] sm:px-4">
+        <div key={aba} className="troca">
           {aba === "google" ? (
             <div className="flex flex-col gap-2.5">
               <Consulta texto={BUSCA_DEMO.termo} />
               {BUSCA_DEMO.google.map((f, i) => (
-                <div key={f.nome} className="flex items-center gap-3 rounded-[13px] bg-superficie p-3.5 ring-1 ring-linha">
+                <div key={f.nome} className="flex items-center gap-3 rounded-[13px] bg-superficie p-3 ring-1 ring-linha sm:p-3.5">
                   <span className="grid size-9 shrink-0 place-items-center rounded-[9px] bg-elevado text-[14px] font-bold text-mudo">
                     {i + 1}
                   </span>
@@ -127,7 +121,7 @@ function JanelaBusca({ aba, trocar }: { aba: "google" | "ia"; trocar: (a: "googl
           ) : (
             <div>
               <Consulta texto={BUSCA_DEMO.ia.pergunta} />
-              <div className="mt-2.5 rounded-[13px] bg-elevado p-4 ring-1 ring-linha">
+              <div className="mt-2.5 rounded-[13px] bg-elevado p-3.5 ring-1 ring-linha sm:p-4">
                 <p className="text-[15px] leading-[1.6] text-corpo">{BUSCA_DEMO.ia.resposta}</p>
                 <ul className="mt-3 flex flex-col gap-2">
                   {BUSCA_DEMO.ia.citadas.map((n, i) => (
@@ -144,7 +138,7 @@ function JanelaBusca({ aba, trocar }: { aba: "google" | "ia"; trocar: (a: "googl
               </div>
             </div>
           )}
-        </motion.div>
+        </div>
       </div>
     </div>
   );
@@ -161,7 +155,7 @@ function Consulta({ texto }: { texto: string }) {
 
 function Ausente() {
   return (
-    <div className="flex items-center gap-3 rounded-[13px] border border-dashed border-[#f1553288] bg-marca-tenue p-3.5">
+    <div className="flex items-center gap-3 rounded-[13px] border border-dashed border-[#f1553288] bg-marca-tenue p-3 sm:p-3.5">
       <span className="grid size-9 shrink-0 place-items-center rounded-[9px] bg-white text-[15px] font-bold text-marca-tinta ring-1 ring-[#f1553244]">
         ?
       </span>

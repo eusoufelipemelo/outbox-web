@@ -753,12 +753,10 @@ footer {
   from {
     opacity: 0;
     transform: translateY(16px);
-    filter: blur(6px);
   }
   to {
     opacity: 1;
     transform: none;
-    filter: blur(0);
   }
 }
 
@@ -774,6 +772,46 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   .casca--entra > *,
   .palavras--entra span {
+    animation: none;
+  }
+}
+
+/* No celular a manchete entra inteira, não palavra a palavra: uma dúzia de
+   caixas animando ao mesmo tempo em cada título fazia a rolagem tremer. */
+@media (max-width: 767px) {
+  .palavras--entra span {
+    animation: none;
+  }
+  .palavras--entra {
+    animation: rev-sobe 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .casca--entra > * {
+    animation-duration: 0.45s;
+    animation-delay: calc(var(--i, 0) * 0.06s);
+  }
+}
+
+/* ============================================================
+   Troca de aba da janela de busca do topo.
+   O padrão é VISÍVEL: sem fill-mode, o elemento só usa os quadros da
+   animação enquanto ela roda. Se a animação não rodar, o conteúdo aparece
+   normalmente em vez de ficar preso em opacidade zero.
+   ============================================================ */
+.troca {
+  animation: troca-entra 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes troca-entra {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .troca {
     animation: none;
   }
 }
