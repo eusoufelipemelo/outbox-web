@@ -50,6 +50,61 @@ export function Revelar({
   );
 }
 
+/* Bloco cujos filhos diretos entram em cascata. O CSS mantém tudo visível
+   por padrão; a classe só acrescenta a animação quando o bloco chega na tela. */
+export function Cascata({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const entrou = useEntrou(ref);
+  return (
+    <div ref={ref} className={cn("casca", entrou && "casca--entra", className)}>
+      {Array.isArray(children)
+        ? children.map((c, i) => (
+            <div key={i} style={{ "--i": i } as React.CSSProperties}>
+              {c}
+            </div>
+          ))
+        : children}
+    </div>
+  );
+}
+
+/* Manchete que se monta palavra a palavra. O texto é sempre texto de verdade:
+   sem JS, as palavras aparecem normalmente, só sem a cascata. */
+export function Palavras({
+  texto,
+  className,
+  destaque,
+}: {
+  texto: string;
+  className?: string;
+  destaque?: string;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const entrou = useEntrou(ref, "-8% 0px");
+  const partes = texto.split(" ");
+  const iniDestaque = destaque ? partes.length - destaque.split(" ").length : -1;
+  return (
+    <span ref={ref} className={cn("palavras", entrou && "palavras--entra", className)}>
+      {partes.map((w, i) => (
+        <span
+          key={`${w}-${i}`}
+          style={{ "--i": i } as React.CSSProperties}
+          className={destaque && i >= iniDestaque ? "text-marca" : undefined}
+        >
+          {w}
+          {i < partes.length - 1 ? "\u00A0" : ""}
+        </span>
+      ))}
+    </span>
+  );
+}
+
 export function Secao({
   id,
   children,

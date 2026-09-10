@@ -735,3 +735,45 @@ footer {
     animation: none;
   }
 }
+
+/* ============================================================
+   Entrada em cascata para títulos e blocos de texto da proposta.
+   Mesma regra da .rev: o padrão é VISÍVEL e o JavaScript só acrescenta a
+   animação. Cada filho recebe o próprio atraso pela variável --i, então a
+   frase se monta por partes em vez de aparecer inteira de uma vez.
+   ============================================================ */
+.casca > * {
+  opacity: 1;
+}
+.casca--entra > * {
+  animation: casca-sobe 0.62s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.09s);
+}
+@keyframes casca-sobe {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+/* palavra a palavra, para a manchete de abertura */
+.palavras span {
+  display: inline-block;
+}
+.palavras--entra span {
+  animation: casca-sobe 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.045s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .casca--entra > *,
+  .palavras--entra span {
+    animation: none;
+  }
+}

@@ -9,7 +9,7 @@ import {
   AGENCIA, ASSINATURA, BLOG, COMECO, DIAGNOSTICO, DUAS_BUSCAS, ESCOPO, FAQ, FATORES,
   FECHAMENTO, GEO, INVESTIMENTO, MENSAL, PROVA, SITE_IA,
 } from "./conteudo";
-import { Botao, Linha, Revelar, Rotulo, Secao, Titulo, cn } from "./base";
+import { Botao, Cascata, Linha, Palavras, Revelar, Rotulo, Secao, Titulo, cn } from "./base";
 import { Hero } from "./Hero";
 import { Simulador } from "./Simulador";
 
@@ -39,11 +39,21 @@ export default function Proposta() {
 function DuasBuscas() {
   return (
     <Secao fundo="branco">
-      <Revelar>
-        <Titulo className="text-tinta">{DUAS_BUSCAS.titulo}</Titulo>
+      <Cascata>
+        <Titulo className="text-tinta">
+          <Palavras texto={DUAS_BUSCAS.titulo} />
+        </Titulo>
         <Linha>{DUAS_BUSCAS.linha}</Linha>
+      </Cascata>
+      <Revelar atraso={0.06}>
+        <FotoSecao
+          src={DUAS_BUSCAS.imagem.src}
+          alt={DUAS_BUSCAS.imagem.alt}
+          proporcao="aspect-[16/9]"
+          className="mt-11"
+        />
       </Revelar>
-      <div className="mt-12 grid gap-5 md:grid-cols-2">
+      <div className="mt-5 grid gap-5 md:grid-cols-2">
         {DUAS_BUSCAS.blocos.map((b, i) => (
           <Revelar key={b.id} atraso={i * 0.08}>
             <article className="h-full rounded-[24px] bg-papel p-8 ring-1 ring-linha md:p-10">
@@ -71,10 +81,21 @@ function DuasBuscas() {
 function Diagnostico() {
   return (
     <Secao>
-      <Revelar>
-        <Titulo className="text-tinta">{DIAGNOSTICO.titulo}</Titulo>
-        <Linha>{DIAGNOSTICO.linha}</Linha>
-      </Revelar>
+      <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
+        <Revelar>
+          <FotoSecao
+            src={DIAGNOSTICO.imagem.src}
+            alt={DIAGNOSTICO.imagem.alt}
+            proporcao="aspect-[4/5]"
+          />
+        </Revelar>
+        <Cascata>
+          <Titulo className="text-tinta">
+            <Palavras texto={DIAGNOSTICO.titulo} />
+          </Titulo>
+          <Linha>{DIAGNOSTICO.linha}</Linha>
+        </Cascata>
+      </div>
       <div className="mt-12 grid gap-5 md:grid-cols-3">
         {DIAGNOSTICO.casos.map((c, i) => (
           <Revelar key={c.titulo} atraso={i * 0.08}>
@@ -110,7 +131,9 @@ function Fatores() {
   return (
     <Secao fundo="branco">
       <Revelar>
-        <Titulo className="text-tinta">{FATORES.titulo}</Titulo>
+        <Titulo className="text-tinta">
+          <Palavras texto={FATORES.titulo} />
+        </Titulo>
         <Linha>{FATORES.linha}</Linha>
       </Revelar>
       <div className="mt-12 grid gap-5 md:grid-cols-3">
@@ -159,7 +182,9 @@ function Geo() {
     <Secao fundo="tenue">
       <Revelar>
         <Rotulo>{GEO.selo}</Rotulo>
-        <Titulo className="mt-6 text-tinta">{GEO.titulo}</Titulo>
+        <Titulo className="mt-6 text-tinta">
+          <Palavras texto={GEO.titulo} />
+        </Titulo>
         <Linha>{GEO.linha}</Linha>
       </Revelar>
       <div className="mt-12 grid gap-5 md:grid-cols-2">
@@ -192,6 +217,35 @@ function Geo() {
   );
 }
 
+/* Foto de apoio da seção. Sempre com moldura da marca e proporção fixa, para a
+   página não pular enquanto a imagem carrega. */
+function FotoSecao({
+  src,
+  alt,
+  proporcao = "aspect-[3/2]",
+  className,
+  prioridade = false,
+}: {
+  src: string;
+  alt: string;
+  proporcao?: string;
+  className?: string;
+  prioridade?: boolean;
+}) {
+  return (
+    <div className={cn("relative overflow-hidden rounded-[24px] bg-elevado", proporcao, className)}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(max-width: 1024px) 100vw, 560px"
+        className="object-cover"
+        priority={prioridade}
+      />
+    </div>
+  );
+}
+
 const ICONES_SITE = {
   codigo: Braces,
   raio: Zap,
@@ -208,7 +262,9 @@ function SiteIA() {
           que mostra o argumento acontecendo. A seção era só texto em coluna. */}
       <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         <Revelar>
-          <Titulo className="text-tinta">{SITE_IA.titulo}</Titulo>
+          <Titulo className="text-tinta">
+            <Palavras texto={SITE_IA.titulo} />
+          </Titulo>
           <Linha>{SITE_IA.linha}</Linha>
         </Revelar>
 
@@ -271,7 +327,9 @@ function Blog() {
       <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
         <Revelar>
           <Rotulo>{BLOG.selo}</Rotulo>
-          <Titulo className="mt-6 text-tinta">{BLOG.titulo}</Titulo>
+          <Titulo className="mt-6 text-tinta">
+            <Palavras texto={BLOG.titulo} />
+          </Titulo>
           <Linha>{BLOG.linha}</Linha>
 
           <div className="mt-10 flex flex-col gap-7 border-t border-linha pt-8">
@@ -321,10 +379,17 @@ function Blog() {
 function Mensal() {
   return (
     <Secao fundo="branco">
-      <Revelar>
-        <Titulo className="text-tinta">{MENSAL.titulo}</Titulo>
-        <Linha>{MENSAL.linha}</Linha>
-      </Revelar>
+      <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+        <Cascata>
+          <Titulo className="text-tinta">
+            <Palavras texto={MENSAL.titulo} />
+          </Titulo>
+          <Linha>{MENSAL.linha}</Linha>
+        </Cascata>
+        <Revelar atraso={0.06}>
+          <FotoSecao src={MENSAL.imagem.src} alt={MENSAL.imagem.alt} />
+        </Revelar>
+      </div>
       <div className="mt-12 overflow-hidden rounded-[24px] ring-1 ring-linha">
         {MENSAL.ciclo.map((c, i) => (
           <Revelar key={c.texto} atraso={i * 0.05}>
@@ -349,9 +414,20 @@ function Mensal() {
 function Escopo() {
   return (
     <Secao>
-      <Revelar>
-        <Titulo className="text-tinta">{ESCOPO.titulo}</Titulo>
-      </Revelar>
+      <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
+        <Cascata>
+          <Titulo className="text-tinta">
+            <Palavras texto={ESCOPO.titulo} />
+          </Titulo>
+          <Linha>
+            Fotografia e vídeo do seu negócio são produzidos por você. O roteiro, a orientação e a publicação são
+            com a gente.
+          </Linha>
+        </Cascata>
+        <Revelar atraso={0.06}>
+          <FotoSecao src={ESCOPO.imagem.src} alt={ESCOPO.imagem.alt} />
+        </Revelar>
+      </div>
       <div className="mt-12 grid gap-5 md:grid-cols-2">
         {[ESCOPO.nosso, ESCOPO.seu].map((col, i) => (
           <Revelar key={col.titulo} atraso={i * 0.08}>
@@ -391,7 +467,9 @@ function Investimento() {
   return (
     <Secao id="investimento" fundo="branco">
       <Revelar>
-        <Titulo className="text-tinta">{INVESTIMENTO.titulo}</Titulo>
+        <Titulo className="text-tinta">
+          <Palavras texto={INVESTIMENTO.titulo} />
+        </Titulo>
         <Linha>{INVESTIMENTO.linha}</Linha>
       </Revelar>
 
@@ -521,9 +599,20 @@ function Investimento() {
 function Comeco() {
   return (
     <Secao>
-      <Revelar>
-        <Titulo className="text-tinta">{COMECO.titulo}</Titulo>
-      </Revelar>
+      <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+        <Cascata>
+          <Titulo className="text-tinta">
+            <Palavras texto={COMECO.titulo} />
+          </Titulo>
+          <Linha>
+            Cinco passos, e o primeiro não custa nada: uma conversa curta para você ver o que aparece hoje quando
+            alguém procura o seu serviço.
+          </Linha>
+        </Cascata>
+        <Revelar atraso={0.06}>
+          <FotoSecao src={COMECO.imagem.src} alt={COMECO.imagem.alt} />
+        </Revelar>
+      </div>
       <ol className="mt-12 grid gap-x-10 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
         {COMECO.passos.map((p, i) => (
           <Revelar key={p.n} atraso={(i % 3) * 0.07}>
@@ -547,7 +636,9 @@ function Faq() {
   return (
     <Secao fundo="branco">
       <Revelar>
-        <Titulo className="text-tinta">{FAQ.titulo}</Titulo>
+        <Titulo className="text-tinta">
+          <Palavras texto={FAQ.titulo} />
+        </Titulo>
       </Revelar>
       <div className="mt-12 overflow-hidden rounded-[24px] ring-1 ring-linha">
         {FAQ.itens.map((f, i) => (
@@ -571,7 +662,9 @@ function Prova() {
     <Secao fundo="tenue">
       <Revelar>
         <Rotulo>{PROVA.selo}</Rotulo>
-        <Titulo className="mt-6 text-tinta">{PROVA.titulo}</Titulo>
+        <Titulo className="mt-6 text-tinta">
+          <Palavras texto={PROVA.titulo} />
+        </Titulo>
       </Revelar>
       <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
         {PROVA.depoimentos.map((d, i) => (
@@ -603,26 +696,27 @@ function Assinatura() {
   return (
     <Secao fundo="branco">
       <Revelar>
-        <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[auto_1fr] md:gap-14">
-          <div className="relative mx-auto w-[220px] shrink-0 md:mx-0 md:w-[260px]">
-            <div
-              aria-hidden
-              className="absolute -inset-3 rounded-[28px] bg-marca-tenue"
-            />
-            <Image
-              src={ASSINATURA.foto}
-              alt={ASSINATURA.nome}
-              width={520}
-              height={646}
-              className="relative w-full rounded-[24px] object-cover"
-            />
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-16">
+          <div className="relative">
+            <div aria-hidden className="absolute -inset-4 rounded-[32px] bg-marca-tenue md:-inset-5" />
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[24px] bg-elevado">
+              <Image
+                src={ASSINATURA.foto}
+                alt={ASSINATURA.nome}
+                fill
+                sizes="(max-width: 1024px) 100vw, 520px"
+                className="object-cover"
+              />
+            </div>
           </div>
           <div>
-            <Rotulo>{ASSINATURA.selo}</Rotulo>
-            <p className="mt-6 text-[21px] leading-[1.55] font-medium text-tinta md:text-[23px]">
-              {ASSINATURA.texto}
-            </p>
-            <p className="mt-5 max-w-[60ch] text-[17.5px] leading-[1.62] text-suave">{ASSINATURA.texto2}</p>
+            <Cascata>
+              <Rotulo>{ASSINATURA.selo}</Rotulo>
+              <p className="mt-6 text-[22px] leading-[1.5] font-medium text-tinta md:text-[26px]">
+                {ASSINATURA.texto}
+              </p>
+              <p className="mt-5 max-w-[60ch] text-[17.5px] leading-[1.62] text-suave">{ASSINATURA.texto2}</p>
+            </Cascata>
             <div className="mt-8 border-t border-linha pt-6">
               <p className="text-[18px] font-bold tracking-[-.02em] text-tinta">{ASSINATURA.nome}</p>
               <p className="mt-1 text-[15.5px] text-mudo">{ASSINATURA.cargo}</p>
@@ -644,7 +738,9 @@ function Fechamento() {
       />
       <div className="relative mx-auto w-full max-w-[1180px]">
         <Revelar>
-          <Titulo className="max-w-[18ch] text-white">{FECHAMENTO.titulo}</Titulo>
+          <Titulo className="max-w-[18ch] text-white">
+            <Palavras texto={FECHAMENTO.titulo} />
+          </Titulo>
           <p className="mt-5 max-w-[58ch] text-[19px] leading-[1.62] text-white/64">{FECHAMENTO.linha}</p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Botao href={AGENCIA.whats}>

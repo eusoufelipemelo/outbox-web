@@ -44,6 +44,7 @@ export const BUSCA_DEMO = {
 };
 
 export const DUAS_BUSCAS = {
+  imagem: { src: "/img/gmn-busca-rua.jpg", alt: "Mulher na rua comercial procurando um serviço no celular" },
   titulo: "Duas buscas. O mesmo cliente.",
   linha:
     "Ele não mudou de necessidade, mudou de porta de entrada. Hoje entra pelas duas, e decide na primeira que responde bem.",
@@ -76,6 +77,7 @@ export const DUAS_BUSCAS = {
 };
 
 export const DIAGNOSTICO = {
+  imagem: { src: "/img/gmn-dono-loja.jpg", alt: "Dono de um pequeno comércio olhando o celular atrás do balcão" },
   titulo: "Onde a sua empresa está agora",
   linha: "Três situações, três urgências diferentes. Provavelmente uma delas é a sua.",
   casos: [
@@ -267,6 +269,7 @@ export const SIMULADOR = {
 };
 
 export const MENSAL = {
+  imagem: { src: "/img/gmn-operacao.jpg", alt: "Profissional trabalhando no computador em um escritório pequeno" },
   titulo: "Implantação é obra. Manutenção é operação.",
   linha:
     "A implantação resolve de uma vez o que estava errado. O que mantém a ficha viva é o mês a mês, porque o Google não para e o concorrente também não.",
@@ -281,6 +284,7 @@ export const MENSAL = {
 };
 
 export const ESCOPO = {
+  imagem: { src: "/img/gmn-foto-loja.jpg", alt: "Lojista fotografando o próprio estabelecimento com o celular" },
   titulo: "O que é nosso e o que é seu",
   nosso: {
     titulo: "A OutBox faz",
@@ -375,6 +379,7 @@ export const INVESTIMENTO = {
 };
 
 export const COMECO = {
+  imagem: { src: "/img/gmn-conversa.jpg", alt: "Duas pessoas conversando sobre um notebook em uma reunião curta" },
   titulo: "Como começa",
   passos: [
     { n: 1, titulo: "Conversa de 20 minutos", texto: "Você conta o que faz e para quem. Conferimos o que já existe no Google em nome da sua empresa." },
@@ -441,6 +446,27 @@ export const PROVA = {
       nome: "Patrícia Fontanive",
       cargo: "Founder e Diretora Criativa, Couros do Valleh",
       foto: "/img/av-patricia.png",
+    },
+    {
+      texto:
+        "Trabalhar com essa equipe foi como ter uma arma secreta. Eles pegaram nossas ideias dispersas e as transformaram em uma estratégia que grita uau. Nossos clientes não param de elogiar.",
+      nome: "Jônas Pastore",
+      cargo: "Fundador, Casa46 e Escola de Planejados",
+      foto: "/img/av-jonas.png",
+    },
+    {
+      texto:
+        "Nossa marca passou de um sussurro a um rugido. A criatividade e a expertise da equipe fizeram toda a diferença. Estamos sendo notados como nunca antes.",
+      nome: "Dr. Fabrício Sanches",
+      cargo: "Médico Pneumologista",
+      foto: "/img/av-fabricio.png",
+    },
+    {
+      texto:
+        "Finalmente, uma agência que fala a nossa língua. Eles entenderam a nossa visão melhor do que nós e a concretizaram de uma forma que superou as expectativas. Recomendo.",
+      nome: "Nicoli Cercal Ferreira",
+      cargo: "Head, Escola de Planejados",
+      foto: "/img/av-nicoli.png",
     },
   ],
 };
