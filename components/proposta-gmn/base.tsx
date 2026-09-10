@@ -1,31 +1,47 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 export function cn(...c: (string | false | undefined)[]) {
   return c.filter(Boolean).join(" ");
 }
 
-/* Observa uma vez e devolve se já pode animar. Não controla visibilidade:
-   quem controla é o CSS, e lá o padrão é visível. Ver .rev no index.css. */
-function useEntrou(ref: React.RefObject<Element | null>, margem = "-12% 0px") {
-  const [entrou, setEntrou] = useState(false);
+/* Liga a animação de entrada de um bloco. Não controla visibilidade: quem
+   controla é o CSS, e lá o padrão é visível. Ver .rev em globals.css.
+
+   Duas travas contra a piscada, porque a animação começa em opacidade zero:
+
+   1. A margem é POSITIVA embaixo, então o gatilho acontece enquanto o bloco
+      ainda está abaixo da dobra e a animação corre enquanto ele sobe.
+   2. Mesmo assim, se a rolagem foi rápida e o bloco já apareceu, ele fica
+      visível SEM animar. Apagar algo que o visitante já está lendo é
+      exatamente o que a tela inteira lê como piscada.
+
+   A classe entra direto no elemento em vez de passar por estado do React: o
+   ciclo de renderização atrasa a classe em relação à decisão, e nesse intervalo
+   a página já rolou mais um pedaço. Aqui decisão e efeito são a mesma tarefa. */
+function useAnimarAoEntrar(
+  ref: React.RefObject<HTMLElement | null>,
+  classe: string,
+  margem = "0px 0px 18% 0px"
+) {
   useEffect(() => {
     const el = ref.current;
     if (!el || typeof IntersectionObserver === "undefined") return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
     const obs = new IntersectionObserver(
       ([e]) => {
-        if (e.isIntersecting) {
-          setEntrou(true);
-          obs.disconnect();
+        if (!e.isIntersecting) return;
+        obs.disconnect();
+        if (el.getBoundingClientRect().top >= window.innerHeight * 0.82) {
+          el.classList.add(classe);
         }
       },
       { rootMargin: margem }
     );
     obs.observe(el);
     return () => obs.disconnect();
-  }, [ref, margem]);
-  return entrou;
+  }, [ref, classe, margem]);
 }
 
 export function Revelar({
@@ -38,12 +54,12 @@ export function Revelar({
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const entrou = useEntrou(ref);
+  useAnimarAoEntrar(ref, "rev--entra");
   return (
     <div
       ref={ref}
-      className={cn("rev", entrou && "rev--entra", className)}
-      style={entrou && atraso ? { animationDelay: `${atraso}s` } : undefined}
+      className={cn("rev", className)}
+      style={atraso ? { animationDelay: `${atraso}s` } : undefined}
     >
       {children}
     </div>
@@ -60,9 +76,9 @@ export function Cascata({
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const entrou = useEntrou(ref);
+  useAnimarAoEntrar(ref, "casca--entra");
   return (
-    <div ref={ref} className={cn("casca", entrou && "casca--entra", className)}>
+    <div ref={ref} className={cn("casca", className)}>
       {Array.isArray(children)
         ? children.map((c, i) => (
             <div key={i} style={{ "--i": i } as React.CSSProperties}>
@@ -86,11 +102,11 @@ export function Palavras({
   destaque?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const entrou = useEntrou(ref, "-8% 0px");
+  useAnimarAoEntrar(ref, "palavras--entra", "0px 0px 16% 0px");
   const partes = texto.split(" ");
   const iniDestaque = destaque ? partes.length - destaque.split(" ").length : -1;
   return (
-    <span ref={ref} className={cn("palavras", entrou && "palavras--entra", className)}>
+    <span ref={ref} className={cn("palavras", className)}>
       {partes.map((w, i) => (
         <span
           key={`${w}-${i}`}

@@ -123,14 +123,19 @@
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  /* overflow-x: clip corta o excesso sem transformar a raiz em container de
+     rolagem, ao contrario de overflow: hidden no body, que atrapalha a
+     inercia da rolagem no celular e o comportamento de position: sticky.
+     text-rendering: optimizeLegibility ficou de fora de proposito: ele
+     recalcula kerning e ligadura de todo o texto e faz a pagina redesenhar
+     enquanto rola. */
+  overflow-x: clip;
 }
 
 body {
   background: var(--color-ink);
   color: var(--color-fg);
   font-family: var(--font-sans);
-  overflow-x: hidden;
 }
 
 /* Container padrão: área de proteção de 1140px */
@@ -718,12 +723,12 @@ footer {
   opacity: 1;
 }
 .rev--entra {
-  animation: rev-sobe 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: rev-sobe 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 @keyframes rev-sobe {
   from {
-    opacity: 0;
-    transform: translateY(22px);
+    opacity: 0.45;
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -746,13 +751,13 @@ footer {
   opacity: 1;
 }
 .casca--entra > * {
-  animation: casca-sobe 0.62s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(var(--i, 0) * 0.09s);
+  animation: casca-sobe 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.04s);
 }
 @keyframes casca-sobe {
   from {
-    opacity: 0;
-    transform: translateY(16px);
+    opacity: 0.45;
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -760,13 +765,24 @@ footer {
   }
 }
 
-/* palavra a palavra, para a manchete de abertura */
+/* A manchete entra junto com o bloco que a contém, não palavra a palavra.
+   O escalonamento por palavra deixava as últimas palavras em opacidade zero
+   quando o título já estava no meio da tela, e ler um título montando aos
+   pedaços no meio da leitura é o que se enxerga como página piscando.
+   O inline-block continua porque é ele que segura o espaço entre palavras. */
 .palavras span {
   display: inline-block;
 }
-.palavras--entra span {
-  animation: casca-sobe 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(var(--i, 0) * 0.045s);
+.palavras--entra {
+  animation: aparece 0.4s ease both;
+}
+@keyframes aparece {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -779,15 +795,11 @@ footer {
 /* No celular a manchete entra inteira, não palavra a palavra: uma dúzia de
    caixas animando ao mesmo tempo em cada título fazia a rolagem tremer. */
 @media (max-width: 767px) {
+  .rev--entra,
+  .casca--entra > *,
+  .palavras--entra,
   .palavras--entra span {
     animation: none;
-  }
-  .palavras--entra {
-    animation: rev-sobe 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-  .casca--entra > * {
-    animation-duration: 0.45s;
-    animation-delay: calc(var(--i, 0) * 0.06s);
   }
 }
 
