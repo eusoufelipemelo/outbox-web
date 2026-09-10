@@ -1,11 +1,11 @@
 "use client";
 
 import {
-  AlertTriangle, ArrowRight, BarChart3, Braces, Check, Layers, Link2,
-  MessageSquareText, Minus, X, Zap,
+  AlertTriangle, ArrowRight, BarChart3, Braces, Check, FileText, Layers, Link2,
+  MessageSquareText, Minus, Search, X, Zap,
 } from "lucide-react";
 import {
-  AGENCIA, COMECO, DIAGNOSTICO, DUAS_BUSCAS, ESCOPO, FAQ, FATORES,
+  AGENCIA, BLOG, COMECO, DIAGNOSTICO, DUAS_BUSCAS, ESCOPO, FAQ, FATORES,
   FECHAMENTO, GEO, INVESTIMENTO, MENSAL, SITE_IA,
 } from "./conteudo";
 import { Botao, Linha, Revelar, Rotulo, Secao, Titulo, cn } from "./base";
@@ -21,6 +21,7 @@ export default function Proposta() {
       <Fatores />
       <Geo />
       <SiteIA />
+      <Blog />
       <Simulador />
       <Mensal />
       <Escopo />
@@ -257,6 +258,59 @@ function SiteIA() {
           );
         })}
       </div>
+    </Secao>
+  );
+}
+
+function Blog() {
+  return (
+    <Secao fundo="branco">
+      <div className="grid items-start gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
+        <Revelar>
+          <Rotulo>{BLOG.selo}</Rotulo>
+          <Titulo className="mt-6 text-tinta">{BLOG.titulo}</Titulo>
+          <Linha>{BLOG.linha}</Linha>
+
+          <div className="mt-10 flex flex-col gap-7 border-t border-linha pt-8">
+            {BLOG.motores.map((m) => (
+              <div key={m.sigla}>
+                <h3 className="text-[18px] font-bold tracking-[-.02em] text-marca-tinta">{m.sigla}</h3>
+                <p className="mt-2.5 text-[16.5px] leading-[1.6] text-suave">{m.texto}</p>
+              </div>
+            ))}
+          </div>
+        </Revelar>
+
+        {/* as perguntas que só um blog responde, cada uma virando uma porta */}
+        <Revelar atraso={0.1}>
+          <div className="rounded-[24px] bg-papel p-7 ring-1 ring-linha md:p-9">
+            <div className="flex flex-col gap-2.5">
+              {BLOG.perguntas.map((q) => (
+                <div
+                  key={q}
+                  className="flex items-center gap-3 rounded-full bg-superficie px-5 py-3.5 ring-1 ring-linha"
+                >
+                  <Search size={16} className="shrink-0 text-mudo" />
+                  <span className="truncate text-[15.5px] text-corpo">{q}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-7 flex items-start gap-3.5 border-t border-linha pt-7">
+              <span className="grid size-10 shrink-0 place-items-center rounded-[12px] bg-marca-tenue text-marca ring-1 ring-[#f1553233]">
+                <FileText size={19} strokeWidth={1.7} />
+              </span>
+              <p className="text-[16px] leading-[1.55] font-medium text-tinta">{BLOG.legenda}</p>
+            </div>
+          </div>
+        </Revelar>
+      </div>
+
+      <Revelar atraso={0.16}>
+        <p className="mt-12 max-w-[70ch] border-t border-linha pt-8 text-[18px] leading-[1.62] font-medium text-tinta">
+          {BLOG.fecho}
+        </p>
+      </Revelar>
     </Secao>
   );
 }

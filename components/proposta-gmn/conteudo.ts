@@ -225,6 +225,38 @@ export const SITE_IA = {
   ],
 };
 
+/* O blog fecha o raciocínio da página: o site é a obra, o blog é a operação,
+   exatamente como implantação e manutenção no perfil do Google. Sem número de
+   tráfego inventado: o argumento é o mecanismo, que é verificável. */
+export const BLOG = {
+  selo: "A operação do site",
+  titulo: "Site parado envelhece igual ficha parada.",
+  linha:
+    "O site novo entra no ar respondendo o que você faz. Só que o cliente pergunta muito mais do que isso, e cada pergunta que você não responde é uma porta que o concorrente abre.",
+  perguntas: [
+    "quanto custa [seu serviço]",
+    "qual a diferença entre [opção A] e [opção B]",
+    "como escolher [seu serviço] na minha cidade",
+    "vale a pena [seu serviço]",
+    "quanto tempo demora [seu serviço]",
+  ],
+  legenda: "Cada uma dessas perguntas é um artigo. Cada artigo é uma porta de entrada nova.",
+  motores: [
+    {
+      sigla: "No Google",
+      texto:
+        "Página de serviço disputa um punhado de termos. Artigo disputa as perguntas inteiras, que é como as pessoas realmente escrevem na busca. Mais páginas boas no ar, mais chances de aparecer.",
+    },
+    {
+      sigla: "Nas IAs",
+      texto:
+        "A IA cita quem responde direto e com clareza. Um artigo que resolve a dúvida em texto organizado é exatamente o material que ela consegue resumir e atribuir a você.",
+    },
+  ],
+  fecho:
+    "É o mesmo princípio da manutenção do perfil no Google, aplicado ao site: constância vale mais que tamanho. Você escreve, ou a OutBox escreve por você.",
+};
+
 export const SIMULADOR = {
   selo: "Faça a conta com os seus números",
   titulo: "Quanto vale um cliente novo por semana",
@@ -305,6 +337,7 @@ export const INVESTIMENTO = {
       "Arquitetura de páginas por serviço",
       "Redação e dados estruturados para SEO e GEO",
       "Publicação, medição e ligação com a ficha do Google",
+      "Blog, quando o plano é alimentar o site com conteúdo",
     ],
     cta: "Quero uma cotação do site",
   },
