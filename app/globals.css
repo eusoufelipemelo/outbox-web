@@ -827,3 +827,20 @@ footer {
     animation: none;
   }
 }
+
+/* Trilho do material de estudo: a lista de módulos rola quando a tela é baixa,
+   e a barra grossa do sistema atravessava o desenho. */
+.trilho-modulos {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-linha-forte) transparent;
+}
+.trilho-modulos::-webkit-scrollbar {
+  width: 6px;
+}
+.trilho-modulos::-webkit-scrollbar-thumb {
+  background: var(--color-linha-forte);
+  border-radius: 999px;
+}
+.trilho-modulos::-webkit-scrollbar-track {
+  background: transparent;
+}
