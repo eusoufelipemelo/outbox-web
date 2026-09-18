@@ -57,24 +57,23 @@ export default function AdminShell({
           style={{ borderColor: "var(--a-line)", background: "var(--a-panel)" }}
         >
           <div className="flex h-full flex-col p-5">
-            <Link href="/admin" className="flex items-center gap-2.5 px-1 py-1">
+            <Link href="/admin" className="flex flex-col gap-2 px-1 py-1">
               <Image
-                src="/brand/logo-mark.svg"
-                alt=""
-                width={30}
-                height={30}
-                className="h-[30px] w-[30px]"
+                src={
+                  theme === "dark"
+                    ? "/brand/outbox-horizontal-branco.svg"
+                    : "/brand/outbox-horizontal-preto.svg"
+                }
+                alt="OutBox Soluções Digitais"
+                width={130}
+                height={32}
+                className="h-[32px] w-auto self-start"
               />
-              <span className="flex flex-col leading-none">
-                <span className="font-display text-[17px] font-semibold">
-                  OutBox
-                </span>
-                <span
-                  className="mt-1 text-[11px] uppercase tracking-widest"
-                  style={{ color: "var(--a-subtle)" }}
-                >
-                  Painel
-                </span>
+              <span
+                className="text-[11px] uppercase tracking-widest"
+                style={{ color: "var(--a-subtle)" }}
+              >
+                Painel
               </span>
             </Link>
 

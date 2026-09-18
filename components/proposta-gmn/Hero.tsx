@@ -36,7 +36,7 @@ export function Hero() {
       />
       <div className="relative mx-auto w-full max-w-[1180px]">
         <nav className="flex items-center justify-between gap-4">
-          <img src="/brand/logo-outbox-black.svg" alt={AGENCIA.nome} className="h-[26px] w-auto" />
+          <img src="/brand/outbox-horizontal-preto.svg" alt={AGENCIA.nome} className="h-[26px] w-auto" />
           <span className="hidden text-[14px] text-mudo sm:block">{AGENCIA.siteRotulo}</span>
         </nav>
 

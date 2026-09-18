@@ -64,6 +64,8 @@ export default function RootLayout({
       addressRegion: "SP",
       addressCountry: "BR",
     },
+    logo: `${SITE.url}/brand/outbox-logo-512.png`,
+    image: `${SITE.url}/og.png`,
     sameAs: [SITE.instagramBrand, SITE.instagramPersonal],
     areaServed: "BR",
     knowsAbout: [
@@ -91,10 +93,6 @@ export default function RootLayout({
         <link
           href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
-        />
-        <link
-          rel="icon"
-          href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 247 247'%3E%3Crect width='246.166' height='246.166' rx='123.083' fill='%23F15532'/%3E%3Cpath d='M118.614 87.4689V136.172L128.575 136.172L128.575 87.4689L140.324 99.2111L147.368 92.171L123.594 68.4106L99.8206 92.171L106.865 99.2111L118.614 87.4689Z' fill='white'/%3E%3Cpath d='M216.349 120.191V178.329H30.8398V120.191H40.1901V168.984H206.999V120.191H216.349Z' fill='white'/%3E%3C/svg%3E"
         />
         <script
           type="application/ld+json"

@@ -25,11 +25,11 @@ export default function Footer() {
           {/* Marca */}
           <div>
             <Image
-              src="/brand/logo-outbox-white.svg"
-              alt="OutBox Group"
-              width={200}
-              height={52}
-              className="h-[42px] w-auto"
+              src="/brand/outbox-horizontal-branco.svg"
+              alt="OutBox Soluções Digitais"
+              width={227}
+              height={56}
+              className="h-[56px] w-auto"
             />
             <p className="mt-6 max-w-[38ch] leading-relaxed text-[var(--color-fg-muted)]">
               Sistemas, sites, marcas e apresentações que colocam a sua empresa

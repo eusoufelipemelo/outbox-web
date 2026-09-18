@@ -722,7 +722,7 @@ function Fechamento() {
         </Revelar>
 
         <div className="mt-20 flex flex-col gap-6 border-t border-white/12 pt-9 md:flex-row md:items-center md:justify-between">
-          <img src="/brand/logo-outbox-white.svg" alt={AGENCIA.nome} className="h-[24px] w-auto" />
+          <img src="/brand/outbox-horizontal-branco.svg" alt={AGENCIA.nome} className="h-[24px] w-auto" />
           <div className="flex flex-col gap-1.5 text-[15px] text-white/55 md:items-end">
             <span>
               {AGENCIA.whatsRotulo} · {AGENCIA.email}

@@ -57,7 +57,7 @@ export function Indice() {
         className="fixed top-0 left-0 z-40 hidden h-screen w-[248px] flex-col border-r border-linha bg-superficie px-6 py-8 lg:flex"
       >
         <a href="/" className="inline-flex min-h-[44px] cursor-pointer items-center" aria-label="Ir para o site da OutBox">
-          <img src="/brand/logo-outbox-black.svg" alt="OutBox Group" className="h-[22px] w-auto" />
+          <img src="/brand/outbox-horizontal-preto.svg" alt="OutBox Group" className="h-[22px] w-auto" />
         </a>
         <p className="mt-8 text-[11.5px] font-semibold tracking-[0.16em] text-mudo uppercase">
           Material de estudo
@@ -98,7 +98,7 @@ export function Indice() {
           <i className="block h-full bg-marca transition-[width] duration-200" style={{ width: progresso + "%" }} />
         </div>
         <div className="flex items-center gap-3 px-4 py-2.5">
-          <img src="/brand/logo-outbox-black.svg" alt="OutBox Group" className="h-[18px] w-auto shrink-0" />
+          <img src="/brand/outbox-horizontal-preto.svg" alt="OutBox Group" className="h-[18px] w-auto shrink-0" />
           <p className="min-w-0 flex-1 truncate text-[13.5px] font-semibold text-corpo">
             <span className="text-mudo">{atual.n}.</span> {atual.nome}
           </p>

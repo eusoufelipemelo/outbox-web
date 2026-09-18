@@ -55,11 +55,11 @@ export default function Comparison() {
             />
             <h3 className="relative z-10 flex items-center gap-2.5 font-display text-[21px] text-white">
               <Image
-                src="/brand/logo-mark.svg"
+                src="/brand/outbox-simbolo.svg"
                 alt=""
-                width={26}
-                height={26}
-                className="h-[26px] w-[26px]"
+                width={24}
+                height={24}
+                className="h-[24px] w-[24px]"
               />
               Com a OutBox
             </h3>

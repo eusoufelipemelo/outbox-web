@@ -49,16 +49,13 @@ export default function Navbar() {
             aria-label="OutBox Group, ir para o início"
           >
             <Image
-              src="/brand/logo-mark.svg"
-              alt=""
-              width={30}
-              height={30}
-              className="h-[30px] w-[30px]"
+              src="/brand/outbox-horizontal-branco.svg"
+              alt="OutBox Soluções Digitais"
+              width={138}
+              height={34}
+              className="h-[30px] w-auto md:h-[34px]"
               priority
             />
-            <span className="font-display text-[19px] leading-none text-white">
-              OutBox
-            </span>
           </Link>
 
           <ul className="hidden items-center gap-1 md:flex">

@@ -69,7 +69,7 @@ export function PostCard({ post, delay = 0 }: { post: Post; delay?: number }) {
           ) : (
             <div className="flex h-full items-center justify-center">
               <Image
-                src="/brand/logo-mark.svg"
+                src="/brand/outbox-simbolo.svg"
                 alt=""
                 width={54}
                 height={54}

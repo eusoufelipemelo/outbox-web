@@ -60,11 +60,11 @@ function LoginForm() {
         <div className="admin-panel relative z-10 w-full max-w-[400px] p-8">
           <div className="flex flex-col items-center text-center">
             <Image
-              src="/brand/logo-mark.svg"
-              alt=""
-              width={46}
-              height={46}
-              className="h-[46px] w-[46px]"
+              src="/brand/outbox-vertical-branco.svg"
+              alt="OutBox Soluções Digitais"
+              width={120}
+              height={90}
+              className="h-[90px] w-auto"
             />
             <h1 className="mt-5 font-display text-[26px] font-semibold">
               Painel OutBox
