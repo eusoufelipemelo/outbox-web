@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
 const LINKS = [
@@ -10,12 +11,17 @@ const LINKS = [
   { href: "/#processo", label: "Processo" },
   { href: "/#sobre", label: "Sobre" },
   { href: "/#depoimentos", label: "Clientes" },
+  { href: "/google-empresas", label: "Google Empresas" },
   { href: "/blog", label: "Blog" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  /** Página atual, para marcar o item do menu (as âncoras da home não contam). */
+  const atual = (href: string) =>
+    !href.includes("#") && (pathname === href || pathname.startsWith(`${href}/`));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -45,7 +51,7 @@ export default function Navbar() {
         >
           <Link
             href="/"
-            className="flex shrink-0 items-center gap-2.5"
+            className="flex min-h-11 shrink-0 items-center gap-2.5"
             aria-label="OutBox Group, ir para o início"
           >
             <Image
@@ -58,12 +64,15 @@ export default function Navbar() {
             />
           </Link>
 
-          <ul className="hidden items-center gap-1 md:flex">
+          <ul className="hidden items-center gap-0.5 lg:flex">
             {LINKS.map((l) => (
               <li key={l.href}>
                 <Link
                   href={l.href}
-                  className="cursor-pointer rounded-full px-3.5 py-2 text-[14.5px] text-white/70 transition-colors duration-200 hover:text-white"
+                  aria-current={atual(l.href) ? "page" : undefined}
+                  className={`cursor-pointer whitespace-nowrap rounded-full px-3 py-2 text-[14.5px] transition-colors duration-200 hover:text-white xl:px-3.5 ${
+                    atual(l.href) ? "text-white" : "text-white/70"
+                  }`}
                 >
                   {l.label}
                 </Link>
@@ -87,7 +96,7 @@ export default function Navbar() {
               onClick={() => setOpen((v) => !v)}
               aria-label={open ? "Fechar menu" : "Abrir menu"}
               aria-expanded={open}
-              className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-white/12 text-white transition-colors hover:bg-white/8 md:hidden"
+              className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-white/12 text-white transition-colors hover:bg-white/8 lg:hidden"
             >
               {open ? (
                 <X className="h-5 w-5" />
@@ -101,17 +110,20 @@ export default function Navbar() {
 
       {/* Menu mobile */}
       <div
-        className={`fixed inset-0 z-40 bg-black/95 backdrop-blur-xl transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 z-40 overflow-y-auto bg-black/95 backdrop-blur-xl transition-opacity duration-300 lg:hidden ${
           open ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        <div className="flex h-full flex-col justify-center gap-2 px-8">
+        <div className="flex min-h-full flex-col justify-center gap-2 px-8 py-24">
           {LINKS.map((l, i) => (
             <Link
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="border-b border-white/8 py-5 font-display text-3xl text-white transition-colors hover:text-[var(--color-brand)]"
+              aria-current={atual(l.href) ? "page" : undefined}
+              className={`border-b border-white/8 py-5 font-display text-3xl transition-colors hover:text-[var(--color-brand)] ${
+                atual(l.href) ? "text-[var(--color-brand)]" : "text-white"
+              }`}
               style={{
                 transitionDelay: open ? `${i * 50}ms` : "0ms",
               }}

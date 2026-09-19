@@ -5,7 +5,32 @@ import { Plus } from "lucide-react";
 import { FAQ } from "@/lib/site";
 import RevealTitle from "@/components/ui/reveal-title";
 
-export default function Faq() {
+type Item = { readonly q: string; readonly a: string };
+
+/**
+ * Perguntas frequentes. Sem props, mostra as da home; outras páginas passam
+ * as próprias perguntas e o próprio título. As respostas ficam no HTML mesmo
+ * fechadas, então o Google e as IAs leem todas.
+ */
+export default function Faq({
+  items = FAQ,
+  titulo = "Perguntas que sempre chegam por aqui.",
+  rotulo = "Dúvidas frequentes",
+  texto = "Se a sua dúvida não estiver na lista, é só chamar no WhatsApp que a gente responde de verdade, sem robô.",
+  tituloComo = "h2",
+  animarTitulo = true,
+}: {
+  items?: readonly Item[];
+  titulo?: string;
+  rotulo?: string;
+  texto?: string;
+  /** Nível do título da seção. */
+  tituloComo?: "h2" | "h3";
+  /** O título animado só existe no HTML depois que a animação roda. Em página
+      que precisa do título indexável, passe false para ele nascer como texto. */
+  animarTitulo?: boolean;
+} = {}) {
+  const Titulo = tituloComo;
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -18,22 +43,27 @@ export default function Faq() {
                 aria-hidden
                 className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
               />
-              Dúvidas frequentes
+              {rotulo}
             </span>
-            <RevealTitle
-              as="h2"
-              className="mt-6 max-w-[16ch] font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white"
-            >
-              Perguntas que sempre chegam por aqui.
-            </RevealTitle>
+            {animarTitulo ? (
+              <RevealTitle
+                as={tituloComo}
+                className="mt-6 max-w-[16ch] font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white"
+              >
+                {titulo}
+              </RevealTitle>
+            ) : (
+              <Titulo className="reveal mt-6 max-w-[16ch] font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white">
+                {titulo}
+              </Titulo>
+            )}
             <p className="reveal mt-5 max-w-[42ch] leading-relaxed text-[var(--color-fg-muted)]">
-              Se a sua dúvida não estiver na lista, é só chamar no WhatsApp que
-              a gente responde de verdade, sem robô.
+              {texto}
             </p>
           </div>
 
           <div className="reveal flex flex-col gap-3">
-            {FAQ.map((item, i) => {
+            {items.map((item, i) => {
               const isOpen = open === i;
               return (
                 <div
@@ -46,8 +76,10 @@ export default function Faq() {
                 >
                   <button
                     type="button"
+                    id={`faq-q-${i}`}
                     onClick={() => setOpen(isOpen ? null : i)}
                     aria-expanded={isOpen}
+                    aria-controls={`faq-a-${i}`}
                     className="flex w-full cursor-pointer items-center justify-between gap-5 p-6 text-left"
                   >
                     <span className="font-display text-[17px] leading-snug text-white">
@@ -64,6 +96,9 @@ export default function Faq() {
                     </span>
                   </button>
                   <div
+                    id={`faq-a-${i}`}
+                    role="region"
+                    aria-labelledby={`faq-q-${i}`}
                     className="grid transition-all duration-400 ease-out"
                     style={{
                       gridTemplateRows: isOpen ? "1fr" : "0fr",

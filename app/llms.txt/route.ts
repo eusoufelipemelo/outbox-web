@@ -12,6 +12,6 @@ export async function GET() {
   } catch {
     // cai no resumo local
   }
-  const body = `# ${SITE.name}\n\n> ${SITE.description}\n\n## Links\n\n- [Site](${SITE.url})\n- [Blog](${SITE.url}/blog)\n`;
+  const body = `# ${SITE.name}\n\n> ${SITE.description}\n\n## Links\n\n- [Site](${SITE.url})\n- [Google Empresas: artigos com SEO e GEO todo mês](${SITE.url}/google-empresas)\n- [Blog](${SITE.url}/blog)\n`;
   return new Response(body, { headers: { "content-type": "text/plain; charset=utf-8" } });
 }

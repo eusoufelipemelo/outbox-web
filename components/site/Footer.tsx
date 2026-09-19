@@ -42,7 +42,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Instagram da OutBox Group, ${SITE.instagramBrandHandle}`}
-                className="group flex cursor-pointer items-center gap-2.5 rounded-full border border-white/12 px-4 py-2.5 text-[13.5px] text-white/80 transition-colors duration-300 hover:border-[var(--color-brand)]/50 hover:text-white"
+                className="group flex cursor-pointer items-center gap-2.5 min-h-11 rounded-full border border-white/12 px-4 py-2.5 text-[13.5px] text-white/80 transition-colors duration-300 hover:border-[var(--color-brand)]/50 hover:text-white"
               >
                 <InstagramIcon className="h-4 w-4 text-[var(--color-brand)]" />
                 {SITE.instagramBrandHandle}
@@ -52,7 +52,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Instagram do Felipe Melo, ${SITE.instagramPersonalHandle}`}
-                className="group flex cursor-pointer items-center gap-2.5 rounded-full border border-white/12 px-4 py-2.5 text-[13.5px] text-white/80 transition-colors duration-300 hover:border-[var(--color-brand)]/50 hover:text-white"
+                className="group flex cursor-pointer items-center gap-2.5 min-h-11 rounded-full border border-white/12 px-4 py-2.5 text-[13.5px] text-white/80 transition-colors duration-300 hover:border-[var(--color-brand)]/50 hover:text-white"
               >
                 <InstagramIcon className="h-4 w-4 text-[var(--color-brand)]" />
                 {SITE.instagramPersonalHandle}
@@ -65,19 +65,20 @@ export default function Footer() {
             <h2 className="font-display text-[15px] uppercase tracking-widest text-[var(--color-fg-subtle)]">
               Navegar
             </h2>
-            <ul className="mt-5 flex flex-col gap-3">
+            <ul className="mt-3 flex flex-col">
               {[
                 { href: "/#servicos", label: "Serviços" },
                 { href: "/#processo", label: "Processo" },
                 { href: "/#sobre", label: "Sobre" },
                 { href: "/#depoimentos", label: "Clientes" },
+                { href: "/google-empresas", label: "Google Empresas" },
                 { href: "/blog", label: "Blog" },
                 { href: "/#contato", label: "Contato" },
               ].map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="cursor-pointer text-[15px] text-[var(--color-fg-muted)] transition-colors duration-200 hover:text-[var(--color-brand)]"
+                    className="inline-flex min-h-11 min-w-11 cursor-pointer items-center text-[15px] text-[var(--color-fg-muted)] transition-colors duration-200 hover:text-[var(--color-brand)]"
                   >
                     {l.label}
                   </Link>
@@ -91,29 +92,29 @@ export default function Footer() {
             <h2 className="font-display text-[15px] uppercase tracking-widest text-[var(--color-fg-subtle)]">
               Contato
             </h2>
-            <ul className="mt-5 flex flex-col gap-4">
+            <ul className="mt-3 flex flex-col gap-1">
               <li>
                 <a
                   href={whatsappLink()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex cursor-pointer items-start gap-3 text-[15px] text-[var(--color-fg-muted)] transition-colors duration-200 hover:text-white"
+                  className="group flex min-h-11 cursor-pointer items-center gap-3 text-[15px] text-[var(--color-fg-muted)] transition-colors duration-200 hover:text-white"
                 >
-                  <Phone className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-brand)]" />
+                  <Phone className="h-4 w-4 shrink-0 text-[var(--color-brand)]" />
                   {SITE.phoneDisplay}
                 </a>
               </li>
               <li>
                 <a
                   href={`mailto:${SITE.email}`}
-                  className="group flex cursor-pointer items-start gap-3 break-all text-[15px] text-[var(--color-fg-muted)] transition-colors duration-200 hover:text-white"
+                  className="group flex min-h-11 cursor-pointer items-center gap-3 break-all text-[15px] text-[var(--color-fg-muted)] transition-colors duration-200 hover:text-white"
                 >
-                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-brand)]" />
+                  <Mail className="h-4 w-4 shrink-0 text-[var(--color-brand)]" />
                   {SITE.email}
                 </a>
               </li>
-              <li className="flex items-start gap-3 text-[15px] text-[var(--color-fg-muted)]">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-brand)]" />
+              <li className="flex min-h-11 items-center gap-3 text-[15px] text-[var(--color-fg-muted)]">
+                <MapPin className="h-4 w-4 shrink-0 text-[var(--color-brand)]" />
                 {SITE.city}
               </li>
             </ul>
@@ -134,13 +135,13 @@ export default function Footer() {
         {/* Links legais */}
         <nav
           aria-label="Documentos legais"
-          className="mt-12 flex flex-wrap justify-center gap-x-6 gap-y-2 border-t border-white/8 pt-8 text-[13.5px]"
+          className="mt-12 flex flex-wrap justify-center gap-x-6 border-t border-white/8 pt-6 text-[13.5px]"
         >
           {LEGAL_LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="cursor-pointer text-[var(--color-fg-muted)] transition-colors duration-200 hover:text-[var(--color-brand)]"
+              className="inline-flex min-h-11 min-w-11 cursor-pointer items-center text-[var(--color-fg-muted)] transition-colors duration-200 hover:text-[var(--color-brand)]"
             >
               {l.label}
             </Link>
@@ -157,7 +158,7 @@ export default function Footer() {
             Desenvolvido por{" "}
             <a
               href={SITE.url}
-              className="cursor-pointer text-white/70 transition-colors hover:text-[var(--color-brand)]"
+              className="inline-flex min-h-11 cursor-pointer items-center text-white/70 transition-colors hover:text-[var(--color-brand)]"
             >
               OutBox Group
             </a>

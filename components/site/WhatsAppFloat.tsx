@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { whatsappLink, SITE } from "@/lib/site";
 
-export default function WhatsAppFloat() {
+/** Botão flutuante do WhatsApp. `contexto` entra na mensagem pronta. */
+export default function WhatsAppFloat({ contexto }: { contexto?: string } = {}) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -15,7 +16,7 @@ export default function WhatsAppFloat() {
 
   return (
     <a
-      href={whatsappLink()}
+      href={whatsappLink(contexto)}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Falar no WhatsApp com a OutBox Group pelo número ${SITE.phoneDisplay}`}
