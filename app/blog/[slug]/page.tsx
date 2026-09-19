@@ -20,14 +20,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug(slug);
   if (!post) return { title: "Artigo não encontrado" };
 
+  const description = post.cms?.seo_description ?? post.excerpt ?? undefined;
   return {
-    title: post.title,
-    description: post.excerpt ?? undefined,
+    title: post.cms?.seo_title ?? post.title,
+    description,
     alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
       type: "article",
-      title: post.title,
-      description: post.excerpt ?? undefined,
+      title: post.cms?.seo_title ?? post.title,
+      description,
       publishedTime: post.published_at ?? undefined,
       authors: post.author ? [post.author] : undefined,
       images: post.cover_url ? [{ url: post.cover_url }] : undefined,
@@ -40,7 +41,8 @@ export default async function PostPage({ params }: Props) {
   const post = await getPostBySlug(slug);
   if (!post) notFound();
 
-  const jsonLd = {
+  const cms = post.cms;
+  const fallbackJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
@@ -61,7 +63,7 @@ export default async function PostPage({ params }: Props) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(cms?.json_ld ?? fallbackJsonLd).replace(/</g, "\\u003c") }}
       />
       <Ambience />
       <ScrollEffects />
@@ -112,6 +114,12 @@ export default async function PostPage({ params }: Props) {
                 <p className="mt-7 border-t border-white/8 pt-6 text-[14.5px] text-[var(--color-fg-muted)]">
                   Por{" "}
                   <span className="font-medium text-white">{post.author}</span>
+                  {cms?.author_credentials ? <span>, {cms.author_credentials}</span> : null}
+                  {post.updated_at && post.updated_at !== post.published_at ? (
+                    <span className="block mt-1 text-[13px] text-[var(--color-fg-subtle)]">
+                      Atualizado em <time dateTime={post.updated_at}>{formatDate(post.updated_at)}</time>
+                    </span>
+                  ) : null}
                 </p>
               )}
             </header>
@@ -120,7 +128,7 @@ export default async function PostPage({ params }: Props) {
               <div className="relative mx-auto mt-12 h-[300px] max-w-[900px] overflow-hidden rounded-[var(--radius-xl2)] border border-white/8 md:h-[440px]">
                 <Image
                   src={post.cover_url}
-                  alt=""
+                  alt={cms?.cover_alt ?? ""}
                   fill
                   sizes="(max-width: 900px) 100vw, 900px"
                   className="object-cover"
@@ -130,6 +138,30 @@ export default async function PostPage({ params }: Props) {
             )}
 
             <div className="mx-auto mt-12 max-w-[760px]">
+              {cms?.answer_summary ? (
+                <section
+                  aria-label="Resposta rápida"
+                  className="mb-10 rounded-[var(--radius-xl2)] border border-[var(--color-brand)]/35 bg-[var(--color-brand)]/[0.07] p-6 md:p-7"
+                >
+                  <p className="text-[13px] font-medium text-[var(--color-brand)]">Resposta rápida</p>
+                  <p className="mt-2 text-[17px] leading-relaxed text-white">{cms.answer_summary}</p>
+                </section>
+              ) : null}
+
+              {cms && cms.key_takeaways.length > 0 ? (
+                <section aria-labelledby="pontos" className="mb-10 rounded-[var(--radius-xl2)] border border-white/8 bg-white/[0.02] p-6 md:p-7">
+                  <h2 id="pontos" className="font-display text-xl text-white">Pontos principais</h2>
+                  <ul className="mt-4 space-y-2.5">
+                    {cms.key_takeaways.map((t, i) => (
+                      <li key={i} className="flex gap-3 leading-relaxed text-[var(--color-fg-muted)]">
+                        <span aria-hidden className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand)]" />
+                        <span>{t}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ) : null}
+
               {post.content ? (
                 <div
                   className="prose prose-invert prose-outbox max-w-none prose-headings:font-display prose-a:underline-offset-4"
@@ -144,6 +176,47 @@ export default async function PostPage({ params }: Props) {
                   </p>
                 </div>
               )}
+
+              {cms && cms.faq.length > 0 ? (
+                <section aria-labelledby="faq" className="mt-14">
+                  <h2 id="faq" className="font-display text-[clamp(1.4rem,3vw,1.9rem)] text-white">Perguntas frequentes</h2>
+                  <div className="mt-6 divide-y divide-white/8 rounded-[var(--radius-xl2)] border border-white/8">
+                    {cms.faq.map((f, i) => (
+                      <details key={i} className="group px-6 py-5">
+                        <summary className="flex cursor-pointer list-none items-start justify-between gap-4 font-medium text-white">
+                          <span>{f.question}</span>
+                          <span aria-hidden className="mt-0.5 text-[var(--color-brand)] transition-transform group-open:rotate-45">+</span>
+                        </summary>
+                        <p className="mt-3 leading-relaxed text-[var(--color-fg-muted)]">{f.answer}</p>
+                      </details>
+                    ))}
+                  </div>
+                </section>
+              ) : null}
+
+              {cms && cms.sources.length > 0 ? (
+                <section aria-labelledby="fontes" className="mt-12">
+                  <h2 id="fontes" className="font-display text-lg text-white">Fontes</h2>
+                  <ol className="mt-4 list-decimal space-y-2 pl-5 text-[14.5px] text-[var(--color-fg-muted)]">
+                    {cms.sources.map((src, i) => (
+                      <li key={i}>
+                        <a href={src.url} target="_blank" rel="nofollow noopener noreferrer" className="underline underline-offset-4 hover:text-white">
+                          {src.title}
+                        </a>
+                        {src.publisher ? <span>, {src.publisher}</span> : null}
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+              ) : null}
+
+              {cms?.author_bio && post.author ? (
+                <section aria-label="Sobre o autor" className="mt-12 rounded-[var(--radius-xl2)] border border-white/8 bg-white/[0.02] p-6">
+                  <p className="font-medium text-white">{post.author}</p>
+                  {cms.author_credentials ? <p className="text-[13.5px] text-[var(--color-fg-subtle)]">{cms.author_credentials}</p> : null}
+                  <p className="mt-3 text-[14.5px] leading-relaxed text-[var(--color-fg-muted)]">{cms.author_bio}</p>
+                </section>
+              ) : null}
             </div>
 
             {/* Chamada para ação */}

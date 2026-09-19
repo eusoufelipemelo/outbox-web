@@ -11,7 +11,18 @@ const nextConfig: NextConfig = {
         hostname: "fqfisqifwtaavxdttypy.supabase.co",
         pathname: "/storage/v1/object/public/**",
       },
+      // imagens dos artigos do OutBox CMS
+      {
+        protocol: "https",
+        hostname: "qvkkivnlbmktnykllkqc.supabase.co",
+        pathname: "/storage/v1/object/public/**",
+      },
     ],
+  },
+
+  // IndexNow: /<chave>.txt é respondido pela rota que confere a chave no OutBox CMS
+  async rewrites() {
+    return [{ source: "/:key([a-f0-9]{32}).txt", destination: "/api/outbox/indexnow/:key" }];
   },
 
   async headers() {

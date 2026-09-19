@@ -1,4 +1,5 @@
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
+import { getCmsPost, listCmsPosts, type CmsFaq, type CmsPost, type CmsSource } from "@/lib/outbox-cms";
 
 export type Post = {
   id: string;
@@ -14,7 +15,50 @@ export type Post = {
   published_at: string | null;
   created_at: string;
   updated_at: string | null;
+  /** Campos extras dos artigos vindos do OutBox CMS (SEO + GEO). */
+  cms?: {
+    answer_summary: string | null;
+    key_takeaways: string[];
+    faq: CmsFaq[];
+    sources: CmsSource[];
+    author_credentials: string | null;
+    author_bio: string | null;
+    cover_alt: string | null;
+    seo_title: string | null;
+    seo_description: string | null;
+    json_ld: unknown;
+  };
 };
+
+function fromCms(c: CmsPost): Post {
+  return {
+    id: `cms-${c.slug}`,
+    slug: c.slug,
+    title: c.title,
+    excerpt: c.excerpt,
+    content: c.content_html || null,
+    cover_url: c.cover_url,
+    category: c.category,
+    author: c.author,
+    read_minutes: c.reading_minutes,
+    status: "published",
+    published_at: c.published_at,
+    created_at: c.published_at ?? new Date().toISOString(),
+    updated_at: c.updated_at,
+    cms: {
+      answer_summary: c.answer_summary,
+      key_takeaways: c.key_takeaways,
+      faq: c.faq,
+      sources: c.sources,
+      author_credentials: c.author_credentials,
+      author_bio: c.author_bio,
+      cover_alt: c.cover_alt,
+      seo_title: c.seo_title,
+      seo_description: c.seo_description,
+      json_ld: c.json_ld,
+    },
+  };
+}
 
 /**
  * Posts de demonstração usados enquanto o Supabase não está conectado
@@ -72,7 +116,7 @@ export const DEMO_POSTS: Post[] = [
 ];
 
 /** Lista os posts publicados. Cai nos posts de demonstração se não houver nada. */
-export async function getPublishedPosts(limit?: number): Promise<{
+async function getLocalPosts(limit?: number): Promise<{
   posts: Post[];
   isDemo: boolean;
 }> {
@@ -107,7 +151,7 @@ export async function getPublishedPosts(limit?: number): Promise<{
 }
 
 /** Busca um post publicado pelo slug. */
-export async function getPostBySlug(slug: string): Promise<Post | null> {
+async function getLocalPostBySlug(slug: string): Promise<Post | null> {
   if (!isSupabaseConfigured) {
     return DEMO_POSTS.find((p) => p.slug === slug) ?? null;
   }
@@ -126,6 +170,30 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   } catch {
     return DEMO_POSTS.find((p) => p.slug === slug) ?? null;
   }
+}
+
+/**
+ * Artigos do OutBox CMS + artigos do painel próprio do site, do mais novo para o mais antigo.
+ * Os de demonstração só aparecem quando não há nenhum artigo real.
+ */
+export async function getPublishedPosts(limit?: number): Promise<{ posts: Post[]; isDemo: boolean }> {
+  const [cms, local] = await Promise.all([listCmsPosts().then((l) => l.map(fromCms)), getLocalPosts()]);
+  const real = local.isDemo ? [] : local.posts;
+  if (cms.length === 0 && real.length === 0) {
+    return { posts: limit ? DEMO_POSTS.slice(0, limit) : DEMO_POSTS, isDemo: true };
+  }
+  const seen = new Set(cms.map((p) => p.slug));
+  const merged = [...cms, ...real.filter((p) => !seen.has(p.slug))].sort(
+    (a, b) => new Date(b.published_at ?? b.created_at).getTime() - new Date(a.published_at ?? a.created_at).getTime(),
+  );
+  return { posts: limit ? merged.slice(0, limit) : merged, isDemo: false };
+}
+
+/** Busca o artigo no OutBox CMS e, se não houver, no painel próprio do site. */
+export async function getPostBySlug(slug: string): Promise<Post | null> {
+  const cms = await getCmsPost(slug);
+  if (cms) return fromCms(cms);
+  return getLocalPostBySlug(slug);
 }
 
 /** Data no formato brasileiro. */
