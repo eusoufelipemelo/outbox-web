@@ -11,7 +11,9 @@ const nextConfig: NextConfig = {
         hostname: "fqfisqifwtaavxdttypy.supabase.co",
         pathname: "/storage/v1/object/public/**",
       },
-      // imagens dos artigos do OutBox CMS
+      // imagens dos artigos do OutBox CMS no Cloudflare R2
+      { protocol: "https", hostname: "**.r2.dev" },
+      // imagens antigas do OutBox CMS no Supabase
       {
         protocol: "https",
         hostname: "qvkkivnlbmktnykllkqc.supabase.co",
