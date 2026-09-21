@@ -5,10 +5,12 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, Clock } from "lucide-react";
 import Ambience from "@/components/site/Ambience";
 import Navbar from "@/components/site/Navbar";
+import ReadBeacon from "@/components/site/ReadBeacon";
 import Footer from "@/components/site/Footer";
 import WhatsAppFloat from "@/components/site/WhatsAppFloat";
 import ScrollEffects from "@/components/ui/ScrollEffects";
 import { getPostBySlug, formatDate } from "@/lib/blog";
+import { OUTBOX_API, OUTBOX_DOMAIN } from "@/lib/outbox-cms";
 import { SITE, whatsappLink } from "@/lib/site";
 
 export const revalidate = 60;
@@ -65,6 +67,7 @@ export default async function PostPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(cms?.json_ld ?? fallbackJsonLd).replace(/</g, "\\u003c") }}
       />
+      {cms ? <ReadBeacon endpoint={`${OUTBOX_API}/posts/${encodeURIComponent(post.slug)}/view?site=${OUTBOX_DOMAIN}`} /> : null}
       <Ambience />
       <ScrollEffects />
       <Navbar />
