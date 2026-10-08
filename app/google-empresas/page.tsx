@@ -17,6 +17,7 @@ import Faq from "@/components/site/Faq";
 import ScrollEffects from "@/components/ui/ScrollEffects";
 import { Revelar } from "@/components/ui/revelar";
 import PlanosGE from "@/components/google-empresas/PlanosGE";
+import VantagensGE from "@/components/google-empresas/VantagensGE";
 import { SITE } from "@/lib/site";
 import {
   GE_CONDICOES,
@@ -394,6 +395,9 @@ export default function GoogleEmpresasPage() {
             </div>
           </div>
         </section>
+
+        {/* Vantagens: o argumento completo antes do preço */}
+        <VantagensGE tituloClasse={TITULO_SECAO} />
 
         {/* Planos */}
         <section id="planos" className="relative scroll-mt-24 py-20 md:py-28">

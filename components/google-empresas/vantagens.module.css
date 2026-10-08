@@ -1,0 +1,681 @@
+/* ============================================================
+   Seção "Vantagens" da página /google-empresas.
+   CSS próprio da seção (módulo), para não mexer no globals.css.
+
+   Regra da casa: tudo nasce VISÍVEL. A animação do celular roda só
+   com CSS; o JavaScript apenas pausa o loop fora da tela e liga a
+   entrada dos gráficos. Sem JS, perde-se o enfeite, nunca o conteúdo.
+   Só transform e opacity animam, para não pesar no celular.
+   ============================================================ */
+
+/* ---------- Palco ---------- */
+.palco {
+  --ciclo: 15s;
+  /* Quanto o bloco avança para fora do aparelho, sem passar da borda do palco. */
+  --fora: -27%;
+  position: relative;
+  height: 640px;
+  display: grid;
+  place-items: center;
+  perspective: 1600px;
+  overflow-x: clip;
+}
+.palco[data-pausado="1"] * {
+  animation-play-state: paused !important;
+}
+
+/* Halo laranja atrás do aparelho */
+.halo {
+  position: absolute;
+  inset: 12% 10%;
+  border-radius: 9999px;
+  background: radial-gradient(
+    closest-side,
+    rgba(241, 85, 50, 0.32),
+    rgba(241, 85, 50, 0.1) 55%,
+    transparent 75%
+  );
+  pointer-events: none;
+}
+
+.cena3d {
+  position: relative;
+  transform-style: preserve-3d;
+  animation: flutua 7s ease-in-out infinite;
+}
+@keyframes flutua {
+  0%,
+  100% {
+    transform: rotateY(-16deg) rotateX(6deg) translateY(0);
+  }
+  50% {
+    transform: rotateY(-10deg) rotateX(4deg) translateY(-10px);
+  }
+}
+
+/* ---------- iPhone 17 Pro laranja ---------- */
+.moldura {
+  position: relative;
+  width: 284px;
+  aspect-ratio: 0.478;
+  padding: 4px;
+  border-radius: 56px;
+  background: linear-gradient(
+    150deg,
+    #ffc39a 0%,
+    #ff8a45 14%,
+    #e9611f 38%,
+    #b8421a 58%,
+    #f47a33 80%,
+    #ffb07a 100%
+  );
+  box-shadow:
+    0 0 0 1px rgba(255, 190, 150, 0.35) inset,
+    0 40px 90px -30px rgba(241, 85, 50, 0.65),
+    0 18px 40px rgba(0, 0, 0, 0.55);
+  transform-style: preserve-3d;
+}
+/* Botões laterais */
+.moldura::before,
+.moldura::after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #ff9b5c, #c4481a);
+}
+.moldura::before {
+  right: -3px;
+  top: 27%;
+  height: 13%;
+}
+.moldura::after {
+  left: -3px;
+  top: 21%;
+  height: 22%;
+  box-shadow: 0 -38px 0 -1px #e2632a;
+}
+
+.vidro {
+  height: 100%;
+  padding: 9px;
+  border-radius: 52px;
+  background: #050505;
+}
+
+.tela {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 44px;
+  background:
+    radial-gradient(120% 60% at 50% 0%, rgba(241, 85, 50, 0.16), transparent 60%),
+    #0b0b0d;
+  color: #fff;
+  font-size: 11.5px;
+  line-height: 1.35;
+}
+
+.ilha {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 92px;
+  height: 27px;
+  translate: -50% 0;
+  border-radius: 9999px;
+  background: #000;
+  z-index: 5;
+}
+
+.statusBar {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 46px;
+  padding: 15px 26px 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 4;
+}
+.statusBar span:last-child {
+  letter-spacing: 1px;
+  opacity: 0.85;
+}
+
+/* ---------- Cenas dentro da tela ---------- */
+.cena {
+  position: absolute;
+  inset: 52px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  animation: cena var(--ciclo) linear infinite;
+}
+.cena1 {
+  animation-delay: 0s;
+}
+.cena2 {
+  animation-delay: calc(var(--ciclo) / 3);
+}
+.cena3 {
+  animation-delay: calc(var(--ciclo) / 3 * 2);
+}
+/* Cada cena ocupa um terço do ciclo */
+@keyframes cena {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  3% {
+    opacity: 1;
+    transform: none;
+  }
+  30% {
+    opacity: 1;
+    transform: none;
+  }
+  33.3%,
+  100% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+.app {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+}
+.appPonto {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: #f15532;
+}
+
+.busca {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 11.5px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.digitando {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  clip-path: inset(0 0 0 0);
+  animation: digita var(--ciclo) steps(22, end) infinite;
+  animation-delay: inherit;
+}
+.cursor {
+  display: inline-block;
+  width: 1px;
+  height: 13px;
+  margin-left: 1px;
+  background: #f15532;
+  vertical-align: middle;
+  animation: pisca 1s steps(2) infinite;
+}
+@keyframes digita {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  10%,
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes pisca {
+  50% {
+    opacity: 0;
+  }
+}
+
+.mapa {
+  position: relative;
+  height: 128px;
+  border-radius: 16px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, transparent 47%, rgba(255, 255, 255, 0.07) 47% 53%, transparent 53%) 0 0 / 60px 60px,
+    linear-gradient(0deg, transparent 47%, rgba(255, 255, 255, 0.07) 47% 53%, transparent 53%) 0 0 / 60px 60px,
+    linear-gradient(35deg, transparent 48%, rgba(255, 255, 255, 0.1) 48% 51%, transparent 51%),
+    #141417;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.pino {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 50% 50% 50% 0;
+  rotate: -45deg;
+  background: #4a4a52;
+}
+.pinoMeu {
+  width: 22px;
+  height: 22px;
+  background: #f15532;
+  box-shadow: 0 0 0 6px rgba(241, 85, 50, 0.22), 0 0 24px rgba(241, 85, 50, 0.7);
+  animation: pulsa 1.8s ease-in-out infinite;
+}
+@keyframes pulsa {
+  50% {
+    box-shadow: 0 0 0 11px rgba(241, 85, 50, 0.08), 0 0 30px rgba(241, 85, 50, 0.85);
+  }
+}
+
+.resultado {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 11px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.resultadoMeu {
+  background: rgba(241, 85, 50, 0.14);
+  border-color: rgba(241, 85, 50, 0.6);
+}
+.resultadoNome {
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.estrelas {
+  color: #ffb36b;
+  letter-spacing: 1px;
+  font-size: 10.5px;
+}
+.acoes {
+  display: flex;
+  gap: 5px;
+  margin-top: 2px;
+}
+.acoes span {
+  padding: 3px 8px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.09);
+  font-size: 10px;
+}
+.acoes span:first-child {
+  background: #f15532;
+  color: #000;
+  font-weight: 600;
+}
+.barra {
+  height: 7px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Cena da IA */
+.balaoEu {
+  align-self: flex-end;
+  max-width: 82%;
+  padding: 9px 12px;
+  border-radius: 16px 16px 4px 16px;
+  background: rgba(255, 255, 255, 0.1);
+}
+.balaoIa {
+  align-self: flex-start;
+  max-width: 92%;
+  padding: 10px 12px;
+  border-radius: 16px 16px 16px 4px;
+  background: rgba(241, 85, 50, 0.1);
+  border: 1px solid rgba(241, 85, 50, 0.3);
+}
+.balaoIa strong {
+  color: #ff9a72;
+}
+.pontinhos {
+  display: inline-flex;
+  gap: 3px;
+}
+.pontinhos i {
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.55);
+  animation: salta 1s ease-in-out infinite;
+}
+.pontinhos i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.pontinhos i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes salta {
+  50% {
+    transform: translateY(-3px);
+    opacity: 0.4;
+  }
+}
+.fonte {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 7px;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Cena do contato */
+.notificacao {
+  display: flex;
+  gap: 9px;
+  padding: 10px;
+  border-radius: 18px;
+  background: rgba(40, 40, 44, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: desce var(--ciclo) cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation-delay: inherit;
+}
+@keyframes desce {
+  0%,
+  2% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+  7%,
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}
+.notificacaoIcone {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: #25d366;
+  color: #fff;
+  font-weight: 700;
+}
+.novoCliente {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 12px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(241, 85, 50, 0.28), rgba(241, 85, 50, 0.08));
+  border: 1px solid rgba(241, 85, 50, 0.55);
+  text-align: center;
+}
+.check {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  display: grid;
+  place-items: center;
+  background: #f15532;
+  color: #000;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* ---------- Blocos que saem da tela ---------- */
+.bloco {
+  position: absolute;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: max-content;
+  max-width: 210px;
+  padding: 10px 14px 10px 10px;
+  border-radius: 16px;
+  background: rgba(20, 20, 22, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(241, 85, 50, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.25;
+  opacity: 0;
+  animation: sai var(--ciclo) cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation-delay: var(--atraso, 0s);
+}
+.bloco[data-lado="e"] {
+  left: var(--fora);
+}
+.bloco[data-lado="d"] {
+  right: var(--fora);
+}
+.blocoIcone {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: rgba(241, 85, 50, 0.16);
+  color: #f15532;
+}
+.blocoForte {
+  background: #f15532;
+  border-color: transparent;
+  color: #000;
+  box-shadow: 0 22px 50px -14px rgba(241, 85, 50, 0.8);
+}
+.blocoForte .blocoIcone {
+  background: rgba(0, 0, 0, 0.15);
+  color: #000;
+}
+/* O bloco nasce no centro da tela do celular (--dx/--dy), voa para o seu
+   lugar à frente do aparelho, segura e volta a sumir com a cena. */
+@keyframes sai {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--dx, 0), var(--dy, 0), 0) scale(0.45);
+  }
+  3% {
+    opacity: 0;
+    transform: translate3d(var(--dx, 0), var(--dy, 0), 0) scale(0.45);
+  }
+  9% {
+    opacity: 1;
+    transform: translate3d(0, 0, 70px) scale(1);
+  }
+  24% {
+    opacity: 1;
+    transform: translate3d(0, -4px, 70px) scale(1);
+  }
+  28%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -14px, 40px) scale(0.92);
+  }
+}
+
+/* Legenda da cena atual, embaixo do aparelho */
+.legendas {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  translate: -50% 0;
+  display: flex;
+  gap: 6px;
+}
+.legenda {
+  padding: 6px 12px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.55);
+  white-space: nowrap;
+  animation: legenda var(--ciclo) linear infinite;
+}
+.legenda:nth-child(2) {
+  animation-delay: calc(var(--ciclo) / 3);
+}
+.legenda:nth-child(3) {
+  animation-delay: calc(var(--ciclo) / 3 * 2);
+}
+@keyframes legenda {
+  0%,
+  31% {
+    color: #fff;
+    border-color: rgba(241, 85, 50, 0.7);
+    background: rgba(241, 85, 50, 0.16);
+  }
+  34%,
+  100% {
+    color: rgba(255, 255, 255, 0.55);
+    border-color: rgba(255, 255, 255, 0.12);
+    background: transparent;
+  }
+}
+
+/* ---------- Celular pequeno ---------- */
+@media (max-width: 767px) {
+  .palco {
+    height: 560px;
+  }
+  .moldura {
+    width: 232px;
+    border-radius: 46px;
+  }
+  .vidro {
+    border-radius: 43px;
+    padding: 7px;
+  }
+  .tela {
+    border-radius: 37px;
+    font-size: 10px;
+  }
+  .ilha {
+    width: 76px;
+    height: 22px;
+    top: 9px;
+  }
+  .statusBar {
+    padding: 13px 22px 0;
+    font-size: 11px;
+  }
+  .cena {
+    inset: 44px 10px 12px;
+    gap: 7px;
+  }
+  .mapa {
+    height: 100px;
+  }
+  .palco {
+    --fora: -17%;
+  }
+  .bloco {
+    max-width: 150px;
+    padding: 8px 11px 8px 8px;
+    font-size: 12px;
+    border-radius: 13px;
+  }
+  .blocoIcone {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+  }
+  .legenda {
+    font-size: 11.5px;
+    padding: 5px 10px;
+  }
+}
+
+/* ---------- Gráficos ---------- */
+/* Barras nascem cheias; a classe .entra só acrescenta o crescimento. */
+.barraColuna {
+  transform-origin: left;
+}
+.entra .barraColuna {
+  animation: cresce 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.08s);
+}
+@keyframes cresce {
+  from {
+    transform: scaleX(0.03);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* Textos do gráfico: o SVG encolhe no celular, então a letra cresce em unidades do desenho. */
+.eixo {
+  font-size: 11px;
+}
+.rotuloFim {
+  font-size: 13px;
+  font-weight: 600;
+}
+@media (max-width: 767px) {
+  .eixo {
+    font-size: 23px;
+  }
+  .rotuloFim {
+    font-size: 26px;
+  }
+}
+
+.linhaConcorrente {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 0;
+}
+.entra .linhaConcorrente {
+  animation: desenha 1.6s cubic-bezier(0.45, 0, 0.2, 1) both;
+}
+.entra .areaDistancia {
+  animation: aparece 1.2s ease 0.6s both;
+}
+@keyframes desenha {
+  from {
+    stroke-dashoffset: 600;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes aparece {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Quem pediu menos movimento vê a primeira cena parada, com os blocos no lugar. */
+@media (prefers-reduced-motion: reduce) {
+  .palco *,
+  .entra * {
+    animation: none !important;
+  }
+  .cena1,
+  .bloco[data-cena="1"] {
+    opacity: 1;
+    transform: none;
+  }
+  .legenda:first-child {
+    color: #fff;
+    border-color: rgba(241, 85, 50, 0.7);
+    background: rgba(241, 85, 50, 0.16);
+  }
+}

@@ -160,3 +160,94 @@ export function formatarReais(valor: number) {
     maximumFractionDigits: 0,
   });
 }
+
+/* ------------------------------------------------------------------
+   Seção "Vantagens": por que aparecer no Google e nas IAs vale a pena,
+   como o investimento se paga e o que acontece se a empresa não fizer.
+   Nenhum número de mercado inventado: os gráficos usam só a quantidade
+   de artigos de cada plano, que é fato do contrato.
+   ------------------------------------------------------------------ */
+
+export const GE_VANTAGENS_SEO = [
+  {
+    titulo: "Aparecer entre os primeiros do mapa",
+    texto:
+      "O Google declara que ordena o resultado local por relevância, distância e destaque. Perfil completo, atualizado e ligado a um site com conteúdo trabalha nos dois critérios que você controla.",
+  },
+  {
+    titulo: "Cada artigo é uma porta de entrada nova",
+    texto:
+      "Uma página que responde uma dúvida real do seu cliente pode aparecer para quem pesquisa exatamente aquela pergunta, no Google e no Perfil.",
+  },
+  {
+    titulo: "Presença que se acumula",
+    texto:
+      "O anúncio some no dia em que o pagamento para. O artigo continua no ar, mês após mês, somando páginas que trabalham por você.",
+  },
+  {
+    titulo: "Cliente que chega mais decidido",
+    texto:
+      "Quem leu a sua resposta antes de chamar já entendeu o que você faz e por que confiar. A conversa começa mais perto do fechamento.",
+  },
+] as const;
+
+export const GE_VANTAGENS_GEO = [
+  {
+    titulo: "Ser citado como fonte na resposta",
+    texto:
+      "Resposta direta, perguntas frequentes e dados estruturados são o formato que as IAs conseguem ler, entender e citar com o seu nome.",
+  },
+  {
+    titulo: "Presença em todas as IAs, não só em uma",
+    texto:
+      "As IAs consultam a web aberta. Conteúdo claro e consistente no seu próprio site aumenta a chance de a sua empresa ser mencionada em qualquer uma delas.",
+  },
+  {
+    titulo: "A informação certa sobre você",
+    texto:
+      "Quando uma IA fala da sua empresa, ela usa o que encontra. Com conteúdo próprio, a fonte sobre serviços, região e diferenciais é você.",
+  },
+  {
+    titulo: "Ocupar o espaço antes do concorrente",
+    texto:
+      "Uma resposta de IA cita poucas empresas. Quem constrói conteúdo primeiro ocupa esse espaço, e quem chega depois precisa disputar com quem já está lá.",
+  },
+] as const;
+
+/** IAs que leem a web aberta e podem citar o conteúdo do cliente. */
+export const GE_IAS = [
+  "ChatGPT",
+  "Gemini",
+  "Claude",
+  "Perplexity",
+  "Copilot",
+  "Meta AI",
+  "Grok",
+  "DeepSeek",
+  "Visão geral criada por IA do Google",
+  "Modo IA do Google",
+] as const;
+
+/** Linha do tempo de quem não faz nada, contra um concorrente no Plano Autoridade. */
+export const GE_CONSEQUENCIAS = [
+  {
+    quando: "Hoje",
+    texto:
+      "Quem pesquisa encontra o concorrente que respondeu a pergunta. A sua empresa nem entra na comparação.",
+  },
+  {
+    quando: "Em 3 meses",
+    texto:
+      "As IAs citam quem tem conteúdo sobre o seu segmento na sua cidade. Sem conteúdo, o seu nome não tem de onde sair.",
+  },
+  {
+    quando: "Em 6 meses",
+    texto:
+      "Um concorrente com 10 artigos por mês já tem 60 páginas respondendo os seus clientes. Você tem as mesmas de hoje.",
+  },
+  {
+    quando: "Em 12 meses",
+    texto:
+      "Para alcançar, você começa do zero enquanto ele soma 120. Recuperar o espaço custa mais tempo e mais dinheiro do que começar agora.",
+  },
+] as const;
