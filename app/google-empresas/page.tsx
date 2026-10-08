@@ -14,6 +14,7 @@ import Navbar from "@/components/site/Navbar";
 import Footer from "@/components/site/Footer";
 import WhatsAppFloat from "@/components/site/WhatsAppFloat";
 import Faq from "@/components/site/Faq";
+import AboutFelipe from "@/components/site/AboutFelipe";
 import ScrollEffects from "@/components/ui/ScrollEffects";
 import { Revelar } from "@/components/ui/revelar";
 import PlanosGE from "@/components/google-empresas/PlanosGE";
@@ -23,6 +24,7 @@ import {
   GE_CONDICOES,
   GE_CONTEXTO,
   GE_FAQ,
+  GE_IMPLANTACAO,
   GE_PASSOS,
   GE_PLANOS,
   GE_PROBLEMAS,
@@ -106,7 +108,7 @@ function jsonLd() {
           itemListElement: GE_PLANOS.map((p) => ({
             "@type": "Offer",
             name: p.nome,
-            description: `${p.artigos} artigos por mês com SEO e GEO, publicados no site e resumidos no Perfil da Empresa no Google.`,
+            description: `${p.artigos} artigos por mês com SEO e GEO, publicados no site e resumidos no Perfil da Empresa no Google. Mensalidade de ${formatarReais(p.preco)} mais implantação única de ${formatarReais(GE_IMPLANTACAO.valor)}.`,
             url: `${URL_PAGINA}#planos`,
             price: p.preco.toFixed(2),
             priceCurrency: "BRL",
@@ -114,14 +116,27 @@ function jsonLd() {
             seller: provedor,
             /* A unidade da cobrança (por mês) mora aqui: unitText não é
                propriedade de Offer no schema.org, é de UnitPriceSpecification. */
-            priceSpecification: {
-              "@type": "UnitPriceSpecification",
-              price: p.preco.toFixed(2),
-              priceCurrency: "BRL",
-              unitText: "MONTH",
-              unitCode: "MON",
-              referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "MON" },
-            },
+            priceSpecification: [
+              {
+                "@type": "UnitPriceSpecification",
+                name: "Mensalidade",
+                price: p.preco.toFixed(2),
+                priceCurrency: "BRL",
+                unitText: "MONTH",
+                unitCode: "MON",
+                referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "MON" },
+              },
+              /* Implantação: cobrança única no começo do contrato. ActivationFee é
+                 o tipo do schema.org para taxa de ativação de um serviço contratado. */
+              {
+                "@type": "UnitPriceSpecification",
+                name: "Implantação",
+                description: GE_IMPLANTACAO.inclui.join("; ") + `. ${GE_IMPLANTACAO.pagamento}`,
+                price: GE_IMPLANTACAO.valor.toFixed(2),
+                priceCurrency: "BRL",
+                priceComponentType: "https://schema.org/ActivationFee",
+              },
+            ],
             eligibleDuration: { "@type": "QuantitativeValue", minValue: 6, unitCode: "MON" },
           })),
         },
@@ -420,6 +435,9 @@ export default function GoogleEmpresasPage() {
             <PlanosGE />
           </div>
         </section>
+
+        {/* Quem está por trás: vai em toda página nova da OutBox */}
+        <AboutFelipe />
 
         {/* Perguntas frequentes */}
         <div id="perguntas">
