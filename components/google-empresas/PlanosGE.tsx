@@ -1,7 +1,8 @@
-import { ArrowUpRight, CalendarClock, Check, CreditCard, Minus } from "lucide-react";
+import { ArrowUpRight, CalendarClock, Check, CreditCard, Minus, Settings2 } from "lucide-react";
 import { Revelar } from "@/components/ui/revelar";
 import {
   GE_CONDICOES,
+  GE_IMPLANTACAO,
   GE_ITENS_AUTORIDADE,
   GE_ITENS_COMUNS,
   GE_PLANOS,
@@ -71,6 +72,9 @@ function CardPlano({ plano, atraso }: { plano: Plano; atraso: number }) {
           </p>
           <p className="mt-2 text-[16px] font-medium text-white">
             {plano.artigos} artigos por mês
+          </p>
+          <p className="mt-1 text-[13.5px] text-[var(--color-fg-muted)]">
+            + implantação única de {formatarReais(GE_IMPLANTACAO.valor)}
           </p>
 
           <div
@@ -160,6 +164,47 @@ export default function PlanosGE() {
       </div>
 
       <Revelar className="mt-14">
+        <div
+          id="implantacao"
+          className="relative grid gap-8 overflow-hidden rounded-[var(--radius-xl2)] border border-[var(--color-brand)]/35 bg-[linear-gradient(135deg,rgba(241,85,50,0.12),rgba(255,255,255,0.02)_60%)] p-7 md:grid-cols-[0.85fr_1.15fr] md:gap-12 md:p-9"
+        >
+          <div>
+            <h3 className="flex items-center gap-3 font-display text-[22px] leading-tight text-white">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--color-brand)]/16">
+                <Settings2 className="h-5 w-5 text-[var(--color-brand)]" aria-hidden />
+              </span>
+              Implantação
+            </h3>
+            <p className="mt-5 flex items-baseline gap-2">
+              <span className="font-display text-[clamp(2.3rem,4.5vw,2.8rem)] leading-none text-white">
+                {formatarReais(GE_IMPLANTACAO.valor)}
+              </span>
+              <span className="text-[15px] text-[var(--color-fg-muted)]">pago uma vez</span>
+            </p>
+            <p className="mt-3 max-w-[38ch] text-[15px] leading-relaxed text-white/85">
+              {GE_IMPLANTACAO.pagamento}
+            </p>
+            <p className="mt-2 max-w-[38ch] text-[13.5px] leading-relaxed text-[var(--color-fg-muted)]">
+              Vale para qualquer plano e é cobrada à parte da mensalidade.
+            </p>
+          </div>
+          <div>
+            <p className="text-[15px] font-medium text-white">O que a implantação inclui</p>
+            <ul className="mt-4 flex flex-col gap-3.5">
+              {GE_IMPLANTACAO.inclui.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-[15px] leading-relaxed text-white/90">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]">
+                    <Check className="h-3 w-3 text-black" strokeWidth={3.2} aria-hidden />
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Revelar>
+
+      <Revelar className="mt-5">
         <div className="grid gap-4 rounded-[var(--radius-xl2)] border border-white/8 bg-white/[0.025] p-6 md:grid-cols-2 md:p-7">
           <p className="flex items-start gap-3.5 text-[15px] leading-relaxed text-white/90">
             <CalendarClock className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-brand)]" aria-hidden />

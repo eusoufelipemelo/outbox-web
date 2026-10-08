@@ -121,6 +121,18 @@ export const GE_PLANOS: Plano[] = [
   },
 ];
 
+/** Implantação: paga uma vez, no começo, à parte da mensalidade do plano. */
+export const GE_IMPLANTACAO = {
+  valor: 2000,
+  pagamento:
+    "No Pix ou no cartão de crédito em até 12x, com os juros da operadora.",
+  inclui: [
+    "Criação do seu Perfil da Empresa no Google ou ajuste do perfil que você já tem",
+    "Configuração da automação dos artigos do blog no seu site",
+    "Configuração da automação das publicações no seu Perfil da Empresa no Google",
+  ],
+} as const;
+
 export const GE_CONDICOES = {
   contrato: "Contrato mínimo de 6 meses, renovável por igual período.",
   pagamento:
