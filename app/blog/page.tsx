@@ -7,6 +7,7 @@ import ScrollEffects from "@/components/ui/ScrollEffects";
 import { PostCard } from "@/components/site/BlogSection";
 import { getPublishedPosts } from "@/lib/blog";
 import RevealTitle from "@/components/ui/reveal-title";
+import AboutFelipe from "@/components/site/AboutFelipe";
 
 export const revalidate = 60;
 
@@ -64,6 +65,9 @@ export default async function BlogPage() {
             )}
           </div>
         </section>
+
+        {/* Quem está por trás: vai em toda página da OutBox */}
+        <AboutFelipe />
       </main>
 
       <Footer />
