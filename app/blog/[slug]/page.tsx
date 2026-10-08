@@ -7,6 +7,7 @@ import Ambience from "@/components/site/Ambience";
 import Navbar from "@/components/site/Navbar";
 import ReadBeacon from "@/components/site/ReadBeacon";
 import Footer from "@/components/site/Footer";
+import AboutFelipe from "@/components/site/AboutFelipe";
 import WhatsAppFloat from "@/components/site/WhatsAppFloat";
 import ScrollEffects from "@/components/ui/ScrollEffects";
 import { getPostBySlug, formatDate } from "@/lib/blog";
@@ -258,6 +259,9 @@ export default async function PostPage({ params }: Props) {
             </aside>
           </div>
         </article>
+
+        {/* Quem está por trás: vai em toda página da OutBox */}
+        <AboutFelipe />
       </main>
 
       <Footer />
