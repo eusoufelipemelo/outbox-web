@@ -1,9 +1,10 @@
-import { Search, Sparkles } from "lucide-react";
+import { Plus, Search, Sparkles } from "lucide-react";
 import { Revelar } from "@/components/ui/revelar";
 import { GE_IAS, GE_VANTAGENS_GEO, GE_VANTAGENS_SEO } from "@/lib/google-empresas";
 import CelularGE from "./CelularGE";
 import RetornoGE from "./RetornoGE";
 import ConsequenciasGE from "./ConsequenciasGE";
+import v from "./vantagens.module.css";
 
 /* Seção entre "O que é GEO?" e os planos: o argumento completo antes do preço.
    O que se ganha no Google e nas IAs, como o investimento se paga e o que
@@ -26,14 +27,24 @@ function Grupo({
         </span>
         {titulo}
       </h3>
-      <ul className="mt-5 grid gap-x-8 gap-y-5 sm:grid-cols-2">
-        {itens.map((v) => (
-          <li key={v.titulo} className="border-l border-[var(--color-brand)]/35 pl-4">
-            <p className="text-[15.5px] font-semibold leading-snug text-white">{v.titulo}</p>
-            <p className="mt-1.5 text-[14.5px] leading-relaxed text-[var(--color-fg-muted)]">{v.texto}</p>
-          </li>
+      <div className="mt-4 border-t border-white/8">
+        {itens.map((item) => (
+          <details key={item.titulo} className={`${v.item} border-b border-white/8`}>
+            <summary className="flex min-h-14 cursor-pointer items-center justify-between gap-4 py-3 text-left">
+              <span className="text-[15.5px] font-semibold leading-snug text-white">{item.titulo}</span>
+              <span
+                className={`${v.mais} flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/16 text-white/75`}
+                aria-hidden
+              >
+                <Plus className="h-4 w-4" strokeWidth={2.4} />
+              </span>
+            </summary>
+            <p className="max-w-[60ch] pb-5 pr-12 text-[14.5px] leading-relaxed text-[var(--color-fg-muted)]">
+              {item.texto}
+            </p>
+          </details>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
@@ -66,7 +77,7 @@ export default function VantagensGE({ tituloClasse }: { tituloClasse: string }) 
             <CelularGE />
           </div>
 
-          <div className="flex min-w-0 flex-col gap-10">
+          <div className="flex min-w-0 flex-col gap-9">
             <Revelar>
               <Grupo Icone={Search} titulo="No Google, com SEO" itens={GE_VANTAGENS_SEO} />
             </Revelar>

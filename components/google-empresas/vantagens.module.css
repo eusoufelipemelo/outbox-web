@@ -14,9 +14,13 @@
   /* Quanto o bloco avança para fora do aparelho, sem passar da borda do palco. */
   --fora: -27%;
   position: relative;
-  height: 640px;
-  display: grid;
-  place-items: center;
+  /* Celular e etiquetas em coluna: as etiquetas ficam no fluxo, com respiro
+     de verdade abaixo do aparelho, em vez de sobrepostas à base dele. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 52px;
+  padding: 36px 0 8px;
   perspective: 1600px;
   overflow-x: clip;
 }
@@ -510,12 +514,11 @@
 
 /* Legenda da cena atual, embaixo do aparelho */
 .legendas {
-  position: absolute;
-  bottom: 4px;
-  left: 50%;
-  translate: -50% 0;
+  position: relative;
   display: flex;
-  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
 }
 .legenda {
   padding: 6px 12px;
@@ -550,7 +553,8 @@
 /* ---------- Celular pequeno ---------- */
 @media (max-width: 767px) {
   .palco {
-    height: 560px;
+    gap: 40px;
+    padding-top: 24px;
   }
   .moldura {
     width: 232px;
@@ -677,5 +681,43 @@
     color: #fff;
     border-color: rgba(241, 85, 50, 0.7);
     background: rgba(241, 85, 50, 0.16);
+  }
+}
+
+/* ---------- Vantagens em acordeão ----------
+   <details> nativo: o texto continua no HTML (o Google e as IAs leem tudo)
+   e abre sem JavaScript. Onde o navegador suporta, a altura anima. */
+.item {
+  interpolate-size: allow-keywords;
+}
+.item::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition:
+    block-size 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    content-visibility 0.32s allow-discrete;
+}
+.item[open]::details-content {
+  block-size: auto;
+}
+.item summary {
+  list-style: none;
+}
+.item summary::-webkit-details-marker {
+  display: none;
+}
+.item .mais {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s, border-color 0.3s;
+}
+.item[open] .mais {
+  transform: rotate(45deg);
+  background: #f15532;
+  border-color: #f15532;
+  color: #000;
+}
+@media (prefers-reduced-motion: reduce) {
+  .item::details-content,
+  .item .mais {
+    transition: none;
   }
 }
