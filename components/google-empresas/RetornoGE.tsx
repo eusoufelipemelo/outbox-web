@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
-import { GE_PLANOS, formatarReais, type Plano } from "@/lib/google-empresas";
+import { GE_IMPLANTACAO, GE_PLANOS, formatarReais, type Plano } from "@/lib/google-empresas";
 import { useEntrar } from "./useEntrar";
 import s from "./vantagens.module.css";
 
@@ -22,6 +22,10 @@ export default function RetornoGE() {
   const plano = planos.find((p) => p.id === planoId)!;
   const clientes = valor > 0 ? Math.ceil(plano.preco / valor) : null;
   const sobra = clientes === 1 ? valor - plano.preco : 0;
+  /* Contrato mínimo: implantação + 6 mensalidades. Quantos clientes no período cobrem tudo. */
+  const MESES_MINIMO = 6;
+  const totalMinimo = GE_IMPLANTACAO.valor + plano.preco * MESES_MINIMO;
+  const clientesMinimo = valor > 0 ? Math.ceil(totalMinimo / valor) : null;
 
   const colunas = [
     { nome: "Sem conteúdo", artigos: 0, id: "nenhum" as const },
@@ -35,7 +39,7 @@ export default function RetornoGE() {
       </h3>
       <p className="mt-3 max-w-[54ch] leading-relaxed text-[var(--color-fg-muted)]">
         Faça a conta com o seu número. Diga quanto entra, em média, com um cliente novo e veja
-        quantos clientes por mês cobrem o plano.
+        quantos clientes cobrem o plano e a implantação.
       </p>
 
       {/* Escolha do plano */}
@@ -106,6 +110,17 @@ export default function RetornoGE() {
                   : "Todo cliente a mais é retorno."
                 : `Do ${clientes + 1}º em diante, é retorno.`}
             </p>
+            {clientesMinimo !== null && (
+              <p className="mt-4 border-t border-white/10 pt-4 text-[14.5px] leading-relaxed text-white/80">
+                Com a implantação, os {MESES_MINIMO} meses do contrato mínimo somam{" "}
+                <b className="font-semibold text-white">{formatarReais(totalMinimo)}</b> (
+                {formatarReais(GE_IMPLANTACAO.valor)} de implantação + {MESES_MINIMO} mensalidades).{" "}
+                <b className="font-semibold text-white">
+                  {clientesMinimo} {clientesMinimo === 1 ? "cliente novo" : "clientes novos"}
+                </b>{" "}
+                nesse período {clientesMinimo === 1 ? "cobre" : "cobrem"} tudo.
+              </p>
+            )}
           </>
         )}
       </div>

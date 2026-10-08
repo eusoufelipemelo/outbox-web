@@ -22,7 +22,8 @@ function economiaPorArtigo(plano: Plano) {
 function CardPlano({ plano, atraso }: { plano: Plano; atraso: number }) {
   const d = plano.destaque;
   // O espaço fixo do "R$ 1.590" vira espaço comum na mensagem do WhatsApp.
-  const mensagem = `${plano.nome} (${plano.artigos} artigos por mês, ${formatarReais(plano.preco).replace(/\u00a0/g, " ")}/mês)`;
+  const reais = (v: number) => formatarReais(v).replace(/\u00a0/g, " ");
+  const mensagem = `${plano.nome} (${plano.artigos} artigos por mês, ${reais(plano.preco)}/mês + implantação de ${reais(GE_IMPLANTACAO.valor)})`;
 
   return (
     <Revelar
