@@ -157,7 +157,7 @@ function PlacaObra() {
       </div>
       <div aria-hidden className="absolute top-8 bottom-24 left-2 flex flex-col items-center gap-2 text-[12px] text-mudo">
         <span className="w-px flex-1 bg-linha-forte" />
-        <span className="[writing-mode:vertical-rl] rotate-180">6 meses</span>
+        <span className="[writing-mode:vertical-rl] rotate-180">todo mês</span>
         <span className="w-px flex-1 bg-linha-forte" />
       </div>
 
@@ -173,20 +173,22 @@ function PlacaObra() {
             sizes="(max-width: 1024px) 90vw, 430px"
           />
         </div>
-        <dl className="grid grid-cols-2 gap-px bg-linha">
-          <div className="bg-superficie p-5">
-            <dt className="text-[13px] text-mudo">Implantação</dt>
-            <dd className="mt-1 font-display [word-spacing:0.08em] text-[26px] font-semibold text-tinta">{reais(VALORES.implantacao)}</dd>
-          </div>
-          <div className="bg-superficie p-5">
-            <dt className="text-[13px] text-mudo">Por mês</dt>
-            <dd className="mt-1 font-display [word-spacing:0.08em] text-[26px] font-semibold text-tinta">{reais(VALORES.mensal)}</dd>
-          </div>
-          <div className="col-span-2 flex items-center justify-between gap-3 bg-marca-tenue p-5">
-            <dt className="text-[14.5px] font-medium text-marca-tinta">Site de {reais(VALORES.site)}</dt>
-            <dd className="rounded-full bg-marca px-3.5 py-1.5 text-[13.5px] font-semibold text-white">de brinde</dd>
-          </div>
-        </dl>
+        {/* sem valores aqui: o investimento só aparece depois das vantagens e da urgência */}
+        <ul className="grid grid-cols-2 gap-px bg-linha">
+          {[
+            { t: "Perfil no Google", d: "criado ou revisado" },
+            { t: "4 artigos", d: "por mês, no automático" },
+          ].map((i) => (
+            <li key={i.t} className="bg-superficie p-5">
+              <span className="block font-display [word-spacing:0.08em] text-[21px] leading-[1.15] font-semibold text-tinta">{i.t}</span>
+              <span className="mt-1 block text-[13.5px] text-mudo">{i.d}</span>
+            </li>
+          ))}
+          <li className="col-span-2 flex items-center justify-between gap-3 bg-marca-tenue p-5">
+            <span className="text-[14.5px] font-medium text-marca-tinta">Site com blog e CMS próprio</span>
+            <span className="shrink-0 rounded-full bg-marca px-3.5 py-1.5 text-[13.5px] font-semibold text-white">de brinde</span>
+          </li>
+        </ul>
       </div>
     </div>
   );
@@ -889,7 +891,7 @@ function BarraCelular() {
     >
       <div className="flex items-center gap-3">
         <div className="min-w-0 flex-1">
-          <p className="truncate text-[13px] text-mudo">Implantação {reais(VALORES.implantacao)}</p>
+          <p className="truncate text-[13px] text-mudo">Tudo pronto em {VALORES.diasParaEntregar} dias</p>
           <p className="truncate text-[14.5px] font-semibold text-tinta">Site de brinde até {VALIDADE.texto.slice(0, 5)}</p>
         </div>
         <a
