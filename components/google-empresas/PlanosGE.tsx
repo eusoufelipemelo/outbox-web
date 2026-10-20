@@ -34,8 +34,8 @@ function CardPlano({ plano, atraso }: { plano: Plano; atraso: number }) {
         aria-labelledby={`plano-${plano.id}`}
         className={
           d
-            ? "relative flex w-full flex-col rounded-[var(--radius-xl2)] border border-[var(--color-brand)]/70 bg-[linear-gradient(180deg,rgba(241,85,50,0.16),rgba(241,85,50,0.035)_55%,rgba(255,255,255,0.02))] p-7 shadow-[0_0_0_1px_rgba(241,85,50,0.25),0_30px_90px_-30px_rgba(241,85,50,0.55)] md:p-9 lg:py-12"
-            : "card-dark flex w-full flex-col p-7 md:p-8"
+            ? "relative flex w-full flex-col rounded-[var(--radius-xl2)] border-2 border-[var(--color-brand)] bg-[var(--color-breu)] p-7 text-white shadow-[0_30px_90px_-30px_rgba(241,85,50,0.55)] md:p-9 lg:py-12"
+            : "plano-claro flex w-full flex-col rounded-[var(--radius-xl2)] p-7 md:p-8"
         }
       >
         {d && (
@@ -206,7 +206,7 @@ export default function PlanosGE() {
       </Revelar>
 
       <Revelar className="mt-5">
-        <div className="grid gap-4 rounded-[var(--radius-xl2)] border border-white/8 bg-white/[0.025] p-6 md:grid-cols-2 md:p-7">
+        <div className="plano-claro grid gap-4 rounded-[var(--radius-xl2)] p-6 md:grid-cols-2 md:p-7">
           <p className="flex items-start gap-3.5 text-[15px] leading-relaxed text-white/90">
             <CalendarClock className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-brand)]" aria-hidden />
             {GE_CONDICOES.contrato}

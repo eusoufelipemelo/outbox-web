@@ -23,15 +23,15 @@ export default function GerenciarCookies() {
       <button
         type="button"
         onClick={() => window.dispatchEvent(new Event(EVENTO_ABRIR))}
-        className="flex cursor-pointer items-center gap-2.5 rounded-full border border-white/16 px-5 py-3 text-[14.5px] font-medium text-white transition-colors duration-300 hover:border-[var(--color-brand)]/50"
+        className="flex cursor-pointer items-center gap-2.5 rounded-full border border-[var(--color-breu)]/25 px-5 py-3 text-[14.5px] font-medium text-[var(--color-breu)] transition-colors duration-300 hover:border-[var(--color-brand)]/50"
       >
         <Settings2 className="h-4 w-4 text-[var(--color-brand)]" />
         Rever minha escolha
       </button>
       {escolha && (
-        <span className="text-[13.5px] text-[var(--color-fg-subtle)]">
+        <span className="text-[13.5px] text-[var(--color-cinza)]">
           Escolha atual:{" "}
-          <strong className="text-white">
+          <strong className="text-[var(--color-breu)]">
             {escolha === "aceito" ? "aceito" : "recusado"}
           </strong>
         </span>

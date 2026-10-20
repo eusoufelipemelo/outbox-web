@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
+  // Prévia do layout novo: nada é indexado.
+  if (process.env.NEXT_PUBLIC_PREVIA === "1") return { rules: [{ userAgent: "*", disallow: "/" }] };
   return {
     rules: [
       { userAgent: "*", allow: "/", disallow: ["/admin", "/api"] },

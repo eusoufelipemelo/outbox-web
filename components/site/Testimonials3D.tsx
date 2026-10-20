@@ -1,124 +1,78 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
-import { Marquee } from "@/components/ui/marquee";
-import RevealTitle from "@/components/ui/reveal-title";
+import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
+import { Star } from "lucide-react";
 import { TESTIMONIALS } from "@/lib/site";
 
-type Depoimento = (typeof TESTIMONIALS)[number];
+type Depo = (typeof TESTIMONIALS)[number];
 
-function CartaoDepoimento({ quote, name, role, avatar }: Depoimento) {
+function Cartao({ t }: { t: Depo }) {
   return (
-    <figure className="w-[290px] shrink-0 rounded-[var(--radius-xl2)] border border-white/12 bg-white/[0.055] p-6 transition-colors duration-300 hover:border-[var(--color-brand)]/50">
-      <span
-        aria-hidden
-        className="font-display text-4xl leading-[0.3] text-[var(--color-brand)]"
-      >
-        &rdquo;
-      </span>
-      <blockquote className="mt-5 text-[14px] leading-relaxed text-white/85">
-        {quote}
-      </blockquote>
-      <figcaption className="mt-5 flex items-center gap-3 border-t border-white/8 pt-4">
-        <Image
-          src={avatar}
-          alt=""
-          width={38}
-          height={38}
-          className="h-[38px] w-[38px] rounded-full object-cover"
-        />
-        <span className="flex min-w-0 flex-col">
-          <span className="truncate font-display text-[14.5px] text-white">
-            {name}
-          </span>
-          <span className="truncate text-[11.5px] text-[var(--color-fg-subtle)]">
-            {role}
-          </span>
+    <figure className="rounded-[22px] border border-white/10 bg-[#1f1f1f]/92 p-6 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.8)] backdrop-blur-md md:p-7">
+      <div className="flex gap-1" aria-label="Cinco estrelas">
+        {[0, 1, 2, 3, 4].map((i) => (
+          <Star key={i} className="h-[18px] w-[18px] fill-[var(--color-brand)] text-[var(--color-brand)]" aria-hidden />
+        ))}
+      </div>
+      <blockquote className="mt-5 text-[15.5px] leading-[1.6] text-white/88">“{t.quote}”</blockquote>
+      <figcaption className="mt-7 flex items-center gap-3">
+        <Image src={t.avatar} alt="" width={40} height={40} className="h-10 w-10 rounded-[10px] object-cover" />
+        <span>
+          <span className="block text-[15px] font-semibold text-white">{t.name}</span>
+          <span className="block text-[13px] text-[#a1a1a1]">{t.role}</span>
         </span>
       </figcaption>
     </figure>
   );
 }
 
-/** Divide os depoimentos em colunas alternadas. */
-const colunas = [
-  TESTIMONIALS.filter((_, i) => i % 3 === 0),
-  TESTIMONIALS.filter((_, i) => i % 3 === 1),
-  TESTIMONIALS.filter((_, i) => i % 3 === 2),
-  [...TESTIMONIALS].reverse(),
-];
-
+/* "Trusted by Happy Clients" da referência: o fundo com rastros de luz e o
+   título ficam presos na tela enquanto os depoimentos sobem por cima, em
+   duas colunas com velocidades diferentes. */
 export default function Testimonials3D() {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduzir = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const yB = useTransform(scrollYProgress, [0, 1], reduzir ? [0, 0] : [140, -140]);
+
+  const colA = TESTIMONIALS.filter((_, i) => i % 2 === 0);
+  const colB = TESTIMONIALS.filter((_, i) => i % 2 === 1);
+
   return (
-    <section
-      id="depoimentos"
-      className="relative overflow-hidden py-24 md:py-32"
-    >
-      <div className="container-outbox relative z-10">
-        <div className="mx-auto max-w-[44ch] text-center">
-          <span className="pill reveal">
-            <span
-              aria-hidden
-              className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
-            />
-            Quem já trabalhou com a gente
-          </span>
-          <RevealTitle
-            as="h2"
-            className="mt-6 font-display text-[clamp(1.9rem,4.4vw,3.2rem)] leading-[1.07] text-white"
-          >
+    <section id="depoimentos" className="tema-breu relative scroll-mt-16" aria-labelledby="depo-titulo">
+      {/* Palco preso: fundo de luz e título */}
+      <div className="sticky top-0 h-[100svh] overflow-hidden">
+        <div aria-hidden className="v3-luz absolute inset-0">
+          <span className="v3-luz__faixa" style={{ ["--r" as string]: "-24deg", top: "38%", ["--d" as string]: "0s" }} />
+          <span className="v3-luz__faixa" style={{ ["--r" as string]: "-18deg", top: "46%", ["--d" as string]: "-3s" }} />
+          <span className="v3-luz__faixa v3-luz__faixa--fina" style={{ ["--r" as string]: "-30deg", top: "52%", ["--d" as string]: "-6s" }} />
+          <span className="v3-luz__faixa v3-luz__faixa--fria" style={{ ["--r" as string]: "-12deg", top: "58%", ["--d" as string]: "-2s" }} />
+          <span className="v3-luz__nucleo" />
+        </div>
+        <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
+          <h2 id="depo-titulo" className="v3-titulo max-w-[14ch] text-white">
             O resultado quem conta são eles.
-          </RevealTitle>
+          </h2>
+          <p className="v3-sub mt-4">Quem já trabalhou com a gente</p>
         </div>
       </div>
 
-      {/* Palco 3D */}
-      <div
-        className="relative mt-16 flex h-[560px] w-full items-center justify-center overflow-hidden [perspective:340px]"
-        style={{
-          maskImage:
-            "radial-gradient(ellipse 78% 66% at 50% 50%, #000 34%, rgba(0,0,0,0.55) 62%, transparent 86%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 78% 66% at 50% 50%, #000 34%, rgba(0,0,0,0.55) 62%, transparent 86%)",
-        }}
-      >
-        <div
-          className="flex flex-row items-center gap-4"
-          style={{
-            transform:
-              "translateX(-40px) translateZ(-90px) rotateX(16deg) rotateY(-9deg) rotateZ(16deg)",
-          }}
-        >
-          {colunas.map((coluna, i) => (
-            <Marquee
-              key={i}
-              vertical
-              pauseOnHover
-              reverse={i % 2 === 1}
-              repeat={3}
-              className="[--duration:46s] [--gap:1rem]"
-            >
-              {coluna.map((d) => (
-                <CartaoDepoimento key={`${i}-${d.name}`} {...d} />
-              ))}
-            </Marquee>
-          ))}
+      {/* Cartões que passam por cima */}
+      <div ref={ref} className="relative z-20 -mt-[100svh] pb-[30svh] pt-[70svh]">
+        <div className="container-outbox grid gap-6 md:grid-cols-2 md:gap-x-[14%]">
+          <div className="flex flex-col gap-6 md:gap-[38vh]">
+            {colA.map((t) => (
+              <Cartao key={t.name} t={t} />
+            ))}
+          </div>
+          <motion.div style={{ y: yB }} className="flex flex-col gap-6 md:mt-[34vh] md:gap-[38vh]">
+            {colB.map((t) => (
+              <Cartao key={t.name} t={t} />
+            ))}
+          </motion.div>
         </div>
-      </div>
-
-      {/* Lista acessível: o palco 3D é decorativo */}
-      <div className="sr-only">
-        <h3>Depoimentos de clientes</h3>
-        <ul>
-          {TESTIMONIALS.map((d) => (
-            <li key={d.name}>
-              <blockquote>{d.quote}</blockquote>
-              <cite>
-                {d.name}, {d.role}
-              </cite>
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   );

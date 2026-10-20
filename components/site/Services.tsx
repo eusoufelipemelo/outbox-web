@@ -1,269 +1,184 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowUpRight,
-  Check,
-  Code2,
-  Gauge,
-  Palette,
-  Presentation,
-} from "lucide-react";
-import RevealTitle from "@/components/ui/reveal-title";
-import { SERVICES, whatsappLink } from "@/lib/site";
+import { motion, useScroll, useTransform, useReducedMotion, type MotionValue } from "motion/react";
+import { ArrowUpRight } from "lucide-react";
+import { SERVICES, whatsappLink, type Service } from "@/lib/site";
 
-const ICONS = {
-  sistemas: Code2,
-  sites: Gauge,
-  branding: Palette,
-  apresentacoes: Presentation,
-} as const;
+/* Imagens reais de trabalhos da OutBox. Sistemas e Branding não têm foto
+   própria no site, então ganham um quadro desenhado em código. */
+function Visual({ slug }: { slug: Service["slug"] }) {
+  if (slug === "sites" || slug === "apresentacoes") {
+    const src = slug === "sites" ? "/img/proj-rap.jpg" : "/img/proj-revolucao.jpg";
+    const alt =
+      slug === "sites"
+        ? "Página de vendas criada pela OutBox para o programa RAP"
+        : "Página da imersão A Revolução, criada pela OutBox";
+    return (
+      <Image src={src} alt={alt} fill sizes="(max-width: 768px) 100vw, 520px" className="object-cover object-top" />
+    );
+  }
+  if (slug === "branding") return <QuadroMarcas />;
+  return <QuadroPainel />;
+}
 
-const TOTAL = SERVICES.length;
-
-export default function Services() {
-  const [active, setActive] = useState(0);
-  const [fixado, setFixado] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  // Só fixa a rolagem em telas grandes e para quem não pediu menos movimento.
-  useEffect(() => {
-    const mqTela = window.matchMedia("(min-width: 1024px)");
-    const mqMovimento = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const avaliar = () => setFixado(mqTela.matches && !mqMovimento.matches);
-    avaliar();
-    mqTela.addEventListener("change", avaliar);
-    mqMovimento.addEventListener("change", avaliar);
-    return () => {
-      mqTela.removeEventListener("change", avaliar);
-      mqMovimento.removeEventListener("change", avaliar);
-    };
-  }, []);
-
-  // Enquanto a seção está presa na tela, a rolagem escolhe o serviço.
-  useEffect(() => {
-    if (!fixado) return;
-    const el = sectionRef.current;
-    if (!el) return;
-
-    const onScroll = () => {
-      const rect = el.getBoundingClientRect();
-      const percorrivel = el.offsetHeight - window.innerHeight;
-      if (percorrivel <= 0) return;
-      const andado = Math.min(Math.max(-rect.top, 0), percorrivel);
-      const progresso = andado / percorrivel;
-      const idx = Math.min(TOTAL - 1, Math.floor(progresso * TOTAL));
-      setActive((atual) => (atual === idx ? atual : idx));
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [fixado]);
-
-  /** Clicar em um item leva a rolagem até o trecho dele. */
-  const irPara = useCallback(
-    (i: number) => {
-      if (!fixado) {
-        setActive(i);
-        return;
-      }
-      const el = sectionRef.current;
-      if (!el) return;
-      const percorrivel = el.offsetHeight - window.innerHeight;
-      const alvo =
-        el.offsetTop + (percorrivel * (i + 0.5)) / TOTAL - window.innerHeight * 0;
-      window.scrollTo({ top: alvo, behavior: "smooth" });
-    },
-    [fixado]
+/* Painel de gestão em modo escuro, só com formas: representa um sistema sob medida. */
+function QuadroPainel() {
+  const barras = [42, 68, 54, 82, 61, 90, 74];
+  return (
+    <div aria-hidden className="absolute inset-0 bg-[radial-gradient(120%_90%_at_100%_0%,#f15532_0%,#5a1404_45%,#0a0a0a_80%)] p-6 md:p-8">
+      <div className="flex h-full flex-col gap-3 rounded-[16px] border border-white/12 bg-[#111]/85 p-4 shadow-2xl backdrop-blur">
+        <div className="flex items-center gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-full bg-white/25" />
+          <span className="h-2.5 w-2.5 rounded-full bg-white/25" />
+          <span className="h-2.5 w-2.5 rounded-full bg-white/25" />
+          <span className="ml-3 h-2 w-24 rounded-full bg-white/15" />
+        </div>
+        <div className="grid grid-cols-3 gap-2.5">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="rounded-[10px] bg-white/[0.06] p-3">
+              <span className="block h-1.5 w-10 rounded-full bg-white/25" />
+              <span className={`mt-2.5 block h-3.5 rounded-full ${i === 1 ? "w-14 bg-[#f15532]" : "w-12 bg-white/70"}`} />
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-1 items-end gap-2 rounded-[10px] bg-white/[0.04] p-3">
+          {barras.map((h, i) => (
+            <span
+              key={i}
+              className={`flex-1 rounded-t-[4px] ${i === 5 ? "bg-[#f15532]" : "bg-white/20"}`}
+              style={{ height: `${h}%` }}
+            />
+          ))}
+        </div>
+        <div className="space-y-2">
+          {[78, 64, 52].map((w, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <span className="h-5 w-5 rounded-full bg-white/12" />
+              <span className="h-1.5 rounded-full bg-white/20" style={{ width: `${w}%` }} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
+}
 
-  const servico = SERVICES[active];
-  const Icone = ICONS[servico.slug];
+/* Marcas de clientes reais em azulejos: o trabalho de branding da OutBox. */
+function QuadroMarcas() {
+  const logos = [
+    "/img/logo-jonas.svg",
+    "/img/logo-patricia.svg",
+    "/img/logo-alexandre.svg",
+    "/img/logo-michelle.svg",
+    "/img/logo-nicoli.png",
+    "/img/logo-fabricio.png",
+  ];
+  return (
+    <div className="absolute inset-0 grid grid-cols-3 gap-2 bg-[var(--color-brand)] p-2">
+      {logos.map((src) => (
+        <div key={src} className="relative flex items-center justify-center rounded-[12px] bg-[#fbfaf9]">
+          <Image src={src} alt="" width={80} height={80} className="h-[42%] w-auto object-contain" />
+        </div>
+      ))}
+      <span className="sr-only">Marcas de clientes desenvolvidas pela OutBox</span>
+    </div>
+  );
+}
+
+function Cartao({
+  s,
+  i,
+  total,
+  p,
+  reduzir,
+}: {
+  s: Service;
+  i: number;
+  total: number;
+  p: MotionValue<number>;
+  reduzir: boolean;
+}) {
+  // O cartão de baixo encolhe um pouco quando o próximo passa por cima.
+  const alvo = 1 - (total - 1 - i) * 0.035;
+  const scale = useTransform(p, [i / total, 1], reduzir ? [1, 1] : [1, alvo]);
 
   return (
-    <section
-      id="servicos"
-      ref={sectionRef}
-      className="relative"
-      style={fixado ? { height: `${TOTAL * 100}vh` } : undefined}
-    >
-      <div
-        className={
-          fixado
-            ? "sticky top-0 flex h-screen items-center overflow-hidden py-16"
-            : "py-24 md:py-32"
-        }
+    <div className="md:sticky md:pb-6" style={{ top: `${96 + i * 22}px` }}>
+      <motion.article
+        style={{ scale, transformOrigin: "top center" }}
+        className="grid overflow-hidden rounded-[24px] border border-[var(--color-borda)] bg-[#fbfaf9] shadow-[0_-12px_40px_-24px_rgba(10,10,10,0.25)] md:grid-cols-[1.05fr_1fr]"
       >
-        <div className="container-outbox w-full">
-          <div className="max-w-[46ch]">
-            <span className="pill reveal">
-              <span
-                aria-hidden
-                className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
-              />
-              O que fazemos
-            </span>
-            <RevealTitle
-              as="h2"
-              className="mt-6 font-display text-[clamp(2rem,4.6vw,3.4rem)] leading-[1.06] text-white"
-            >
-              Quatro frentes para tirar a sua empresa do lugar comum.
-            </RevealTitle>
+        <div className="flex flex-col p-7 md:p-10">
+          <p className="text-[14px] font-medium text-[var(--color-cinza)]">
+            {s.number} · {s.tagline}
+          </p>
+          <h3 className="mt-3 text-[clamp(1.6rem,2.6vw,2.15rem)] font-bold leading-[1.08] tracking-[-0.025em]">
+            {s.name}
+          </h3>
+          <p className="mt-4 max-w-[52ch] text-[15.5px] leading-relaxed text-[var(--color-cinza)]">{s.description}</p>
+
+          <div className="mt-6 border-t border-[var(--color-borda)] pt-5">
+            <p className="text-[13px] font-medium text-[var(--color-cinza)]">O resultado</p>
+            <p className="v3-chip mt-2 !text-[15.5px] !font-semibold">{s.outcome}</p>
           </div>
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-[0.85fr_1.4fr]">
-            {/* Lista */}
-            <div className="flex flex-col gap-2">
-              {SERVICES.map((s, i) => {
-                const Icon = ICONS[s.slug];
-                const isActive = i === active;
-                return (
-                  <button
-                    key={s.slug}
-                    type="button"
-                    onClick={() => irPara(i)}
-                    aria-pressed={isActive}
-                    className={`group relative flex cursor-pointer items-start gap-4 overflow-hidden rounded-2xl border p-5 text-left transition-all duration-500 ${
-                      isActive
-                        ? "border-[var(--color-brand)]/45 bg-white/[0.05]"
-                        : "border-white/8 bg-transparent hover:border-white/16 hover:bg-white/[0.025]"
-                    }`}
-                  >
-                    {/* Barra de progresso do item ativo */}
-                    {fixado && isActive && (
-                      <span
-                        aria-hidden
-                        className="absolute inset-y-0 left-0 w-[3px] bg-[var(--color-brand)]"
-                      />
-                    )}
-                    <span
-                      className={`mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-colors duration-500 ${
-                        isActive
-                          ? "bg-[var(--color-brand)] text-white"
-                          : "bg-white/6 text-[var(--color-fg-muted)] group-hover:text-white"
-                      }`}
-                    >
-                      <Icon className="h-5 w-5" strokeWidth={2} />
-                    </span>
-                    <span className="flex-1">
-                      <span
-                        className={`font-display text-xs tracking-widest ${
-                          isActive
-                            ? "text-[var(--color-brand)]"
-                            : "text-[var(--color-fg-subtle)]"
-                        }`}
-                      >
-                        {s.number}
-                      </span>
-                      <span
-                        className={`mt-1 block font-display text-[19px] leading-snug transition-colors duration-500 ${
-                          isActive ? "text-white" : "text-white/75"
-                        }`}
-                      >
-                        {s.name}
-                      </span>
-                      <span className="mt-1 block text-[13.5px] text-[var(--color-fg-subtle)]">
-                        {s.tagline}
-                      </span>
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Detalhe: troca com a rolagem */}
-            <div className="card-dark relative overflow-hidden p-8 md:p-10">
-              <div key={servico.slug} className="animate-troca relative z-10">
-                <div className="flex items-start justify-between gap-4">
-                  <span className="font-display text-6xl leading-none text-white/8">
-                    {servico.number}
-                  </span>
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--color-brand)]/15">
-                    <Icone
-                      className="h-5 w-5 text-[var(--color-brand)]"
-                      strokeWidth={2}
-                    />
-                  </span>
-                </div>
-
-                <h3 className="mt-4 font-display text-[clamp(1.5rem,2.6vw,2.1rem)] leading-tight text-white">
-                  {servico.name}
-                </h3>
-
-                <p className="mt-4 max-w-[58ch] leading-relaxed text-[var(--color-fg-muted)]">
-                  {servico.description}
-                </p>
-
-                <ul className="mt-7 grid gap-3 sm:grid-cols-2">
-                  {servico.bullets.map((b) => (
-                    <li
-                      key={b}
-                      className="flex items-start gap-2.5 text-[14.5px] text-white/85"
-                    >
-                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]/15">
-                        <Check
-                          className="h-3 w-3 text-[var(--color-brand)]"
-                          strokeWidth={3}
-                        />
-                      </span>
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-7 rounded-2xl border border-[var(--color-brand)]/25 bg-[var(--color-brand)]/8 p-5">
-                  <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-brand)]">
-                    O resultado
-                  </span>
-                  <p className="mt-1.5 text-[15.5px] text-white">
-                    {servico.outcome}
-                  </p>
-                </div>
-
-                <div className="mt-7 flex flex-wrap gap-3">
-                  <Link
-                    href="/#contato"
-                    className="group flex cursor-pointer items-center gap-2.5 rounded-full bg-white px-5 py-3 text-[14.5px] font-medium text-black transition-all duration-300 hover:shadow-[0_12px_30px_rgba(255,255,255,0.14)]"
-                  >
-                    Quero este serviço
-                    <ArrowUpRight
-                      className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                      strokeWidth={2.4}
-                    />
-                  </Link>
-                  <a
-                    href={whatsappLink(servico.name)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="cursor-pointer rounded-full border border-white/14 px-5 py-3 text-[14.5px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
-                  >
-                    Tirar dúvida no WhatsApp
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Passos: mostra onde a pessoa está na sequência */}
-          {fixado && (
-            <div
-              className="mt-8 flex items-center justify-center gap-2"
-              aria-hidden
-            >
-              {SERVICES.map((s, i) => (
-                <span
-                  key={s.slug}
-                  className={`h-1 rounded-full transition-all duration-500 ${
-                    i === active
-                      ? "w-10 bg-[var(--color-brand)]"
-                      : "w-5 bg-white/15"
-                  }`}
-                />
+          <div className="mt-5 border-t border-[var(--color-borda)] pt-5">
+            <p className="text-[13px] font-medium text-[var(--color-cinza)]">Inclui</p>
+            <ul className="mt-2 grid gap-x-5 gap-y-1.5 sm:grid-cols-2">
+              {s.bullets.map((b) => (
+                <li key={b} className="v3-chip !text-[14.5px]">
+                  {b}
+                </li>
               ))}
-            </div>
-          )}
+            </ul>
+          </div>
+
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Link href="/#contato" className="v3-btn">
+              Quero este serviço
+              <ArrowUpRight className="h-4 w-4" strokeWidth={2.4} aria-hidden />
+            </Link>
+            <a
+              href={whatsappLink(s.name)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="v3-btn v3-btn--contorno !border-[var(--color-borda)] hover:!bg-white"
+            >
+              Tirar dúvida no WhatsApp
+            </a>
+          </div>
+        </div>
+        <div className="relative min-h-[260px] overflow-hidden md:m-3 md:min-h-0 md:rounded-[18px]">
+          <Visual slug={s.slug} />
+        </div>
+      </motion.article>
+    </div>
+  );
+}
+
+/* Serviços em cartões empilhados: cada um fica preso no topo e o seguinte
+   passa por cima, então a página só segue depois do 04. No celular viram
+   uma lista comum. */
+export default function Services() {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduzir = useReducedMotion() ?? false;
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+
+  return (
+    <section id="servicos" className="scroll-mt-16 bg-[var(--color-creme)] pb-24 pt-8 md:pb-32">
+      <div className="container-outbox">
+        <div className="mx-auto max-w-[760px] text-center">
+          <h2 className="v3-titulo">Quatro frentes para tirar a sua empresa do lugar comum.</h2>
+          <p className="v3-sub mx-auto mt-4 max-w-[46ch]">O que fazemos</p>
+        </div>
+
+        <div ref={ref} className="mt-14 flex flex-col gap-6 md:gap-[18vh]">
+          {SERVICES.map((s, i) => (
+            <Cartao key={s.slug} s={s} i={i} total={SERVICES.length} p={scrollYProgress} reduzir={reduzir} />
+          ))}
         </div>
       </div>
     </section>

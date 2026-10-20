@@ -51,7 +51,7 @@ function Grupo({
 
 export default function VantagensGE({ tituloClasse }: { tituloClasse: string }) {
   return (
-    <section id="vantagens" className="relative scroll-mt-24 py-20 md:py-28">
+    <section id="vantagens" className="tema-breu relative scroll-mt-24 py-20 md:py-28">
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="glow glow--brand absolute -left-40 top-24 h-[520px] w-[620px] opacity-60" />
       </div>

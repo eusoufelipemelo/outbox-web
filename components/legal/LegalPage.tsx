@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import Ambience from "@/components/site/Ambience";
 import Navbar from "@/components/site/Navbar";
 import Footer from "@/components/site/Footer";
 import WhatsAppFloat from "@/components/site/WhatsAppFloat";
@@ -19,17 +18,16 @@ export default function LegalPage({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <Ambience />
+    <div className="sitev">
       <ScrollEffects />
       <Navbar />
 
       <main>
-        <article className="relative pt-36 pb-24 md:pt-44">
+        <article className="relative bg-[var(--color-creme)] pb-24 pt-32 md:pt-40">
           <div className="container-outbox relative z-10">
             <Link
               href="/"
-              className="inline-flex cursor-pointer items-center gap-2 text-[14.5px] text-[var(--color-fg-muted)] transition-colors hover:text-white"
+              className="inline-flex min-h-11 cursor-pointer items-center gap-2 text-[14.5px] text-[var(--color-cinza)] transition-colors hover:text-[var(--color-acao)]"
             >
               <ArrowLeft className="h-4 w-4" />
               Voltar para o site
@@ -43,47 +41,47 @@ export default function LegalPage({
                 />
                 Documento legal
               </span>
-              <h1 className="mt-6 font-display text-[clamp(2rem,4.6vw,3.2rem)] leading-[1.06] text-white">
+              <h1 className="mt-6 font-bold tracking-[-0.025em] text-[clamp(2rem,4.6vw,3.2rem)] leading-[1.06] text-[var(--color-breu)]">
                 {titulo}
               </h1>
-              <p className="mt-5 text-lg leading-relaxed text-[var(--color-fg-muted)]">
+              <p className="mt-5 text-lg leading-relaxed text-[var(--color-cinza)]">
                 {resumo}
               </p>
-              <p className="mt-6 border-t border-white/8 pt-5 text-[13.5px] text-[var(--color-fg-subtle)]">
+              <p className="mt-6 border-t border-[var(--color-borda)] pt-5 text-[13.5px] text-[var(--color-cinza)]">
                 Última atualização: {ATUALIZADO_EM}
               </p>
             </header>
 
-            <div className="prose prose-invert prose-outbox mt-12 max-w-[760px] prose-headings:font-display prose-h2:mt-12 prose-h2:text-[1.5rem] prose-h3:text-[1.15rem] prose-a:text-[var(--color-brand)] prose-a:underline-offset-4 prose-li:marker:text-[var(--color-brand)]">
+            <div className="prose prose-v3 mt-12 max-w-[760px] prose-headings:font-bold tracking-[-0.025em] prose-h2:mt-12 prose-h2:text-[1.5rem] prose-h3:text-[1.15rem] prose-a:text-[#b8330f] prose-a:underline-offset-4 prose-li:marker:text-[var(--color-brand)]">
               {children}
             </div>
 
             {/* Identificação do responsável */}
-            <aside className="mt-14 max-w-[760px] rounded-[var(--radius-xl2)] border border-white/10 bg-white/[0.03] p-7">
-              <h2 className="font-display text-[19px] text-white">
+            <aside className="mt-14 max-w-[760px] rounded-[var(--radius-xl2)] border border-[var(--color-borda)] bg-white p-7">
+              <h2 className="font-bold tracking-[-0.025em] text-[19px] text-[var(--color-breu)]">
                 Quem é o responsável
               </h2>
               <dl className="mt-4 grid gap-3 text-[14.5px] sm:grid-cols-2">
                 <div>
-                  <dt className="text-[var(--color-fg-subtle)]">Razão social</dt>
-                  <dd className="text-white">{SITE.name}</dd>
+                  <dt className="text-[var(--color-cinza)]">Razão social</dt>
+                  <dd className="text-[var(--color-breu)]">{SITE.name}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-fg-subtle)]">CNPJ</dt>
-                  <dd className="text-white">{SITE.cnpj}</dd>
+                  <dt className="text-[var(--color-cinza)]">CNPJ</dt>
+                  <dd className="text-[var(--color-breu)]">{SITE.cnpj}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-fg-subtle)]">Endereço</dt>
-                  <dd className="text-white">{SITE.city}</dd>
+                  <dt className="text-[var(--color-cinza)]">Endereço</dt>
+                  <dd className="text-[var(--color-breu)]">{SITE.city}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-fg-subtle)]">
+                  <dt className="text-[var(--color-cinza)]">
                     Contato do encarregado
                   </dt>
                   <dd>
                     <a
                       href={`mailto:${SITE.email}`}
-                      className="text-[var(--color-brand)] hover:underline"
+                      className="text-[#b8330f] hover:underline"
                     >
                       {SITE.email}
                     </a>
@@ -101,7 +99,7 @@ export default function LegalPage({
                 <Link
                   key={l.href}
                   href={l.href}
-                  className="cursor-pointer rounded-full border border-white/12 px-4 py-2.5 text-[13.5px] text-white/80 transition-colors duration-300 hover:border-[var(--color-brand)]/50 hover:text-white"
+                  className="cursor-pointer rounded-full border border-[var(--color-borda)] px-4 py-2.5 text-[13.5px] text-[var(--color-breu)] transition-colors duration-300 hover:border-[var(--color-brand)]/50 hover:text-[var(--color-acao)]"
                 >
                   {l.label}
                 </Link>
@@ -113,6 +111,6 @@ export default function LegalPage({
 
       <Footer />
       <WhatsAppFloat />
-    </>
+    </div>
   );
 }

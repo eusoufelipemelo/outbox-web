@@ -37,7 +37,8 @@ export const metadata: Metadata = {
     description: SITE.description,
     images: ["/og.png"],
   },
-  robots: { index: true, follow: true },
+  // Na prévia (Vercel) a página não entra no Google para não competir com o site oficial.
+  robots: process.env.NEXT_PUBLIC_PREVIA === "1" ? { index: false, follow: false } : { index: true, follow: true },
   alternates: { canonical: SITE.url },
 };
 
@@ -92,6 +93,10 @@ export default function RootLayout({
         />
         <link
           href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&family=Anton&display=swap"
           rel="stylesheet"
         />
         <script

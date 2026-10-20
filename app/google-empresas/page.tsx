@@ -9,11 +9,11 @@ import {
   Sparkles,
   TrendingDown,
 } from "lucide-react";
-import Ambience from "@/components/site/Ambience";
 import Navbar from "@/components/site/Navbar";
 import Footer from "@/components/site/Footer";
 import WhatsAppFloat from "@/components/site/WhatsAppFloat";
 import Faq from "@/components/site/Faq";
+import TopoPagina from "@/components/site/TopoPagina";
 import AboutFelipe from "@/components/site/AboutFelipe";
 import ScrollEffects from "@/components/ui/ScrollEffects";
 import { Revelar } from "@/components/ui/revelar";
@@ -172,118 +172,82 @@ function Rotulo({ children }: { children: React.ReactNode }) {
 
 function BotaoWhatsapp({ children = "Quero aparecer no Google" }: { children?: React.ReactNode }) {
   return (
-    <a
-      href={geWhatsapp()}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group flex min-h-12 cursor-pointer items-center gap-3 rounded-full bg-white py-2 pl-2 pr-6 text-[15px] font-medium text-black transition-all duration-300 hover:shadow-[0_14px_40px_rgba(255,255,255,0.16)]"
-    >
-      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-brand)] transition-transform duration-300 group-hover:rotate-45">
-        <ArrowUpRight className="h-4.5 w-4.5 text-white" strokeWidth={2.4} aria-hidden />
-      </span>
+    <a href={geWhatsapp()} target="_blank" rel="noopener noreferrer" className="v3-btn">
       {children}
+      <ArrowUpRight className="h-4 w-4" strokeWidth={2.4} aria-hidden />
     </a>
   );
 }
 
 const ICONES_PROBLEMA = [MapPinOff, FileX2, TrendingDown] as const;
-const TITULO_SECAO = "font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white";
+const TITULO_SECAO = "v3-titulo !text-[clamp(2rem,4.2vw,3.25rem)]";
 
 export default function GoogleEmpresasPage() {
   const menorPreco = Math.min(...GE_PLANOS.map((p) => p.preco));
 
   return (
-    <>
+    <div className="sitev">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }}
       />
-      <Ambience />
       <ScrollEffects />
       <Navbar />
 
       <main>
         {/* Topo */}
-        <section className="relative overflow-hidden pt-36 pb-20 md:pt-44 md:pb-28">
-          <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="glow glow--brand absolute -top-40 left-1/2 h-[480px] w-[640px] -translate-x-1/2" />
-          </div>
-
-          <div className="container-outbox relative z-10 flex flex-col items-center text-center">
-            <nav aria-label="Você está em" className="mb-8">
-              <ol className="flex items-center gap-1.5 text-[13.5px] text-[var(--color-fg-muted)]">
-                <li>
-                  <Link href="/" className="inline-flex min-h-11 min-w-11 items-center justify-center px-1 transition-colors hover:text-white">
-                    Início
-                  </Link>
-                </li>
-                <li aria-hidden>
-                  <ChevronRight className="h-3.5 w-3.5" />
-                </li>
-                <li aria-current="page" className="px-1 text-white/85">
-                  Google Empresas
-                </li>
-              </ol>
-            </nav>
-
-            <Revelar>
-              <Rotulo>Google Empresas · SEO e GEO</Rotulo>
-            </Revelar>
-
-            <Revelar atraso={0.05}>
-              <h1 className="mt-7 max-w-[19ch] font-display text-[clamp(2.3rem,6vw,4.4rem)] leading-[1.04] text-white">
-                Seja <span className="text-brand-gradient">encontrado no Google</span> e{" "}
-                <span className="text-brand-gradient">citado pelas IAs</span> com artigos
-                novos todo mês.
-              </h1>
-            </Revelar>
-
-            <Revelar atraso={0.1}>
-              <p className="mx-auto mt-7 max-w-[60ch] text-[17px] leading-relaxed text-[var(--color-fg-muted)] md:text-lg">
-                Artigos pensados para o seu nicho e a sua cidade, publicados no seu
-                site e divulgados no seu Perfil da Empresa no Google. Para aparecer
-                na busca, no ChatGPT, no Gemini e nos resumos com IA do Google.
-              </p>
-            </Revelar>
-
-            <Revelar atraso={0.15} className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
+        <TopoPagina
+          palavra="GOOGLE"
+          esquerda="Google Empresas"
+          direita="SEO e GEO"
+          titulo="Seja encontrado no Google e citado pelas IAs com artigos novos todo mês."
+          texto="Artigos pensados para o seu nicho e a sua cidade, publicados no seu site e divulgados no seu Perfil da Empresa no Google. Para aparecer na busca, no ChatGPT, no Gemini e nos resumos com IA do Google."
+        >
+          <div className="mt-10 flex flex-col gap-6 border-t border-[var(--color-borda)] pt-8 md:flex-row md:items-center md:justify-between">
+            <div className="flex flex-wrap gap-3">
               <BotaoWhatsapp />
-              <a
-                href="#planos"
-                className="flex min-h-12 cursor-pointer items-center rounded-full border border-white/14 px-7 py-3.5 text-[15px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
-              >
+              <a href="#planos" className="v3-btn v3-btn--contorno !border-[var(--color-breu)]/25 hover:!bg-white">
                 Ver os planos
               </a>
-            </Revelar>
-
-            <Revelar atraso={0.2} className="mt-12 w-full">
-              <ul className="mx-auto grid max-w-[760px] gap-3 text-[14.5px] sm:grid-cols-3">
-                {[
-                  "De 4 a 10 artigos por mês",
-                  "No seu site e no seu Perfil",
-                  `Planos a partir de ${formatarReais(menorPreco)}/mês`,
-                ].map((t) => (
-                  <li
-                    key={t}
-                    className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3.5 text-white/85"
-                  >
-                    {t}
-                  </li>
-                ))}
-              </ul>
-            </Revelar>
+            </div>
+            <ul className="flex flex-wrap gap-2 text-[14px] font-medium">
+              {[
+                "De 4 a 10 artigos por mês",
+                "No seu site e no seu Perfil",
+                `Planos a partir de ${formatarReais(menorPreco)}/mês`,
+              ].map((t) => (
+                <li key={t} className="v3-chip rounded-full bg-white px-4 py-2.5">
+                  {t}
+                </li>
+              ))}
+            </ul>
           </div>
-        </section>
+          <nav aria-label="Você está em" className="mt-8">
+            <ol className="flex items-center gap-1.5 text-[13.5px] text-[var(--color-cinza)]">
+              <li>
+                <Link href="/" className="inline-flex min-h-11 min-w-11 items-center justify-center px-1 transition-colors hover:text-[var(--color-acao)]">
+                  Início
+                </Link>
+              </li>
+              <li aria-hidden>
+                <ChevronRight className="h-3.5 w-3.5" />
+              </li>
+              <li aria-current="page" className="px-1 text-[var(--color-breu)]">
+                Google Empresas
+              </li>
+            </ol>
+          </nav>
+        </TopoPagina>
 
         {/* O problema */}
-        <section id="problema" className="relative py-20 md:py-28">
+        <section id="problema" className="relative bg-[var(--color-creme)] py-20 md:py-28">
           <div className="container-outbox">
             <Revelar className="max-w-[46ch]">
               <Rotulo>O problema</Rotulo>
               <h2 className={`mt-6 ${TITULO_SECAO}`}>
                 Por que o cliente está escolhendo o concorrente?
               </h2>
-              <p className="mt-5 leading-relaxed text-[var(--color-fg-muted)]">
+              <p className="mt-5 leading-relaxed text-[var(--color-cinza)]">
                 Muitas vezes não é preço nem qualidade, é presença: quem aparece
                 com uma resposta na hora da pesquisa leva a conversa.
               </p>
@@ -294,14 +258,14 @@ export default function GoogleEmpresasPage() {
                 const Icone = ICONES_PROBLEMA[i];
                 return (
                   <Revelar key={p.titulo} atraso={i * 0.06} className="flex">
-                    <article className="card-dark w-full p-7">
+                    <article className="rounded-[20px] bg-white w-full p-7">
                       <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--color-brand)]/12">
                         <Icone className="h-5 w-5 text-[var(--color-brand)]" aria-hidden />
                       </span>
-                      <h3 className="mt-5 font-display text-[20px] leading-snug text-white">
+                      <h3 className="mt-5 font-display text-[20px] leading-snug text-[var(--color-breu)]">
                         {p.titulo}
                       </h3>
-                      <p className="mt-3 text-[15px] leading-relaxed text-[var(--color-fg-muted)]">
+                      <p className="mt-3 text-[15px] leading-relaxed text-[var(--color-cinza)]">
                         {p.texto}
                       </p>
                     </article>
@@ -313,7 +277,7 @@ export default function GoogleEmpresasPage() {
         </section>
 
         {/* Como funciona */}
-        <section id="como-funciona" className="relative py-20 md:py-28">
+        <section id="como-funciona" className="tema-breu relative py-20 md:py-28">
           <div className="container-outbox">
             <Revelar className="max-w-[44ch]">
               <Rotulo>Como funciona</Rotulo>
@@ -354,18 +318,18 @@ export default function GoogleEmpresasPage() {
         </section>
 
         {/* GEO */}
-        <section id="geo" className="relative py-20 md:py-28">
+        <section id="geo" className="relative bg-[var(--color-creme)] py-20 md:py-28">
           <div className="container-outbox">
             <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
               <Revelar>
                 <Rotulo>SEO e GEO</Rotulo>
                 <h2 className={`mt-6 ${TITULO_SECAO}`}>O que é GEO?</h2>
-                <p className="mt-6 max-w-[60ch] text-[17px] leading-relaxed text-white/90">
+                <p className="mt-6 max-w-[60ch] text-[17px] leading-relaxed text-[var(--color-breu)]">
                   GEO é a otimização para motores generativos, as inteligências
                   artificiais que respondem perguntas, como o ChatGPT, o Gemini e os
                   resumos com IA do Google.
                 </p>
-                <p className="mt-4 max-w-[60ch] leading-relaxed text-[var(--color-fg-muted)]">
+                <p className="mt-4 max-w-[60ch] leading-relaxed text-[var(--color-cinza)]">
                   É escrever e organizar o conteúdo de um jeito que essas IAs
                   entendam a sua empresa e citem o seu site na resposta. O SEO
                   continua sendo a base, porque as IAs leem o que o Google encontra.
@@ -390,16 +354,16 @@ export default function GoogleEmpresasPage() {
                   },
                 ].map(({ Icone, rotulo, titulo, texto }, i) => (
                   <Revelar key={rotulo} atraso={i * 0.06}>
-                    <div className="card-dark flex items-start gap-5 p-6">
+                    <div className="rounded-[20px] bg-white flex items-start gap-5 p-6">
                       <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--color-brand)]/12">
                         <Icone className="h-5 w-5 text-[var(--color-brand)]" aria-hidden />
                       </span>
                       <div>
-                        <p className="text-[12.5px] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand)]">
+                        <p className="text-[13px] font-semibold uppercase tracking-[0.1em] text-[#b8330f]">
                           {rotulo}
                         </p>
-                        <p className="mt-1 font-display text-[20px] text-white">{titulo}</p>
-                        <p className="mt-1.5 text-[14.5px] leading-relaxed text-[var(--color-fg-muted)]">
+                        <p className="mt-1 font-display text-[20px] text-[var(--color-breu)]">{titulo}</p>
+                        <p className="mt-1.5 text-[14.5px] leading-relaxed text-[var(--color-cinza)]">
                           {texto}
                         </p>
                       </div>
@@ -415,17 +379,14 @@ export default function GoogleEmpresasPage() {
         <VantagensGE tituloClasse={TITULO_SECAO} />
 
         {/* Planos */}
-        <section id="planos" className="relative scroll-mt-24 py-20 md:py-28">
-          <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-            <div className="glow glow--brand absolute left-1/2 top-1/3 h-[560px] w-[760px] -translate-x-1/2 opacity-70" />
-          </div>
+        <section id="planos" className="relative scroll-mt-24 bg-[var(--color-creme)] py-20 md:py-28">
           <div className="container-outbox relative z-10">
             <Revelar className="mx-auto max-w-[52ch] text-center">
               <Rotulo>Planos</Rotulo>
               <h2 className={`mt-6 ${TITULO_SECAO}`}>
                 Quantos artigos a sua empresa precisa por mês?
               </h2>
-              <p className="mt-5 leading-relaxed text-[var(--color-fg-muted)]">
+              <p className="mt-5 leading-relaxed text-[var(--color-cinza)]">
                 Todos os planos têm artigos com SEO e GEO, publicação no seu site e
                 resumo no Perfil da Empresa no Google. O que muda é o volume e o
                 quanto a gente investe na sua cidade.
@@ -451,23 +412,19 @@ export default function GoogleEmpresasPage() {
         </div>
 
         {/* Chamada final */}
-        <section className="relative pb-24 md:pb-32">
+        <section className="bg-[var(--color-creme)] pb-24 md:pb-32">
           <div className="container-outbox">
             <Revelar>
-              <div className="card-dark relative overflow-hidden p-8 text-center md:p-14">
-                <div aria-hidden className="glow glow--brand absolute -right-24 -top-24 h-80 w-80" />
-                <div aria-hidden className="glow glow--warm absolute -bottom-32 -left-24 h-80 w-80" />
-                <div className="relative z-10 flex flex-col items-center">
-                  <h2 className="max-w-[22ch] font-display text-[clamp(1.8rem,4vw,2.8rem)] leading-[1.08] text-white">
-                    Enquanto o seu perfil está parado, alguém responde o seu cliente.
-                  </h2>
-                  <p className="mt-5 max-w-[52ch] leading-relaxed text-[var(--color-fg-muted)]">
-                    Conte o seu segmento e a sua cidade no WhatsApp. A gente mostra
-                    as perguntas que o seu cliente faz e por onde começar.
-                  </p>
-                  <div className="mt-8">
-                    <BotaoWhatsapp />
-                  </div>
+              <div className="flex flex-col items-center rounded-[28px] bg-[var(--color-breu)] p-8 text-center text-white md:p-14">
+                <h2 className="max-w-[22ch] text-[clamp(1.8rem,4vw,2.8rem)] font-bold leading-[1.08] tracking-[-0.03em]">
+                  Enquanto o seu perfil está parado, alguém responde o seu cliente.
+                </h2>
+                <p className="mt-5 max-w-[52ch] leading-relaxed text-[#a1a1a1]">
+                  Conte o seu segmento e a sua cidade no WhatsApp. A gente mostra as perguntas que o
+                  seu cliente faz e por onde começar.
+                </p>
+                <div className="mt-8">
+                  <BotaoWhatsapp />
                 </div>
               </div>
             </Revelar>
@@ -477,6 +434,6 @@ export default function GoogleEmpresasPage() {
 
       <Footer />
       <WhatsAppFloat contexto={GE_CONTEXTO} />
-    </>
+    </div>
   );
 }

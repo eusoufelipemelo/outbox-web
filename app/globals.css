@@ -58,6 +58,18 @@
   --color-marca-tinta: #b8330f;
   --color-marca-tenue: #fef2ed;
 
+  /* --- Layout v3 do site (creme, preto e laranja) ---
+     Nomes próprios para não mexer nos tokens que as propostas e o
+     material dos consultores ainda usam. */
+  --color-creme: #f3efe8;
+  --color-breu: #0a0a0a;
+  --color-acao: #d63a1a;
+  --color-acao-hover: #bf3214;
+  --color-cinza: #5c5c5c;
+  --color-borda: #e2ddd3;
+  --font-urb: "Urbanist", ui-sans-serif, system-ui, sans-serif;
+  --font-anton: "Anton", "Urbanist", Impact, sans-serif;
+
   /* --- Animações --- */
   --animate-marquee: marquee var(--duration, 42s) linear infinite;
   --animate-marquee-vertical: marquee-vertical var(--duration, 40s) linear infinite;
@@ -861,4 +873,357 @@ footer {
 }
 .trilho-modulos::-webkit-scrollbar-track {
   background: transparent;
+}
+
+
+/* ============================================================
+   LAYOUT V3 (referência marketinglab): creme intercalado com
+   preto e laranja. Tudo dentro de .sitev, para as propostas e o
+   material dos consultores continuarem como estão.
+   ============================================================ */
+.sitev {
+  min-height: 100vh;
+  background: var(--color-creme);
+  color: var(--color-breu);
+  font-family: var(--font-urb);
+  font-feature-settings: "ss01" 0;
+}
+.sitev .font-display {
+  font-family: var(--font-urb);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+/* Pílula de rótulo no tema claro (e de volta ao escuro nas seções pretas) */
+.sitev .pill {
+  border-color: rgba(10, 10, 10, 0.16);
+  background: rgba(255, 255, 255, 0.55);
+  color: #3a3a3a;
+}
+.sitev .tema-breu .pill {
+  border-color: var(--color-line-strong);
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--color-fg-muted);
+}
+/* Cartões de plano no tema claro (a página Google Empresas). Os cartões
+   foram desenhados para o fundo escuro; aqui as cores claras viram tinta. */
+.sitev .plano-claro {
+  background: #fff;
+  color: var(--color-breu);
+  border: 1px solid var(--color-borda);
+}
+.sitev .plano-claro :is(.text-white, .text-white\/90, .text-white\/85) {
+  color: var(--color-breu);
+}
+.sitev .plano-claro .text-\[var\(--color-fg-muted\)\] {
+  color: var(--color-cinza);
+}
+.sitev .plano-claro .text-white\/45 {
+  color: #8a857c;
+}
+.sitev .plano-claro :is(.border-white\/8, .border-white\/12, .border-white\/16) {
+  border-color: var(--color-borda);
+}
+.sitev .plano-claro .bg-white\/\[0\.03\] {
+  background: var(--color-creme);
+}
+.sitev .plano-claro .decoration-white\/25 {
+  text-decoration-color: rgba(10, 10, 10, 0.3);
+}
+.sitev .plano-claro a.border:hover {
+  border-color: var(--color-breu);
+  background: var(--color-creme);
+}
+/* Seções em preto e em laranja */
+.sitev .tema-breu {
+  background: var(--color-breu);
+  color: #fff;
+}
+.sitev .tema-laranja {
+  background: var(--color-brand);
+  color: var(--color-breu);
+}
+
+@layer components {
+/* Títulos de seção, na escala da referência (64px no desktop) */
+.v3-titulo {
+  font-family: var(--font-urb);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 4.6vw, 4rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+.v3-sub {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-cinza);
+}
+.tema-breu .v3-sub {
+  color: #a1a1a1;
+}
+
+/* Botão principal: pílula laranja com seta */
+.v3-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 9999px;
+  background: var(--color-acao);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15.5px;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+.v3-btn:hover {
+  background: var(--color-acao-hover);
+}
+.v3-btn svg {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.v3-btn:hover svg {
+  transform: translate(2px, -2px);
+}
+.v3-btn--claro {
+  background: #fff;
+  color: var(--color-breu);
+}
+.v3-btn--claro:hover {
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+.v3-btn--contorno {
+  background: transparent;
+  color: currentColor;
+  border: 1.5px solid currentColor;
+}
+.v3-btn--contorno:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+.v3-btn--escuro {
+  background: var(--color-breu);
+  color: #fff;
+}
+.v3-btn--escuro:hover {
+  background: #262626;
+}
+
+/* Etiqueta com ponto laranja (chips de categoria e de item) */
+.v3-chip {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.v3-chip::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: var(--color-brand);
+  flex: none;
+  margin-top: 0.55em;
+}
+
+/* Faixa infinita (serviços e clientes) */
+.v3-faixa {
+  display: flex;
+  width: max-content;
+  animation: v3-faixa var(--dur, 40s) linear infinite;
+}
+.v3-faixa:hover {
+  animation-play-state: paused;
+}
+@keyframes v3-faixa {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Palavra gigante do topo: cada letra sobe na carga da página.
+   O estado final é o normal: sem animação, a letra já está no lugar. */
+.v3-letra {
+  display: inline-block;
+  background: linear-gradient(
+    105deg,
+    #4a0904 0%,
+    #9e1f0a 26%,
+    #f15532 58%,
+    #ff8a3d 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: v3-sobe 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.06s + 0.1s);
+}
+@keyframes v3-sobe {
+  from {
+    transform: translateY(42%);
+    opacity: 0.2;
+  }
+}
+
+/* Assinatura gigante do rodapé, recortada embaixo como na referência */
+.v3-assinatura {
+  background: linear-gradient(180deg, #f15532 0%, #b8330f 45%, rgba(10, 10, 10, 0) 100%);
+  -webkit-mask: url("/brand/outbox-wordmark.svg") no-repeat center / contain;
+  mask: url("/brand/outbox-wordmark.svg") no-repeat center / contain;
+}
+
+/* Foco visível no tema claro */
+.sitev a:focus-visible,
+.sitev button:focus-visible,
+.sitev input:focus-visible,
+.sitev select:focus-visible,
+.sitev textarea:focus-visible,
+.sitev summary:focus-visible {
+  outline: 2.5px solid var(--color-acao);
+  outline-offset: 3px;
+}
+
+/* Campos do formulário no tema claro */
+.v3-campo {
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid var(--color-borda);
+  color: var(--color-breu);
+  font-size: 15.5px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.v3-campo::placeholder {
+  color: #8a857c;
+}
+.v3-campo:focus {
+  outline: none;
+  border-color: var(--color-acao);
+  box-shadow: 0 0 0 4px rgba(214, 58, 26, 0.14);
+}
+
+/* Texto de artigo no tema claro */
+.prose-v3 {
+  --tw-prose-body: #2b2b2b;
+  --tw-prose-headings: #0a0a0a;
+  --tw-prose-links: #b8330f;
+  --tw-prose-bold: #0a0a0a;
+  --tw-prose-quotes: #0a0a0a;
+  --tw-prose-quote-borders: #f15532;
+  --tw-prose-bullets: #f15532;
+  --tw-prose-counters: #5c5c5c;
+  --tw-prose-hr: #e2ddd3;
+  font-family: var(--font-urb);
+}
+.prose-v3 h2,
+.prose-v3 h3 {
+  letter-spacing: -0.02em;
+}
+
+/* Fundo dos depoimentos: rastros de luz feitos com gradientes, no lugar da
+   foto de longa exposição da referência. Só transform anima. */
+.v3-luz {
+  background:
+    radial-gradient(60% 50% at 50% 55%, rgba(241, 85, 50, 0.18), transparent 70%),
+    radial-gradient(40% 30% at 62% 48%, rgba(70, 110, 255, 0.1), transparent 70%),
+    #050505;
+}
+.v3-luz__faixa {
+  position: absolute;
+  left: -20%;
+  width: 140%;
+  height: 46px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(241, 85, 50, 0) 18%,
+    rgba(241, 85, 50, 0.85) 46%,
+    rgba(255, 179, 107, 0.95) 54%,
+    rgba(241, 85, 50, 0.5) 66%,
+    transparent 86%
+  );
+  filter: blur(18px);
+  opacity: 0.7;
+  transform: rotate(var(--r)) translateX(-6%);
+  animation: v3-luz 14s ease-in-out infinite alternate;
+  animation-delay: var(--d);
+}
+.v3-luz__faixa--fina {
+  height: 10px;
+  filter: blur(4px);
+  opacity: 0.9;
+}
+.v3-luz__faixa--fria {
+  height: 28px;
+  background: linear-gradient(90deg, transparent 20%, rgba(90, 130, 255, 0.7) 50%, rgba(170, 200, 255, 0.6) 56%, transparent 80%);
+  opacity: 0.45;
+}
+.v3-luz__nucleo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 34vmin;
+  height: 34vmin;
+  translate: -50% -50%;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(255, 210, 160, 0.35), rgba(241, 85, 50, 0.12) 45%, transparent 70%);
+  filter: blur(20px);
+}
+@keyframes v3-luz {
+  to {
+    transform: rotate(var(--r)) translateX(6%);
+  }
+}
+
+/* Símbolo 3D provisório da última seção */
+.v3-3d {
+  position: relative;
+  perspective: 900px;
+}
+.v3-3d__gira {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  animation: v3-gira 9s linear infinite;
+}
+.v3-3d__camada {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.v3-3d__sombra {
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: -22%;
+  height: 14%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(10, 10, 10, 0.22), transparent);
+}
+@keyframes v3-gira {
+  from {
+    transform: rotateX(12deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(12deg) rotateY(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3-faixa,
+  .v3-letra,
+  .v3-luz__faixa,
+  .v3-3d__gira {
+    animation: none;
+  }
+  .v3-3d__gira {
+    transform: rotateX(12deg) rotateY(-24deg);
+  }
+}
 }

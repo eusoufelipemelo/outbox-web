@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import Ambience from "@/components/site/Ambience";
 import Navbar from "@/components/site/Navbar";
 import Footer from "@/components/site/Footer";
 import WhatsAppFloat from "@/components/site/WhatsAppFloat";
 import ScrollEffects from "@/components/ui/ScrollEffects";
 import { PostCard } from "@/components/site/BlogSection";
 import { getPublishedPosts } from "@/lib/blog";
-import RevealTitle from "@/components/ui/reveal-title";
+import TopoPagina from "@/components/site/TopoPagina";
 import AboutFelipe from "@/components/site/AboutFelipe";
 
 export const revalidate = 60;
@@ -22,38 +21,22 @@ export default async function BlogPage() {
   const { posts } = await getPublishedPosts();
 
   return (
-    <>
-      <Ambience />
+    <div className="sitev">
       <ScrollEffects />
       <Navbar />
 
       <main>
-        <section className="relative overflow-hidden pt-40 pb-16 md:pt-48">
-          <div className="container-outbox relative z-10 text-center">
-            <span className="pill reveal">
-              <span
-                aria-hidden
-                className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
-              />
-              Blog da OutBox
-            </span>
-            <RevealTitle
-              as="h1"
-              className="mx-auto mt-7 max-w-[18ch] font-display text-[clamp(2.2rem,5.5vw,4rem)] leading-[1.04] text-white"
-            >
-              Ideias que fazem a sua marca crescer.
-            </RevealTitle>
-            <p className="reveal mx-auto mt-6 max-w-[58ch] text-[17px] leading-relaxed text-[var(--color-fg-muted)]">
-              Performance, SEO, GEO, branding e tecnologia explicados sem
-              jargão, do jeito que a gente conversa com os nossos clientes.
-            </p>
-          </div>
-        </section>
+        <TopoPagina
+          palavra="BLOG"
+          esquerda="Blog da OutBox"
+          titulo="Ideias que fazem a sua marca crescer."
+          texto="Performance, SEO, GEO, branding e tecnologia explicados sem jargão, do jeito que a gente conversa com os nossos clientes."
+        />
 
-        <section className="pb-24 md:pb-32">
+        <section className="bg-[var(--color-creme)] pb-24 md:pb-32">
           <div className="container-outbox">
             {posts.length === 0 ? (
-              <p className="py-20 text-center text-[var(--color-fg-muted)]">
+              <p className="py-20 text-center text-[var(--color-cinza)]">
                 Ainda não publicamos nada por aqui. Volte em breve.
               </p>
             ) : (
@@ -72,6 +55,6 @@ export default async function BlogPage() {
 
       <Footer />
       <WhatsAppFloat />
-    </>
+    </div>
   );
 }

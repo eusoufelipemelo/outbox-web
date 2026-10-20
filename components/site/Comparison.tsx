@@ -1,82 +1,62 @@
 import Image from "next/image";
-import { Check, X } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight, Compass, Gauge, MonitorSmartphone, PenTool, Sparkles, Timer } from "lucide-react";
 import { COMPARISON } from "@/lib/site";
-import RevealTitle from "@/components/ui/reveal-title";
+import { Revelar } from "@/components/ui/revelar";
 
+const ICONES = [PenTool, Gauge, Sparkles, MonitorSmartphone, Timer, Compass];
+
+/* "Our Values" da referência aplicado ao diferencial da OutBox: cada item
+   mostra como a OutBox faz e, embaixo, o jeito de sempre que ele substitui. */
 export default function Comparison() {
+  const itens = COMPARISON.outbox.map((titulo, i) => ({
+    titulo,
+    lugar: COMPARISON.others[i],
+    Icone: ICONES[i],
+  }));
+
   return (
-    <section className="relative overflow-hidden py-24 md:py-32">
-      <div className="container-outbox relative z-10">
-        <div className="mx-auto max-w-[42ch] text-center">
-          <span className="pill reveal">
-            <span
-              aria-hidden
-              className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
-            />
-            Nosso diferencial
-          </span>
-          <RevealTitle
-            as="h2"
-            className="mt-6 font-display text-[clamp(1.9rem,4.4vw,3.2rem)] leading-[1.07] text-white"
-          >
-            A diferença entre ter um site e ser encontrado.
-          </RevealTitle>
+    <section className="bg-[var(--color-creme)] py-24 md:py-32">
+      <div className="container-outbox">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <h2 className="v3-titulo max-w-[16ch]">A diferença entre ter um site e ser encontrado.</h2>
+          <p className="v3-sub md:text-right">Nosso diferencial</p>
         </div>
 
-        <div className="mx-auto mt-14 grid max-w-[900px] gap-5 md:grid-cols-2">
-          {/* Como a maioria faz */}
-          <div className="reveal rounded-[var(--radius-xl2)] border border-white/8 bg-white/[0.02] p-7 md:p-8">
-            <h3 className="font-display text-[21px] text-white/60">
-              O jeito de sempre
-            </h3>
-            <ul className="mt-6 flex flex-col gap-4">
-              {COMPARISON.others.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-3 text-[14.5px] leading-relaxed text-[var(--color-fg-subtle)]"
-                >
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/6">
-                    <X className="h-3 w-3 text-white/40" strokeWidth={3} />
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Como a OutBox faz */}
-          <div
-            className="reveal relative overflow-hidden rounded-[var(--radius-xl2)] border border-[var(--color-brand)]/35 bg-gradient-to-b from-[var(--color-brand)]/10 to-transparent p-7 md:p-8"
-            style={{ transitionDelay: "120ms" }}
-          >
-            <div
-              aria-hidden
-              className="glow glow--brand absolute -right-16 -top-16 h-56 w-56"
+        <div className="mt-14 grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+          <Revelar className="relative aspect-[16/10] overflow-hidden rounded-[20px] md:col-span-2 lg:aspect-auto lg:min-h-[300px]">
+            <Image
+              src="/img/gmn-operacao.jpg"
+              alt="Empreendedora trabalhando no notebook"
+              fill
+              sizes="(max-width: 1024px) 100vw, 720px"
+              className="object-cover"
             />
-            <h3 className="relative z-10 flex items-center gap-2.5 font-display text-[21px] text-white">
-              <Image
-                src="/brand/outbox-simbolo.svg"
-                alt=""
-                width={24}
-                height={24}
-                className="h-[24px] w-[24px]"
-              />
-              Com a OutBox
-            </h3>
-            <ul className="relative z-10 mt-6 flex flex-col gap-4">
-              {COMPARISON.outbox.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-3 text-[14.5px] leading-relaxed text-white/90"
-                >
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]">
-                    <Check className="h-3 w-3 text-white" strokeWidth={3.2} />
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
+          </Revelar>
+
+          {itens.map(({ titulo, lugar, Icone }, i) => (
+            <Revelar key={titulo} atraso={(i % 3) * 0.06}>
+              <div className={i === 0 ? "lg:flex lg:h-full lg:flex-col lg:justify-end" : ""}>
+                <Icone className="h-8 w-8 text-[var(--color-breu)]" strokeWidth={1.7} aria-hidden />
+                <h3 className="mt-5 text-[20px] font-semibold leading-snug tracking-[-0.01em]">{titulo}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-[var(--color-cinza)]">
+                  No lugar de: {lugar.charAt(0).toLowerCase() + lugar.slice(1)}.
+                </p>
+              </div>
+            </Revelar>
+          ))}
+
+          <Revelar atraso={0.12}>
+            <div className="flex h-full flex-col justify-between gap-6 rounded-[20px] bg-[var(--color-brand)] p-7">
+              <p className="text-[22px] font-bold leading-tight tracking-[-0.02em] text-[var(--color-breu)]">
+                Quer um site que traz cliente, e não só elogio?
+              </p>
+              <Link href="/#contato" className="v3-btn v3-btn--escuro self-start">
+                Começar meu projeto
+                <ArrowUpRight className="h-4 w-4" strokeWidth={2.4} aria-hidden />
+              </Link>
+            </div>
+          </Revelar>
         </div>
       </div>
     </section>

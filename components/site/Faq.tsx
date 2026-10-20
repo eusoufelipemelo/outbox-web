@@ -1,16 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Plus } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import { FAQ } from "@/lib/site";
-import RevealTitle from "@/components/ui/reveal-title";
 
 type Item = { readonly q: string; readonly a: string };
 
 /**
- * Perguntas frequentes. Sem props, mostra as da home; outras páginas passam
- * as próprias perguntas e o próprio título. As respostas ficam no HTML mesmo
- * fechadas, então o Google e as IAs leem todas.
+ * Perguntas frequentes no layout v3: linhas brancas e a aberta em laranja.
+ * Sem props, mostra as da home; outras páginas passam as próprias perguntas.
+ * As respostas ficam no HTML mesmo fechadas, então o Google e as IAs leem tudo.
  */
 export default function Faq({
   items = FAQ,
@@ -18,102 +17,73 @@ export default function Faq({
   rotulo = "Dúvidas frequentes",
   texto = "Se a sua dúvida não estiver na lista, é só chamar no WhatsApp que a gente responde de verdade, sem robô.",
   tituloComo = "h2",
-  animarTitulo = true,
 }: {
   items?: readonly Item[];
   titulo?: string;
   rotulo?: string;
   texto?: string;
-  /** Nível do título da seção. */
   tituloComo?: "h2" | "h3";
-  /** O título animado só existe no HTML depois que a animação roda. Em página
-      que precisa do título indexável, passe false para ele nascer como texto. */
+  /** Mantido por compatibilidade: o título já nasce como texto. */
   animarTitulo?: boolean;
 } = {}) {
+  const [aberto, setAberto] = useState<number | null>(0);
   const Titulo = tituloComo;
-  const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="relative overflow-hidden py-24 md:py-32">
-      <div className="container-outbox relative z-10">
-        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-          <div className="lg:sticky lg:top-28 lg:self-start">
-            <span className="pill reveal">
-              <span
-                aria-hidden
-                className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
-              />
-              {rotulo}
-            </span>
-            {animarTitulo ? (
-              <RevealTitle
-                as={tituloComo}
-                className="mt-6 max-w-[16ch] font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white"
-              >
-                {titulo}
-              </RevealTitle>
-            ) : (
-              <Titulo className="reveal mt-6 max-w-[16ch] font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white">
-                {titulo}
-              </Titulo>
-            )}
-            <p className="reveal mt-5 max-w-[42ch] leading-relaxed text-[var(--color-fg-muted)]">
-              {texto}
-            </p>
-          </div>
+    <section className="bg-[var(--color-creme)] py-24 md:py-32">
+      <div className="container-outbox">
+        <div className="mx-auto max-w-[720px] text-center">
+          <Titulo className="v3-titulo">{titulo}</Titulo>
+          <p className="v3-sub mx-auto mt-4 max-w-[52ch]">
+            <span className="sr-only">{rotulo}: </span>
+            {texto}
+          </p>
+        </div>
 
-          <div className="reveal flex flex-col gap-3">
-            {items.map((item, i) => {
-              const isOpen = open === i;
-              return (
-                <div
-                  key={item.q}
-                  className={`overflow-hidden rounded-2xl border transition-colors duration-300 ${
-                    isOpen
-                      ? "border-[var(--color-brand)]/40 bg-white/[0.045]"
-                      : "border-white/8 bg-white/[0.02] hover:border-white/16"
-                  }`}
+        <div className="mx-auto mt-12 flex max-w-[860px] flex-col gap-2.5">
+          {items.map((item, i) => {
+            const on = aberto === i;
+            return (
+              <div
+                key={item.q}
+                className={`overflow-hidden rounded-[16px] transition-colors duration-300 ${
+                  on ? "bg-[var(--color-brand)]" : "bg-white"
+                }`}
+              >
+                <button
+                  type="button"
+                  id={`faq-q-${i}`}
+                  onClick={() => setAberto(on ? null : i)}
+                  aria-expanded={on}
+                  aria-controls={`faq-a-${i}`}
+                  className="flex min-h-[64px] w-full cursor-pointer items-center justify-between gap-5 px-5 py-4 text-left md:px-6"
                 >
-                  <button
-                    type="button"
-                    id={`faq-q-${i}`}
-                    onClick={() => setOpen(isOpen ? null : i)}
-                    aria-expanded={isOpen}
-                    aria-controls={`faq-a-${i}`}
-                    className="flex w-full cursor-pointer items-center justify-between gap-5 p-6 text-left"
+                  <span className="text-[16.5px] font-semibold leading-snug text-[var(--color-breu)]">{item.q}</span>
+                  <span
+                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
+                      on ? "bg-white text-[var(--color-breu)]" : "bg-[var(--color-breu)] text-white"
+                    }`}
+                    aria-hidden
                   >
-                    <span className="font-display text-[17px] leading-snug text-white">
-                      {item.q}
-                    </span>
-                    <span
-                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
-                        isOpen
-                          ? "rotate-45 border-[var(--color-brand)] bg-[var(--color-brand)] text-white"
-                          : "border-white/16 text-white/70"
-                      }`}
-                    >
-                      <Plus className="h-4 w-4" strokeWidth={2.4} />
-                    </span>
-                  </button>
-                  <div
-                    id={`faq-a-${i}`}
-                    role="region"
-                    aria-labelledby={`faq-q-${i}`}
-                    className="grid transition-all duration-400 ease-out"
-                    style={{
-                      gridTemplateRows: isOpen ? "1fr" : "0fr",
-                    }}
-                  >
-                    <div className="overflow-hidden">
-                      <p className="px-6 pb-6 text-[15px] leading-relaxed text-[var(--color-fg-muted)]">
-                        {item.a}
-                      </p>
-                    </div>
+                    {on ? <Minus className="h-4 w-4" strokeWidth={2.6} /> : <Plus className="h-4 w-4" strokeWidth={2.6} />}
+                  </span>
+                </button>
+                <div
+                  id={`faq-a-${i}`}
+                  role="region"
+                  aria-labelledby={`faq-q-${i}`}
+                  className="grid transition-[grid-template-rows] duration-300 ease-out"
+                  style={{ gridTemplateRows: on ? "1fr" : "0fr" }}
+                >
+                  <div className="overflow-hidden">
+                    <p className="px-5 pb-6 text-[15.5px] leading-relaxed text-[var(--color-breu)]/85 md:px-6 md:pr-16">
+                      {item.a}
+                    </p>
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

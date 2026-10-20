@@ -15,63 +15,66 @@ const LINKS = [
   { href: "/blog", label: "Blog" },
 ];
 
+/* Menu do layout v3: barra creme no topo, como na referência. Ao rolar,
+   ganha fundo translúcido e uma linha fina embaixo para não se perder
+   em cima das seções pretas e laranja. */
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [rolou, setRolou] = useState(false);
+  const [aberto, setAberto] = useState(false);
   const pathname = usePathname();
-  /** Página atual, para marcar o item do menu (as âncoras da home não contam). */
   const atual = (href: string) =>
     !href.includes("#") && (pathname === href || pathname.startsWith(`${href}/`));
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setRolou(window.scrollY > 12);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    document.body.style.overflow = aberto ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [open]);
+  }, [aberto]);
 
   return (
     <>
-      <header className="fixed inset-x-0 top-4 z-50 px-4">
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-300 ${
+          rolou || aberto
+            ? "bg-[#f3efe8]/88 shadow-[0_1px_0_rgba(10,10,10,0.08)] backdrop-blur-xl"
+            : "bg-[#f3efe8]"
+        }`}
+      >
         <nav
           aria-label="Navegação principal"
-          className={`container-outbox flex items-center justify-between gap-4 rounded-full border py-2.5 pl-5 pr-2.5 transition-all duration-500 ${
-            scrolled
-              ? "border-white/12 bg-black/70 shadow-[0_10px_40px_rgba(0,0,0,0.5)] backdrop-blur-xl"
-              : "border-white/8 bg-black/35 backdrop-blur-md"
-          }`}
-          style={{ paddingInline: undefined }}
+          className="container-outbox flex h-[76px] items-center justify-between gap-6"
         >
           <Link
             href="/"
-            className="flex min-h-11 shrink-0 items-center gap-2.5"
+            className="flex min-h-11 shrink-0 items-center"
             aria-label="OutBox Group, ir para o início"
           >
             <Image
-              src="/brand/outbox-horizontal-branco.svg"
+              src="/brand/outbox-horizontal-preto.svg"
               alt="OutBox Soluções Digitais"
-              width={138}
-              height={34}
-              className="h-[30px] w-auto md:h-[34px]"
+              width={130}
+              height={32}
+              className="h-[30px] w-auto"
               priority
             />
           </Link>
 
-          <ul className="hidden items-center gap-0.5 lg:flex">
+          <ul className="hidden items-center gap-1 lg:flex">
             {LINKS.map((l) => (
               <li key={l.href}>
                 <Link
                   href={l.href}
                   aria-current={atual(l.href) ? "page" : undefined}
-                  className={`cursor-pointer whitespace-nowrap rounded-full px-3 py-2 text-[14.5px] transition-colors duration-200 hover:text-white xl:px-3.5 ${
-                    atual(l.href) ? "text-white" : "text-white/70"
+                  className={`relative inline-flex min-h-11 items-center whitespace-nowrap px-3 text-[15.5px] font-medium transition-colors duration-200 hover:text-[var(--color-acao)] ${
+                    atual(l.href) ? "text-[var(--color-acao)]" : "text-[var(--color-breu)]"
                   }`}
                 >
                   {l.label}
@@ -81,63 +84,46 @@ export default function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2">
-            <Link
-              href="/#contato"
-              className="group hidden cursor-pointer items-center gap-2.5 rounded-full bg-white py-2 pl-2 pr-4 text-[14.5px] font-medium text-black transition-all duration-300 hover:bg-white/90 sm:flex"
-            >
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-brand)] transition-transform duration-300 group-hover:rotate-45">
-                <ArrowUpRight className="h-4 w-4 text-white" strokeWidth={2.4} />
-              </span>
+            <Link href="/#contato" className="v3-btn hidden !min-h-11 !px-5 !text-[15px] sm:inline-flex">
               Começar projeto
+              <ArrowUpRight className="h-4 w-4" strokeWidth={2.4} aria-hidden />
             </Link>
-
             <button
               type="button"
-              onClick={() => setOpen((v) => !v)}
-              aria-label={open ? "Fechar menu" : "Abrir menu"}
-              aria-expanded={open}
-              className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-white/12 text-white transition-colors hover:bg-white/8 lg:hidden"
+              onClick={() => setAberto((v) => !v)}
+              aria-label={aberto ? "Fechar menu" : "Abrir menu"}
+              aria-expanded={aberto}
+              className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-[var(--color-borda)] bg-white text-[var(--color-breu)] lg:hidden"
             >
-              {open ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
+              {aberto ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </nav>
       </header>
 
-      {/* Menu mobile */}
+      {/* Menu do celular */}
       <div
-        className={`fixed inset-0 z-40 overflow-y-auto bg-black/95 backdrop-blur-xl transition-opacity duration-300 lg:hidden ${
-          open ? "opacity-100" : "pointer-events-none opacity-0"
+        className={`fixed inset-0 z-40 overflow-y-auto bg-[var(--color-creme)] transition-opacity duration-300 lg:hidden ${
+          aberto ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        <div className="flex min-h-full flex-col justify-center gap-2 px-8 py-24">
-          {LINKS.map((l, i) => (
+        <div className="flex min-h-full flex-col justify-center gap-1 px-6 pb-12 pt-28">
+          {LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              onClick={() => setOpen(false)}
+              onClick={() => setAberto(false)}
               aria-current={atual(l.href) ? "page" : undefined}
-              className={`border-b border-white/8 py-5 font-display text-3xl transition-colors hover:text-[var(--color-brand)] ${
-                atual(l.href) ? "text-[var(--color-brand)]" : "text-white"
+              className={`border-b border-[var(--color-borda)] py-4 text-[30px] font-bold tracking-[-0.02em] transition-colors hover:text-[var(--color-acao)] ${
+                atual(l.href) ? "text-[var(--color-acao)]" : "text-[var(--color-breu)]"
               }`}
-              style={{
-                transitionDelay: open ? `${i * 50}ms` : "0ms",
-              }}
             >
               {l.label}
             </Link>
           ))}
-          <Link
-            href="/#contato"
-            onClick={() => setOpen(false)}
-            className="mt-8 flex items-center justify-center gap-2 rounded-full bg-[var(--color-brand)] px-6 py-4 font-medium text-white"
-          >
+          <Link href="/#contato" onClick={() => setAberto(false)} className="v3-btn mt-8 !min-h-14">
             Começar projeto
-            <ArrowUpRight className="h-5 w-5" />
+            <ArrowUpRight className="h-5 w-5" aria-hidden />
           </Link>
         </div>
       </div>
