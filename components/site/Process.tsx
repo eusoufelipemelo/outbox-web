@@ -37,7 +37,7 @@ function Cartao({
           sizes="(max-width: 768px) 50vw, 280px"
           className="object-cover opacity-90 mix-blend-multiply grayscale contrast-125"
         />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-[#3a0c03]/90 via-[#3a0c03]/25 to-transparent" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-[#000000]/90 via-[#000000]/25 to-transparent" />
         <span className="absolute right-4 top-3 text-[clamp(3rem,5.2vw,4.25rem)] font-bold leading-none tracking-[-0.04em] text-white">
           {passo.step}
         </span>
@@ -78,7 +78,7 @@ export default function Process() {
             <h3 className="mt-4 max-w-[20ch] text-[clamp(1.6rem,3vw,2.3rem)] font-bold leading-[1.1] tracking-[-0.025em]">
               Material completo na mão, projeto no ar em tempo recorde.
             </h3>
-            <p className="mt-5 max-w-[56ch] leading-relaxed text-[#a1a1a1]">
+            <p className="mt-5 max-w-[56ch] leading-relaxed text-[#c9c9c9]">
               O que mais atrasa um projeto não é a produção, é a espera por texto, foto e
               informação. Por isso a nossa regra é clara: assim que você entrega o material, o
               cronograma corre sem travas e a gente entrega no menor prazo possível, com o
@@ -88,7 +88,7 @@ export default function Process() {
           <dl className="flex flex-col self-end">
             {PRAZOS.map((p) => (
               <div key={p.k} className="flex items-baseline justify-between gap-4 border-b border-white/12 py-4">
-                <dt className="text-[15.5px] text-[#a1a1a1]">{p.k}</dt>
+                <dt className="text-[15.5px] text-[#c9c9c9]">{p.k}</dt>
                 <dd className="text-[20px] font-semibold text-[var(--color-brand)]">{p.v}</dd>
               </div>
             ))}

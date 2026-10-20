@@ -21,7 +21,7 @@ function Cartao({ t }: { t: Depo }) {
         <Image src={t.avatar} alt="" width={40} height={40} className="h-10 w-10 rounded-[10px] object-cover" />
         <span>
           <span className="block text-[15px] font-semibold text-white">{t.name}</span>
-          <span className="block text-[13px] text-[#a1a1a1]">{t.role}</span>
+          <span className="block text-[13px] text-[#c9c9c9]">{t.role}</span>
         </span>
       </figcaption>
     </figure>

@@ -27,7 +27,7 @@ export default function Logo3D() {
               {frente && (
                 <defs>
                   <linearGradient id="v3-3d-frente" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#ff9a5c" />
+                    <stop offset="0%" stopColor="#f5764e" />
                     <stop offset="45%" stopColor="#f15532" />
                     <stop offset="100%" stopColor="#b8330f" />
                   </linearGradient>
@@ -35,7 +35,7 @@ export default function Logo3D() {
               )}
               <path
                 d={SIMBOLO}
-                fill={frente ? "url(#v3-3d-frente)" : `rgb(${Math.round(120 + t * 70)}, ${Math.round(28 + t * 20)}, ${Math.round(8 + t * 6)})`}
+                fill={frente ? "url(#v3-3d-frente)" : `rgb(${Math.round(92 + t * 92)}, ${Math.round(26 + t * 25)}, ${Math.round(8 + t * 7)})`}
               />
             </svg>
           );

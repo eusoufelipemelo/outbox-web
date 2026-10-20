@@ -8,8 +8,8 @@ const TEXTO =
 
 const FATOS = ["Santa Cruz do Rio Pardo, SP", "Atendimento em todo o Brasil", "Entrega rápida com o material em mãos"];
 
-const CINZA = "#b4ada2";
-const TINTA = "#0a0a0a";
+const CINZA = "#c9c9c9";
+const TINTA = "#000000";
 
 function Palavra({ p, i, n, children }: { p: MotionValue<number>; i: number; n: number; children: string }) {
   const color = useTransform(p, [i / n, (i + 1) / n], [CINZA, TINTA]);

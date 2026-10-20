@@ -77,7 +77,7 @@ export default async function PostPage({ params }: Props) {
           <div className="container-outbox relative z-10">
             <Link
               href="/blog"
-              className="inline-flex min-h-11 cursor-pointer items-center gap-2 text-[14.5px] text-[var(--color-cinza)] transition-colors hover:text-[var(--color-acao)]"
+              className="inline-flex min-h-11 cursor-pointer items-center gap-2 text-[14.5px] text-[var(--color-cinza)] transition-colors hover:text-[#b8330f]"
             >
               <ArrowLeft className="h-4 w-4" />
               Voltar para o blog
@@ -199,7 +199,7 @@ export default async function PostPage({ params }: Props) {
                   <ol className="mt-4 list-decimal space-y-2 pl-5 text-[14.5px] text-[var(--color-cinza)]">
                     {cms.sources.map((src, i) => (
                       <li key={i}>
-                        <a href={src.url} target="_blank" rel="nofollow noopener noreferrer" className="underline underline-offset-4 hover:text-[var(--color-acao)]">
+                        <a href={src.url} target="_blank" rel="nofollow noopener noreferrer" className="underline underline-offset-4 hover:text-[#b8330f]">
                           {src.title}
                         </a>
                         {src.publisher ? <span>, {src.publisher}</span> : null}
@@ -224,7 +224,7 @@ export default async function PostPage({ params }: Props) {
                 <h2 className="text-[clamp(1.4rem,3vw,2rem)] font-bold leading-tight tracking-[-0.025em]">
                   Quer um site que traz cliente, e não só elogio?
                 </h2>
-                <p className="mx-auto mt-4 max-w-[46ch] leading-relaxed text-[#a1a1a1]">
+                <p className="mx-auto mt-4 max-w-[46ch] leading-relaxed text-[#c9c9c9]">
                   A gente cuida da estratégia, do design e da tecnologia. Você cuida do seu negócio.
                 </p>
                 <div className="mt-7 flex flex-wrap justify-center gap-3">

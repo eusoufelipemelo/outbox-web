@@ -60,7 +60,7 @@ function Capa({ post, sizes }: { post: Post; sizes: string }) {
 function Categoria({ post }: { post: Post }) {
   if (!post.category) return null;
   return (
-    <span className="v3-chip absolute left-4 top-4 rounded-full bg-[#f3efe8] px-3 py-1.5 !text-[12.5px]">
+    <span className="v3-chip absolute left-4 top-4 rounded-full bg-[#f5f2f0] px-3 py-1.5 !text-[12.5px]">
       {post.category}
     </span>
   );
@@ -93,7 +93,7 @@ function PostDestaque({ post }: { post: Post }) {
       <div className="flex flex-col p-5 md:p-8">
         <Meta post={post} />
         <h3 className="mt-3 text-[clamp(1.5rem,2.4vw,2rem)] font-bold leading-[1.12] tracking-[-0.025em]">
-          <Link href={`/blog/${post.slug}`} className="transition-colors hover:text-[var(--color-acao)]">
+          <Link href={`/blog/${post.slug}`} className="transition-colors hover:text-[#b8330f]">
             {post.title}
           </Link>
         </h3>
@@ -119,7 +119,7 @@ export function PostCard({ post, delay = 0 }: { post: Post; delay?: number }) {
         </Link>
         <div className="flex flex-1 flex-col px-3 pb-4 pt-5">
           <h3 className="text-[19px] font-bold leading-snug tracking-[-0.015em]">
-            <Link href={`/blog/${post.slug}`} className="transition-colors hover:text-[var(--color-acao)]">
+            <Link href={`/blog/${post.slug}`} className="transition-colors hover:text-[#b8330f]">
               {post.title}
             </Link>
           </h3>

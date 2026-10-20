@@ -44,8 +44,8 @@ export default function Navbar() {
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-300 ${
           rolou || aberto
-            ? "bg-[#f3efe8]/88 shadow-[0_1px_0_rgba(10,10,10,0.08)] backdrop-blur-xl"
-            : "bg-[#f3efe8]"
+            ? "bg-[#f5f2f0]/88 shadow-[0_1px_0_rgba(0,0,0,0.08)] backdrop-blur-xl"
+            : "bg-[#f5f2f0]"
         }`}
       >
         <nav
@@ -73,8 +73,8 @@ export default function Navbar() {
                 <Link
                   href={l.href}
                   aria-current={atual(l.href) ? "page" : undefined}
-                  className={`relative inline-flex min-h-11 items-center whitespace-nowrap px-3 text-[15.5px] font-medium transition-colors duration-200 hover:text-[var(--color-acao)] ${
-                    atual(l.href) ? "text-[var(--color-acao)]" : "text-[var(--color-breu)]"
+                  className={`relative inline-flex min-h-11 items-center whitespace-nowrap px-3 text-[15.5px] font-medium transition-colors duration-200 hover:text-[#b8330f] ${
+                    atual(l.href) ? "text-[#b8330f]" : "text-[var(--color-breu)]"
                   }`}
                 >
                   {l.label}
@@ -114,8 +114,8 @@ export default function Navbar() {
               href={l.href}
               onClick={() => setAberto(false)}
               aria-current={atual(l.href) ? "page" : undefined}
-              className={`border-b border-[var(--color-borda)] py-4 text-[30px] font-bold tracking-[-0.02em] transition-colors hover:text-[var(--color-acao)] ${
-                atual(l.href) ? "text-[var(--color-acao)]" : "text-[var(--color-breu)]"
+              className={`border-b border-[var(--color-borda)] py-4 text-[30px] font-bold tracking-[-0.02em] transition-colors hover:text-[#b8330f] ${
+                atual(l.href) ? "text-[#b8330f]" : "text-[var(--color-breu)]"
               }`}
             >
               {l.label}

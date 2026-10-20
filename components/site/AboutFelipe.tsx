@@ -27,7 +27,7 @@ export default function AboutFelipe({ foto = "retrato" }: { foto?: keyof typeof 
       <div className="container-outbox relative">
         <div className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
           <Revelar className="relative mx-auto w-full max-w-[500px]">
-            <div className="group relative overflow-hidden rounded-[24px] bg-[#c2340f] shadow-[0_40px_80px_-30px_rgba(60,10,0,0.6)]">
+            <div className="group relative overflow-hidden rounded-[24px] bg-[#b8330f] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.5)]">
               <Image
                 src={f.src}
                 alt={f.alt}

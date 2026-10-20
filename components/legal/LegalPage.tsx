@@ -27,7 +27,7 @@ export default function LegalPage({
           <div className="container-outbox relative z-10">
             <Link
               href="/"
-              className="inline-flex min-h-11 cursor-pointer items-center gap-2 text-[14.5px] text-[var(--color-cinza)] transition-colors hover:text-[var(--color-acao)]"
+              className="inline-flex min-h-11 cursor-pointer items-center gap-2 text-[14.5px] text-[var(--color-cinza)] transition-colors hover:text-[#b8330f]"
             >
               <ArrowLeft className="h-4 w-4" />
               Voltar para o site
@@ -99,7 +99,7 @@ export default function LegalPage({
                 <Link
                   key={l.href}
                   href={l.href}
-                  className="cursor-pointer rounded-full border border-[var(--color-borda)] px-4 py-2.5 text-[13.5px] text-[var(--color-breu)] transition-colors duration-300 hover:border-[var(--color-brand)]/50 hover:text-[var(--color-acao)]"
+                  className="cursor-pointer rounded-full border border-[var(--color-borda)] px-4 py-2.5 text-[13.5px] text-[var(--color-breu)] transition-colors duration-300 hover:border-[var(--color-brand)]/50 hover:text-[#b8330f]"
                 >
                   {l.label}
                 </Link>

@@ -79,7 +79,7 @@ export default function ContactForm() {
               ))}
             </ul>
             <div className="border-t border-white/12 pt-6">
-              <p className="text-[14px] text-[#a1a1a1]">Prefere ir direto ao ponto?</p>
+              <p className="text-[14px] text-[#c9c9c9]">Prefere ir direto ao ponto?</p>
               <a
                 href={whatsappLink()}
                 target="_blank"
@@ -95,21 +95,21 @@ export default function ContactForm() {
           <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4 rounded-[24px] bg-white p-6 md:p-8">
             <div>
               <label htmlFor="nome" className="mb-2 block text-[14.5px] font-semibold">
-                Nome <span className="text-[var(--color-acao)]">*</span>
+                Nome <span className="text-[#b8330f]">*</span>
               </label>
               <input id="nome" name="nome" type="text" required autoComplete="name" placeholder="Como podemos te chamar?" className="v3-campo" />
             </div>
 
             <div>
               <label htmlFor="email" className="mb-2 block text-[14.5px] font-semibold">
-                E-mail <span className="text-[var(--color-acao)]">*</span>
+                E-mail <span className="text-[#b8330f]">*</span>
               </label>
               <input id="email" name="email" type="email" required autoComplete="email" placeholder="seu@email.com.br" className="v3-campo" />
             </div>
 
             <div>
               <label htmlFor="servico" className="mb-2 block text-[14.5px] font-semibold">
-                Tipo de serviço <span className="text-[var(--color-acao)]">*</span>
+                Tipo de serviço <span className="text-[#b8330f]">*</span>
               </label>
               <select
                 id="servico"
@@ -141,19 +141,19 @@ export default function ContactForm() {
               onClick={() => setVideoCall((v) => !v)}
               aria-pressed={videoCall}
               className={`flex cursor-pointer items-center gap-3.5 rounded-[14px] border p-4 text-left transition-colors duration-300 ${
-                videoCall ? "border-[var(--color-acao)] bg-[#fdeee9]" : "border-[var(--color-borda)] hover:border-[#c9c2b6]"
+                videoCall ? "border-[var(--color-acao)] bg-[#fef2ed]" : "border-[var(--color-borda)] hover:border-[#c9c9c9]"
               }`}
             >
               <span
                 className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md border-2 transition-colors duration-300 ${
-                  videoCall ? "border-[var(--color-acao)] bg-[var(--color-acao)]" : "border-[#c9c2b6]"
+                  videoCall ? "border-[var(--color-acao)] bg-[var(--color-acao)]" : "border-[#c9c9c9]"
                 }`}
               >
                 {videoCall && <Check className="h-3.5 w-3.5 text-white" strokeWidth={3.2} aria-hidden />}
               </span>
               <span className="flex-1">
                 <span className="flex items-center gap-2 text-[15px] font-semibold">
-                  <Video className="h-4 w-4 text-[var(--color-acao)]" aria-hidden />
+                  <Video className="h-4 w-4 text-[#b8330f]" aria-hidden />
                   Quero marcar uma videochamada
                 </span>
                 <span className="mt-0.5 block text-[13.5px] text-[var(--color-cinza)]">
@@ -181,7 +181,7 @@ export default function ContactForm() {
                 role="status"
                 aria-live="polite"
                 className={`rounded-[12px] px-4 py-3 text-[14.5px] ${
-                  status === "ok" ? "bg-emerald-50 text-emerald-800" : "bg-red-50 text-red-800"
+                  status === "ok" ? "border-l-4 border-[#1f9d63] bg-[var(--color-creme)] text-[var(--color-breu)]" : "border-l-4 border-[#d93b2b] bg-[var(--color-creme)] text-[var(--color-breu)]"
                 }`}
               >
                 {message}

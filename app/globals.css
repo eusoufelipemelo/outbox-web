@@ -58,15 +58,16 @@
   --color-marca-tinta: #b8330f;
   --color-marca-tenue: #fef2ed;
 
-  /* --- Layout v3 do site (creme, preto e laranja) ---
-     Nomes próprios para não mexer nos tokens que as propostas e o
-     material dos consultores ainda usam. */
-  --color-creme: #f3efe8;
-  --color-breu: #0a0a0a;
-  --color-acao: #d63a1a;
-  --color-acao-hover: #bf3214;
-  --color-cinza: #5c5c5c;
-  --color-borda: #e2ddd3;
+  /* --- Layout v3 do site: estrutura da referência, cores oficiais da
+     OutBox (claro #F5F2F0, preto #000, laranja #F15532 com hover #F5764E,
+     texto #1F1F1F, cinza #6B6B6B, bordas #E4E4E4). Nomes próprios para não
+     mexer nos tokens que as propostas e o material dos consultores usam. */
+  --color-creme: #f5f2f0;
+  --color-breu: #000000;
+  --color-acao: #f15532;
+  --color-acao-hover: #f5764e;
+  --color-cinza: #6b6b6b;
+  --color-borda: #e4e4e4;
   --font-urb: "Urbanist", ui-sans-serif, system-ui, sans-serif;
   --font-anton: "Anton", "Urbanist", Impact, sans-serif;
 
@@ -895,9 +896,9 @@ footer {
 }
 /* Pílula de rótulo no tema claro (e de volta ao escuro nas seções pretas) */
 .sitev .pill {
-  border-color: rgba(10, 10, 10, 0.16);
+  border-color: rgba(0, 0, 0, 0.16);
   background: rgba(255, 255, 255, 0.55);
-  color: #3a3a3a;
+  color: #1f1f1f;
 }
 .sitev .tema-breu .pill {
   border-color: var(--color-line-strong);
@@ -918,7 +919,7 @@ footer {
   color: var(--color-cinza);
 }
 .sitev .plano-claro .text-white\/45 {
-  color: #8a857c;
+  color: #6b6b6b;
 }
 .sitev .plano-claro :is(.border-white\/8, .border-white\/12, .border-white\/16) {
   border-color: var(--color-borda);
@@ -927,7 +928,7 @@ footer {
   background: var(--color-creme);
 }
 .sitev .plano-claro .decoration-white\/25 {
-  text-decoration-color: rgba(10, 10, 10, 0.3);
+  text-decoration-color: rgba(0, 0, 0, 0.3);
 }
 .sitev .plano-claro a.border:hover {
   border-color: var(--color-breu);
@@ -958,7 +959,7 @@ footer {
   color: var(--color-cinza);
 }
 .tema-breu .v3-sub {
-  color: #a1a1a1;
+  color: #c9c9c9;
 }
 
 /* Botão principal: pílula laranja com seta */
@@ -971,13 +972,17 @@ footer {
   padding: 0 22px;
   border-radius: 9999px;
   background: var(--color-acao);
-  color: #fff;
+  color: #000;
   font-weight: 600;
   font-size: 15.5px;
   transition: background-color 0.25s ease, transform 0.25s ease;
 }
 .v3-btn:hover {
   background: var(--color-acao-hover);
+}
+.v3-btn:active {
+  background: #d9421f;
+  transform: scale(0.97);
 }
 .v3-btn svg {
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
@@ -1006,7 +1011,7 @@ footer {
   color: #fff;
 }
 .v3-btn--escuro:hover {
-  background: #262626;
+  background: #1f1f1f;
 }
 
 /* Etiqueta com ponto laranja (chips de categoria e de item) */
@@ -1048,10 +1053,10 @@ footer {
   display: inline-block;
   background: linear-gradient(
     105deg,
-    #4a0904 0%,
-    #9e1f0a 26%,
-    #f15532 58%,
-    #ff8a3d 100%
+    #000000 0%,
+    #b8330f 28%,
+    #f15532 60%,
+    #f5764e 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -1069,7 +1074,7 @@ footer {
 
 /* Assinatura gigante do rodapé, recortada embaixo como na referência */
 .v3-assinatura {
-  background: linear-gradient(180deg, #f15532 0%, #b8330f 45%, rgba(10, 10, 10, 0) 100%);
+  background: linear-gradient(180deg, #f15532 0%, #b8330f 45%, rgba(0, 0, 0, 0) 100%);
   -webkit-mask: url("/brand/outbox-wordmark.svg") no-repeat center / contain;
   mask: url("/brand/outbox-wordmark.svg") no-repeat center / contain;
 }
@@ -1098,25 +1103,25 @@ footer {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .v3-campo::placeholder {
-  color: #8a857c;
+  color: #6b6b6b;
 }
 .v3-campo:focus {
   outline: none;
   border-color: var(--color-acao);
-  box-shadow: 0 0 0 4px rgba(214, 58, 26, 0.14);
+  box-shadow: 0 0 0 4px rgba(241, 85, 50, 0.22);
 }
 
 /* Texto de artigo no tema claro */
 .prose-v3 {
-  --tw-prose-body: #2b2b2b;
-  --tw-prose-headings: #0a0a0a;
+  --tw-prose-body: #1f1f1f;
+  --tw-prose-headings: #000000;
   --tw-prose-links: #b8330f;
-  --tw-prose-bold: #0a0a0a;
-  --tw-prose-quotes: #0a0a0a;
+  --tw-prose-bold: #000000;
+  --tw-prose-quotes: #000000;
   --tw-prose-quote-borders: #f15532;
   --tw-prose-bullets: #f15532;
-  --tw-prose-counters: #5c5c5c;
-  --tw-prose-hr: #e2ddd3;
+  --tw-prose-counters: #6b6b6b;
+  --tw-prose-hr: #e4e4e4;
   font-family: var(--font-urb);
 }
 .prose-v3 h2,
@@ -1129,8 +1134,8 @@ footer {
 .v3-luz {
   background:
     radial-gradient(60% 50% at 50% 55%, rgba(241, 85, 50, 0.18), transparent 70%),
-    radial-gradient(40% 30% at 62% 48%, rgba(70, 110, 255, 0.1), transparent 70%),
-    #050505;
+    radial-gradient(40% 30% at 62% 48%, rgba(241, 85, 50, 0.08), transparent 70%),
+    #000000;
 }
 .v3-luz__faixa {
   position: absolute;
@@ -1143,7 +1148,7 @@ footer {
     transparent 0%,
     rgba(241, 85, 50, 0) 18%,
     rgba(241, 85, 50, 0.85) 46%,
-    rgba(255, 179, 107, 0.95) 54%,
+    rgba(245, 118, 78, 0.95) 54%,
     rgba(241, 85, 50, 0.5) 66%,
     transparent 86%
   );
@@ -1160,7 +1165,7 @@ footer {
 }
 .v3-luz__faixa--fria {
   height: 28px;
-  background: linear-gradient(90deg, transparent 20%, rgba(90, 130, 255, 0.7) 50%, rgba(170, 200, 255, 0.6) 56%, transparent 80%);
+  background: linear-gradient(90deg, transparent 20%, rgba(255, 255, 255, 0.55) 50%, rgba(254, 242, 237, 0.6) 56%, transparent 80%);
   opacity: 0.45;
 }
 .v3-luz__nucleo {
@@ -1171,7 +1176,7 @@ footer {
   height: 34vmin;
   translate: -50% -50%;
   border-radius: 9999px;
-  background: radial-gradient(circle, rgba(255, 210, 160, 0.35), rgba(241, 85, 50, 0.12) 45%, transparent 70%);
+  background: radial-gradient(circle, rgba(254, 242, 237, 0.35), rgba(241, 85, 50, 0.12) 45%, transparent 70%);
   filter: blur(20px);
 }
 @keyframes v3-luz {
@@ -1204,7 +1209,7 @@ footer {
   bottom: -22%;
   height: 14%;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(10, 10, 10, 0.22), transparent);
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.22), transparent);
 }
 @keyframes v3-gira {
   from {

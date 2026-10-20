@@ -55,7 +55,7 @@ export default function Hero() {
       {/* Faixa com o retrato */}
       <div
         ref={faixa}
-        className="relative mt-6 h-[clamp(620px,58vw,760px)] overflow-hidden bg-[#c2340f] text-white md:mt-8"
+        className="relative mt-6 h-[clamp(620px,58vw,760px)] overflow-hidden bg-[#b8330f] text-white md:mt-8"
       >
         <Image
           src="/img/felipe-retrato.jpg"
@@ -158,7 +158,7 @@ function FaixaServicos() {
         {lista.map((t, i) => (
           <span
             key={i}
-            className="flex items-center gap-3 border-r border-[var(--color-borda)] px-8 text-[15px] font-medium uppercase tracking-[0.06em] text-[#3a3a3a] whitespace-nowrap"
+            className="flex items-center gap-3 border-r border-[var(--color-borda)] px-8 text-[15px] font-medium uppercase tracking-[0.06em] text-[#1f1f1f] whitespace-nowrap"
           >
             <span className="text-[var(--color-brand)]">/</span>
             {t}

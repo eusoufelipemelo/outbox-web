@@ -28,8 +28,8 @@ function Visual({ slug }: { slug: Service["slug"] }) {
 function QuadroPainel() {
   const barras = [42, 68, 54, 82, 61, 90, 74];
   return (
-    <div aria-hidden className="absolute inset-0 bg-[radial-gradient(120%_90%_at_100%_0%,#f15532_0%,#5a1404_45%,#0a0a0a_80%)] p-6 md:p-8">
-      <div className="flex h-full flex-col gap-3 rounded-[16px] border border-white/12 bg-[#111]/85 p-4 shadow-2xl backdrop-blur">
+    <div aria-hidden className="absolute inset-0 bg-[radial-gradient(120%_90%_at_100%_0%,#f15532_0%,#b8330f_45%,#000000_80%)] p-6 md:p-8">
+      <div className="flex h-full flex-col gap-3 rounded-[16px] border border-white/12 bg-[#1f1f1f]/85 p-4 shadow-2xl backdrop-blur">
         <div className="flex items-center gap-1.5">
           <span className="h-2.5 w-2.5 rounded-full bg-white/25" />
           <span className="h-2.5 w-2.5 rounded-full bg-white/25" />
@@ -79,7 +79,7 @@ function QuadroMarcas() {
   return (
     <div className="absolute inset-0 grid grid-cols-3 gap-2 bg-[var(--color-brand)] p-2">
       {logos.map((src) => (
-        <div key={src} className="relative flex items-center justify-center rounded-[12px] bg-[#fbfaf9]">
+        <div key={src} className="relative flex items-center justify-center rounded-[12px] bg-[#ffffff]">
           <Image src={src} alt="" width={80} height={80} className="h-[42%] w-auto object-contain" />
         </div>
       ))}
@@ -109,7 +109,7 @@ function Cartao({
     <div className="md:sticky md:pb-6" style={{ top: `${96 + i * 22}px` }}>
       <motion.article
         style={{ scale, transformOrigin: "top center" }}
-        className="grid overflow-hidden rounded-[24px] border border-[var(--color-borda)] bg-[#fbfaf9] shadow-[0_-12px_40px_-24px_rgba(10,10,10,0.25)] md:grid-cols-[1.05fr_1fr]"
+        className="grid overflow-hidden rounded-[24px] border border-[var(--color-borda)] bg-[#ffffff] shadow-[0_-12px_40px_-24px_rgba(0,0,0,0.25)] md:grid-cols-[1.05fr_1fr]"
       >
         <div className="flex flex-col p-7 md:p-10">
           <p className="text-[14px] font-medium text-[var(--color-cinza)]">

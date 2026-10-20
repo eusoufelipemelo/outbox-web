@@ -225,7 +225,7 @@ export default function GoogleEmpresasPage() {
           <nav aria-label="Você está em" className="mt-8">
             <ol className="flex items-center gap-1.5 text-[13.5px] text-[var(--color-cinza)]">
               <li>
-                <Link href="/" className="inline-flex min-h-11 min-w-11 items-center justify-center px-1 transition-colors hover:text-[var(--color-acao)]">
+                <Link href="/" className="inline-flex min-h-11 min-w-11 items-center justify-center px-1 transition-colors hover:text-[#b8330f]">
                   Início
                 </Link>
               </li>
@@ -419,7 +419,7 @@ export default function GoogleEmpresasPage() {
                 <h2 className="max-w-[22ch] text-[clamp(1.8rem,4vw,2.8rem)] font-bold leading-[1.08] tracking-[-0.03em]">
                   Enquanto o seu perfil está parado, alguém responde o seu cliente.
                 </h2>
-                <p className="mt-5 max-w-[52ch] leading-relaxed text-[#a1a1a1]">
+                <p className="mt-5 max-w-[52ch] leading-relaxed text-[#c9c9c9]">
                   Conte o seu segmento e a sua cidade no WhatsApp. A gente mostra as perguntas que o
                   seu cliente faz e por onde começar.
                 </p>

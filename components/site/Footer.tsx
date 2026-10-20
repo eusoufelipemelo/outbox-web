@@ -32,7 +32,7 @@ export default function Footer() {
               height={52}
               className="h-[48px] w-auto"
             />
-            <p className="mt-5 text-[15px] leading-relaxed text-[#a1a1a1]">
+            <p className="mt-5 text-[15px] leading-relaxed text-[#c9c9c9]">
               Sistemas, sites, marcas e apresentações que colocam a sua empresa na frente. Feito com
               estratégia, tecnologia e capricho.
             </p>
@@ -48,7 +48,7 @@ export default function Footer() {
 
         <div className="mt-14 grid grid-cols-2 gap-10 md:grid-cols-4">
           <nav aria-label="Rodapé">
-            <h2 className="text-[15px] font-medium text-[#a1a1a1]">Navegar</h2>
+            <h2 className="text-[15px] font-medium text-[#c9c9c9]">Navegar</h2>
             <ul className="mt-3">
               {NAVEGAR.map((l) => (
                 <li key={l.href}>
@@ -61,7 +61,7 @@ export default function Footer() {
           </nav>
 
           <nav aria-label="Documentos legais">
-            <h2 className="text-[15px] font-medium text-[#a1a1a1]">Documentos</h2>
+            <h2 className="text-[15px] font-medium text-[#c9c9c9]">Documentos</h2>
             <ul className="mt-3">
               {LEGAL_LINKS.map((l) => (
                 <li key={l.href}>
@@ -74,7 +74,7 @@ export default function Footer() {
           </nav>
 
           <div>
-            <h2 className="text-[15px] font-medium text-[#a1a1a1]">Redes</h2>
+            <h2 className="text-[15px] font-medium text-[#c9c9c9]">Redes</h2>
             <ul className="mt-3">
               <li>
                 <a href={SITE.instagramBrand} target="_blank" rel="noopener noreferrer" className={linkCls}>
@@ -90,7 +90,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h2 className="text-[15px] font-medium text-[#a1a1a1]">Fale com a gente</h2>
+            <h2 className="text-[15px] font-medium text-[#c9c9c9]">Fale com a gente</h2>
             <ul className="mt-3 flex flex-col">
               <li>
                 <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className={`${linkCls} gap-3`}>
@@ -112,7 +112,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-2 border-t border-white/10 py-6 text-[13.5px] text-[#a1a1a1] sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-2 border-t border-white/10 py-6 text-[13.5px] text-[#c9c9c9] sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {SITE.name}. Todos os direitos reservados. CNPJ {SITE.cnpj}
           </p>
