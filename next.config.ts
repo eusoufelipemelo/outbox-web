@@ -1,8 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Gera o servidor mínimo para rodar em container (EasyPanel).
-  output: "standalone",
+  // Gera o servidor mínimo para rodar em container (EasyPanel). Na Vercel
+  // (só a prévia de layout) o build próprio dela não aceita esse modo.
+  output: process.env.VERCEL ? undefined : "standalone",
 
   images: {
     remotePatterns: [
