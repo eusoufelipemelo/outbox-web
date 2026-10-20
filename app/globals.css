@@ -70,6 +70,7 @@
   --color-borda: #e4e4e4;
   --font-urb: "Urbanist", ui-sans-serif, system-ui, sans-serif;
   --font-anton: "Anton", "Urbanist", Impact, sans-serif;
+  --font-gigante: "Bebas Neue", "Anton", Impact, sans-serif;
 
   /* --- Animações --- */
   --animate-marquee: marquee var(--duration, 42s) linear infinite;
@@ -934,6 +935,12 @@ footer {
   border-color: var(--color-breu);
   background: var(--color-creme);
 }
+/* O menu do layout v3 é fixo; a regra antiga "main, header, footer {
+   position: relative }" vencia a classe fixed do Tailwind. */
+.sitev > header {
+  position: fixed;
+  z-index: 50;
+}
 /* Seções em preto e em laranja */
 .sitev .tema-breu {
   background: var(--color-breu);
@@ -1065,6 +1072,21 @@ footer {
   animation: v3-sobe 1s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: calc(var(--i, 0) * 0.06s + 0.1s);
 }
+/* Tons das letras de MARKETING. Escuro: do preto ao laranja queimado.
+   Laranja: o laranja da marca com brilho. Meio: começa escuro e acende. */
+.v3-letra[data-tom="e"] {
+  background: linear-gradient(100deg, #000 0%, #000 18%, #b8330f 100%);
+}
+.v3-letra[data-tom="l"] {
+  background: linear-gradient(100deg, #d9421f 0%, #f15532 45%, #f5764e 100%);
+}
+.v3-letra[data-tom="m"] {
+  background: linear-gradient(100deg, #000 0%, #b8330f 38%, #f15532 75%, #f5764e 100%);
+}
+.v3-letra[data-tom] {
+  -webkit-background-clip: text;
+  background-clip: text;
+}
 @keyframes v3-sobe {
   from {
     transform: translateY(42%);
@@ -1194,7 +1216,7 @@ footer {
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
-  animation: v3-gira 9s linear infinite;
+  animation: v3-gira 12s linear infinite;
 }
 .v3-3d__camada {
   position: absolute;
@@ -1202,12 +1224,19 @@ footer {
   width: 100%;
   height: 100%;
 }
+.v3-3d__aura {
+  position: absolute;
+  inset: 8%;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 40% 40%, rgba(245, 118, 78, 0.55), rgba(241, 85, 50, 0.25) 45%, transparent 70%);
+  filter: blur(28px);
+}
 .v3-3d__sombra {
   position: absolute;
   left: 18%;
   right: 18%;
-  bottom: -22%;
-  height: 14%;
+  bottom: -14%;
+  height: 10%;
   border-radius: 50%;
   background: radial-gradient(closest-side, rgba(0, 0, 0, 0.22), transparent);
 }

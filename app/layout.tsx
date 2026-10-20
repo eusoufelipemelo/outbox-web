@@ -96,7 +96,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&family=Anton&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&family=Anton&family=Bebas+Neue&display=swap"
           rel="stylesheet"
         />
         <script

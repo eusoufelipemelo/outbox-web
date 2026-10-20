@@ -66,24 +66,43 @@ function QuadroPainel() {
   );
 }
 
-/* Marcas de clientes reais em azulejos: o trabalho de branding da OutBox. */
+/* Painel de identidade visual (símbolo, paleta, tipografia e aplicação),
+   usando a própria marca da OutBox como exemplo de sistema de marca. */
 function QuadroMarcas() {
-  const logos = [
-    "/img/logo-jonas.svg",
-    "/img/logo-patricia.svg",
-    "/img/logo-alexandre.svg",
-    "/img/logo-michelle.svg",
-    "/img/logo-nicoli.png",
-    "/img/logo-fabricio.png",
+  const paleta = [
+    { cor: "#F15532", nome: "Laranja", texto: "#000" },
+    { cor: "#000000", nome: "Preto", texto: "#fff" },
+    { cor: "#F5F2F0", nome: "Claro", texto: "#000" },
+    { cor: "#B8330F", nome: "Queimado", texto: "#fff" },
   ];
   return (
-    <div className="absolute inset-0 grid grid-cols-3 gap-2 bg-[var(--color-brand)] p-2">
-      {logos.map((src) => (
-        <div key={src} className="relative flex items-center justify-center rounded-[12px] bg-[#ffffff]">
-          <Image src={src} alt="" width={80} height={80} className="h-[42%] w-auto object-contain" />
-        </div>
-      ))}
-      <span className="sr-only">Marcas de clientes desenvolvidas pela OutBox</span>
+    <div aria-hidden className="absolute inset-0 grid grid-cols-2 grid-rows-[1.25fr_1fr] gap-2 bg-[#e4e4e4] p-2">
+      <div className="relative flex items-center justify-center rounded-[14px] bg-[#f15532]">
+        <Image src="/brand/outbox-simbolo-branco.svg" alt="" width={120} height={120} className="h-[46%] w-auto" />
+        <span className="absolute bottom-3 left-4 text-[11px] font-semibold uppercase tracking-[0.12em] text-black/70">Símbolo</span>
+      </div>
+      <div className="grid grid-rows-4 gap-2">
+        {paleta.map((c) => (
+          <div
+            key={c.nome}
+            className="flex items-center justify-between rounded-[10px] px-3 text-[11.5px] font-semibold"
+            style={{ background: c.cor, color: c.texto }}
+          >
+            <span>{c.nome}</span>
+            <span className="opacity-80">{c.cor}</span>
+          </div>
+        ))}
+      </div>
+      <div className="flex flex-col justify-between rounded-[14px] bg-white p-4">
+        <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#6b6b6b]">Tipografia</span>
+        <span className="text-[clamp(2.2rem,4vw,3.4rem)] font-bold leading-none tracking-[-0.04em]">Aa</span>
+        <span className="text-[11.5px] text-[#6b6b6b]">Títulos e textos com a mesma voz</span>
+      </div>
+      <div className="flex flex-col justify-between rounded-[14px] bg-black p-4">
+        <Image src="/brand/outbox-horizontal-branco.svg" alt="" width={140} height={34} className="h-6 w-auto self-start" />
+        <span className="h-1.5 w-12 rounded-full bg-[#f15532]" />
+        <span className="text-[11.5px] text-[#c9c9c9]">Aplicação em fundo escuro</span>
+      </div>
     </div>
   );
 }

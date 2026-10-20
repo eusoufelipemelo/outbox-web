@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Quote } from "lucide-react";
 import { SITE } from "@/lib/site";
-import { Revelar } from "@/components/ui/revelar";
+import RevealTitle from "@/components/ui/reveal-title";
 
 const MARCAS = [
   "Casa46",
@@ -12,100 +12,138 @@ const MARCAS = [
   "Master Revolution",
 ];
 
-const FOTOS = {
-  retrato: { src: "/img/felipe-retrato.jpg", w: 1127, h: 1400, alt: "Felipe Melo, fundador da OutBox Group, em retrato com fundo laranja" },
-  estudio: { src: "/img/team-felipe.jpg", w: 746, h: 1000, alt: "Felipe Melo, fundador da OutBox Group, de camiseta branca e braços cruzados" },
-} as const;
-
-/* "Quem está por trás": a seção laranja do layout v3. Vai em toda página do
-   site. Na home usa a foto de estúdio, porque o retrato laranja já está na
-   abertura; nas outras páginas, o retrato. */
-export default function AboutFelipe({ foto = "retrato" }: { foto?: keyof typeof FOTOS } = {}) {
-  const f = FOTOS[foto];
+export default function AboutFelipe() {
   return (
-    <section id="sobre" className="tema-laranja relative scroll-mt-16 overflow-hidden py-24 md:py-32">
-      <div className="container-outbox relative">
-        <div className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
-          <Revelar className="relative mx-auto w-full max-w-[500px]">
-            <div className="group relative overflow-hidden rounded-[24px] bg-[#b8330f] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.5)]">
-              <Image
-                src={f.src}
-                alt={f.alt}
-                width={f.w}
-                height={f.h}
-                sizes="(max-width: 1024px) 92vw, 500px"
-                className="h-auto w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+    <section id="sobre" className="tema-breu relative scroll-mt-16 overflow-hidden bg-[var(--color-breu)] py-24 md:py-32">
+      <div className="container-outbox relative z-10">
+        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1fr]">
+          {/* Retrato */}
+          <div className="reveal relative">
+            <div className="group relative mx-auto max-w-[540px]">
+              {/* Moldura com brilho da marca */}
+              <div
+                aria-hidden
+                className="absolute -inset-4 rounded-[36px] bg-gradient-to-br from-[var(--color-brand)]/25 via-transparent to-transparent opacity-70 blur-2xl transition-opacity duration-[900ms] group-hover:opacity-100"
               />
-              <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6 text-white">
-                <p className="text-[24px] font-bold leading-tight tracking-[-0.02em]">Felipe Melo</p>
-                <p className="mt-1 text-[14px] text-white/85">Fundador e Diretor de Criação</p>
+              <div className="relative overflow-hidden rounded-[var(--radius-xl2)] border border-white/10 transition-colors duration-500 group-hover:border-[var(--color-brand)]/40">
+                <Image
+                  src="/img/felipe-retrato.jpg"
+                  alt="Felipe Melo, fundador da OutBox Group"
+                  width={1128}
+                  height={1400}
+                  className="h-auto w-full scale-[1.02] object-cover transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] group-hover:brightness-110 group-hover:saturate-[1.08]"
+                  sizes="(max-width: 1024px) 92vw, 540px"
+                />
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"
+                />
+                <div className="absolute bottom-5 left-5 right-5">
+                  <p className="font-display text-[22px] leading-tight text-white">
+                    Felipe Melo
+                  </p>
+                  <p className="mt-1 text-[13.5px] text-white/70">
+                    Fundador e Diretor de Criação
+                  </p>
+                </div>
+              </div>
+
+              {/* Selo de anos */}
+              <div className="absolute -right-3 -top-3 rounded-2xl border border-[var(--color-brand)]/40 bg-black/80 px-4 py-3 text-center backdrop-blur-sm">
+                <span className="block font-display text-[26px] leading-none text-[var(--color-brand)]">
+                  15
+                </span>
+                <span className="mt-1 block text-[10.5px] uppercase tracking-widest text-white/60">
+                  anos de estrada
+                </span>
               </div>
             </div>
-            <div className="absolute -right-3 -top-4 rounded-[18px] bg-[var(--color-breu)] px-5 py-4 text-center text-white shadow-xl">
-              <span className="block text-[34px] font-bold leading-none text-[var(--color-brand)]">15</span>
-              <span className="mt-1 block text-[13px] font-medium">anos de estrada</span>
-            </div>
-          </Revelar>
+          </div>
 
+          {/* Texto */}
           <div>
-            <Revelar>
-              <p className="inline-flex items-center gap-2 rounded-full border border-[var(--color-breu)]/25 px-4 py-2 text-[14px] font-semibold">
-                <span aria-hidden className="h-2 w-2 rounded-full bg-[var(--color-breu)]" />
-                Quem está por trás
+            <span className="pill reveal">
+              <span
+                aria-hidden
+                className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
+              />
+              Quem está por trás
+            </span>
+
+            <RevealTitle
+              as="h2"
+              className="mt-6 max-w-[18ch] font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white"
+            >
+              Você não fala com um robô. Fala comigo.
+            </RevealTitle>
+
+            <div className="reveal mt-6 flex flex-col gap-4 text-[16.5px] leading-relaxed text-[var(--color-fg-muted)]">
+              <p>
+                Meu nome é Felipe Melo e eu toco a OutBox. Sou designer e
+                estrategista de marca, e passei os últimos quinze anos ajudando
+                empresas a parecerem tão boas por fora quanto já são por dentro.
               </p>
-              <h2 className="v3-titulo mt-6 max-w-[15ch]">Você não fala com um robô. Fala comigo.</h2>
-              <div className="mt-7 flex flex-col gap-4 text-[17px] leading-relaxed text-[var(--color-breu)]/85">
-                <p>
-                  Meu nome é Felipe Melo e eu toco a OutBox. Sou designer e estrategista de marca, e
-                  passei os últimos quinze anos ajudando empresas a parecerem tão boas por fora quanto
-                  já são por dentro.
-                </p>
-                <p>
-                  Acredito em três coisas: projeto tem que ter <strong className="text-[var(--color-breu)]">dono</strong>,
-                  prazo tem que ser <strong className="text-[var(--color-breu)]">cumprido</strong> e site bonito que não
-                  traz cliente é <strong className="text-[var(--color-breu)]">despesa, não investimento</strong>. Por
-                  isso eu mesmo participo de cada etapa, do briefing à publicação.
-                </p>
-                <p>
-                  Quando você me chama no WhatsApp, é comigo que você fala. Sem atendente, sem fila, sem
-                  promessa que a gente não vai cumprir.
-                </p>
-              </div>
-            </Revelar>
+              <p>
+                Acredito em três coisas: projeto tem que ter{" "}
+                <span className="text-white">dono</span>, prazo tem que ser{" "}
+                <span className="text-white">cumprido</span> e site bonito que
+                não traz cliente é{" "}
+                <span className="text-white">despesa, não investimento</span>.
+                Por isso eu mesmo participo de cada etapa, do briefing à
+                publicação.
+              </p>
+              <p>
+                Quando você me chama no WhatsApp, é comigo que você fala. Sem
+                atendente, sem fila, sem promessa que a gente não vai cumprir.
+              </p>
+            </div>
 
-            <Revelar atraso={0.06}>
-              <blockquote className="mt-8 rounded-[20px] bg-[var(--color-breu)] p-6 text-white md:p-7">
-                <Quote className="h-6 w-6 text-[var(--color-brand)]" aria-hidden />
-                <p className="mt-3 text-[clamp(1.15rem,1.8vw,1.4rem)] font-semibold leading-snug tracking-[-0.01em]">
-                  Marca boa não é a que grita mais alto. É a que a pessoa lembra na hora de decidir.
-                </p>
-              </blockquote>
+            {/* Citação */}
+            <blockquote className="reveal mt-8 rounded-2xl border-l-2 border-[var(--color-brand)] bg-white/[0.03] p-6">
+              <Quote className="h-5 w-5 text-[var(--color-brand)]" />
+              <p className="mt-3 font-display text-[19px] leading-snug text-white">
+                Marca boa não é a que grita mais alto. É a que a pessoa lembra
+                na hora de decidir.
+              </p>
+            </blockquote>
 
-              <p className="mt-8 text-[14.5px] font-semibold">Já construí marca e presença digital para</p>
-              <ul className="mt-3 flex flex-wrap gap-2">
+            {/* Marcas atendidas */}
+            <div className="reveal mt-8">
+              <p className="text-[12.5px] uppercase tracking-widest text-[var(--color-fg-subtle)]">
+                Já construí marca e presença digital para
+              </p>
+              <div className="mt-3.5 flex flex-wrap gap-2">
                 {MARCAS.map((m) => (
-                  <li key={m} className="rounded-full bg-[var(--color-breu)]/10 px-4 py-2 text-[14px] font-medium">
+                  <span
+                    key={m}
+                    className="rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-2 text-[13.5px] text-white/80"
+                  >
                     {m}
-                  </li>
+                  </span>
                 ))}
-              </ul>
-
-              <div className="mt-9 flex flex-wrap gap-3">
-                <Link href="/#contato" className="v3-btn v3-btn--escuro">
-                  Falar direto comigo
-                  <ArrowUpRight className="h-4 w-4" strokeWidth={2.4} aria-hidden />
-                </Link>
-                <a
-                  href={SITE.instagramPersonal}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="v3-btn v3-btn--contorno hover:!bg-[var(--color-breu)]/10"
-                >
-                  {SITE.instagramPersonalHandle}
-                </a>
               </div>
-            </Revelar>
+            </div>
+
+            <div className="reveal mt-9 flex flex-wrap gap-3">
+              <Link
+                href="/#contato"
+                className="group flex cursor-pointer items-center gap-2.5 rounded-full bg-white px-5 py-3.5 text-[14.5px] font-medium text-black transition-all duration-300 hover:shadow-[0_12px_30px_rgba(255,255,255,0.14)]"
+              >
+                Falar direto comigo
+                <ArrowUpRight
+                  className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  strokeWidth={2.4}
+                />
+              </Link>
+              <a
+                href={SITE.instagramPersonal}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cursor-pointer rounded-full border border-white/14 px-5 py-3.5 text-[14.5px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
+              >
+                {SITE.instagramPersonalHandle}
+              </a>
+            </div>
           </div>
         </div>
       </div>

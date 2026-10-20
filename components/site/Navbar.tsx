@@ -50,7 +50,7 @@ export default function Navbar() {
       >
         <nav
           aria-label="Navegação principal"
-          className="container-outbox flex h-[76px] items-center justify-between gap-6"
+          className={`mx-auto flex w-full max-w-[1440px] items-center justify-between gap-6 px-6 transition-[height] duration-300 md:px-[30px] ${rolou ? "h-[76px]" : "h-[76px] lg:h-[104px]"}`}
         >
           <Link
             href="/"
@@ -62,18 +62,18 @@ export default function Navbar() {
               alt="OutBox Soluções Digitais"
               width={130}
               height={32}
-              className="h-[30px] w-auto"
+              className="h-[30px] w-auto lg:h-[36px]"
               priority
             />
           </Link>
 
-          <ul className="hidden items-center gap-1 lg:flex">
+          <ul className="hidden items-center gap-2 lg:flex">
             {LINKS.map((l) => (
               <li key={l.href}>
                 <Link
                   href={l.href}
                   aria-current={atual(l.href) ? "page" : undefined}
-                  className={`relative inline-flex min-h-11 items-center whitespace-nowrap px-3 text-[15.5px] font-medium transition-colors duration-200 hover:text-[#b8330f] ${
+                  className={`relative inline-flex min-h-11 items-center whitespace-nowrap px-3 text-[16px] font-medium transition-colors duration-200 hover:text-[#b8330f] ${
                     atual(l.href) ? "text-[#b8330f]" : "text-[var(--color-breu)]"
                   }`}
                 >
@@ -84,7 +84,7 @@ export default function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2">
-            <Link href="/#contato" className="v3-btn hidden !min-h-11 !px-5 !text-[15px] sm:inline-flex">
+            <Link href="/#contato" className="v3-btn hidden !min-h-12 !px-6 !text-[16px] sm:inline-flex lg:!min-h-[52px] lg:!px-7">
               Começar projeto
               <ArrowUpRight className="h-4 w-4" strokeWidth={2.4} aria-hidden />
             </Link>

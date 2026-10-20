@@ -18,7 +18,7 @@ export default function TopoPagina({
   children?: ReactNode;
 }) {
   return (
-    <section className="bg-[var(--color-creme)] pb-16 pt-[96px] md:pb-24 md:pt-[108px]">
+    <section className="bg-[var(--color-creme)] pb-16 pt-[96px] md:pb-24 md:pt-[108px] lg:pt-[150px]">
       <div className="container-outbox">
         <div className="flex items-end justify-between text-[clamp(1.05rem,2.2vw,2rem)] font-bold leading-none">
           <span>{esquerda}</span>
@@ -26,8 +26,8 @@ export default function TopoPagina({
         </div>
         <div aria-hidden className="mt-3 overflow-hidden pb-[1.5cqw] [container-type:inline-size] md:mt-4">
           <div
-            className="flex justify-between font-[family-name:var(--font-anton)] leading-[0.86] select-none"
-            style={{ fontSize: `${Math.min(33, 230 / palavra.length)}cqw` }}
+            className="flex justify-between font-[family-name:var(--font-gigante)] leading-[0.86] select-none"
+            style={{ fontSize: `${Math.min(33, 250 / palavra.length)}cqw` }}
           >
             {palavra.split("").map((l, i) => (
               <span key={i} className="v3-letra" style={{ ["--i" as string]: i }}>

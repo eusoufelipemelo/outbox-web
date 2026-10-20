@@ -6,7 +6,11 @@ import Image from "next/image";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 
-const PALAVRA = "DIGITAL";
+const PALAVRA = "MARKETING";
+
+/* Tom de cada letra de MARKETING, na ordem da referência:
+   escuro, laranja, laranja, escuro, escuro, laranja, laranja, laranja, escuro. */
+const TONS = ["e", "l", "l", "e", "m", "l", "l", "m", "e"];
 
 const NUMEROS = [
   { valor: "250+", rotulo: "Projetos entregues" },
@@ -33,18 +37,20 @@ export default function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], reduzir ? ["0%", "0%"] : ["-9%", "9%"]);
 
   return (
-    <section className="relative bg-[var(--color-creme)] pt-[96px] md:pt-[108px]">
-      <div className="container-outbox">
+    <section className="relative bg-[var(--color-creme)] pt-[96px] md:pt-[128px] lg:pt-[150px]">
+      {/* Mesma medida da referência: margem de 60px no desktop, além da área de 1140 */}
+      <div className="mx-auto w-full max-w-[1440px] px-6 md:px-[60px]">
         <div className="flex items-end justify-between text-[clamp(1.05rem,2.2vw,2rem)] font-bold leading-none">
           <span>©2026</span>
           <span>AGÊNCIA</span>
         </div>
 
-        {/* Palavra gigante: decorativa, o título da página é o h1 da faixa */}
-        <div aria-hidden className="mt-3 overflow-hidden pb-[1.5cqw] [container-type:inline-size] md:mt-4">
-          <div className="flex justify-between font-[family-name:var(--font-anton)] text-[33.2cqw] leading-[0.86] select-none">
+        {/* Palavra gigante: decorativa, o título da página é o h1 da faixa.
+            Cada letra tem um tom, alternando escuro e laranja como na referência. */}
+        <div aria-hidden className="mt-6 overflow-hidden [container-type:inline-size] md:mt-10">
+          <div className="v3-palavra flex justify-between font-[family-name:var(--font-gigante)] text-[28cqw] leading-[0.8] select-none">
             {PALAVRA.split("").map((l, i) => (
-              <span key={i} className="v3-letra" style={{ ["--i" as string]: i }}>
+              <span key={i} className="v3-letra" style={{ ["--i" as string]: i }} data-tom={TONS[i]}>
                 {l}
               </span>
             ))}
@@ -55,7 +61,7 @@ export default function Hero() {
       {/* Faixa com o retrato */}
       <div
         ref={faixa}
-        className="relative mt-6 h-[clamp(620px,58vw,760px)] overflow-hidden bg-[#b8330f] text-white md:mt-8"
+        className="relative mt-12 h-[clamp(620px,58vw,760px)] overflow-hidden bg-[#b8330f] text-white md:mt-[90px]"
       >
         <Image
           src="/img/felipe-retrato.jpg"
@@ -88,15 +94,12 @@ export default function Hero() {
         <div aria-hidden className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/45 to-transparent" />
         <div aria-hidden className="absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-black/75 via-black/35 to-transparent" />
 
-        <div className="container-outbox relative z-10 flex h-full flex-col justify-between py-8 md:py-10">
-          <dl className="grid grid-cols-3 gap-4">
+        <div className="relative z-10 mx-auto flex h-full w-full max-w-[1440px] flex-col justify-between px-6 py-8 md:px-[60px] md:py-12">
+          <dl className="grid grid-cols-3 gap-4 md:grid-cols-[564fr_564fr_192fr] md:gap-0">
             {NUMEROS.map((n, i) => (
-              <div
-                key={n.valor}
-                className={`flex flex-col-reverse ${i === 1 ? "items-center text-center" : i === 2 ? "items-end text-right" : ""}`}
-              >
-                <dt className="mt-1 text-[13px] text-white/85 md:text-[15px]">{n.rotulo}</dt>
-                <dd className="text-[clamp(1.25rem,2.4vw,1.75rem)] font-bold leading-none">{n.valor}</dd>
+              <div key={n.valor} className="flex flex-col-reverse">
+                <dt className="mt-1.5 text-[13px] text-white md:text-[16px]">{n.rotulo}</dt>
+                <dd className="text-[clamp(1.2rem,1.9vw,1.5rem)] font-bold leading-none">{n.valor}</dd>
               </div>
             ))}
           </dl>
