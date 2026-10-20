@@ -1,0 +1,146 @@
+/* Movimento da proposta da Essence. Tudo é visível por padrão: as classes
+   de animação só entram via JS e nada anima com reduced-motion. */
+
+.entrada {
+  animation: sobe 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.prancha {
+  animation: sobe 0.8s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes sobe {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* planta: as paredes se desenham quando a planta entra na tela */
+.desenha .traco {
+  stroke-dasharray: 1;
+  animation: traca 1.4s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+.desenha .traco:nth-of-type(2) {
+  animation-delay: 0.35s;
+}
+.desenha .traco:nth-of-type(3) {
+  animation-delay: 0.5s;
+}
+.desenha .traco:nth-of-type(4) {
+  animation-delay: 0.65s;
+}
+.desenha .porta {
+  animation: aparece 0.5s 1.2s both;
+}
+@keyframes traca {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes aparece {
+  from {
+    opacity: 0;
+  }
+}
+
+.comodo:hover .piso {
+  fill: var(--color-marca-tenue);
+}
+.comodo:focus-visible .piso {
+  stroke: var(--color-marca);
+  stroke-width: 3;
+}
+
+.troca {
+  animation: sobe 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* brinde: o valor do site é riscado uma vez */
+.risco::after {
+  content: "";
+  position: absolute;
+  left: -4%;
+  top: 52%;
+  height: 4px;
+  width: 108%;
+  border-radius: 4px;
+  background: #ff8666;
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.riscado .risco::after {
+  animation: risca 0.6s 0.2s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+@keyframes risca {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* botão principal: um pulso discreto para chamar a decisão */
+.pulso {
+  animation: pulso 2.6s ease-in-out infinite;
+}
+@keyframes pulso {
+  0%,
+  100% {
+    box-shadow: 0 12px 30px rgba(241, 85, 50, 0.28), 0 0 0 0 rgba(241, 85, 50, 0.45);
+  }
+  50% {
+    box-shadow: 0 12px 30px rgba(241, 85, 50, 0.28), 0 0 0 10px rgba(241, 85, 50, 0);
+  }
+}
+
+/* régua do simulador */
+.regua {
+  appearance: none;
+  height: 8px;
+  border-radius: 99px;
+  background: linear-gradient(
+    to right,
+    var(--color-marca) var(--p),
+    var(--color-linha) var(--p)
+  );
+}
+.regua::-webkit-slider-thumb {
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--color-marca);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+.regua::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--color-marca);
+}
+.regua:focus-visible {
+  outline: 3px solid var(--color-marca);
+  outline-offset: 6px;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entrada,
+  .prancha,
+  .desenha .traco,
+  .desenha .porta,
+  .troca,
+  .riscado .risco::after,
+  .pulso {
+    animation: none;
+  }
+}
