@@ -39,9 +39,9 @@
 /* ---------- Topo: o nome é o elemento gráfico da página ---------- */
 .nome {
   font-weight: 700;
-  font-size: clamp(4.2rem, 15.6vw, 15.5rem);
-  line-height: 0.82;
-  letter-spacing: -0.065em;
+  font-size: clamp(3.2rem, 6.4vw, 6.25rem);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
   color: #000;
   margin-left: -0.04em;
 }

@@ -109,64 +109,53 @@ export default function FelipeMeloPage() {
       </header>
 
       <main id="topo">
-        {/* 1. Topo */}
-        <section className="overflow-hidden pb-16 pt-10 md:pb-24 md:pt-14">
-          <div className={s.envelope}>
-            <h1 className={s.nome}>
-              <span>Felipe</span> <span>Melo</span>
-              <span className="sr-only">, designer e estrategista de marca</span>
-            </h1>
+        {/* 1. Topo: o retrato é o protagonista, o nome entra em escala de título */}
+        <section className="overflow-hidden pb-16 pt-8 md:pb-24 md:pt-12">
+          <div className={`${s.envelope} grid items-center gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:gap-16`}>
+            <div className="order-2 lg:order-1">
+              <h1 className={s.nome}>
+                <span>Felipe</span> <span>Melo</span>
+                <span className="sr-only">, designer e estrategista de marca</span>
+              </h1>
+              <p className="mt-6 max-w-[22ch] text-[clamp(1.5rem,2.5vw,2.15rem)] font-semibold leading-[1.14] tracking-[-0.025em] text-black">
+                Quinze anos construindo marcas que as pessoas lembram na hora de decidir.
+              </p>
+              <p className="mt-5 max-w-[50ch] text-[17.5px] leading-relaxed text-[#4a4340]">
+                Designer, estrategista de marca e fundador da OutBox Group. Este é o meu contato
+                direto para projetos de marketing digital, parcerias e patrocínio dos meus canais.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href={fmWhatsapp()} target="_blank" rel="noopener noreferrer" className={`${s.btn} ${s.btnMarca}`}>
+                  <IconeWhatsapp className="h-5 w-5" />
+                  Chamar no WhatsApp
+                </a>
+                <a href="#contato" className={`${s.btn} ${s.btnLinha}`}>
+                  Enviar uma proposta
+                  <ArrowUpRight className="h-4 w-4" strokeWidth={2.4} aria-hidden />
+                </a>
+              </div>
+              <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[15px] text-[#4a4340]">
+                <li>Fundador da OutBox Group</li>
+                <li>{FM.cidade}</li>
+                <li>Atendo todo o Brasil</li>
+              </ul>
+            </div>
 
-            <div className="mt-8 grid gap-10 lg:mt-0 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
-              <div className="flex flex-col justify-end lg:pt-14">
-                <p className="max-w-[24ch] text-[clamp(1.6rem,2.9vw,2.4rem)] font-semibold leading-[1.12] tracking-[-0.025em] text-black">
-                  Quinze anos construindo marcas que as pessoas lembram na hora de decidir.
-                </p>
-                <p className="mt-5 max-w-[52ch] text-[17.5px] leading-relaxed text-[#4a4340]">
-                  Designer, estrategista de marca e fundador da OutBox Group. Este é o meu contato
-                  direto para projetos de marketing digital, parcerias e patrocínio dos meus canais.
-                </p>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <a href={fmWhatsapp()} target="_blank" rel="noopener noreferrer" className={`${s.btn} ${s.btnMarca}`}>
-                    <IconeWhatsapp className="h-5 w-5" />
-                    Chamar no WhatsApp
-                  </a>
-                  <a href="#contato" className={`${s.btn} ${s.btnLinha}`}>
-                    Enviar uma proposta
-                    <ArrowUpRight className="h-4 w-4" strokeWidth={2.4} aria-hidden />
-                  </a>
-                </div>
-                <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[15px] text-[#4a4340]">
-                  <li>Fundador da OutBox Group</li>
-                  <li>250+ projetos entregues</li>
-                  <li>Atendo todo o Brasil</li>
-                </ul>
+            {/* Retrato grande */}
+            <div className="relative order-1 lg:order-2">
+              <div className={`${s.retrato} relative aspect-[4/5] overflow-hidden rounded-[28px] bg-[#c2340f] shadow-[0_40px_90px_-40px_rgba(0,0,0,0.55)] lg:aspect-auto lg:h-[min(84vh,800px)]`}>
                 <Image
-                  src="/img/felipemelo/assinatura.png"
-                  alt="Assinatura de Felipe Melo"
-                  width={900}
-                  height={479}
-                  className="mt-8 h-auto w-[190px] md:w-[220px]"
+                  src="/img/felipemelo/felipe-laranja.jpg"
+                  alt="Felipe Melo em retrato com fundo laranja"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 92vw, 640px"
+                  className="object-cover object-[50%_22%]"
                 />
               </div>
-
-              {/* Retrato: sobe por cima do fim do nome no desktop */}
-              <div className="relative z-10 lg:-mt-[2.4vw]">
-                <div className={`${s.retrato} relative overflow-hidden rounded-[28px] bg-[#c2340f] shadow-[0_40px_90px_-40px_rgba(0,0,0,0.55)]`}>
-                  <Image
-                    src="/img/felipemelo/felipe-laranja.jpg"
-                    alt="Felipe Melo em retrato com fundo laranja"
-                    width={1127}
-                    height={1400}
-                    priority
-                    sizes="(max-width: 1024px) 92vw, 560px"
-                    className="h-auto w-full"
-                  />
-                </div>
-                <div className="absolute -left-3 bottom-8 rounded-[20px] bg-black px-5 py-4 text-white shadow-xl md:-left-6">
-                  <p className="text-[44px] font-bold leading-none tracking-[-0.04em] text-[#f15532]">15</p>
-                  <p className="mt-1 text-[14px] font-medium">anos de estrada</p>
-                </div>
+              <div className="absolute bottom-6 left-6 rounded-[20px] bg-black px-5 py-4 text-white shadow-xl md:bottom-8 md:left-8">
+                <p className="text-[48px] font-bold leading-none tracking-[-0.04em] text-[#f15532]">15</p>
+                <p className="mt-1 text-[15px] font-medium">anos de estrada</p>
               </div>
             </div>
           </div>
