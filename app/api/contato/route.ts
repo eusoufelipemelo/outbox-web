@@ -11,6 +11,10 @@ type Payload = {
   servico?: string;
   mensagem?: string;
   videochamada?: boolean;
+  /** Página de onde veio o contato (ex.: "felipemelo"). Padrão: "site". */
+  origem?: string;
+  empresa?: string;
+  telefone?: string;
   /** Campo isca contra robôs: se vier preenchido, é spam. */
   website?: string;
 };
@@ -64,6 +68,10 @@ export async function POST(request: Request) {
     const servico = (body.servico ?? "").trim();
     const mensagem = (body.mensagem ?? "").trim();
     const videochamada = Boolean(body.videochamada);
+    const origem = (body.origem ?? "").trim().slice(0, 40) || "site";
+    const empresa = (body.empresa ?? "").trim().slice(0, 160);
+    const telefone = (body.telefone ?? "").trim().slice(0, 40);
+    const comercial = origem === "felipemelo";
 
     if (!nome || !email || !servico) {
       return NextResponse.json(
@@ -86,9 +94,12 @@ export async function POST(request: Request) {
           nome,
           email,
           servico,
-          mensagem: mensagem || null,
+          mensagem:
+            [empresa && `Empresa: ${empresa}`, telefone && `Telefone: ${telefone}`, mensagem]
+              .filter(Boolean)
+              .join("\n") || null,
           videochamada,
-          origem: "site",
+          origem,
         });
         saved = !error;
       }
@@ -110,19 +121,28 @@ export async function POST(request: Request) {
         auth: { user, pass },
       });
 
-      const linhas = [
-        ["Nome", nome],
-        ["E-mail", email],
-        ["Serviço", servico],
-        ["Videochamada", videochamada ? "Sim, quer agendar" : "Não"],
-        ["Mensagem", mensagem || "(não informada)"],
-      ];
+      const linhas = comercial
+        ? [
+            ["Nome", nome],
+            ["E-mail", email],
+            ["Empresa", empresa || "(não informada)"],
+            ["Telefone", telefone || "(não informado)"],
+            ["Assunto", servico],
+            ["Mensagem", mensagem || "(não informada)"],
+          ]
+        : [
+            ["Nome", nome],
+            ["E-mail", email],
+            ["Serviço", servico],
+            ["Videochamada", videochamada ? "Sim, quer agendar" : "Não"],
+            ["Mensagem", mensagem || "(não informada)"],
+          ];
 
       const html = `
         <div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f5f7f9;padding:28px">
           <div style="max-width:560px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;border:1px solid #e6e9ec">
             <div style="background:#0a0a0a;padding:22px 26px">
-              <span style="color:#fff;font-size:18px;font-weight:600">Novo contato pelo site</span>
+              <span style="color:#fff;font-size:18px;font-weight:600">${comercial ? "Contato comercial pela página Felipe Melo" : "Novo contato pelo site"}</span>
               ${
                 videochamada
                   ? '<span style="display:inline-block;margin-left:10px;background:#F15532;color:#fff;font-size:12px;padding:4px 10px;border-radius:99px">Quer videochamada</span>'
@@ -152,10 +172,10 @@ export async function POST(request: Request) {
         </div>`;
 
       await transporter.sendMail({
-        from: `"Site OutBox" <${user}>`,
+        from: comercial ? `"Página Felipe Melo" <${user}>` : `"Site OutBox" <${user}>`,
         to: SITE.email,
         replyTo: `"${nome}" <${email}>`,
-        subject: `Novo lead: ${nome} · ${servico}${
+        subject: `${comercial ? "Contato comercial" : "Novo lead"}: ${nome} · ${servico}${
           videochamada ? " · quer videochamada" : ""
         }`,
         text: linhas.map(([k, v]) => `${k}: ${v}`).join("\n"),

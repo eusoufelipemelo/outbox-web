@@ -1,0 +1,148 @@
+/* ============================================================
+   Página /felipemelo: modo claro da identidade OutBox.
+   Papel #FBF9F8, branco, tinta #000, corpo #1F1F1F, cinza #6B6B6B,
+   bordas #E4E4E4, laranja #F15532 (texto pequeno em #B8330F).
+   Uma família só: Geist, com títulos em 700 e tracking fechado.
+   ============================================================ */
+
+.pagina {
+  min-height: 100vh;
+  background: #fbf9f8;
+  color: #1f1f1f;
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+}
+.pagina :is(a, button, input, select, textarea):focus-visible {
+  outline: 2.5px solid #f15532;
+  outline-offset: 3px;
+}
+
+.envelope {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+@media (min-width: 768px) {
+  .envelope {
+    padding-inline: 40px;
+  }
+}
+
+.titulo {
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.04;
+  color: #000;
+  text-wrap: balance;
+}
+
+/* ---------- Topo: o nome é o elemento gráfico da página ---------- */
+.nome {
+  font-weight: 700;
+  font-size: clamp(4.2rem, 15.6vw, 15.5rem);
+  line-height: 0.82;
+  letter-spacing: -0.065em;
+  color: #000;
+  margin-left: -0.04em;
+}
+/* Cada palavra sobe uma vez, na carga. Começa em 0.45 de opacidade, nunca
+   em zero: se a animação não rodar, o nome já está lá. */
+.nome span {
+  display: inline-block;
+  animation: sobe 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.nome span:nth-child(2) {
+  animation-delay: 0.08s;
+}
+@keyframes sobe {
+  from {
+    opacity: 0.45;
+    transform: translateY(18%);
+  }
+}
+
+/* O retrato entra recortado de baixo para cima, logo depois do nome. */
+.retrato {
+  animation: abre 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+@keyframes abre {
+  from {
+    clip-path: inset(18% 0 0 0 round 28px);
+    transform: translateY(24px);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 28px);
+  }
+}
+
+/* ---------- Botões ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 24px;
+  border-radius: 9999px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btnMarca {
+  background: #f15532;
+  color: #000;
+}
+.btnMarca:hover {
+  background: #f5764e;
+  box-shadow: 0 12px 32px rgba(241, 85, 50, 0.28);
+}
+.btnTinta {
+  background: #000;
+  color: #fff;
+}
+.btnTinta:hover {
+  background: #1f1f1f;
+}
+.btnLinha {
+  border: 1.5px solid #c9c9c9;
+  color: #000;
+  background: #fff;
+}
+.btnLinha:hover {
+  border-color: #000;
+}
+
+/* ---------- Campos ---------- */
+.campo {
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #e4e4e4;
+  background: #fff;
+  color: #000;
+  font-size: 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.campo::placeholder {
+  color: #8a8a8a;
+}
+.campo:focus {
+  outline: none;
+  border-color: #f15532;
+  box-shadow: 0 0 0 4px rgba(241, 85, 50, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nome span,
+  .retrato {
+    animation: none;
+  }
+  .btn:active {
+    transform: none;
+  }
+}
