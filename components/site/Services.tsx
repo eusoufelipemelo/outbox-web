@@ -144,7 +144,9 @@ export default function Services() {
                     type="button"
                     onClick={() => irPara(i)}
                     aria-pressed={isActive}
-                    className={`group relative flex cursor-pointer items-start gap-4 overflow-hidden rounded-2xl border p-5 text-left transition-all duration-500 ${
+                    className={`group relative flex cursor-pointer items-start gap-4 overflow-hidden rounded-2xl border text-left transition-all duration-500 ${
+                      fixado ? "p-4" : "p-5"
+                    } ${
                       isActive
                         ? "border-[var(--color-brand)]/45 bg-white/[0.05]"
                         : "border-white/8 bg-transparent hover:border-white/16 hover:bg-white/[0.025]"
@@ -190,13 +192,26 @@ export default function Services() {
                   </button>
                 );
               })}
+              {/* Com a seção presa, o resultado sobe para baixo da lista e
+                  a imagem do card ganha essa altura (o quanto a tela deixar). */}
+              {fixado && (
+                <div key={servico.slug} className="animate-troca">
+                  <Resultado texto={servico.outcome} className="" />
+                </div>
+              )}
             </div>
 
             {/* Detalhe: troca com a rolagem */}
             <div className="card-dark relative overflow-hidden p-5 md:p-6">
               {/* As quatro imagens ficam carregadas e trocam por opacidade,
                   para não piscar quando a rolagem muda de frente. */}
-              <div className="relative h-[200px] overflow-hidden rounded-2xl border border-white/10 md:h-[220px] lg:h-[170px]">
+              <div
+                className={`relative overflow-hidden rounded-2xl border border-white/10 ${
+                  fixado
+                    ? "h-[clamp(170px,calc(100svh-550px),320px)]"
+                    : "h-[240px] md:h-[320px]"
+                }`}
+              >
                 {SERVICES.map((s, i) => (
                   <Image
                     key={s.slug}
@@ -253,14 +268,7 @@ export default function Services() {
                   ))}
                 </ul>
 
-                <div className="mt-7 rounded-2xl lg:mt-5 border border-[var(--color-brand)]/25 bg-[var(--color-brand)]/8 p-5">
-                  <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-brand)]">
-                    O resultado
-                  </span>
-                  <p className="mt-1.5 text-[15.5px] text-white">
-                    {servico.outcome}
-                  </p>
-                </div>
+                {!fixado && <Resultado texto={servico.outcome} />}
 
                 <div className="mt-7 flex flex-wrap gap-3 lg:mt-5">
                   <Link
@@ -307,5 +315,24 @@ export default function Services() {
         </div>
       </div>
     </section>
+  );
+}
+
+function Resultado({
+  texto,
+  className = "mt-7 lg:mt-5",
+}: {
+  texto: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`rounded-2xl border border-[var(--color-brand)]/25 bg-[var(--color-brand)]/8 p-5 ${className}`}
+    >
+      <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-brand)]">
+        O resultado
+      </span>
+      <p className="mt-1.5 text-[15.5px] text-white">{texto}</p>
+    </div>
   );
 }
