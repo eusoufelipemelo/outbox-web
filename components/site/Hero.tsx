@@ -10,55 +10,91 @@ const STATS = [
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden pt-40 pb-24 md:pt-48 md:pb-32">
-      <div className="container-outbox relative z-10">
-        <div className="flex flex-col items-center text-center">
-          <span className="pill reveal">
-            <span
-              aria-hidden
-              className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
+    <section className="relative overflow-hidden pb-24 md:pb-32">
+      {/* Palco com a imagem de fundo: zoom lento e as luzes de neon pulsando */}
+      <div className="relative flex min-h-[100svh] items-end overflow-hidden md:min-h-[min(100svh,920px)] md:items-center">
+        <div aria-hidden className="hero-bg absolute inset-x-0 top-0 h-[74svh] md:inset-0 md:h-auto">
+          <picture>
+            <source media="(max-width: 767px)" srcSet="/img/hero/hero-mobile.webp" type="image/webp" />
+            <source media="(max-width: 767px)" srcSet="/img/hero/hero-mobile.jpg" />
+            <source srcSet="/img/hero/hero-desktop.webp" type="image/webp" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/img/hero/hero-desktop.jpg"
+              alt=""
+              fetchPriority="high"
+              decoding="async"
+              className="hero-bg__foto h-full w-full object-cover object-[50%_40%] md:object-[70%_50%]"
             />
-            Agência de tecnologia e criação
-          </span>
-
-          <h1 className="reveal-words mt-8 max-w-[16ch] font-display text-[clamp(2.6rem,7vw,5.1rem)] leading-[1.02] text-white">
-            Sua marca no digital, feita para{" "}
-            <span className="text-brand-gradient">vender</span> e para ser{" "}
-            <span className="text-brand-gradient">encontrada</span>.
-          </h1>
-
-          <p
-            className="reveal mt-7 max-w-[62ch] text-[17px] leading-relaxed text-[var(--color-fg-muted)] md:text-lg"
-            style={{ transitionDelay: "120ms" }}
-          >
-            Sistemas sob medida, sites de alta performance com SEO e GEO,
-            branding e apresentações em link. Você entrega o material, a gente
-            entrega rápido e com acabamento de gente grande.
-          </p>
-
-          <div
-            className="reveal mt-10 flex flex-col items-center gap-4 sm:flex-row"
-            style={{ transitionDelay: "220ms" }}
-          >
-            <Link
-              href="/#contato"
-              className="group flex cursor-pointer items-center gap-3 rounded-full bg-white py-2 pl-2 pr-6 text-[15px] font-medium text-black transition-all duration-300 hover:shadow-[0_14px_40px_rgba(255,255,255,0.16)]"
-            >
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-brand)] transition-transform duration-300 group-hover:rotate-45">
-                <ArrowUpRight className="h-4.5 w-4.5 text-white" strokeWidth={2.4} />
-              </span>
-              Começar meu projeto
-            </Link>
-
-            <Link
-              href="/#servicos"
-              className="cursor-pointer rounded-full border border-white/14 px-7 py-3.5 text-[15px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
-            >
-              Ver o que fazemos
-            </Link>
-          </div>
+          </picture>
+          <picture>
+            <source media="(max-width: 767px)" srcSet="/img/hero/neon-mobile.webp" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/img/hero/neon-desktop.webp"
+              alt=""
+              decoding="async"
+              className="hero-bg__neon absolute inset-0 h-full w-full object-cover object-[50%_40%] md:object-[70%_50%]"
+            />
+          </picture>
         </div>
 
+        {/* Sombras para o texto ler bem: lado esquerdo no desktop, base no celular */}
+        <div aria-hidden className="absolute inset-x-0 top-0 h-[74svh] bg-[linear-gradient(to_top,#000_0%,rgba(0,0,0,0.6)_22%,transparent_48%)] md:inset-0 md:h-auto md:bg-[linear-gradient(to_right,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.55)_42%,transparent_70%)]" />
+        <div aria-hidden className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
+        <div aria-hidden className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-black/60 to-transparent" />
+
+        <div className="container-outbox relative z-10 pb-14 pt-[56svh] md:pb-24 md:pt-40">
+          <div className="flex flex-col items-center text-center md:max-w-[600px] md:items-start md:text-left">
+            <span className="pill reveal">
+              <span
+                aria-hidden
+                className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
+              />
+              Agência de tecnologia e criação
+            </span>
+
+            <h1 className="reveal-words mt-8 max-w-[16ch] font-display text-[clamp(2.5rem,5.6vw,4.6rem)] leading-[1.03] text-white">
+              Sua marca no digital, feita para{" "}
+              <span className="text-brand-gradient">vender</span> e para ser{" "}
+              <span className="text-brand-gradient">encontrada</span>.
+            </h1>
+
+            <p
+              className="mt-7 max-w-[52ch] text-[17px] leading-relaxed text-white/80 md:text-lg"
+              style={{ transitionDelay: "120ms" }}
+            >
+              Sistemas sob medida, sites de alta performance com SEO e GEO,
+              branding e apresentações em link. Você entrega o material, a gente
+              entrega rápido e com acabamento de gente grande.
+            </p>
+
+            <div
+              className="mt-10 flex flex-col items-center gap-4 sm:flex-row md:items-start"
+              style={{ transitionDelay: "220ms" }}
+            >
+              <Link
+                href="/#contato"
+                className="group flex cursor-pointer items-center gap-3 rounded-full bg-white py-2 pl-2 pr-6 text-[15px] font-medium text-black transition-all duration-300 hover:shadow-[0_14px_40px_rgba(255,255,255,0.16)]"
+              >
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-brand)] transition-transform duration-300 group-hover:rotate-45">
+                  <ArrowUpRight className="h-4.5 w-4.5 text-white" strokeWidth={2.4} />
+                </span>
+                Começar meu projeto
+              </Link>
+
+              <Link
+                href="/#servicos"
+                className="cursor-pointer rounded-full border border-white/25 bg-black/30 px-7 py-3.5 text-[15px] text-white/90 backdrop-blur-sm transition-colors duration-300 hover:border-white/45 hover:text-white"
+              >
+                Ver o que fazemos
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container-outbox relative z-10">
         {/* Números */}
         <div
           className="reveal mt-20 grid gap-4 sm:grid-cols-3"

@@ -862,3 +862,47 @@ footer {
 .trilho-modulos::-webkit-scrollbar-track {
   background: transparent;
 }
+
+/* ============================================================
+   Hero da home: imagem de fundo com zoom lento (o neon vai junto,
+   porque a animação está no contêiner) e as luzes de neon pulsando
+   numa camada própria, somada à foto com mix-blend screen.
+   Só transform e opacity animam.
+   ============================================================ */
+.hero-bg {
+  transform-origin: 62% 45%;
+  animation: hero-zoom 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.hero-bg__neon {
+  mix-blend-mode: screen;
+  opacity: 0.55;
+  animation: hero-neon 3.2s ease-in-out infinite;
+  will-change: opacity;
+}
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.12) translate3d(-1.5%, -1%, 0);
+  }
+}
+@keyframes hero-neon {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  45% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 0.85;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg,
+  .hero-bg__neon {
+    animation: none;
+  }
+}
