@@ -730,7 +730,7 @@ function Fechamento() {
             <span>
               Desenvolvido por:{" "}
               <a href={AGENCIA.site} target="_blank" rel="noopener" className="font-medium text-marca-clara no-underline hover:text-white">
-                OutBox Group
+                OutBox Soluções Digitais
               </a>
             </span>
           </div>

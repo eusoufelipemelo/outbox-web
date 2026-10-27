@@ -360,7 +360,7 @@ export default function FelipeMeloPage() {
           <p>
             Desenvolvido por:{" "}
             <a href="https://www.outboxgroup.com.br" className="inline-flex min-h-11 items-center font-semibold text-black hover:text-[#b8330f]">
-              OutBox Group
+              OutBox Soluções Digitais
             </a>
           </p>
         </div>
