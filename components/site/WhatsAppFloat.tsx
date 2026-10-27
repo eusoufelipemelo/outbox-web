@@ -20,7 +20,7 @@ export default function WhatsAppFloat({ contexto }: { contexto?: string } = {}) 
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Falar no WhatsApp com a OutBox Group pelo número ${SITE.phoneDisplay}`}
-      className={`group fixed bottom-6 right-6 z-50 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-[#25D366] shadow-[0_10px_34px_rgba(37,211,102,0.4)] transition-all duration-400 hover:scale-105 hover:shadow-[0_14px_44px_rgba(37,211,102,0.55)] ${
+      className={`group fixed bottom-6 right-6 z-50 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-[var(--color-brand)] shadow-[0_10px_34px_rgba(241,85,50,0.45)] transition-all duration-400 hover:scale-105 hover:shadow-[0_14px_44px_rgba(241,85,50,0.6)] ${
         visible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-4 opacity-0"
@@ -28,7 +28,7 @@ export default function WhatsAppFloat({ contexto }: { contexto?: string } = {}) 
     >
       <span
         aria-hidden
-        className="absolute inset-0 animate-ping rounded-full bg-[#25D366] opacity-20"
+        className="absolute inset-0 animate-ping rounded-full bg-[var(--color-brand)] opacity-20"
         style={{ animationDuration: "2.6s" }}
       />
       <svg

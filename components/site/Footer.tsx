@@ -160,7 +160,7 @@ export default function Footer() {
               href={SITE.url}
               className="inline-flex min-h-11 cursor-pointer items-center text-white/70 transition-colors hover:text-[var(--color-brand)]"
             >
-              OutBox Group
+              OutBox Soluções Digitais
             </a>
           </p>
         </div>
