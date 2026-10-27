@@ -4,6 +4,7 @@ import { useId, useState } from "react";
 import { GE_IMPLANTACAO, GE_PLANOS, formatarReais, type Plano } from "@/lib/google-empresas";
 import { useEntrar } from "./useEntrar";
 import s from "./vantagens.module.css";
+import { useI18n } from "@/lib/i18n/client";
 
 /* A conta é feita ao contrário, como no simulador da proposta: em vez de
    prometer contatos, parte do quanto o próprio cliente ganha com um cliente
@@ -17,6 +18,7 @@ export default function RetornoGE() {
   const [planoId, setPlanoId] = useState<Plano["id"]>("autoridade");
   const [valor, setValor] = useState(1500);
   const idValor = useId();
+  const { t } = useI18n();
   const barras = useEntrar<HTMLDivElement>(s.entra);
 
   const plano = planos.find((p) => p.id === planoId)!;
@@ -28,24 +30,23 @@ export default function RetornoGE() {
   const clientesMinimo = valor > 0 ? Math.ceil(totalMinimo / valor) : null;
 
   const colunas = [
-    { nome: "Sem conteúdo", artigos: 0, id: "nenhum" as const },
-    ...planos.map((p) => ({ nome: p.nome.replace("Plano ", ""), artigos: p.artigos * 12, id: p.id })),
+    { nome: t("Sem conteúdo"), artigos: 0, id: "nenhum" as const },
+    ...planos.map((p) => ({ nome: t(p.nome.replace("Plano ", "")), artigos: p.artigos * 12, id: p.id })),
   ];
 
   return (
     <article className="card-dark flex h-full flex-col p-7 md:p-9" aria-labelledby="retorno-titulo">
       <h3 id="retorno-titulo" className="font-display text-[clamp(1.5rem,2.6vw,2rem)] leading-tight text-white">
-        Como o investimento se paga?
+        {t("Como o investimento se paga?")}
       </h3>
       <p className="mt-3 max-w-[54ch] leading-relaxed text-[var(--color-fg-muted)]">
-        Faça a conta com o seu número. Diga quanto entra, em média, com um cliente novo e veja
-        quantos clientes cobrem o plano e a implantação.
+        {t("Faça a conta com o seu número. Diga quanto entra, em média, com um cliente novo e veja quantos clientes cobrem o plano e a implantação.")}
       </p>
 
       {/* Escolha do plano */}
       <div
         role="radiogroup"
-        aria-label="Plano para a conta"
+        aria-label={t("Plano para a conta")}
         className="mt-7 grid grid-cols-3 gap-1.5 rounded-2xl border border-white/10 bg-black/30 p-1.5"
       >
         {planos.map((p) => {
@@ -61,7 +62,7 @@ export default function RetornoGE() {
                 ativo ? "bg-[var(--color-brand)] text-black" : "text-white/75 hover:bg-white/[0.06] hover:text-white"
               }`}
             >
-              {p.nome.replace("Plano ", "")}
+              {t(p.nome.replace("Plano ", ""))}
             </button>
           );
         })}
@@ -69,7 +70,7 @@ export default function RetornoGE() {
 
       {/* Valor de um cliente */}
       <label htmlFor={idValor} className="mt-6 block text-[14.5px] font-medium text-white/85">
-        Quanto entra, em média, com um cliente novo?
+        {t("Quanto entra, em média, com um cliente novo?")}
       </label>
       <div className="mt-2.5 flex items-center gap-3 rounded-2xl border border-white/12 bg-white/[0.04] px-4 focus-within:border-[var(--color-brand)]">
         <span className="text-[17px] font-semibold text-white/50">R$</span>
@@ -91,7 +92,7 @@ export default function RetornoGE() {
         className="mt-6 rounded-2xl border border-[var(--color-brand)]/45 bg-[var(--color-brand)]/10 p-5"
       >
         {clientes === null ? (
-          <p className="text-[15px] text-white/85">Digite um valor para ver a conta.</p>
+          <p className="text-[15px] text-white/85">{t("Digite um valor para ver a conta.")}</p>
         ) : (
           <>
             <p className="flex flex-wrap items-baseline gap-x-3">
@@ -99,26 +100,32 @@ export default function RetornoGE() {
                 {clientes}
               </span>
               <span className="text-[17px] font-medium text-white">
-                {clientes === 1 ? "cliente novo por mês" : "clientes novos por mês"}
+                {clientes === 1 ? t("cliente novo por mês") : t("clientes novos por mês")}
               </span>
             </p>
             <p className="mt-3 text-[15px] leading-relaxed text-white/80">
-              {clientes === 1 ? "paga" : "pagam"} o {plano.nome} ({formatarReais(plano.preco)}/mês).{" "}
+              {t(clientes === 1 ? "paga o {plano} ({preco}/mês)." : "pagam o {plano} ({preco}/mês).", {
+                plano: t(plano.nome),
+                preco: formatarReais(plano.preco),
+              })}{" "}
               {clientes === 1
                 ? sobra > 0
-                  ? `E ainda sobram ${formatarReais(sobra)}. Todo cliente a mais é retorno.`
-                  : "Todo cliente a mais é retorno."
-                : `Do ${clientes + 1}º em diante, é retorno.`}
+                  ? t("E ainda sobram {valor}. Todo cliente a mais é retorno.", { valor: formatarReais(sobra) })
+                  : t("Todo cliente a mais é retorno.")
+                : t("Do {n}º em diante, é retorno.", { n: clientes + 1 })}
             </p>
             {clientesMinimo !== null && (
               <p className="mt-4 border-t border-white/10 pt-4 text-[14.5px] leading-relaxed text-white/80">
-                Com a implantação, os {MESES_MINIMO} meses do contrato mínimo somam{" "}
-                <b className="font-semibold text-white">{formatarReais(totalMinimo)}</b> (
-                {formatarReais(GE_IMPLANTACAO.valor)} de implantação + {MESES_MINIMO} mensalidades).{" "}
+                {t("Com a implantação, os {meses} meses do contrato mínimo somam", { meses: MESES_MINIMO })}{" "}
+                <b className="font-semibold text-white">{formatarReais(totalMinimo)}</b>{" "}
+                {t("({implantacao} de implantação + {meses} mensalidades).", {
+                  implantacao: formatarReais(GE_IMPLANTACAO.valor),
+                  meses: MESES_MINIMO,
+                })}{" "}
                 <b className="font-semibold text-white">
-                  {clientesMinimo} {clientesMinimo === 1 ? "cliente novo" : "clientes novos"}
+                  {clientesMinimo} {clientesMinimo === 1 ? t("cliente novo") : t("clientes novos")}
                 </b>{" "}
-                nesse período {clientesMinimo === 1 ? "cobre" : "cobrem"} tudo.
+                {clientesMinimo === 1 ? t("nesse período cobre tudo.") : t("nesse período cobrem tudo.")}
               </p>
             )}
           </>
@@ -128,9 +135,9 @@ export default function RetornoGE() {
       {/* Páginas acumuladas em 12 meses */}
       <div ref={barras} className="mt-8 border-t border-white/8 pt-7">
         <p className="text-[15px] font-medium text-white">
-          Páginas novas respondendo o seu cliente em 12 meses
+          {t("Páginas novas respondendo o seu cliente em 12 meses")}
         </p>
-        <ul className="mt-5 flex flex-col gap-3" aria-label="Páginas novas em 12 meses, por plano">
+        <ul className="mt-5 flex flex-col gap-3" aria-label={t("Páginas novas em 12 meses, por plano")}>
           {colunas.map((c, i) => {
             const ativo = c.id === planoId;
             const largura = c.artigos === 0 ? 1.5 : Math.max(6, (c.artigos / MAX_ARTIGOS_ANO) * 100);
@@ -163,8 +170,7 @@ export default function RetornoGE() {
           })}
         </ul>
         <p className="mt-6 text-[14.5px] leading-relaxed text-[var(--color-fg-muted)]">
-          O anúncio pago some no dia em que o pagamento para. O artigo continua no ar, e cada mês
-          soma páginas novas que trabalham por você.
+          {t("O anúncio pago some no dia em que o pagamento para. O artigo continua no ar, e cada mês soma páginas novas que trabalham por você.")}
         </p>
       </div>
     </article>

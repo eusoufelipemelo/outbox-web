@@ -4,10 +4,12 @@ import Image from "next/image";
 import { Marquee } from "@/components/ui/marquee";
 import RevealTitle from "@/components/ui/reveal-title";
 import { TESTIMONIALS } from "@/lib/site";
+import { useI18n } from "@/lib/i18n/client";
 
 type Depoimento = (typeof TESTIMONIALS)[number];
 
 function CartaoDepoimento({ quote, name, role, avatar }: Depoimento) {
+  const { t } = useI18n();
   return (
     <figure className="w-[290px] shrink-0 rounded-[var(--radius-xl2)] border border-white/12 bg-white/[0.055] p-6 transition-colors duration-300 hover:border-[var(--color-brand)]/50">
       <span
@@ -17,7 +19,7 @@ function CartaoDepoimento({ quote, name, role, avatar }: Depoimento) {
         &rdquo;
       </span>
       <blockquote className="mt-5 text-[14px] leading-relaxed text-white/85">
-        {quote}
+        {t(quote)}
       </blockquote>
       <figcaption className="mt-5 flex items-center gap-3 border-t border-white/8 pt-4">
         <Image
@@ -32,7 +34,7 @@ function CartaoDepoimento({ quote, name, role, avatar }: Depoimento) {
             {name}
           </span>
           <span className="truncate text-[11.5px] text-[var(--color-fg-subtle)]">
-            {role}
+            {t(role)}
           </span>
         </span>
       </figcaption>
@@ -49,6 +51,7 @@ const colunas = [
 ];
 
 export default function Testimonials3D() {
+  const { t } = useI18n();
   return (
     <section
       id="depoimentos"
@@ -61,13 +64,13 @@ export default function Testimonials3D() {
               aria-hidden
               className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
             />
-            Quem já trabalhou com a gente
+            {t("Quem já trabalhou com a gente")}
           </span>
           <RevealTitle
             as="h2"
             className="mt-6 font-display text-[clamp(1.9rem,4.4vw,3.2rem)] leading-[1.07] text-white"
           >
-            O resultado quem conta são eles.
+            {t("O resultado quem conta são eles.")}
           </RevealTitle>
         </div>
       </div>
@@ -108,13 +111,13 @@ export default function Testimonials3D() {
 
       {/* Lista acessível: o palco 3D é decorativo */}
       <div className="sr-only">
-        <h3>Depoimentos de clientes</h3>
+        <h3>{t("Depoimentos de clientes")}</h3>
         <ul>
           {TESTIMONIALS.map((d) => (
             <li key={d.name}>
-              <blockquote>{d.quote}</blockquote>
+              <blockquote>{t(d.quote)}</blockquote>
               <cite>
-                {d.name}, {d.role}
+                {d.name}, {t(d.role)}
               </cite>
             </li>
           ))}

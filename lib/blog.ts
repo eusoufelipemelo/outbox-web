@@ -1,4 +1,5 @@
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
+import { INTL, type Locale } from "@/lib/i18n/config";
 import { getCmsPost, listCmsPosts, type CmsFaq, type CmsPost, type CmsSource } from "@/lib/outbox-cms";
 
 export type Post = {
@@ -15,6 +16,8 @@ export type Post = {
   published_at: string | null;
   created_at: string;
   updated_at: string | null;
+  /** Em /en, /es e /ca: true quando o artigo já tem tradução para o idioma. */
+  traduzido?: boolean;
   /** Campos extras dos artigos vindos do OutBox CMS (SEO + GEO). */
   cms?: {
     answer_summary: string | null;
@@ -196,10 +199,10 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   return getLocalPostBySlug(slug);
 }
 
-/** Data no formato brasileiro. */
-export function formatDate(value: string | null) {
+/** Data por extenso no idioma da página (português por padrão). */
+export function formatDate(value: string | null, locale: Locale = "pt") {
   if (!value) return "";
-  return new Date(value).toLocaleDateString("pt-BR", {
+  return new Date(value).toLocaleDateString(INTL[locale], {
     day: "2-digit",
     month: "long",
     year: "numeric",

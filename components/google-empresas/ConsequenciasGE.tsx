@@ -3,6 +3,7 @@
 import { GE_CONSEQUENCIAS } from "@/lib/google-empresas";
 import { useEntrar } from "./useEntrar";
 import s from "./vantagens.module.css";
+import { useI18n } from "@/lib/i18n/client";
 
 /* Gráfico ilustrativo com fatos do contrato: um concorrente no Plano Autoridade
    publica 10 artigos por mês (120 em um ano); quem não faz nada fica em zero.
@@ -22,6 +23,7 @@ const area = `${linha} L${x(MESES)},${y(0)} L${x(0)},${y(0)} Z`;
 
 export default function ConsequenciasGE() {
   const ref = useEntrar<HTMLDivElement>(s.entra);
+  const { t } = useI18n();
 
   return (
     <article
@@ -32,11 +34,10 @@ export default function ConsequenciasGE() {
         id="consequencias-titulo"
         className="font-display text-[clamp(1.5rem,2.6vw,2rem)] leading-tight text-white"
       >
-        E se a sua empresa não fizer nada?
+        {t("E se a sua empresa não fizer nada?")}
       </h3>
       <p className="mt-3 max-w-[54ch] leading-relaxed text-[var(--color-fg-muted)]">
-        Parar não deixa a sua empresa onde está. O concorrente que publica segue andando, e a
-        distância cresce todo mês.
+        {t("Parar não deixa a sua empresa onde está. O concorrente que publica segue andando, e a distância cresce todo mês.")}
       </p>
 
       <div ref={ref} className="mt-7">
@@ -44,7 +45,7 @@ export default function ConsequenciasGE() {
           viewBox={`0 0 ${W} ${H}`}
           className="h-auto w-full"
           role="img"
-          aria-label="Gráfico: em 12 meses, um concorrente com 10 artigos por mês chega a 120 páginas publicadas, enquanto a empresa sem conteúdo continua com zero."
+          aria-label={t("Gráfico: em 12 meses, um concorrente com 10 artigos por mês chega a 120 páginas publicadas, enquanto a empresa sem conteúdo continua com zero.")}
         >
           <defs>
             <linearGradient id="ge-distancia" x1="0" y1="0" x2="0" y2="1">
@@ -63,7 +64,7 @@ export default function ConsequenciasGE() {
           ))}
           {[0, 6, 12].map((m) => (
             <text key={m} x={x(m)} y={H - 6} textAnchor={m === 0 ? "start" : m === 12 ? "end" : "middle"} className={s.eixo} fill="rgba(255,255,255,0.45)">
-              {m === 0 ? "hoje" : `${m} meses`}
+              {m === 0 ? t("hoje") : t("{n} meses", { n: m })}
             </text>
           ))}
 
@@ -93,11 +94,11 @@ export default function ConsequenciasGE() {
         <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-[13px] text-[var(--color-fg-muted)]">
           <span className="flex items-center gap-2">
             <span className="h-[3px] w-5 rounded-full bg-[var(--color-brand)]" aria-hidden />
-            Concorrente no Plano Autoridade
+            {t("Concorrente no Plano Autoridade")}
           </span>
           <span className="flex items-center gap-2">
             <span className="h-[3px] w-5 rounded-full bg-white/50" aria-hidden />
-            Empresa sem conteúdo
+            {t("Empresa sem conteúdo")}
           </span>
         </div>
       </div>
@@ -110,9 +111,9 @@ export default function ConsequenciasGE() {
                 i === GE_CONSEQUENCIAS.length - 1 ? "text-[var(--color-brand-soft)]" : "text-white"
               }`}
             >
-              {c.quando}
+              {t(c.quando)}
             </span>
-            <p className="text-[14.5px] leading-relaxed text-[var(--color-fg-muted)]">{c.texto}</p>
+            <p className="text-[14.5px] leading-relaxed text-[var(--color-fg-muted)]">{t(c.texto)}</p>
           </li>
         ))}
       </ol>

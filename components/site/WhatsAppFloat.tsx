@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { whatsappLink, SITE } from "@/lib/site";
+import { useI18n } from "@/lib/i18n/client";
 
 /** Botão flutuante do WhatsApp. `contexto` entra na mensagem pronta. */
 export default function WhatsAppFloat({ contexto }: { contexto?: string } = {}) {
   const [visible, setVisible] = useState(false);
+  const { t } = useI18n();
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 420);
@@ -16,10 +18,10 @@ export default function WhatsAppFloat({ contexto }: { contexto?: string } = {}) 
 
   return (
     <a
-      href={whatsappLink(contexto)}
+      href={whatsappLink(contexto, t)}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Falar no WhatsApp com a OutBox Group pelo número ${SITE.phoneDisplay}`}
+      aria-label={t("Falar no WhatsApp com a OutBox Group pelo número {numero}", { numero: SITE.phoneDisplay })}
       className={`group fixed bottom-6 right-6 z-50 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-[var(--color-brand)] shadow-[0_10px_34px_rgba(241,85,50,0.45)] transition-all duration-400 hover:scale-105 hover:shadow-[0_14px_44px_rgba(241,85,50,0.6)] ${
         visible
           ? "translate-y-0 opacity-100"
@@ -41,7 +43,7 @@ export default function WhatsAppFloat({ contexto }: { contexto?: string } = {}) 
 
       {/* Tooltip */}
       <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-full bg-black/85 px-4 py-2 text-[13.5px] text-white opacity-0 shadow-lg backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
-        Falar no WhatsApp
+        {t("Falar no WhatsApp")}
       </span>
     </a>
   );

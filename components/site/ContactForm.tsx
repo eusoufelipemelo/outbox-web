@@ -5,6 +5,7 @@ import { ArrowUpRight, Check, Loader2, Video } from "lucide-react";
 import { SERVICE_OPTIONS, SITE, whatsappLink } from "@/lib/site";
 import RevealTitle from "@/components/ui/reveal-title";
 import MapaOutBox from "@/components/site/MapaOutBox";
+import { useI18n } from "@/lib/i18n/client";
 
 type Status = "idle" | "sending" | "ok" | "error";
 
@@ -12,6 +13,7 @@ export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
   const [videoCall, setVideoCall] = useState(false);
+  const { t, locale } = useI18n();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -30,7 +32,7 @@ export default function ContactForm() {
       const res = await fetch("/api/contato", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, videochamada: videoCall }),
+        body: JSON.stringify({ ...data, videochamada: videoCall, idioma: locale }),
       });
       const json = await res.json();
 
@@ -38,14 +40,14 @@ export default function ContactForm() {
 
       setStatus("ok");
       setMessage(
-        "Recebemos a sua mensagem. Em breve o Felipe entra em contato com você."
+        t("Recebemos a sua mensagem. Em breve o Felipe entra em contato com você.")
       );
       form.reset();
       setVideoCall(false);
     } catch {
       setStatus("error");
       setMessage(
-        "Não conseguimos enviar agora. Tente novamente ou fale direto no WhatsApp."
+        t("Não conseguimos enviar agora. Tente novamente ou fale direto no WhatsApp.")
       );
     }
   }
@@ -61,20 +63,18 @@ export default function ContactForm() {
                 aria-hidden
                 className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
               />
-              Vamos conversar
+              {t("Vamos conversar")}
             </span>
 
             <RevealTitle
               as="h2"
               className="mt-6 max-w-[16ch] font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] text-white"
             >
-              Conte o que você precisa. A gente responde rápido.
+              {t("Conte o que você precisa. A gente responde rápido.")}
             </RevealTitle>
 
             <p className="mt-5 max-w-[46ch] leading-relaxed text-[var(--color-fg-muted)]">
-              Preencha o formulário e diga qual serviço faz sentido para o seu
-              momento. Se preferir conversar olho no olho, marque a opção de
-              videochamada que a gente agenda.
+              {t("Preencha o formulário e diga qual serviço faz sentido para o seu momento. Se preferir conversar olho no olho, marque a opção de videochamada que a gente agenda.")}
             </p>
 
             <ul className="mt-8 flex flex-col gap-3.5">
@@ -82,9 +82,9 @@ export default function ContactForm() {
                 "Resposta rápida, sem enrolação",
                 "Orçamento sob medida para o seu escopo",
                 "Sem compromisso de fechar nada",
-              ].map((t) => (
+              ].map((item) => (
                 <li
-                  key={t}
+                  key={item}
                   className="flex items-center gap-3 text-[14.5px] text-white/85"
                 >
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]/15">
@@ -93,17 +93,17 @@ export default function ContactForm() {
                       strokeWidth={3}
                     />
                   </span>
-                  {t}
+                  {t(item)}
                 </li>
               ))}
             </ul>
 
             <div className="mt-9 border-t border-white/8 pt-6">
               <p className="text-[13px] uppercase tracking-widest text-[var(--color-fg-subtle)]">
-                Prefere ir direto ao ponto?
+                {t("Prefere ir direto ao ponto?")}
               </p>
               <a
-                href={whatsappLink()}
+                href={whatsappLink(undefined, t)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2.5 inline-flex cursor-pointer items-center gap-2 font-display text-lg text-white transition-colors hover:text-[var(--color-brand)]"
@@ -126,7 +126,7 @@ export default function ContactForm() {
                 htmlFor="nome"
                 className="mb-2 block text-[13.5px] font-medium text-white/80"
               >
-                Nome <span className="text-[var(--color-brand)]">*</span>
+                {t("Nome")} <span className="text-[var(--color-brand)]">*</span>
               </label>
               <input
                 id="nome"
@@ -134,7 +134,7 @@ export default function ContactForm() {
                 type="text"
                 required
                 autoComplete="name"
-                placeholder="Como podemos te chamar?"
+                placeholder={t("Como podemos te chamar?")}
                 className="field"
               />
             </div>
@@ -144,7 +144,7 @@ export default function ContactForm() {
                 htmlFor="email"
                 className="mb-2 block text-[13.5px] font-medium text-white/80"
               >
-                E-mail <span className="text-[var(--color-brand)]">*</span>
+                {t("E-mail")} <span className="text-[var(--color-brand)]">*</span>
               </label>
               <input
                 id="email"
@@ -152,7 +152,7 @@ export default function ContactForm() {
                 type="email"
                 required
                 autoComplete="email"
-                placeholder="seu@email.com.br"
+                placeholder={t("seu@email.com.br")}
                 className="field"
               />
             </div>
@@ -162,7 +162,7 @@ export default function ContactForm() {
                 htmlFor="servico"
                 className="mb-2 block text-[13.5px] font-medium text-white/80"
               >
-                Tipo de serviço{" "}
+                {t("Tipo de serviço")}{" "}
                 <span className="text-[var(--color-brand)]">*</span>
               </label>
               <select
@@ -173,11 +173,11 @@ export default function ContactForm() {
                 className="field cursor-pointer appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%236e6e77%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>')] bg-[length:20px] bg-[right_16px_center] bg-no-repeat pr-12"
               >
                 <option value="" disabled className="bg-[#121214]">
-                  Selecione o serviço
+                  {t("Selecione o serviço")}
                 </option>
                 {SERVICE_OPTIONS.map((o) => (
                   <option key={o} value={o} className="bg-[#121214]">
-                    {o}
+                    {t(o)}
                   </option>
                 ))}
               </select>
@@ -188,14 +188,14 @@ export default function ContactForm() {
                 htmlFor="mensagem"
                 className="mb-2 block text-[13.5px] font-medium text-white/80"
               >
-                Conte um pouco do projeto{" "}
-                <span className="text-[var(--color-fg-subtle)]">(opcional)</span>
+                {t("Conte um pouco do projeto")}{" "}
+                <span className="text-[var(--color-fg-subtle)]">{t("(opcional)")}</span>
               </label>
               <textarea
                 id="mensagem"
                 name="mensagem"
                 rows={3}
-                placeholder="O que você precisa resolver?"
+                placeholder={t("O que você precisa resolver?")}
                 className="field resize-none"
               />
             </div>
@@ -225,10 +225,10 @@ export default function ContactForm() {
               <span className="flex-1">
                 <span className="flex items-center gap-2 text-[14.5px] font-medium text-white">
                   <Video className="h-4 w-4 text-[var(--color-brand)]" />
-                  Quero marcar uma videochamada
+                  {t("Quero marcar uma videochamada")}
                 </span>
                 <span className="mt-0.5 block text-[13px] text-[var(--color-fg-subtle)]">
-                  A gente entra em contato para combinar o melhor horário.
+                  {t("A gente entra em contato para combinar o melhor horário.")}
                 </span>
               </span>
             </button>
@@ -241,11 +241,11 @@ export default function ContactForm() {
               {status === "sending" ? (
                 <>
                   <Loader2 className="h-4.5 w-4.5 animate-spin" />
-                  Enviando...
+                  {t("Enviando...")}
                 </>
               ) : (
                 <>
-                  Enviar mensagem
+                  {t("Enviar mensagem")}
                   <ArrowUpRight
                     className="h-4.5 w-4.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                     strokeWidth={2.4}
@@ -269,8 +269,7 @@ export default function ContactForm() {
             )}
 
             <p className="text-center text-[12.5px] leading-relaxed text-[var(--color-fg-subtle)]">
-              Seus dados vão direto para a nossa equipe. Sem spam, sem lista de
-              e-mail.
+              {t("Seus dados vão direto para a nossa equipe. Sem spam, sem lista de e-mail.")}
             </p>
           </form>
         </div>

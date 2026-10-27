@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { MapPin, Navigation } from "lucide-react";
 import { SITE } from "@/lib/site";
 import "leaflet/dist/leaflet.css";
+import { useI18n } from "@/lib/i18n/client";
 
 const E = SITE.endereco;
 const ENDERECO_COMPLETO = `${E.rua}, ${E.bairro}, ${E.cidade}, ${E.cep}`;
@@ -14,6 +15,7 @@ const LINK_GOOGLE = `https://www.google.com/maps/search/?api=1&query=${encodeURI
 export default function MapaOutBox() {
   const caixa = useRef<HTMLDivElement>(null);
   const [pronto, setPronto] = useState(false);
+  const { t } = useI18n();
 
   useEffect(() => {
     const el = caixa.current;
@@ -36,7 +38,7 @@ export default function MapaOutBox() {
         attributionControl: true,
       });
       mapa.attributionControl.setPrefix(false);
-      L.control.zoom({ position: "bottomright", zoomInTitle: "Aproximar", zoomOutTitle: "Afastar" }).addTo(mapa);
+      L.control.zoom({ position: "bottomright", zoomInTitle: t("Aproximar"), zoomOutTitle: t("Afastar") }).addTo(mapa);
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>',
@@ -52,7 +54,7 @@ export default function MapaOutBox() {
       L.marker([E.lat, E.lng], { icon: pino, title: "OutBox Group", alt: "OutBox Group" })
         .addTo(mapa)
         .bindPopup(
-          `<strong>OutBox Group</strong><br>${E.rua}<br>${E.bairro}, ${E.cidade}<br><a href="${LINK_GOOGLE}" target="_blank" rel="noopener noreferrer">Ver no Google Maps</a>`
+          `<strong>OutBox Group</strong><br>${E.rua}<br>${E.bairro}, ${E.cidade}<br><a href="${LINK_GOOGLE}" target="_blank" rel="noopener noreferrer">${t("Ver no Google Maps")}</a>`
         );
       setPronto(true);
     };
@@ -73,6 +75,8 @@ export default function MapaOutBox() {
       io.disconnect();
       mapa?.remove();
     };
+    // t só muda junto com o idioma, que exige recarregar a página.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -82,7 +86,7 @@ export default function MapaOutBox() {
           <MapPin className="h-5 w-5 text-[var(--color-brand)]" strokeWidth={2} aria-hidden />
         </span>
         <h3 className="mt-5 font-display text-[clamp(1.5rem,2.4vw,1.9rem)] leading-tight text-white">
-          Onde a OutBox fica
+          {t("Onde a OutBox fica")}
         </h3>
         <address className="mt-4 text-[15.5px] not-italic leading-relaxed text-white/85">
           {E.rua}
@@ -92,7 +96,7 @@ export default function MapaOutBox() {
           CEP {E.cep}
         </address>
         <p className="mt-4 max-w-[38ch] text-[14.5px] leading-relaxed text-[var(--color-fg-muted)]">
-          Atendemos empresas de todo o Brasil on-line. Para falar com a gente, use o formulário acima ou o WhatsApp.
+          {t("Atendemos empresas de todo o Brasil on-line. Para falar com a gente, use o formulário acima ou o WhatsApp.")}
         </p>
         <a
           href={LINK_GOOGLE}
@@ -101,7 +105,7 @@ export default function MapaOutBox() {
           className="mt-7 inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-white/14 px-5 py-2.5 text-[14.5px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
         >
           <Navigation className="h-4 w-4" strokeWidth={2.2} aria-hidden />
-          Ver no Google Maps
+          {t("Ver no Google Maps")}
         </a>
       </div>
 
@@ -109,12 +113,12 @@ export default function MapaOutBox() {
         <div
           ref={caixa}
           role="region"
-          aria-label={`Mapa com a localização da OutBox Group: ${ENDERECO_COMPLETO}`}
+          aria-label={t("Mapa com a localização da OutBox Group: {endereco}", { endereco: ENDERECO_COMPLETO })}
           className="mapa-outbox h-[300px] w-full overflow-hidden rounded-2xl border border-white/10 bg-[#1a1917] md:h-[380px]"
         />
         {!pronto && (
           <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-2xl text-[13.5px] text-[var(--color-fg-subtle)]">
-            Carregando o mapa
+            {t("Carregando o mapa")}
           </div>
         )}
       </div>

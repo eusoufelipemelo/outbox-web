@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Sparkles } from "lucide-react";
 import HeroCta from "@/components/site/HeroCta";
+import { getT } from "@/lib/i18n/server";
 
 const STATS = [
   { value: "250+", label: "Projetos entregues", highlight: false },
@@ -10,6 +11,7 @@ const STATS = [
 ];
 
 export default function Hero() {
+  const { t, href } = getT();
   return (
     <section className="relative overflow-hidden pb-24 md:pb-32">
       {/* Palco com a imagem de fundo: zoom lento e as luzes de neon pulsando */}
@@ -52,22 +54,20 @@ export default function Hero() {
                 aria-hidden
                 className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
               />
-              Agência de tecnologia e criação
+              {t("Agência de tecnologia e criação")}
             </span>
 
             <h1 className="reveal-words mt-8 max-w-[16ch] font-display text-[clamp(2.5rem,5.6vw,4.6rem)] leading-[1.03] text-white">
-              Sua marca no digital, feita para{" "}
-              <span className="text-brand-gradient">vender</span> e para ser{" "}
-              <span className="text-brand-gradient">encontrada</span>.
+              {t("Sua marca no digital, feita para")}{" "}
+              <span className="text-brand-gradient">{t("vender")}</span> {t("e para ser")}{" "}
+              <span className="text-brand-gradient">{t("encontrada")}</span>.
             </h1>
 
             <p
               className="mt-7 max-w-[52ch] text-[17px] leading-relaxed text-white/80 md:text-lg"
               style={{ transitionDelay: "120ms" }}
             >
-              Sistemas sob medida, sites de alta performance com SEO e GEO,
-              branding e apresentações em link. Você entrega o material, a gente
-              entrega rápido e com acabamento de gente grande.
+              {t("Sistemas sob medida, sites de alta performance com SEO e GEO, branding e apresentações em link. Você entrega o material, a gente entrega rápido e com acabamento de gente grande.")}
             </p>
 
             <div
@@ -77,10 +77,10 @@ export default function Hero() {
               <HeroCta />
 
               <Link
-                href="/#servicos"
+                href={href("/#servicos")}
                 className="flex min-h-14 cursor-pointer items-center rounded-full border border-white/25 bg-black/30 px-7 text-[15px] text-white/90 backdrop-blur-sm transition-colors duration-300 hover:border-white/45 hover:text-white"
               >
-                Ver o que fazemos
+                {t("Ver o que fazemos")}
               </Link>
             </div>
           </div>
@@ -103,14 +103,14 @@ export default function Hero() {
               }`}
             >
               <div className="font-display text-[2.6rem] leading-none text-white">
-                {s.value}
+                {t(s.value)}
               </div>
               <div
                 className={`mt-2.5 text-sm ${
                   s.highlight ? "text-white/85" : "text-[var(--color-fg-muted)]"
                 }`}
               >
-                {s.label}
+                {t(s.label)}
               </div>
             </div>
           ))}
@@ -123,10 +123,10 @@ export default function Hero() {
         >
           <span className="flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-[var(--color-brand)]" />
-            Entrega rápida com o material em mãos
+            {t("Entrega rápida com o material em mãos")}
           </span>
           <span className="hidden h-1 w-1 rounded-full bg-white/20 sm:block" />
-          <span>Atendimento em todo o Brasil</span>
+          <span>{t("Atendimento em todo o Brasil")}</span>
           <span className="hidden h-1 w-1 rounded-full bg-white/20 sm:block" />
           <span>Santa Cruz do Rio Pardo, SP</span>
         </div>
@@ -149,7 +149,7 @@ export default function Hero() {
             >
               <Image
                 src={img.src}
-                alt={img.alt}
+                alt={t(img.alt)}
                 width={900}
                 height={640}
                 className="h-[220px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04] md:h-[260px]"
@@ -165,7 +165,7 @@ export default function Hero() {
                     aria-hidden
                     className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
                   />
-                  Projetos rodando agora
+                  {t("Projetos rodando agora")}
                 </figcaption>
               )}
             </figure>

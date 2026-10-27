@@ -1,8 +1,10 @@
 import { PROCESS } from "@/lib/site";
 import { Zap } from "lucide-react";
 import RevealTitle from "@/components/ui/reveal-title";
+import { getT } from "@/lib/i18n/server";
 
 export default function Process() {
+  const { t } = getT();
   return (
     <section id="processo" className="relative overflow-hidden py-24 md:py-32">
       <div className="container-outbox relative z-10">
@@ -16,20 +18,16 @@ export default function Process() {
             <div>
               <span className="pill">
                 <Zap className="h-3.5 w-3.5 text-[var(--color-brand)]" />
-                Nosso compromisso
+                {t("Nosso compromisso")}
               </span>
               <RevealTitle
                 as="h2"
                 className="mt-6 max-w-[20ch] font-display text-[clamp(1.8rem,4vw,3rem)] leading-[1.08] text-white"
               >
-                Material completo na mão, projeto no ar em tempo recorde.
+                {t("Material completo na mão, projeto no ar em tempo recorde.")}
               </RevealTitle>
               <p className="mt-5 max-w-[54ch] leading-relaxed text-[var(--color-fg-muted)]">
-                O que mais atrasa um projeto não é a produção, é a espera por
-                texto, foto e informação. Por isso a nossa regra é clara: assim
-                que você entrega o material, o cronograma corre sem travas e a
-                gente entrega no menor prazo possível, com o acabamento que a
-                sua marca merece.
+                {t("O que mais atrasa um projeto não é a produção, é a espera por texto, foto e informação. Por isso a nossa regra é clara: assim que você entrega o material, o cronograma corre sem travas e a gente entrega no menor prazo possível, com o acabamento que a sua marca merece.")}
               </p>
             </div>
 
@@ -40,14 +38,14 @@ export default function Process() {
                 { k: "Sistemas", v: "prazo combinado" },
               ].map((i) => (
                 <div
-                  key={i.k}
+                  key={t(i.k)}
                   className="flex items-center justify-between rounded-2xl border border-white/8 bg-white/[0.03] px-5 py-4"
                 >
                   <span className="text-[14.5px] text-[var(--color-fg-muted)]">
-                    {i.k}
+                    {t(i.k)}
                   </span>
                   <span className="font-display text-[15px] text-[var(--color-brand)]">
-                    {i.v}
+                    {t(i.v)}
                   </span>
                 </div>
               ))}
@@ -62,13 +60,13 @@ export default function Process() {
               aria-hidden
               className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
             />
-            Como funciona
+            {t("Como funciona")}
           </span>
           <RevealTitle
             as="h2"
             className="mt-6 font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white"
           >
-            Um processo simples, do briefing ao ar.
+            {t("Um processo simples, do briefing ao ar.")}
           </RevealTitle>
         </div>
 
@@ -90,10 +88,10 @@ export default function Process() {
                   {p.step}
                 </span>
                 <h3 className="mt-5 font-display text-[19px] leading-snug text-white">
-                  {p.title}
+                  {t(p.title)}
                 </h3>
                 <p className="mt-3 text-[14.5px] leading-relaxed text-[var(--color-fg-muted)]">
-                  {p.text}
+                  {t(p.text)}
                 </p>
               </div>
             </article>

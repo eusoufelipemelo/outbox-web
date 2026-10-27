@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { LEGAL_LINKS, SITE, whatsappLink } from "@/lib/site";
+import { getT } from "@/lib/i18n/server";
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -13,6 +14,7 @@ function InstagramIcon({ className }: { className?: string }) {
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { t, href } = getT();
 
   return (
     <footer className="relative overflow-hidden border-t border-white/8 pt-20 pb-10">
@@ -32,8 +34,7 @@ export default function Footer() {
               className="h-[56px] w-auto"
             />
             <p className="mt-6 max-w-[38ch] leading-relaxed text-[var(--color-fg-muted)]">
-              Sistemas, sites, marcas e apresentações que colocam a sua empresa
-              na frente. Feito com estratégia, tecnologia e capricho.
+              {t("Sistemas, sites, marcas e apresentações que colocam a sua empresa na frente. Feito com estratégia, tecnologia e capricho.")}
             </p>
 
             <div className="mt-7 flex gap-3">
@@ -41,7 +42,7 @@ export default function Footer() {
                 href={SITE.instagramBrand}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Instagram da OutBox Group, ${SITE.instagramBrandHandle}`}
+                aria-label={t("Instagram da OutBox Group, {perfil}", { perfil: SITE.instagramBrandHandle })}
                 className="group flex cursor-pointer items-center gap-2.5 min-h-11 rounded-full border border-white/12 px-4 py-2.5 text-[13.5px] text-white/80 transition-colors duration-300 hover:border-[var(--color-brand)]/50 hover:text-white"
               >
                 <InstagramIcon className="h-4 w-4 text-[var(--color-brand)]" />
@@ -51,7 +52,7 @@ export default function Footer() {
                 href={SITE.instagramPersonal}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Instagram do Felipe Melo, ${SITE.instagramPersonalHandle}`}
+                aria-label={t("Instagram do Felipe Melo, {perfil}", { perfil: SITE.instagramPersonalHandle })}
                 className="group flex cursor-pointer items-center gap-2.5 min-h-11 rounded-full border border-white/12 px-4 py-2.5 text-[13.5px] text-white/80 transition-colors duration-300 hover:border-[var(--color-brand)]/50 hover:text-white"
               >
                 <InstagramIcon className="h-4 w-4 text-[var(--color-brand)]" />
@@ -61,9 +62,9 @@ export default function Footer() {
           </div>
 
           {/* Navegação */}
-          <nav aria-label="Rodapé">
+          <nav aria-label={t("Rodapé")}>
             <h2 className="font-display text-[15px] uppercase tracking-widest text-[var(--color-fg-subtle)]">
-              Navegar
+              {t("Navegar")}
             </h2>
             <ul className="mt-3 flex flex-col">
               {[
@@ -77,10 +78,10 @@ export default function Footer() {
               ].map((l) => (
                 <li key={l.href}>
                   <Link
-                    href={l.href}
+                    href={href(l.href)}
                     className="inline-flex min-h-11 min-w-11 cursor-pointer items-center text-[15px] text-[var(--color-fg-muted)] transition-colors duration-200 hover:text-[var(--color-brand)]"
                   >
-                    {l.label}
+                    {t(l.label)}
                   </Link>
                 </li>
               ))}
@@ -90,12 +91,12 @@ export default function Footer() {
           {/* Contato */}
           <div>
             <h2 className="font-display text-[15px] uppercase tracking-widest text-[var(--color-fg-subtle)]">
-              Contato
+              {t("Contato")}
             </h2>
             <ul className="mt-3 flex flex-col gap-1">
               <li>
                 <a
-                  href={whatsappLink()}
+                  href={whatsappLink(undefined, t)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex min-h-11 cursor-pointer items-center gap-3 text-[15px] text-[var(--color-fg-muted)] transition-colors duration-200 hover:text-white"
@@ -120,10 +121,10 @@ export default function Footer() {
             </ul>
 
             <Link
-              href="/#contato"
+              href={href("/#contato")}
               className="borda-viva group mt-7 inline-flex cursor-pointer items-center gap-2.5 rounded-full bg-white px-5 py-3 text-[14.5px] font-medium text-black transition-all duration-300 hover:shadow-[0_12px_30px_rgba(255,255,255,0.14)]"
             >
-              Começar projeto
+              {t("Começar projeto")}
               <ArrowUpRight
                 className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 strokeWidth={2.4}
@@ -134,30 +135,30 @@ export default function Footer() {
 
         {/* Links legais */}
         <nav
-          aria-label="Documentos legais"
+          aria-label={t("Documentos legais")}
           className="mt-12 flex flex-wrap justify-center gap-x-6 border-t border-white/8 pt-6 text-[13.5px]"
         >
           {LEGAL_LINKS.map((l) => (
             <Link
               key={l.href}
-              href={l.href}
+              href={href(l.href)}
               className="inline-flex min-h-11 min-w-11 cursor-pointer items-center text-[var(--color-fg-muted)] transition-colors duration-200 hover:text-[var(--color-brand)]"
             >
-              {l.label}
+              {t(l.label)}
             </Link>
           ))}
         </nav>
 
         <div className="mt-8 flex flex-col items-center justify-between gap-3 text-[13.5px] text-[var(--color-fg-subtle)] sm:flex-row">
           <p className="text-center sm:text-left">
-            © {year} {SITE.name}. Todos os direitos reservados.
+            © {year} {SITE.name}. {t("Todos os direitos reservados.")}
             <br className="sm:hidden" />
             <span className="sm:ml-2">CNPJ {SITE.cnpj}</span>
           </p>
           <p>
-            Desenvolvido por{" "}
+            {t("Desenvolvido por")}{" "}
             <a
-              href={SITE.url}
+              href={href("/")}
               className="inline-flex min-h-11 cursor-pointer items-center text-white/70 transition-colors hover:text-[var(--color-brand)]"
             >
               OutBox Soluções Digitais

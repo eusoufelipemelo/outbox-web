@@ -3,10 +3,14 @@ import Image from "next/image";
 import { ArrowUpRight, Clock } from "lucide-react";
 import { getPublishedPosts, formatDate, type Post } from "@/lib/blog";
 import RevealTitle from "@/components/ui/reveal-title";
+import { getT } from "@/lib/i18n/server";
+import { localizarPost } from "@/lib/i18n/blog";
 
 export default async function BlogSection() {
-  const { posts } = await getPublishedPosts(3);
-  if (posts.length === 0) return null;
+  const { t, href, locale } = getT();
+  const { posts: originais } = await getPublishedPosts(3);
+  if (originais.length === 0) return null;
+  const posts = originais.map((p) => localizarPost(p, locale));
 
   return (
     <section id="blog" className="relative overflow-hidden py-24 md:py-32">
@@ -24,15 +28,15 @@ export default async function BlogSection() {
               as="h2"
               className="mt-6 font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white"
             >
-              O que a gente aprende, a gente compartilha.
+              {t("O que a gente aprende, a gente compartilha.")}
             </RevealTitle>
           </div>
 
           <Link
-            href="/blog"
+            href={href("/blog")}
             className="reveal group flex cursor-pointer items-center gap-2.5 rounded-full border border-white/14 px-5 py-3 text-[14.5px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
           >
-            Ver todos os artigos
+            {t("Ver todos os artigos")}
             <ArrowUpRight
               className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               strokeWidth={2.2}
@@ -51,12 +55,13 @@ export default async function BlogSection() {
 }
 
 export function PostCard({ post, delay = 0 }: { post: Post; delay?: number }) {
+  const { t, href, locale } = getT();
   return (
     <article
       className="reveal card-dark group flex flex-col overflow-hidden"
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <Link href={`/blog/${post.slug}`} className="flex flex-1 flex-col">
+      <Link href={href(`/blog/${post.slug}`)} className="flex flex-1 flex-col">
         <div className="relative h-[190px] overflow-hidden bg-gradient-to-br from-white/8 to-transparent">
           {post.cover_url ? (
             <Image
@@ -77,6 +82,11 @@ export function PostCard({ post, delay = 0 }: { post: Post; delay?: number }) {
               />
             </div>
           )}
+          {locale !== "pt" && !post.traduzido && (
+            <span className="absolute right-4 top-4 rounded-full bg-black/65 px-3 py-1.5 text-[11.5px] font-medium text-white backdrop-blur-sm">
+              {t("Em português")}
+            </span>
+          )}
           {post.category && (
             <span className="absolute left-4 top-4 rounded-full bg-black/65 px-3 py-1.5 text-[11.5px] font-medium tracking-wide text-white backdrop-blur-sm">
               {post.category}
@@ -94,7 +104,7 @@ export function PostCard({ post, delay = 0 }: { post: Post; delay?: number }) {
             </p>
           )}
           <div className="mt-6 flex items-center gap-3 text-[12.5px] text-[var(--color-fg-subtle)]">
-            <span>{formatDate(post.published_at)}</span>
+            <span>{formatDate(post.published_at, locale)}</span>
             {post.read_minutes ? (
               <>
                 <span aria-hidden className="h-1 w-1 rounded-full bg-white/20" />

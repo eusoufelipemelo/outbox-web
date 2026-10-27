@@ -10,6 +10,7 @@ import {
   geWhatsapp,
   type Plano,
 } from "@/lib/google-empresas";
+import { getT } from "@/lib/i18n/server";
 
 /* O Plano Crescimento é a âncora: custa quase o mesmo que o Autoridade e
    entrega bem menos, então a economia do Autoridade é medida contra ele. */
@@ -21,9 +22,15 @@ function economiaPorArtigo(plano: Plano) {
 
 function CardPlano({ plano, atraso }: { plano: Plano; atraso: number }) {
   const d = plano.destaque;
+  const { t } = getT();
   // O espaço fixo do "R$ 1.590" vira espaço comum na mensagem do WhatsApp.
   const reais = (v: number) => formatarReais(v).replace(/\u00a0/g, " ");
-  const mensagem = `${plano.nome} (${plano.artigos} artigos por mês, ${reais(plano.preco)}/mês + implantação de ${reais(GE_IMPLANTACAO.valor)})`;
+  const mensagem = t("{plano} ({artigos} artigos por mês, {preco}/mês + implantação de {implantacao})", {
+    plano: t(plano.nome),
+    artigos: plano.artigos,
+    preco: reais(plano.preco),
+    implantacao: reais(GE_IMPLANTACAO.valor),
+  });
 
   return (
     <Revelar
@@ -47,7 +54,7 @@ function CardPlano({ plano, atraso }: { plano: Plano; atraso: number }) {
               <div className="glow glow--brand absolute -right-24 -top-24 h-72 w-72" />
             </div>
             <span className="absolute -top-4 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-[var(--color-brand)] px-4 py-1.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-black shadow-[0_8px_24px_rgba(241,85,50,0.45)]">
-              Mais escolhido
+              {t("Mais escolhido")}
             </span>
           </>
         )}
@@ -57,10 +64,10 @@ function CardPlano({ plano, atraso }: { plano: Plano; atraso: number }) {
             id={`plano-${plano.id}`}
             className={`font-display text-[22px] leading-tight ${d ? "text-[var(--color-brand-soft)]" : "text-white"}`}
           >
-            {plano.nome}
+            {t(plano.nome)}
           </h3>
           <p className="mt-2 min-h-[3.25em] text-[14.5px] leading-relaxed text-[var(--color-fg-muted)]">
-            {plano.resumo}
+            {t(plano.resumo)}
           </p>
 
           <p className="mt-6 flex items-baseline gap-1.5">
@@ -69,13 +76,13 @@ function CardPlano({ plano, atraso }: { plano: Plano; atraso: number }) {
             >
               {formatarReais(plano.preco)}
             </span>
-            <span className="text-[15px] text-[var(--color-fg-muted)]">/mês</span>
+            <span className="text-[15px] text-[var(--color-fg-muted)]">{t("/mês")}</span>
           </p>
           <p className="mt-2 text-[16px] font-medium text-white">
-            {plano.artigos} artigos por mês
+            {t("{n} artigos por mês", { n: plano.artigos })}
           </p>
           <p className="mt-1 text-[13.5px] text-[var(--color-fg-muted)]">
-            + implantação única de {formatarReais(GE_IMPLANTACAO.valor)}
+            {t("+ implantação única de {valor}", { valor: formatarReais(GE_IMPLANTACAO.valor) })}
           </p>
 
           <div
@@ -86,14 +93,14 @@ function CardPlano({ plano, atraso }: { plano: Plano; atraso: number }) {
             }`}
           >
             <p className="flex items-baseline justify-between gap-3 text-[14.5px]">
-              <span className="text-[var(--color-fg-muted)]">Valor por artigo</span>
+              <span className="text-[var(--color-fg-muted)]">{t("Valor por artigo")}</span>
               <span className={`font-display text-[18px] ${d ? "text-[var(--color-brand-soft)]" : "text-white"}`}>
                 {formatarReais(plano.porArtigo)}
               </span>
             </p>
             {d && (
               <p className="mt-1.5 text-[13.5px] font-medium text-white">
-                {economiaPorArtigo(plano)}% a menos por artigo que no {ANCORA.nome}
+                {t("{pct}% a menos por artigo que no {plano}", { pct: economiaPorArtigo(plano), plano: t(ANCORA.nome) })}
               </p>
             )}
           </div>
@@ -104,7 +111,7 @@ function CardPlano({ plano, atraso }: { plano: Plano; atraso: number }) {
                 <span className="mt-px flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]/15">
                   <Check className="h-3 w-3 text-[var(--color-brand)]" strokeWidth={3} aria-hidden />
                 </span>
-                {item}
+                {t(item)}
               </li>
             ))}
             {GE_ITENS_AUTORIDADE.map((item) =>
@@ -113,7 +120,7 @@ function CardPlano({ plano, atraso }: { plano: Plano; atraso: number }) {
                   <span className="mt-px flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]">
                     <Check className="h-3 w-3 text-black" strokeWidth={3.2} aria-hidden />
                   </span>
-                  {item}
+                  {t(item)}
                 </li>
               ) : (
                 <li key={item} className="flex items-start gap-3 text-[14.5px] leading-snug text-[var(--color-fg-muted)] line-through decoration-white/25">
@@ -121,8 +128,8 @@ function CardPlano({ plano, atraso }: { plano: Plano; atraso: number }) {
                     <Minus className="h-3 w-3 text-white/45" strokeWidth={2.6} aria-hidden />
                   </span>
                   <span>
-                    {item}
-                    <span className="sr-only"> (não incluso neste plano)</span>
+                    {t(item)}
+                    <span className="sr-only"> {t("(não incluso neste plano)")}</span>
                   </span>
                 </li>
               )
@@ -131,17 +138,17 @@ function CardPlano({ plano, atraso }: { plano: Plano; atraso: number }) {
 
           <div className="mt-auto pt-8">
             <a
-              href={geWhatsapp(mensagem)}
+              href={geWhatsapp(mensagem, t)}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Escolher o ${plano.nome} pelo WhatsApp`}
+              aria-label={t("Escolher o {plano} pelo WhatsApp", { plano: t(plano.nome) })}
               className={`group flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-full px-6 py-3.5 text-[15px] font-semibold transition-all duration-300 ${
                 d
                   ? "bg-[var(--color-brand)] text-black hover:bg-[var(--color-brand-soft)] hover:shadow-[0_14px_36px_rgba(241,85,50,0.4)]"
                   : "border border-white/16 text-white hover:border-white/40 hover:bg-white/[0.06]"
               }`}
             >
-              Escolher este plano
+              {t("Escolher este plano")}
               <ArrowUpRight
                 className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 strokeWidth={2.4}
@@ -156,6 +163,7 @@ function CardPlano({ plano, atraso }: { plano: Plano; atraso: number }) {
 }
 
 export default function PlanosGE() {
+  const { t } = getT();
   return (
     <>
       <div className="mt-16 grid gap-6 pt-4 lg:grid-cols-3 lg:gap-5">
@@ -174,30 +182,30 @@ export default function PlanosGE() {
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--color-brand)]/16">
                 <Settings2 className="h-5 w-5 text-[var(--color-brand)]" aria-hidden />
               </span>
-              Implantação
+              {t("Implantação")}
             </h3>
             <p className="mt-5 flex items-baseline gap-2">
               <span className="font-display text-[clamp(2.3rem,4.5vw,2.8rem)] leading-none text-white">
                 {formatarReais(GE_IMPLANTACAO.valor)}
               </span>
-              <span className="text-[15px] text-[var(--color-fg-muted)]">pago uma vez</span>
+              <span className="text-[15px] text-[var(--color-fg-muted)]">{t("pago uma vez")}</span>
             </p>
             <p className="mt-3 max-w-[38ch] text-[15px] leading-relaxed text-white/85">
-              {GE_IMPLANTACAO.pagamento}
+              {t(GE_IMPLANTACAO.pagamento)}
             </p>
             <p className="mt-2 max-w-[38ch] text-[13.5px] leading-relaxed text-[var(--color-fg-muted)]">
-              Vale para qualquer plano e é cobrada à parte da mensalidade.
+              {t("Vale para qualquer plano e é cobrada à parte da mensalidade.")}
             </p>
           </div>
           <div>
-            <p className="text-[15px] font-medium text-white">O que a implantação inclui</p>
+            <p className="text-[15px] font-medium text-white">{t("O que a implantação inclui")}</p>
             <ul className="mt-4 flex flex-col gap-3.5">
               {GE_IMPLANTACAO.inclui.map((item) => (
                 <li key={item} className="flex items-start gap-3 text-[15px] leading-relaxed text-white/90">
                   <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]">
                     <Check className="h-3 w-3 text-black" strokeWidth={3.2} aria-hidden />
                   </span>
-                  {item}
+                  {t(item)}
                 </li>
               ))}
             </ul>
@@ -209,11 +217,11 @@ export default function PlanosGE() {
         <div className="grid gap-4 rounded-[var(--radius-xl2)] border border-white/8 bg-white/[0.025] p-6 md:grid-cols-2 md:p-7">
           <p className="flex items-start gap-3.5 text-[15px] leading-relaxed text-white/90">
             <CalendarClock className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-brand)]" aria-hidden />
-            {GE_CONDICOES.contrato}
+            {t(GE_CONDICOES.contrato)}
           </p>
           <p className="flex items-start gap-3.5 text-[15px] leading-relaxed text-white/90">
             <CreditCard className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-brand)]" aria-hidden />
-            {GE_CONDICOES.pagamento}
+            {t(GE_CONDICOES.pagamento)}
           </p>
         </div>
       </Revelar>

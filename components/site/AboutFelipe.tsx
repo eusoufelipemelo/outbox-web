@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight, Quote } from "lucide-react";
 import { SITE } from "@/lib/site";
 import RevealTitle from "@/components/ui/reveal-title";
+import { getT } from "@/lib/i18n/server";
 
 const MARCAS = [
   "Casa46",
@@ -13,6 +14,7 @@ const MARCAS = [
 ];
 
 export default function AboutFelipe() {
+  const { t, href } = getT();
   return (
     <section id="sobre" className="relative overflow-hidden py-24 md:py-32">
       <div className="container-outbox relative z-10">
@@ -28,7 +30,7 @@ export default function AboutFelipe() {
               <div className="relative overflow-hidden rounded-[var(--radius-xl2)] border border-white/10 transition-colors duration-500 group-hover:border-[var(--color-brand)]/40">
                 <Image
                   src="/img/felipe-retrato.jpg"
-                  alt="Felipe Melo, fundador da OutBox Group"
+                  alt={t("Felipe Melo, fundador da OutBox Group")}
                   width={1128}
                   height={1400}
                   className="h-auto w-full scale-[1.02] object-cover transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] group-hover:brightness-110 group-hover:saturate-[1.08]"
@@ -43,7 +45,7 @@ export default function AboutFelipe() {
                     Felipe Melo
                   </p>
                   <p className="mt-1 text-[13.5px] text-white/70">
-                    Fundador e Diretor de Criação
+                    {t("Fundador e Diretor de Criação")}
                   </p>
                 </div>
               </div>
@@ -54,7 +56,7 @@ export default function AboutFelipe() {
                   15
                 </span>
                 <span className="mt-1 block text-[10.5px] uppercase tracking-widest text-white/60">
-                  anos de estrada
+                  {t("anos de estrada")}
                 </span>
               </div>
             </div>
@@ -67,34 +69,31 @@ export default function AboutFelipe() {
                 aria-hidden
                 className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
               />
-              Quem está por trás
+              {t("Quem está por trás")}
             </span>
 
             <RevealTitle
               as="h2"
               className="mt-6 max-w-[18ch] font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white"
             >
-              Você não fala com um robô. Fala comigo.
+              {t("Você não fala com um robô. Fala comigo.")}
             </RevealTitle>
 
             <div className="reveal mt-6 flex flex-col gap-4 text-[16.5px] leading-relaxed text-[var(--color-fg-muted)]">
               <p>
-                Meu nome é Felipe Melo e eu toco a OutBox. Sou designer e
-                estrategista de marca, e passei os últimos quinze anos ajudando
-                empresas a parecerem tão boas por fora quanto já são por dentro.
+                {t("Meu nome é Felipe Melo e eu toco a OutBox. Sou designer e estrategista de marca, e passei os últimos quinze anos ajudando empresas a parecerem tão boas por fora quanto já são por dentro.")}
               </p>
               <p>
-                Acredito em três coisas: projeto tem que ter{" "}
-                <span className="text-white">dono</span>, prazo tem que ser{" "}
-                <span className="text-white">cumprido</span> e site bonito que
-                não traz cliente é{" "}
-                <span className="text-white">despesa, não investimento</span>.
-                Por isso eu mesmo participo de cada etapa, do briefing à
-                publicação.
+                {t("Acredito em três coisas: projeto tem que ter")}{" "}
+                <span className="text-white">{t("dono")}</span>
+                {t(", prazo tem que ser")}{" "}
+                <span className="text-white">{t("cumprido")}</span>{" "}
+                {t("e site bonito que não traz cliente é")}{" "}
+                <span className="text-white">{t("despesa, não investimento")}</span>
+                {t(". Por isso eu mesmo participo de cada etapa, do briefing à publicação.")}
               </p>
               <p>
-                Quando você me chama no WhatsApp, é comigo que você fala. Sem
-                atendente, sem fila, sem promessa que a gente não vai cumprir.
+                {t("Quando você me chama no WhatsApp, é comigo que você fala. Sem atendente, sem fila, sem promessa que a gente não vai cumprir.")}
               </p>
             </div>
 
@@ -102,15 +101,14 @@ export default function AboutFelipe() {
             <blockquote className="reveal mt-8 rounded-2xl border-l-2 border-[var(--color-brand)] bg-white/[0.03] p-6">
               <Quote className="h-5 w-5 text-[var(--color-brand)]" />
               <p className="mt-3 font-display text-[19px] leading-snug text-white">
-                Marca boa não é a que grita mais alto. É a que a pessoa lembra
-                na hora de decidir.
+                {t("Marca boa não é a que grita mais alto. É a que a pessoa lembra na hora de decidir.")}
               </p>
             </blockquote>
 
             {/* Marcas atendidas */}
             <div className="reveal mt-8">
               <p className="text-[12.5px] uppercase tracking-widest text-[var(--color-fg-subtle)]">
-                Já construí marca e presença digital para
+                {t("Já construí marca e presença digital para")}
               </p>
               <div className="mt-3.5 flex flex-wrap gap-2">
                 {MARCAS.map((m) => (
@@ -126,10 +124,10 @@ export default function AboutFelipe() {
 
             <div className="reveal mt-9 flex flex-wrap gap-3">
               <Link
-                href="/#contato"
+                href={href("/#contato")}
                 className="borda-viva group flex cursor-pointer items-center gap-2.5 rounded-full bg-white px-5 py-3.5 text-[14.5px] font-medium text-black transition-all duration-300 hover:shadow-[0_12px_30px_rgba(255,255,255,0.14)]"
               >
-                Falar direto comigo
+                {t("Falar direto comigo")}
                 <ArrowUpRight
                   className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   strokeWidth={2.4}

@@ -34,11 +34,11 @@ export const SITE = {
   cnpj: "51.174.401/0001-07",
 } as const;
 
-/** Mensagem que já vai escrita quando o lead abre o WhatsApp. */
-export function whatsappLink(context?: string) {
-  const base =
-    "Olá, Felipe! Vim pelo site da OutBox e quero tirar meu projeto do papel.";
-  const msg = context ? `${base}\n\nTenho interesse em: ${context}` : base;
+/** Mensagem que já vai escrita quando o lead abre o WhatsApp. Nas versões
+    em outro idioma, passe o t() da página para a mensagem sair traduzida. */
+export function whatsappLink(context?: string, t: (pt: string) => string = (pt) => pt) {
+  const base = t("Olá, Felipe! Vim pelo site da OutBox e quero tirar meu projeto do papel.");
+  const msg = context ? `${base}\n\n${t("Tenho interesse em:")} ${t(context)}` : base;
   return `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(msg)}`;
 }
 

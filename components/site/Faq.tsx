@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Plus } from "lucide-react";
 import { FAQ } from "@/lib/site";
 import RevealTitle from "@/components/ui/reveal-title";
+import { useI18n } from "@/lib/i18n/client";
 
 type Item = { readonly q: string; readonly a: string };
 
@@ -31,6 +32,7 @@ export default function Faq({
   animarTitulo?: boolean;
 } = {}) {
   const Titulo = tituloComo;
+  const { t } = useI18n();
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -43,22 +45,22 @@ export default function Faq({
                 aria-hidden
                 className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
               />
-              {rotulo}
+              {t(rotulo)}
             </span>
             {animarTitulo ? (
               <RevealTitle
                 as={tituloComo}
                 className="mt-6 max-w-[16ch] font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white"
               >
-                {titulo}
+                {t(titulo)}
               </RevealTitle>
             ) : (
               <Titulo className="reveal mt-6 max-w-[16ch] font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.07] text-white">
-                {titulo}
+                {t(titulo)}
               </Titulo>
             )}
             <p className="reveal mt-5 max-w-[42ch] leading-relaxed text-[var(--color-fg-muted)]">
-              {texto}
+              {t(texto)}
             </p>
           </div>
 
@@ -83,7 +85,7 @@ export default function Faq({
                     className="flex w-full cursor-pointer items-center justify-between gap-5 p-6 text-left"
                   >
                     <span className="font-display text-[17px] leading-snug text-white">
-                      {item.q}
+                      {t(item.q)}
                     </span>
                     <span
                       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
@@ -106,7 +108,7 @@ export default function Faq({
                   >
                     <div className="overflow-hidden">
                       <p className="px-6 pb-6 text-[15px] leading-relaxed text-[var(--color-fg-muted)]">
-                        {item.a}
+                        {t(item.a)}
                       </p>
                     </div>
                   </div>

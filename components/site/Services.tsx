@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import RevealTitle from "@/components/ui/reveal-title";
 import { SERVICES, whatsappLink } from "@/lib/site";
+import { useI18n } from "@/lib/i18n/client";
 
 const ICONS = {
   sistemas: Code2,
@@ -36,6 +37,7 @@ const TOTAL = SERVICES.length;
 export default function Services() {
   const [active, setActive] = useState(0);
   const [fixado, setFixado] = useState(false);
+  const { t, href } = useI18n();
   const sectionRef = useRef<HTMLElement>(null);
 
   // Só fixa a rolagem em telas grandes e para quem não pediu menos movimento.
@@ -111,13 +113,13 @@ export default function Services() {
               aria-hidden
               className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
             />
-            O que fazemos
+            {t("O que fazemos")}
           </span>
           <RevealTitle
             as="h2"
             className="mt-6 font-display text-[clamp(2rem,4.6vw,3.4rem)] leading-[1.06] text-white"
           >
-            Quatro frentes para tirar a sua empresa do lugar comum.
+            {t("Quatro frentes para tirar a sua empresa do lugar comum.")}
           </RevealTitle>
         </div>
       </div>
@@ -183,10 +185,10 @@ export default function Services() {
                           isActive ? "text-white" : "text-white/75"
                         }`}
                       >
-                        {s.name}
+                        {t(s.name)}
                       </span>
                       <span className="mt-1 block text-[13.5px] text-[var(--color-fg-subtle)]">
-                        {s.tagline}
+                        {t(s.tagline)}
                       </span>
                     </span>
                   </button>
@@ -196,7 +198,7 @@ export default function Services() {
                   a imagem do card ganha essa altura (o quanto a tela deixar). */}
               {fixado && (
                 <div key={servico.slug} className="animate-troca">
-                  <Resultado texto={servico.outcome} className="" />
+                  <Resultado texto={t(servico.outcome)} titulo={t("O resultado")} className="" />
                 </div>
               )}
             </div>
@@ -216,7 +218,7 @@ export default function Services() {
                   <Image
                     key={s.slug}
                     src={`/img/servicos/${s.slug}.webp`}
-                    alt={i === active ? IMAGENS[s.slug] : ""}
+                    alt={i === active ? t(IMAGENS[s.slug]) : ""}
                     aria-hidden={i !== active}
                     fill
                     sizes="(max-width: 1024px) 100vw, 660px"
@@ -233,7 +235,7 @@ export default function Services() {
                   key={servico.slug}
                   className="animate-troca absolute inset-x-5 bottom-4 font-display text-[clamp(1.45rem,2.4vw,2rem)] leading-tight text-white md:inset-x-6"
                 >
-                  {servico.name}
+                  {t(servico.name)}
                 </h3>
                 <span className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-xl bg-black/55 backdrop-blur-sm">
                   <Icone
@@ -248,7 +250,7 @@ export default function Services() {
                 className="animate-troca relative z-10 px-3 pb-3 md:px-4 md:pb-4"
               >
                 <p className="mt-5 max-w-[58ch] leading-relaxed text-[var(--color-fg-muted)]">
-                  {servico.description}
+                  {t(servico.description)}
                 </p>
 
                 <ul className="mt-7 grid lg:mt-5 gap-3 sm:grid-cols-2">
@@ -263,31 +265,31 @@ export default function Services() {
                           strokeWidth={3}
                         />
                       </span>
-                      {b}
+                      {t(b)}
                     </li>
                   ))}
                 </ul>
 
-                {!fixado && <Resultado texto={servico.outcome} />}
+                {!fixado && <Resultado texto={t(servico.outcome)} titulo={t("O resultado")} />}
 
                 <div className="mt-7 flex flex-wrap gap-3 lg:mt-5">
                   <Link
-                    href="/#contato"
+                    href={href("/#contato")}
                     className="borda-viva group flex cursor-pointer items-center gap-2.5 rounded-full bg-white px-5 py-3 text-[14.5px] font-medium text-black transition-all duration-300 hover:shadow-[0_12px_30px_rgba(255,255,255,0.14)]"
                   >
-                    Quero este serviço
+                    {t("Quero este serviço")}
                     <ArrowUpRight
                       className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                       strokeWidth={2.4}
                     />
                   </Link>
                   <a
-                    href={whatsappLink(servico.name)}
+                    href={whatsappLink(servico.name, t)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="cursor-pointer rounded-full border border-white/14 px-5 py-3 text-[14.5px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
                   >
-                    Tirar dúvida no WhatsApp
+                    {t("Tirar dúvida no WhatsApp")}
                   </a>
                 </div>
               </div>
@@ -320,9 +322,11 @@ export default function Services() {
 
 function Resultado({
   texto,
+  titulo,
   className = "mt-7 lg:mt-5",
 }: {
   texto: string;
+  titulo: string;
   className?: string;
 }) {
   return (
@@ -330,7 +334,7 @@ function Resultado({
       className={`rounded-2xl border border-[var(--color-brand)]/25 bg-[var(--color-brand)]/8 p-5 ${className}`}
     >
       <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-brand)]">
-        O resultado
+        {titulo}
       </span>
       <p className="mt-1.5 text-[15.5px] text-white">{texto}</p>
     </div>

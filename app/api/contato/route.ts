@@ -15,6 +15,8 @@ type Payload = {
   origem?: string;
   empresa?: string;
   telefone?: string;
+  /** Idioma da página de onde o contato veio (en, es, ca). Português quando vazio. */
+  idioma?: string;
   /** Campo isca contra robôs: se vier preenchido, é spam. */
   website?: string;
 };
@@ -72,6 +74,8 @@ export async function POST(request: Request) {
     const empresa = (body.empresa ?? "").trim().slice(0, 160);
     const telefone = (body.telefone ?? "").trim().slice(0, 40);
     const comercial = origem === "felipemelo";
+    const IDIOMAS: Record<string, string> = { en: "Inglês", es: "Espanhol", ca: "Catalão" };
+    const idioma = IDIOMAS[(body.idioma ?? "").trim()] ?? null;
 
     if (!nome || !email || !servico) {
       return NextResponse.json(
@@ -95,7 +99,7 @@ export async function POST(request: Request) {
           email,
           servico,
           mensagem:
-            [empresa && `Empresa: ${empresa}`, telefone && `Telefone: ${telefone}`, mensagem]
+            [idioma && `Idioma do site: ${idioma}`, empresa && `Empresa: ${empresa}`, telefone && `Telefone: ${telefone}`, mensagem]
               .filter(Boolean)
               .join("\n") || null,
           videochamada,
@@ -135,6 +139,7 @@ export async function POST(request: Request) {
             ["E-mail", email],
             ["Serviço", servico],
             ["Videochamada", videochamada ? "Sim, quer agendar" : "Não"],
+            ...(idioma ? [["Idioma do site", `${idioma} (responder neste idioma)`]] : []),
             ["Mensagem", mensagem || "(não informada)"],
           ];
 
@@ -177,6 +182,7 @@ export async function POST(request: Request) {
         replyTo: `"${nome}" <${email}>`,
         subject: `${comercial ? "Contato comercial" : "Novo lead"}: ${nome} · ${servico}${
           videochamada ? " · quer videochamada" : ""
+        }${idioma ? ` · ${idioma}` : ""
         }`,
         text: linhas.map(([k, v]) => `${k}: ${v}`).join("\n"),
         html,

@@ -10,8 +10,8 @@ export const GE_ROTA = "/google-empresas";
 export const GE_CONTEXTO = "Google Empresas";
 
 /** Link do WhatsApp com a mensagem já dizendo de onde a pessoa veio. */
-export function geWhatsapp(detalhe?: string) {
-  return whatsappLink(detalhe ? `${GE_CONTEXTO}, ${detalhe}` : GE_CONTEXTO);
+export function geWhatsapp(detalhe?: string, t: (pt: string) => string = (pt) => pt) {
+  return whatsappLink(detalhe ? `${GE_CONTEXTO}, ${t(detalhe)}` : GE_CONTEXTO, t);
 }
 
 export const GE_PROBLEMAS = [

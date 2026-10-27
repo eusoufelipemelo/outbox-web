@@ -3,6 +3,7 @@
 import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 import { MapPin, MessageCircle, Sparkles, Star, TrendingUp, UserCheck } from "lucide-react";
 import s from "./vantagens.module.css";
+import { useI18n } from "@/lib/i18n/client";
 
 /* Celular laranja com a jornada do cliente em três cenas, em loop:
    1. a busca no Google, com a empresa em primeiro no mapa;
@@ -37,6 +38,7 @@ const BLOCOS: Bloco[] = [
 
 export default function CelularGE() {
   const ref = useRef<HTMLDivElement>(null);
+  const { t } = useI18n();
 
   useEffect(() => {
     const el = ref.current;
@@ -56,7 +58,7 @@ export default function CelularGE() {
       ref={ref}
       className={s.palco}
       role="img"
-      aria-label="Animação de um celular laranja: a empresa aparece em primeiro no mapa do Google, é citada como fonte por uma inteligência artificial e recebe um novo contato no WhatsApp."
+      aria-label={t("Animação de um celular laranja: a empresa aparece em primeiro no mapa do Google, é citada como fonte por uma inteligência artificial e recebe um novo contato no WhatsApp.")}
     >
       <div className={s.halo} aria-hidden />
 
@@ -76,7 +78,7 @@ export default function CelularGE() {
                   <span className={s.appPonto} /> Google
                 </div>
                 <div className={s.busca}>
-                  <span className={s.digitando}>melhor opção perto de mim</span>
+                  <span className={s.digitando}>{t("melhor opção perto de mim")}</span>
                   <span className={s.cursor} />
                 </div>
                 <div className={s.mapa}>
@@ -86,12 +88,12 @@ export default function CelularGE() {
                   <span className={`${s.pino} ${s.pinoMeu}`} style={{ left: "46%", top: "34%" }} />
                 </div>
                 <div className={`${s.resultado} ${s.resultadoMeu}`}>
-                  <span className={s.resultadoNome}>Sua empresa</span>
+                  <span className={s.resultadoNome}>{t("Sua empresa")}</span>
                   <span className={s.estrelas}>★★★★★</span>
                   <span className={s.acoes}>
-                    <span>Ligar</span>
-                    <span>Rotas</span>
-                    <span>Site</span>
+                    <span>{t("Ligar")}</span>
+                    <span>{t("Rotas")}</span>
+                    <span>{t("Site")}</span>
                   </span>
                 </div>
                 <div className={s.resultado}>
@@ -107,9 +109,9 @@ export default function CelularGE() {
               {/* Cena 2: IA */}
               <div className={`${s.cena} ${s.cena2}`}>
                 <div className={s.app}>
-                  <span className={s.appPonto} /> Assistente de IA
+                  <span className={s.appPonto} /> {t("Assistente de IA")}
                 </div>
-                <div className={s.balaoEu}>Qual empresa você recomenda aqui na minha cidade?</div>
+                <div className={s.balaoEu}>{t("Qual empresa você recomenda aqui na minha cidade?")}</div>
                 <div className={s.balaoIa}>
                   <span className={s.pontinhos}>
                     <i />
@@ -117,14 +119,15 @@ export default function CelularGE() {
                     <i />
                   </span>
                   <p style={{ marginTop: 6 }}>
-                    Recomendo a <strong>Sua empresa</strong>. Ela explica no blog como funciona o
-                    serviço, quanto tempo leva e o que está incluso.
+                    {t("Recomendo a")} <strong>{t("Sua empresa")}</strong>
+                    {t(". Ela explica no blog como funciona o serviço, quanto tempo leva e o que está incluso.")}
                   </p>
-                  <span className={s.fonte}>↗ seusite.com.br/blog</span>
+                  <span className={s.fonte}>↗ {t("seusite.com.br/blog")}</span>
                 </div>
-                <div className={s.balaoEu}>Como falo com eles?</div>
+                <div className={s.balaoEu}>{t("Como falo com eles?")}</div>
                 <div className={s.balaoIa}>
-                  Pelo WhatsApp do <strong>perfil no Google</strong>, com atendimento no mesmo dia.
+                  {t("Pelo WhatsApp do")} <strong>{t("perfil no Google")}</strong>
+                  {t(", com atendimento no mesmo dia.")}
                 </div>
               </div>
 
@@ -135,21 +138,21 @@ export default function CelularGE() {
                   <span>
                     <b>WhatsApp</b>
                     <br />
-                    Olá! Vi vocês no Google e quero um orçamento.
+                    {t("Olá! Vi vocês no Google e quero um orçamento.")}
                   </span>
                 </div>
                 <div className={s.resultado}>
-                  <span className={s.resultadoNome}>Origem do contato</span>
-                  <span style={{ color: "rgba(255,255,255,.7)" }}>Perfil da Empresa no Google</span>
+                  <span className={s.resultadoNome}>{t("Origem do contato")}</span>
+                  <span style={{ color: "rgba(255,255,255,.7)" }}>{t("Perfil da Empresa no Google")}</span>
                 </div>
                 <div className={s.resultado}>
-                  <span className={s.resultadoNome}>Leu antes de chamar</span>
-                  <span style={{ color: "rgba(255,255,255,.7)" }}>Artigo do seu blog</span>
+                  <span className={s.resultadoNome}>{t("Leu antes de chamar")}</span>
+                  <span style={{ color: "rgba(255,255,255,.7)" }}>{t("Artigo do seu blog")}</span>
                 </div>
                 <div className={s.novoCliente}>
                   <span className={s.check}>✓</span>
-                  <b style={{ fontSize: "1.15em" }}>Novo cliente</b>
-                  <span style={{ color: "rgba(255,255,255,.7)" }}>chegou pelo Google</span>
+                  <b style={{ fontSize: "1.15em" }}>{t("Novo cliente")}</b>
+                  <span style={{ color: "rgba(255,255,255,.7)" }}>{t("chegou pelo Google")}</span>
                 </div>
               </div>
             </div>
@@ -172,15 +175,15 @@ export default function CelularGE() {
             }
           >
             <span className={s.blocoIcone}>{b.icone}</span>
-            {b.texto}
+            {t(b.texto)}
           </span>
         ))}
       </div>
 
       <div className={s.legendas} aria-hidden>
-        <span className={s.legenda}>No Google</span>
-        <span className={s.legenda}>Nas IAs</span>
-        <span className={s.legenda}>No WhatsApp</span>
+        <span className={s.legenda}>{t("No Google")}</span>
+        <span className={s.legenda}>{t("Nas IAs")}</span>
+        <span className={s.legenda}>{t("No WhatsApp")}</span>
       </div>
     </div>
   );
