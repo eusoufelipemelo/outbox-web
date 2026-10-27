@@ -78,7 +78,7 @@ export default function Hero() {
 
               <Link
                 href="/#servicos"
-                className="cursor-pointer rounded-full border border-white/25 bg-black/30 px-7 py-3.5 text-[15px] text-white/90 backdrop-blur-sm transition-colors duration-300 hover:border-white/45 hover:text-white"
+                className="flex min-h-14 cursor-pointer items-center rounded-full border border-white/25 bg-black/30 px-7 text-[15px] text-white/90 backdrop-blur-sm transition-colors duration-300 hover:border-white/45 hover:text-white"
               >
                 Ver o que fazemos
               </Link>

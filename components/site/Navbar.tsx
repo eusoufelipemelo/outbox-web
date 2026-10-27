@@ -83,7 +83,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <Link
               href="/#contato"
-              className="group hidden cursor-pointer items-center gap-2.5 rounded-full bg-white py-2 pl-2 pr-4 text-[14.5px] font-medium text-black transition-all duration-300 hover:bg-white/90 sm:flex"
+              className="borda-viva group hidden cursor-pointer items-center gap-2.5 rounded-full bg-white py-2 pl-2 pr-4 text-[14.5px] font-medium text-black transition-all duration-300 hover:bg-white/90 sm:flex"
             >
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-brand)] transition-transform duration-300 group-hover:rotate-45">
                 <ArrowUpRight className="h-4 w-4 text-white" strokeWidth={2.4} />
@@ -134,7 +134,7 @@ export default function Navbar() {
           <Link
             href="/#contato"
             onClick={() => setOpen(false)}
-            className="mt-8 flex items-center justify-center gap-2 rounded-full bg-[var(--color-brand)] px-6 py-4 font-medium text-white"
+            className="borda-viva mt-8 flex items-center justify-center gap-2 rounded-full bg-[var(--color-brand)] px-6 py-4 font-medium text-white"
           >
             Começar projeto
             <ArrowUpRight className="h-5 w-5" />

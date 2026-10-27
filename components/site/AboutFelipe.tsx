@@ -127,7 +127,7 @@ export default function AboutFelipe() {
             <div className="reveal mt-9 flex flex-wrap gap-3">
               <Link
                 href="/#contato"
-                className="group flex cursor-pointer items-center gap-2.5 rounded-full bg-white px-5 py-3.5 text-[14.5px] font-medium text-black transition-all duration-300 hover:shadow-[0_12px_30px_rgba(255,255,255,0.14)]"
+                className="borda-viva group flex cursor-pointer items-center gap-2.5 rounded-full bg-white px-5 py-3.5 text-[14.5px] font-medium text-black transition-all duration-300 hover:shadow-[0_12px_30px_rgba(255,255,255,0.14)]"
               >
                 Falar direto comigo
                 <ArrowUpRight
@@ -139,7 +139,7 @@ export default function AboutFelipe() {
                 href={SITE.instagramPersonal}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="cursor-pointer rounded-full border border-white/14 px-5 py-3.5 text-[14.5px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
+                className="borda-viva cursor-pointer rounded-full border border-white/14 px-5 py-3.5 text-[14.5px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
               >
                 {SITE.instagramPersonalHandle}
               </a>

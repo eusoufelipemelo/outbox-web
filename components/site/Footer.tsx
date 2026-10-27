@@ -42,7 +42,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Instagram da OutBox Group, ${SITE.instagramBrandHandle}`}
-                className="group flex cursor-pointer items-center gap-2.5 min-h-11 rounded-full border border-white/12 px-4 py-2.5 text-[13.5px] text-white/80 transition-colors duration-300 hover:border-[var(--color-brand)]/50 hover:text-white"
+                className="borda-viva group flex cursor-pointer items-center gap-2.5 min-h-11 rounded-full border border-white/12 px-4 py-2.5 text-[13.5px] text-white/80 transition-colors duration-300 hover:border-[var(--color-brand)]/50 hover:text-white"
               >
                 <InstagramIcon className="h-4 w-4 text-[var(--color-brand)]" />
                 {SITE.instagramBrandHandle}
@@ -52,7 +52,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Instagram do Felipe Melo, ${SITE.instagramPersonalHandle}`}
-                className="group flex cursor-pointer items-center gap-2.5 min-h-11 rounded-full border border-white/12 px-4 py-2.5 text-[13.5px] text-white/80 transition-colors duration-300 hover:border-[var(--color-brand)]/50 hover:text-white"
+                className="borda-viva group flex cursor-pointer items-center gap-2.5 min-h-11 rounded-full border border-white/12 px-4 py-2.5 text-[13.5px] text-white/80 transition-colors duration-300 hover:border-[var(--color-brand)]/50 hover:text-white"
               >
                 <InstagramIcon className="h-4 w-4 text-[var(--color-brand)]" />
                 {SITE.instagramPersonalHandle}
@@ -121,7 +121,7 @@ export default function Footer() {
 
             <Link
               href="/#contato"
-              className="group mt-7 inline-flex cursor-pointer items-center gap-2.5 rounded-full bg-white px-5 py-3 text-[14.5px] font-medium text-black transition-all duration-300 hover:shadow-[0_12px_30px_rgba(255,255,255,0.14)]"
+              className="borda-viva group mt-7 inline-flex cursor-pointer items-center gap-2.5 rounded-full bg-white px-5 py-3 text-[14.5px] font-medium text-black transition-all duration-300 hover:shadow-[0_12px_30px_rgba(255,255,255,0.14)]"
             >
               Começar projeto
               <ArrowUpRight

@@ -235,7 +235,7 @@ export default function ContactForm() {
             <button
               type="submit"
               disabled={status === "sending"}
-              className="group mt-1 flex cursor-pointer items-center justify-center gap-2.5 rounded-full bg-[var(--color-brand)] px-6 py-4 text-[15px] font-medium text-white transition-all duration-300 hover:bg-[var(--color-brand-deep)] hover:shadow-[0_14px_36px_rgba(241,85,50,0.32)] disabled:cursor-not-allowed disabled:opacity-60"
+              className="borda-viva group mt-1 flex cursor-pointer items-center justify-center gap-2.5 rounded-full bg-[var(--color-brand)] px-6 py-4 text-[15px] font-medium text-white transition-all duration-300 hover:bg-[var(--color-brand-deep)] hover:shadow-[0_14px_36px_rgba(241,85,50,0.32)] disabled:cursor-not-allowed disabled:opacity-60"
             >
               {status === "sending" ? (
                 <>

@@ -912,3 +912,81 @@ footer {
     animation: none;
   }
 }
+
+/* ============================================================
+   Borda viva: o efeito de borda em movimento dos botões do site.
+   Um arco de luz laranja percorre a borda (conic-gradient girando)
+   e um brilho laranja pulsa por fora. Feito em CSS para valer em
+   todos os botões sem custo de JavaScript.
+   ============================================================ */
+@property --borda-ang {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.borda-viva {
+  position: relative;
+  isolation: isolate;
+}
+.borda-viva::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 3px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--borda-ang),
+    rgba(241, 85, 50, 0.55) 0deg,
+    rgba(241, 85, 50, 0.55) 200deg,
+    #f15532 250deg,
+    #ffb48f 300deg,
+    #fff4ee 325deg,
+    #ff7a5c 342deg,
+    rgba(241, 85, 50, 0.55) 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: borda-gira 2.6s linear infinite;
+  pointer-events: none;
+}
+.borda-viva::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow:
+    0 0 14px 2px rgba(255, 122, 92, 0.95),
+    0 0 34px 8px rgba(241, 85, 50, 0.7),
+    0 0 70px 18px rgba(241, 85, 50, 0.35);
+  opacity: 0.3;
+  animation: borda-pulsa 2.2s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes borda-gira {
+  to {
+    --borda-ang: 360deg;
+  }
+}
+@keyframes borda-pulsa {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .borda-viva::before,
+  .borda-viva::after {
+    animation: none;
+  }
+  .borda-viva::after {
+    opacity: 0.5;
+  }
+}

@@ -176,7 +176,7 @@ function BotaoWhatsapp({ children = "Quero aparecer no Google" }: { children?: R
       href={geWhatsapp()}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex min-h-12 cursor-pointer items-center gap-3 rounded-full bg-white py-2 pl-2 pr-6 text-[15px] font-medium text-black transition-all duration-300 hover:shadow-[0_14px_40px_rgba(255,255,255,0.16)]"
+      className="borda-viva group flex min-h-12 cursor-pointer items-center gap-3 rounded-full bg-white py-2 pl-2 pr-6 text-[15px] font-medium text-black transition-all duration-300 hover:shadow-[0_14px_40px_rgba(255,255,255,0.16)]"
     >
       <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-brand)] transition-transform duration-300 group-hover:rotate-45">
         <ArrowUpRight className="h-4.5 w-4.5 text-white" strokeWidth={2.4} aria-hidden />
@@ -250,7 +250,7 @@ export default function GoogleEmpresasPage() {
               <BotaoWhatsapp />
               <a
                 href="#planos"
-                className="flex min-h-12 cursor-pointer items-center rounded-full border border-white/14 px-7 py-3.5 text-[15px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
+                className="borda-viva flex min-h-12 cursor-pointer items-center rounded-full border border-white/14 px-7 py-3.5 text-[15px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
               >
                 Ver os planos
               </a>
