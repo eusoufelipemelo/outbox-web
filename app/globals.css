@@ -717,8 +717,10 @@ html {
 }
 
 /* Todo conteúdo fica acima da camada de atmosfera */
+/* O menu (header[data-nav]) fica de fora: ele é fixo e flutua por cima.
+   Antes esta regra o deixava relative e a seção seguinte cortava a pílula. */
 main,
-header,
+header:not([data-nav]),
 footer {
   position: relative;
   z-index: 1;
@@ -876,8 +878,9 @@ footer {
 }
 .hero-bg__neon {
   mix-blend-mode: screen;
-  opacity: 0.55;
-  animation: hero-neon 3.2s ease-in-out infinite;
+  opacity: 0.6;
+  filter: brightness(1.3) saturate(1.35);
+  animation: hero-neon 2.8s ease-in-out infinite;
   will-change: opacity;
 }
 @keyframes hero-zoom {
@@ -885,19 +888,22 @@ footer {
     transform: scale(1.02) translate3d(0, 0, 0);
   }
   to {
-    transform: scale(1.12) translate3d(-1.5%, -1%, 0);
+    transform: scale(1.06) translate3d(-1%, -0.6%, 0);
   }
 }
 @keyframes hero-neon {
   0%,
   100% {
-    opacity: 0.2;
+    opacity: 0.05;
   }
-  45% {
+  40% {
     opacity: 1;
   }
-  55% {
-    opacity: 0.85;
+  50% {
+    opacity: 0.8;
+  }
+  58% {
+    opacity: 1;
   }
 }
 @media (prefers-reduced-motion: reduce) {

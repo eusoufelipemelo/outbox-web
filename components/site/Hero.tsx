@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
+import HeroCta from "@/components/site/HeroCta";
 
 const STATS = [
   { value: "250+", label: "Projetos entregues", highlight: false },
@@ -12,7 +13,7 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden pb-24 md:pb-32">
       {/* Palco com a imagem de fundo: zoom lento e as luzes de neon pulsando */}
-      <div className="relative flex min-h-[100svh] items-end overflow-hidden md:min-h-[min(100svh,920px)] md:items-center">
+      <div className="relative flex min-h-[100svh] items-end overflow-hidden md:min-h-[min(100svh,960px)] md:items-center">
         <div aria-hidden className="hero-bg absolute inset-x-0 top-0 h-[74svh] md:inset-0 md:h-auto">
           <picture>
             <source media="(max-width: 767px)" srcSet="/img/hero/hero-mobile.webp" type="image/webp" />
@@ -44,7 +45,7 @@ export default function Hero() {
         <div aria-hidden className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
         <div aria-hidden className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-black/60 to-transparent" />
 
-        <div className="container-outbox relative z-10 pb-14 pt-[56svh] md:pb-24 md:pt-40">
+        <div className="container-outbox relative z-10 pb-14 pt-[56svh] md:pb-14 md:pt-[112px]">
           <div className="flex flex-col items-center text-center md:max-w-[600px] md:items-start md:text-left">
             <span className="pill reveal">
               <span
@@ -73,15 +74,7 @@ export default function Hero() {
               className="mt-10 flex flex-col items-center gap-4 sm:flex-row md:items-start"
               style={{ transitionDelay: "220ms" }}
             >
-              <Link
-                href="/#contato"
-                className="group flex cursor-pointer items-center gap-3 rounded-full bg-white py-2 pl-2 pr-6 text-[15px] font-medium text-black transition-all duration-300 hover:shadow-[0_14px_40px_rgba(255,255,255,0.16)]"
-              >
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-brand)] transition-transform duration-300 group-hover:rotate-45">
-                  <ArrowUpRight className="h-4.5 w-4.5 text-white" strokeWidth={2.4} />
-                </span>
-                Começar meu projeto
-              </Link>
+              <HeroCta />
 
               <Link
                 href="/#servicos"
