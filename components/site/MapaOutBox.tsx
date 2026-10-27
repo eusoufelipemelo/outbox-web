@@ -7,8 +7,8 @@ import "leaflet/dist/leaflet.css";
 
 const E = SITE.endereco;
 const ENDERECO_COMPLETO = `${E.rua}, ${E.bairro}, ${E.cidade}, ${E.cep}`;
-const LINK_GOOGLE = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(ENDERECO_COMPLETO)}`;
-const LINK_WAZE = `https://waze.com/ul?q=${encodeURIComponent(ENDERECO_COMPLETO)}&navigate=yes`;
+// A sede não recebe clientes: o link mostra o lugar, sem rota até a porta.
+const LINK_GOOGLE = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ENDERECO_COMPLETO)}`;
 
 /** Mapa da sede, abaixo do formulário. O Leaflet só carrega quando o mapa chega perto da tela. */
 export default function MapaOutBox() {
@@ -52,7 +52,7 @@ export default function MapaOutBox() {
       L.marker([E.lat, E.lng], { icon: pino, title: "OutBox Group", alt: "OutBox Group" })
         .addTo(mapa)
         .bindPopup(
-          `<strong>OutBox Group</strong><br>${E.rua}<br>${E.bairro}, ${E.cidade}<br><a href="${LINK_GOOGLE}" target="_blank" rel="noopener noreferrer">Como chegar</a>`
+          `<strong>OutBox Group</strong><br>${E.rua}<br>${E.bairro}, ${E.cidade}<br><a href="${LINK_GOOGLE}" target="_blank" rel="noopener noreferrer">Ver no Google Maps</a>`
         );
       setPronto(true);
     };
@@ -92,27 +92,17 @@ export default function MapaOutBox() {
           CEP {E.cep}
         </address>
         <p className="mt-4 max-w-[38ch] text-[14.5px] leading-relaxed text-[var(--color-fg-muted)]">
-          Atendemos empresas de todo o Brasil on-line. Para uma reunião presencial, combine o horário antes pelo WhatsApp.
+          Atendemos empresas de todo o Brasil on-line. Para falar com a gente, use o formulário acima ou o WhatsApp.
         </p>
-        <div className="mt-7 flex flex-wrap gap-3">
-          <a
-            href={LINK_GOOGLE}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-white/14 px-5 py-2.5 text-[14.5px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
-          >
-            <Navigation className="h-4 w-4" strokeWidth={2.2} aria-hidden />
-            Como chegar
-          </a>
-          <a
-            href={LINK_WAZE}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex min-h-11 cursor-pointer items-center rounded-full border border-white/14 px-5 py-2.5 text-[14.5px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
-          >
-            Abrir no Waze
-          </a>
-        </div>
+        <a
+          href={LINK_GOOGLE}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-7 inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-white/14 px-5 py-2.5 text-[14.5px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
+        >
+          <Navigation className="h-4 w-4" strokeWidth={2.2} aria-hidden />
+          Ver no Google Maps
+        </a>
       </div>
 
       <div className="relative">
