@@ -135,7 +135,7 @@ function CardPlano({ plano, atraso }: { plano: Plano; atraso: number }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Escolher o ${plano.nome} pelo WhatsApp`}
-              className={`borda-viva group flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-full px-6 py-3.5 text-[15px] font-semibold transition-all duration-300 ${
+              className={`group flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-full px-6 py-3.5 text-[15px] font-semibold transition-all duration-300 ${
                 d
                   ? "bg-[var(--color-brand)] text-black hover:bg-[var(--color-brand-soft)] hover:shadow-[0_14px_36px_rgba(241,85,50,0.4)]"
                   : "border border-white/16 text-white hover:border-white/40 hover:bg-white/[0.06]"

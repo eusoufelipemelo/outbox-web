@@ -241,7 +241,7 @@ export default async function PostPage({ params }: Props) {
                   <div className="mt-7 flex flex-wrap justify-center gap-3">
                     <Link
                       href="/#contato"
-                      className="borda-viva cursor-pointer rounded-full bg-[var(--color-brand)] px-6 py-3.5 text-[14.5px] font-medium text-white transition-all duration-300 hover:bg-[var(--color-brand-deep)]"
+                      className="cursor-pointer rounded-full bg-[var(--color-brand)] px-6 py-3.5 text-[14.5px] font-medium text-white transition-all duration-300 hover:bg-[var(--color-brand-deep)]"
                     >
                       Falar com a OutBox
                     </Link>
@@ -249,7 +249,7 @@ export default async function PostPage({ params }: Props) {
                       href={whatsappLink()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="borda-viva cursor-pointer rounded-full border border-white/14 px-6 py-3.5 text-[14.5px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
+                      className="cursor-pointer rounded-full border border-white/14 px-6 py-3.5 text-[14.5px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
                     >
                       Chamar no WhatsApp
                     </a>

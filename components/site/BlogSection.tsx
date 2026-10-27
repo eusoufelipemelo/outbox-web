@@ -30,7 +30,7 @@ export default async function BlogSection() {
 
           <Link
             href="/blog"
-            className="borda-viva reveal group flex cursor-pointer items-center gap-2.5 rounded-full border border-white/14 px-5 py-3 text-[14.5px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
+            className="reveal group flex cursor-pointer items-center gap-2.5 rounded-full border border-white/14 px-5 py-3 text-[14.5px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
           >
             Ver todos os artigos
             <ArrowUpRight

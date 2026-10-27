@@ -101,7 +101,7 @@ export default function LegalPage({
                 <Link
                   key={l.href}
                   href={l.href}
-                  className="borda-viva cursor-pointer rounded-full border border-white/12 px-4 py-2.5 text-[13.5px] text-white/80 transition-colors duration-300 hover:border-[var(--color-brand)]/50 hover:text-white"
+                  className="cursor-pointer rounded-full border border-white/12 px-4 py-2.5 text-[13.5px] text-white/80 transition-colors duration-300 hover:border-[var(--color-brand)]/50 hover:text-white"
                 >
                   {l.label}
                 </Link>

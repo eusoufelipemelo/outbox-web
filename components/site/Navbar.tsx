@@ -134,7 +134,7 @@ export default function Navbar() {
           <Link
             href="/#contato"
             onClick={() => setOpen(false)}
-            className="borda-viva mt-8 flex items-center justify-center gap-2 rounded-full bg-[var(--color-brand)] px-6 py-4 font-medium text-white"
+            className="mt-8 flex items-center justify-center gap-2 rounded-full bg-[var(--color-brand)] px-6 py-4 font-medium text-white"
           >
             Começar projeto
             <ArrowUpRight className="h-5 w-5" />

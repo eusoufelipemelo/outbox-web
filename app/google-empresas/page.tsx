@@ -250,7 +250,7 @@ export default function GoogleEmpresasPage() {
               <BotaoWhatsapp />
               <a
                 href="#planos"
-                className="borda-viva flex min-h-12 cursor-pointer items-center rounded-full border border-white/14 px-7 py-3.5 text-[15px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
+                className="flex min-h-12 cursor-pointer items-center rounded-full border border-white/14 px-7 py-3.5 text-[15px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
               >
                 Ver os planos
               </a>

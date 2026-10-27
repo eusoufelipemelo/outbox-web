@@ -237,7 +237,7 @@ export default function Services() {
                     href={whatsappLink(servico.name)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="borda-viva cursor-pointer rounded-full border border-white/14 px-5 py-3 text-[14.5px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
+                    className="cursor-pointer rounded-full border border-white/14 px-5 py-3 text-[14.5px] text-white/85 transition-colors duration-300 hover:border-white/30 hover:text-white"
                   >
                     Tirar dúvida no WhatsApp
                   </a>
