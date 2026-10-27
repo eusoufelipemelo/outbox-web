@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ArrowUpRight, Check, Loader2, Video } from "lucide-react";
 import { SERVICE_OPTIONS, SITE, whatsappLink } from "@/lib/site";
 import RevealTitle from "@/components/ui/reveal-title";
+import MapaOutBox from "@/components/site/MapaOutBox";
 
 type Status = "idle" | "sending" | "ok" | "error";
 
@@ -273,6 +274,8 @@ export default function ContactForm() {
             </p>
           </form>
         </div>
+
+        <MapaOutBox />
       </div>
     </section>
   );

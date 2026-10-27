@@ -137,9 +137,9 @@ export default function Hero() {
           style={{ transitionDelay: "460ms" }}
         >
           {[
-            { src: "/img/hero-2.jpg", alt: "Equipe da OutBox em reunião de projeto", tall: true },
-            { src: "/img/hero-1.jpg", alt: "Processo de criação no estúdio", tall: false },
-            { src: "/img/hero-3.jpg", alt: "Desenvolvimento e acompanhamento de resultado", tall: false },
+            { src: "/img/hero-strip-1.webp", alt: "Dupla em reunião de projeto, com ideias e equipe em destaque", tall: true },
+            { src: "/img/hero-strip-2.webp", alt: "Desenvolvimento de sistema e site no estúdio", tall: false },
+            { src: "/img/hero-strip-3.webp", alt: "Cliente comemorando resultado ao telefone", tall: false },
           ].map((img, i) => (
             <figure
               key={img.src}

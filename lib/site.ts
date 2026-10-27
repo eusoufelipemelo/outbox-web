@@ -21,6 +21,16 @@ export const SITE = {
   instagramPersonalHandle: "@eusoufelipemelo",
 
   city: "Santa Cruz do Rio Pardo, SP",
+  /** Sede. As coordenadas são o meio da rua no OpenStreetMap; o "Como chegar"
+      usa o endereço escrito, que o Google e o Waze resolvem pelo número. */
+  endereco: {
+    rua: "Rua João Andriolli, 121",
+    bairro: "Chácara Peixe",
+    cidade: "Santa Cruz do Rio Pardo, SP",
+    cep: "18900-402",
+    lat: -22.90106,
+    lng: -49.61907,
+  },
   cnpj: "51.174.401/0001-07",
 } as const;
 

@@ -914,9 +914,9 @@ footer {
 }
 
 /* ============================================================
-   Borda viva: só nos botões brancos. Um traço laranja fino percorre
-   o contorno do botão (conic-gradient girando, recortado na borda).
-   Sem brilho por fora: é um detalhe, não um holofote.
+   Borda viva: só nos botões brancos. Um traço laranja percorre o
+   contorno (conic-gradient girando, recortado na borda) e um brilho
+   segue o traço por fora, na mesma posição.
    ============================================================ */
 @property --borda-ang {
   syntax: "<angle>";
@@ -926,19 +926,18 @@ footer {
 .borda-viva {
   position: relative;
 }
-.borda-viva::before {
+.borda-viva::before,
+.borda-viva::after {
   content: "";
   position: absolute;
-  inset: 0;
-  padding: 1.5px;
   border-radius: inherit;
   background: conic-gradient(
     from var(--borda-ang),
     transparent 0deg,
-    transparent 250deg,
-    rgba(241, 85, 50, 0.35) 285deg,
-    #f15532 330deg,
-    #ff7a5c 350deg,
+    transparent 240deg,
+    rgba(241, 85, 50, 0.4) 280deg,
+    #f15532 325deg,
+    #ff8a68 348deg,
     transparent 360deg
   );
   -webkit-mask:
@@ -949,13 +948,128 @@ footer {
   animation: borda-gira 3s linear infinite;
   pointer-events: none;
 }
+/* O traço */
+.borda-viva::before {
+  inset: 0;
+  padding: 2px;
+}
+/* O brilho: o mesmo arco desfocado, só na faixa de fora do botão */
+.borda-viva::after {
+  inset: -14px;
+  padding: 14px;
+  filter: blur(7px);
+  opacity: 0.95;
+}
 @keyframes borda-gira {
   to {
     --borda-ang: 360deg;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .borda-viva::before {
+  .borda-viva::before,
+  .borda-viva::after {
     animation: none;
+  }
+}
+
+/* ============================================================
+   Mapa da sede (MapaOutBox). Os blocos do OpenStreetMap são
+   invertidos para o mapa ficar escuro como o site; o pino é o
+   símbolo da OutBox num disco laranja com uma onda saindo dele.
+   ============================================================ */
+.mapa-outbox,
+.mapa-outbox.leaflet-container {
+  font-family: inherit;
+  z-index: 0;
+  /* A mesma cor do terreno já invertido: se sobrar fresta, ela não aparece. */
+  background: #1a1917;
+}
+/* O filtro vai em cada bloco, não no painel inteiro: no painel ele
+   desenhava linhas escuras nas junções. */
+.mapa-outbox .leaflet-tile {
+  filter: invert(1) hue-rotate(180deg) brightness(0.82) contrast(0.92) saturate(0.4);
+}
+.mapa-outbox .leaflet-control-zoom {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: none;
+}
+.mapa-outbox .leaflet-control-zoom a {
+  width: 36px;
+  height: 36px;
+  line-height: 34px;
+  background: rgba(10, 10, 12, 0.85);
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+.mapa-outbox .leaflet-control-zoom a:hover {
+  background: #f15532;
+  color: #000;
+}
+.mapa-outbox.leaflet-container .leaflet-control-attribution {
+  background: rgba(10, 10, 12, 0.7);
+  color: #8a8a93;
+  font-size: 10.5px;
+  border-top-left-radius: 8px;
+}
+.mapa-outbox.leaflet-container .leaflet-control-attribution a {
+  color: #c4c4cc;
+}
+.mapa-outbox .leaflet-popup-content-wrapper,
+.mapa-outbox .leaflet-popup-tip {
+  background: #121214;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+.mapa-outbox .leaflet-popup-content {
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+.mapa-outbox .leaflet-popup-content a {
+  color: #ff7a5c;
+}
+.mapa-outbox .leaflet-container a.leaflet-popup-close-button {
+  color: #a1a1a8;
+}
+.mapa-pino {
+  background: none;
+  border: 0;
+}
+.mapa-pino__disco {
+  position: absolute;
+  inset: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: #f15532;
+  box-shadow:
+    0 0 0 3px rgba(0, 0, 0, 0.55),
+    0 8px 22px rgba(241, 85, 50, 0.55);
+  cursor: pointer;
+}
+.mapa-pino__onda {
+  position: absolute;
+  inset: 8px;
+  border-radius: 9999px;
+  border: 2px solid #f15532;
+  animation: mapa-onda 2.4s ease-out infinite;
+}
+@keyframes mapa-onda {
+  from {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(2.3);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mapa-pino__onda {
+    animation: none;
+    opacity: 0;
   }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowUpRight,
@@ -18,6 +19,16 @@ const ICONS = {
   sites: Gauge,
   branding: Palette,
   apresentacoes: Presentation,
+} as const;
+
+/** A imagem de cada frente, na mesma ordem e com o mesmo slug de SERVICES. */
+const IMAGENS = {
+  sistemas: "Painel de gestão sob medida aberto no monitor do escritório",
+  sites: "Site com SEO e GEO aparecendo no Google e nas respostas das IAs",
+  branding:
+    "Designer criando identidade visual com paleta, tipografia e referências",
+  apresentacoes:
+    "Apresentação de negócios aberta por link no notebook e no celular",
 } as const;
 
 const TOTAL = SERVICES.length;
@@ -73,10 +84,12 @@ export default function Services() {
       if (!el) return;
       const percorrivel = el.offsetHeight - window.innerHeight;
       const alvo =
-        el.offsetTop + (percorrivel * (i + 0.5)) / TOTAL - window.innerHeight * 0;
+        el.offsetTop +
+        (percorrivel * (i + 0.5)) / TOTAL -
+        window.innerHeight * 0;
       window.scrollTo({ top: alvo, behavior: "smooth" });
     },
-    [fixado]
+    [fixado],
   );
 
   const servico = SERVICES[active];
@@ -89,31 +102,37 @@ export default function Services() {
       className="relative"
       style={fixado ? { height: `${TOTAL * 100}vh` } : undefined}
     >
+      {/* O título rola junto com a página; só a lista e o card ficam presos,
+          para caberem inteiros na altura de um notebook. */}
+      <div className="container-outbox pt-24 md:pt-32">
+        <div className="max-w-[46ch] lg:max-w-[880px]">
+          <span className="pill reveal">
+            <span
+              aria-hidden
+              className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
+            />
+            O que fazemos
+          </span>
+          <RevealTitle
+            as="h2"
+            className="mt-6 font-display text-[clamp(2rem,4.6vw,3.4rem)] leading-[1.06] text-white"
+          >
+            Quatro frentes para tirar a sua empresa do lugar comum.
+          </RevealTitle>
+        </div>
+      </div>
+
       <div
         className={
           fixado
-            ? "sticky top-0 flex h-screen items-center overflow-hidden py-16"
-            : "py-24 md:py-32"
+            ? "sticky top-0 flex h-screen items-center overflow-hidden pb-6 pt-24"
+            : "pb-24 md:pb-32"
         }
       >
         <div className="container-outbox w-full">
-          <div className="max-w-[46ch]">
-            <span className="pill reveal">
-              <span
-                aria-hidden
-                className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
-              />
-              O que fazemos
-            </span>
-            <RevealTitle
-              as="h2"
-              className="mt-6 font-display text-[clamp(2rem,4.6vw,3.4rem)] leading-[1.06] text-white"
-            >
-              Quatro frentes para tirar a sua empresa do lugar comum.
-            </RevealTitle>
-          </div>
-
-          <div className="mt-10 grid gap-6 lg:grid-cols-[0.85fr_1.4fr]">
+          <div
+            className={`${fixado ? "" : "mt-10"} grid gap-6 lg:grid-cols-[0.85fr_1.4fr]`}
+          >
             {/* Lista */}
             <div className="flex flex-col gap-2">
               {SERVICES.map((s, i) => {
@@ -174,29 +193,50 @@ export default function Services() {
             </div>
 
             {/* Detalhe: troca com a rolagem */}
-            <div className="card-dark relative overflow-hidden p-8 md:p-10">
-              <div key={servico.slug} className="animate-troca relative z-10">
-                <div className="flex items-start justify-between gap-4">
-                  <span className="font-display text-6xl leading-none text-white/8">
-                    {servico.number}
-                  </span>
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--color-brand)]/15">
-                    <Icone
-                      className="h-5 w-5 text-[var(--color-brand)]"
-                      strokeWidth={2}
-                    />
-                  </span>
-                </div>
-
-                <h3 className="mt-4 font-display text-[clamp(1.5rem,2.6vw,2.1rem)] leading-tight text-white">
+            <div className="card-dark relative overflow-hidden p-5 md:p-6">
+              {/* As quatro imagens ficam carregadas e trocam por opacidade,
+                  para não piscar quando a rolagem muda de frente. */}
+              <div className="relative h-[200px] overflow-hidden rounded-2xl border border-white/10 md:h-[220px] lg:h-[170px]">
+                {SERVICES.map((s, i) => (
+                  <Image
+                    key={s.slug}
+                    src={`/img/servicos/${s.slug}.webp`}
+                    alt={i === active ? IMAGENS[s.slug] : ""}
+                    aria-hidden={i !== active}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 660px"
+                    className={`object-cover transition-opacity duration-700 ${
+                      i === active ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
+                ))}
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"
+                />
+                <h3
+                  key={servico.slug}
+                  className="animate-troca absolute inset-x-5 bottom-4 font-display text-[clamp(1.45rem,2.4vw,2rem)] leading-tight text-white md:inset-x-6"
+                >
                   {servico.name}
                 </h3>
+                <span className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-xl bg-black/55 backdrop-blur-sm">
+                  <Icone
+                    className="h-5 w-5 text-[var(--color-brand)]"
+                    strokeWidth={2}
+                  />
+                </span>
+              </div>
 
-                <p className="mt-4 max-w-[58ch] leading-relaxed text-[var(--color-fg-muted)]">
+              <div
+                key={servico.slug}
+                className="animate-troca relative z-10 px-3 pb-3 md:px-4 md:pb-4"
+              >
+                <p className="mt-5 max-w-[58ch] leading-relaxed text-[var(--color-fg-muted)]">
                   {servico.description}
                 </p>
 
-                <ul className="mt-7 grid gap-3 sm:grid-cols-2">
+                <ul className="mt-7 grid lg:mt-5 gap-3 sm:grid-cols-2">
                   {servico.bullets.map((b) => (
                     <li
                       key={b}
@@ -213,7 +253,7 @@ export default function Services() {
                   ))}
                 </ul>
 
-                <div className="mt-7 rounded-2xl border border-[var(--color-brand)]/25 bg-[var(--color-brand)]/8 p-5">
+                <div className="mt-7 rounded-2xl lg:mt-5 border border-[var(--color-brand)]/25 bg-[var(--color-brand)]/8 p-5">
                   <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-brand)]">
                     O resultado
                   </span>
@@ -222,7 +262,7 @@ export default function Services() {
                   </p>
                 </div>
 
-                <div className="mt-7 flex flex-wrap gap-3">
+                <div className="mt-7 flex flex-wrap gap-3 lg:mt-5">
                   <Link
                     href="/#contato"
                     className="borda-viva group flex cursor-pointer items-center gap-2.5 rounded-full bg-white px-5 py-3 text-[14.5px] font-medium text-black transition-all duration-300 hover:shadow-[0_12px_30px_rgba(255,255,255,0.14)]"
@@ -249,7 +289,7 @@ export default function Services() {
           {/* Passos: mostra onde a pessoa está na sequência */}
           {fixado && (
             <div
-              className="mt-8 flex items-center justify-center gap-2"
+              className="mt-5 flex items-center justify-center gap-2"
               aria-hidden
             >
               {SERVICES.map((s, i) => (
