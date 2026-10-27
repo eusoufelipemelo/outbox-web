@@ -915,8 +915,7 @@ footer {
 
 /* ============================================================
    Borda viva: só nos botões brancos. Um traço laranja percorre o
-   contorno (conic-gradient girando, recortado na borda) e um brilho
-   segue o traço por fora, na mesma posição.
+   contorno (conic-gradient girando, recortado na borda). Sem brilho.
    ============================================================ */
 @property --borda-ang {
   syntax: "<angle>";
@@ -926,9 +925,10 @@ footer {
 .borda-viva {
   position: relative;
 }
-.borda-viva::before,
-.borda-viva::after {
+.borda-viva::before {
   content: "";
+  inset: 0;
+  padding: 2px;
   position: absolute;
   border-radius: inherit;
   background: conic-gradient(
@@ -948,26 +948,13 @@ footer {
   animation: borda-gira 3s linear infinite;
   pointer-events: none;
 }
-/* O traço */
-.borda-viva::before {
-  inset: 0;
-  padding: 2px;
-}
-/* O brilho: o mesmo arco desfocado, só na faixa de fora do botão */
-.borda-viva::after {
-  inset: -14px;
-  padding: 14px;
-  filter: blur(7px);
-  opacity: 0.95;
-}
 @keyframes borda-gira {
   to {
     --borda-ang: 360deg;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .borda-viva::before,
-  .borda-viva::after {
+  .borda-viva::before {
     animation: none;
   }
 }
