@@ -464,6 +464,25 @@ body {
 }
 .field:focus-visible {
   box-shadow: 0 0 0 3px rgba(241, 85, 50, 0.18);
+  /* O seletor de serviço é um <button>: sem isto ele herdaria o contorno e o canto de 6px do foco global. */
+  outline: none;
+  border-radius: 14px;
+}
+
+/* Lista do seletor de serviço: abre descendo de leve. */
+.seletor-lista {
+  animation: seletor-abre 0.16s ease-out;
+}
+@keyframes seletor-abre {
+  from {
+    opacity: 0.6;
+    transform: translateY(-4px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .seletor-lista {
+    animation: none;
+  }
 }
 
 /* Foco visível global (acessibilidade) */

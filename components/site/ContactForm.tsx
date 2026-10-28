@@ -5,6 +5,7 @@ import { ArrowUpRight, Check, Loader2, Video } from "lucide-react";
 import { SERVICE_OPTIONS, SITE, whatsappLink } from "@/lib/site";
 import RevealTitle from "@/components/ui/reveal-title";
 import MapaOutBox from "@/components/site/MapaOutBox";
+import SeletorServico from "@/components/site/SeletorServico";
 import { useI18n } from "@/lib/i18n/client";
 
 type Status = "idle" | "sending" | "ok" | "error";
@@ -13,6 +14,8 @@ export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
   const [videoCall, setVideoCall] = useState(false);
+  const [servico, setServico] = useState("");
+  const [servicoInvalido, setServicoInvalido] = useState(false);
   const { t, locale } = useI18n();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -20,6 +23,11 @@ export default function ContactForm() {
     const form = e.currentTarget;
     if (!form.checkValidity()) {
       form.reportValidity();
+      return;
+    }
+    if (!servico) {
+      setServicoInvalido(true);
+      document.getElementById("servico")?.focus();
       return;
     }
 
@@ -43,6 +51,7 @@ export default function ContactForm() {
         t("Recebemos a sua mensagem. Em breve o Felipe entra em contato com você.")
       );
       form.reset();
+      setServico("");
       setVideoCall(false);
     } catch {
       setStatus("error");
@@ -165,22 +174,24 @@ export default function ContactForm() {
                 {t("Tipo de serviço")}{" "}
                 <span className="text-[var(--color-brand)]">*</span>
               </label>
-              <select
+              {/* O valor enviado é sempre o nome em português: é o que chega no e-mail. */}
+              <SeletorServico
                 id="servico"
                 name="servico"
-                required
-                defaultValue=""
-                className="field cursor-pointer appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%236e6e77%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>')] bg-[length:20px] bg-[right_16px_center] bg-no-repeat pr-12"
-              >
-                <option value="" disabled className="bg-[#121214]">
-                  {t("Selecione o serviço")}
-                </option>
-                {SERVICE_OPTIONS.map((o) => (
-                  <option key={o} value={o} className="bg-[#121214]">
-                    {t(o)}
-                  </option>
-                ))}
-              </select>
+                opcoes={SERVICE_OPTIONS.map((o) => ({ valor: o, rotulo: t(o) }))}
+                valor={servico}
+                aoMudar={(v) => {
+                  setServico(v);
+                  setServicoInvalido(false);
+                }}
+                placeholder={t("Selecione o serviço")}
+                invalido={servicoInvalido}
+              />
+              {servicoInvalido && (
+                <p role="alert" className="mt-2 text-[13px] text-red-300">
+                  {t("Escolha o tipo de serviço para continuar.")}
+                </p>
+              )}
             </div>
 
             <div>
