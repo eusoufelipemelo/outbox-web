@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { LEGAL_LINKS, SITE, whatsappLink } from "@/lib/site";
 import { getT } from "@/lib/i18n/server";
+import VoltarAoTopo from "@/components/site/VoltarAoTopo";
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -26,13 +27,15 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
           {/* Marca */}
           <div>
-            <Image
-              src="/brand/outbox-horizontal-branco.svg"
-              alt="OutBox Soluções Digitais"
-              width={227}
-              height={56}
-              className="h-[56px] w-auto"
-            />
+            <VoltarAoTopo rotulo={t("Voltar ao topo")}>
+              <Image
+                src="/brand/outbox-horizontal-branco.svg"
+                alt="OutBox Soluções Digitais"
+                width={227}
+                height={56}
+                className="h-[56px] w-auto"
+              />
+            </VoltarAoTopo>
             <p className="mt-6 max-w-[38ch] leading-relaxed text-[var(--color-fg-muted)]">
               {t("Sistemas, sites, marcas e apresentações que colocam a sua empresa na frente. Feito com estratégia, tecnologia e capricho.")}
             </p>
