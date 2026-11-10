@@ -38,6 +38,13 @@ export default function Privacidade() {
         </li>
       </ul>
       <p>
+        Se você comentar num artigo do blog, guardamos o <strong>nome</strong>,
+        o <strong>e-mail</strong> e o <strong>comentário</strong>. O nome e o
+        comentário aparecem no artigo depois de aprovados pela nossa equipe. O
+        e-mail nunca é publicado e só serve para avisar quando respondermos.
+        Você pode pedir a remoção do seu comentário a qualquer momento.
+      </p>
+      <p>
         Também registramos temporariamente o endereço de IP de quem envia o
         formulário, apenas para limitar envios automatizados e evitar spam. Esse
         registro fica na memória do servidor e não é guardado em banco de dados.
@@ -52,7 +59,8 @@ export default function Privacidade() {
       <ul>
         <li>Responder ao seu contato e conversar sobre o projeto;</li>
         <li>Preparar orçamento e proposta, quando for o caso;</li>
-        <li>Agendar uma videochamada, se você pediu.</li>
+        <li>Agendar uma videochamada, se você pediu;</li>
+        <li>Publicar e responder os comentários do blog, quando você comenta.</li>
       </ul>
       <p>
         Não usamos seus dados para publicidade, não montamos perfil de

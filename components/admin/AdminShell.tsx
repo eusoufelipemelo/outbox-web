@@ -9,6 +9,7 @@ import {
   FileText,
   Inbox,
   LogOut,
+  MessageCircle,
   Moon,
   PenSquare,
   Sun,
@@ -19,6 +20,7 @@ const NAV = [
   { href: "/admin", label: "Posts", icon: FileText, exact: true },
   { href: "/admin/posts/novo", label: "Novo post", icon: PenSquare },
   { href: "/admin/leads", label: "Leads", icon: Inbox },
+  { href: "/admin/comentarios", label: "Comentários", icon: MessageCircle },
 ];
 
 export default function AdminShell({

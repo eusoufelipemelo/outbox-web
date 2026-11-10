@@ -13,6 +13,7 @@ import ScrollEffects from "@/components/ui/ScrollEffects";
 import { getPostBySlug, formatDate } from "@/lib/blog";
 import { OUTBOX_API, OUTBOX_DOMAIN } from "@/lib/outbox-cms";
 import { SITE, whatsappLink } from "@/lib/site";
+import Comentarios from "@/components/site/Comentarios";
 import { getT } from "@/lib/i18n/server";
 import { localizarPost } from "@/lib/i18n/blog";
 import { alternates } from "@/lib/i18n/meta";
@@ -263,6 +264,8 @@ export default async function BlogArtigo({ slug }: { slug: string }) {
                 </div>
               </div>
             </aside>
+
+            <Comentarios slug={post.slug} />
           </div>
         </article>
 
