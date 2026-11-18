@@ -72,6 +72,8 @@ export default function Footer() {
             <ul className="mt-3 flex flex-col">
               {[
                 { href: "/#servicos", label: "Serviços" },
+                { href: "/consultoria-empresarial", label: "Consultoria Empresarial" },
+                { href: "/mentoria", label: "Mentorias" },
                 { href: "/#processo", label: "Processo" },
                 { href: "/#sobre", label: "Sobre" },
                 { href: "/#depoimentos", label: "Clientes" },

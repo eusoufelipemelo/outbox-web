@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { SITE } from "@/lib/site";
 import CookieConsent from "@/components/site/CookieConsent";
+import Atribuicao from "@/components/site/Atribuicao";
 import { HTML_LANG, type Locale } from "@/lib/i18n/config";
 import { DICIONARIOS } from "@/lib/i18n/dicionarios";
 import { I18nProvider } from "@/lib/i18n/client";
@@ -58,6 +59,7 @@ export default function Documento({ locale, children }: { locale: Locale; childr
         <I18nProvider locale={locale} dict={DICIONARIOS[locale]}>
           {children}
           <CookieConsent />
+          <Atribuicao />
         </I18nProvider>
       </body>
     </html>

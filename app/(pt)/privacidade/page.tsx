@@ -18,7 +18,7 @@ export default function Privacidade() {
       </p>
 
       <h2>2. Quais dados coletamos</h2>
-      <p>Coletamos apenas o que você digita no formulário de contato:</p>
+      <p>Coletamos apenas o que você digita nos formulários do site:</p>
       <ul>
         <li>
           <strong>Nome</strong> e <strong>e-mail</strong>, para conseguir
@@ -34,9 +34,30 @@ export default function Privacidade() {
         </li>
         <li>
           <strong>Preferência por videochamada</strong>, quando você marca essa
-          opção.
+          opção;
+        </li>
+        <li>
+          Nos formulários de projeto, consultoria e mentoria, conforme o caso:{" "}
+          <strong>WhatsApp</strong>, <strong>empresa</strong>, <strong>cargo</strong>,{" "}
+          <strong>segmento</strong>, <strong>site</strong>, <strong>tamanho da equipe</strong>,{" "}
+          <strong>área de atuação</strong>, <strong>experiência</strong> e o que você
+          contar sobre desafios e objetivos, para entender o pedido e responder
+          com o próximo passo certo.
         </li>
       </ul>
+      <p>
+        Junto com o formulário enviamos a <strong>origem da visita</strong>: a
+        campanha ou o vídeo que trouxe você ao site (parâmetros UTM), a página
+        de entrada e o site de onde você veio. Essa informação fica guardada só
+        durante a visita, no seu próprio navegador, e só chega até nós se você
+        enviar um formulário. Ela serve para sabermos quais conteúdos ajudam as
+        pessoas a nos encontrar.
+      </p>
+      <p>
+        Para enviar um formulário, você confirma que concorda com o uso dos
+        dados para responder ao seu contato. Receber novidades sobre serviços e
+        mentorias é uma escolha separada, opcional e nunca vem marcada.
+      </p>
       <p>
         Se você comentar num artigo do blog, guardamos o <strong>nome</strong>,
         o <strong>e-mail</strong> e o <strong>comentário</strong>. O nome e o

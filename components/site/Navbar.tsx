@@ -10,10 +10,10 @@ import { caminhoBase, localizar, LOCALES, NOME_IDIOMA, SIGLA_IDIOMA, temTraducao
 
 const LINKS = [
   { href: "/#servicos", label: "Serviços" },
-  { href: "/#processo", label: "Processo" },
-  { href: "/#sobre", label: "Sobre" },
-  { href: "/#depoimentos", label: "Clientes" },
+  { href: "/consultoria-empresarial", label: "Consultoria" },
+  { href: "/mentoria", label: "Mentorias" },
   { href: "/google-empresas", label: "Google Empresas" },
+  { href: "/#sobre", label: "Sobre" },
   { href: "/blog", label: "Blog" },
 ];
 
@@ -134,7 +134,7 @@ export default function Navbar() {
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-brand)] transition-transform duration-300 group-hover:rotate-45">
                 <ArrowUpRight className="h-4 w-4 text-white" strokeWidth={2.4} />
               </span>
-              {t("Começar projeto")}
+              {t("Falar sobre meu negócio")}
             </Link>
 
             <button
@@ -182,7 +182,7 @@ export default function Navbar() {
             onClick={() => setOpen(false)}
             className="mt-8 flex items-center justify-center gap-2 rounded-full bg-[var(--color-brand)] px-6 py-4 font-medium text-white"
           >
-            {t("Começar projeto")}
+            {t("Falar sobre meu negócio")}
             <ArrowUpRight className="h-5 w-5" />
           </Link>
           {mostraIdiomas && (

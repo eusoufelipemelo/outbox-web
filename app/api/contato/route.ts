@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { SITE } from "@/lib/site";
 import { createAdminClient } from "@/lib/supabase/server";
+import { ehJornada, JORNADAS, limparOrigem, type Jornada } from "@/lib/leads";
 
 export const runtime = "nodejs";
 
@@ -15,8 +16,20 @@ type Payload = {
   origem?: string;
   empresa?: string;
   telefone?: string;
-  /** Idioma da página de onde o contato veio (en, es, ca). Português quando vazio. */
+  /** Idioma da página de onde o contato veio (en). Português quando vazio. */
   idioma?: string;
+  /** Jornada do formulário: projeto, consultoria, mentoria-individual ou mentoria-grupo. */
+  jornada?: string;
+  /** Campos próprios de cada jornada (empresa, segmento, desafio...), já com o rótulo em português. */
+  campos?: Record<string, string>;
+  /** UTM e página de entrada da visita, guardados no navegador. */
+  visita?: Record<string, string>;
+  /** Aceite obrigatório para os formulários das jornadas. */
+  consentimento?: boolean;
+  /** Aceite opcional, nunca pré-marcado, para receber novidades. */
+  novidades?: boolean;
+  /** Página onde o formulário foi enviado. */
+  pagina?: string;
   /** Campo isca contra robôs: se vier preenchido, é spam. */
   website?: string;
 };
@@ -74,6 +87,14 @@ export async function POST(request: Request) {
     const empresa = (body.empresa ?? "").trim().slice(0, 160);
     const telefone = (body.telefone ?? "").trim().slice(0, 40);
     const comercial = origem === "felipemelo";
+    const jornada: Jornada | null = ehJornada(body.jornada) ? body.jornada : null;
+    const visita = limparOrigem(body.visita);
+    const pagina = typeof body.pagina === "string" ? body.pagina.slice(0, 160) : "";
+    // Campos extras: só texto curto, no máximo 15, sem rótulo vazio.
+    const campos = Object.entries(body.campos && typeof body.campos === "object" ? body.campos : {})
+      .filter(([k, v]) => k && typeof v === "string" && v.trim())
+      .slice(0, 15)
+      .map(([k, v]) => [k.slice(0, 60), String(v).trim().slice(0, 1500)] as [string, string]);
     const IDIOMAS: Record<string, string> = { en: "Inglês" };
     const idioma = IDIOMAS[(body.idioma ?? "").trim()] ?? null;
 
@@ -86,6 +107,18 @@ export async function POST(request: Request) {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: "E-mail inválido." }, { status: 400 });
     }
+    if (jornada && body.consentimento !== true) {
+      return NextResponse.json({ error: "Confirme que concorda com o uso dos dados para responder ao seu contato." }, { status: 400 });
+    }
+
+    // O que vai para o banco e para o e-mail além dos campos de sempre.
+    const extras: [string, string][] = [
+      ...campos,
+      ...(jornada ? [["Aceite para contato", "Sim"] as [string, string]] : []),
+      ...(jornada ? [["Quer receber novidades", body.novidades === true ? "Sim" : "Não"] as [string, string]] : []),
+      ...(pagina ? [["Página do envio", pagina] as [string, string]] : []),
+      ...Object.entries(visita).map(([k, v]) => [`Origem: ${k}`, v] as [string, string]),
+    ];
 
     let saved = false;
     let mailed = false;
@@ -99,11 +132,18 @@ export async function POST(request: Request) {
           email,
           servico,
           mensagem:
-            [idioma && `Idioma do site: ${idioma}`, empresa && `Empresa: ${empresa}`, telefone && `Telefone: ${telefone}`, mensagem]
+            [
+              idioma && `Idioma do site: ${idioma}`,
+              empresa && `Empresa: ${empresa}`,
+              telefone && `Telefone: ${telefone}`,
+              ...extras.map(([k, v]) => `${k}: ${v}`),
+              mensagem,
+            ]
               .filter(Boolean)
               .join("\n") || null,
           videochamada,
-          origem,
+          // A jornada vira a origem do lead: dá para filtrar consultoria, mentoria e projeto.
+          origem: jornada ?? origem,
         });
         saved = !error;
       }
@@ -135,11 +175,15 @@ export async function POST(request: Request) {
             ["Mensagem", mensagem || "(não informada)"],
           ]
         : [
+            ...(jornada ? [["Jornada", JORNADAS[jornada].rotulo]] : []),
             ["Nome", nome],
             ["E-mail", email],
-            ["Serviço", servico],
-            ["Videochamada", videochamada ? "Sim, quer agendar" : "Não"],
+            ...(telefone ? [["WhatsApp", telefone]] : []),
+            ...(empresa ? [["Empresa", empresa]] : []),
+            [jornada && jornada !== "projeto" ? "Interesse" : "Serviço", servico],
+            ...(jornada === "projeto" || !jornada ? [["Videochamada", videochamada ? "Sim, quer agendar" : "Não"]] : []),
             ...(idioma ? [["Idioma do site", `${idioma} (responder neste idioma)`]] : []),
+            ...extras,
             ["Mensagem", mensagem || "(não informada)"],
           ];
 
@@ -147,7 +191,7 @@ export async function POST(request: Request) {
         <div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f5f7f9;padding:28px">
           <div style="max-width:560px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;border:1px solid #e6e9ec">
             <div style="background:#0a0a0a;padding:22px 26px">
-              <span style="color:#fff;font-size:18px;font-weight:600">${comercial ? "Contato comercial pela página Felipe Melo" : "Novo contato pelo site"}</span>
+              <span style="color:#fff;font-size:18px;font-weight:600">${comercial ? "Contato comercial pela página Felipe Melo" : jornada ? JORNADAS[jornada].rotulo : "Novo contato pelo site"}</span>
               ${
                 videochamada
                   ? '<span style="display:inline-block;margin-left:10px;background:#F15532;color:#fff;font-size:12px;padding:4px 10px;border-radius:99px">Quer videochamada</span>'
@@ -180,10 +224,9 @@ export async function POST(request: Request) {
         from: comercial ? `"Página Felipe Melo" <${user}>` : `"Site OutBox" <${user}>`,
         to: SITE.email,
         replyTo: `"${nome}" <${email}>`,
-        subject: `${comercial ? "Contato comercial" : "Novo lead"}: ${nome} · ${servico}${
+        subject: `${comercial ? "Contato comercial" : jornada ? JORNADAS[jornada].assunto : "Novo lead"}: ${nome} · ${servico}${
           videochamada ? " · quer videochamada" : ""
-        }${idioma ? ` · ${idioma}` : ""
-        }`,
+        }${idioma ? ` · ${idioma}` : ""}${visita.utm_content ? ` · ${visita.utm_content}` : ""}`,
         text: linhas.map(([k, v]) => `${k}: ${v}`).join("\n"),
         html,
       });

@@ -38,6 +38,12 @@ export default function Cookies() {
           local do navegador se você aceitou ou recusou, justamente para não
           perguntar de novo a cada visita. Fica só no seu aparelho.
         </li>
+        <li>
+          <strong>Origem da visita</strong>: guardamos no armazenamento da
+          sessão do navegador a campanha que trouxe você (parâmetros UTM) e a
+          página de entrada. Some quando você fecha a aba e só é enviada se
+          você preencher um formulário.
+        </li>
       </ul>
 
       <h3>Preferências</h3>

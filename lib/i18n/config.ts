@@ -28,7 +28,19 @@ export function ehIdioma(v: string): v is OutroIdioma {
 }
 
 /** Caminhos que existem nos quatro idiomas. Os demais (propostas, /felipemelo...) são só em português. */
-const TRADUZIDOS = ["/blog", "/google-empresas", "/privacidade", "/termos", "/cookies", "/lgpd"];
+const TRADUZIDOS = [
+  "/blog",
+  "/google-empresas",
+  "/privacidade",
+  "/termos",
+  "/cookies",
+  "/lgpd",
+  "/consultoria-empresarial",
+  "/mentoria",
+  "/servicos",
+  "/cases",
+  "/obrigado",
+];
 
 export function temTraducao(caminhoPt: string) {
   const p = caminhoPt.split(/[?#]/)[0] || "/";
