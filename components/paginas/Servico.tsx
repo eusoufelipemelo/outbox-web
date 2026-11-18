@@ -78,6 +78,7 @@ export default function Servico({ slug }: { slug: string }) {
           rotulo={nome}
           titulo={t(s.titulo)}
           apoio={s.apoio}
+          imagem={`/img/servicos-hero/${slug}`}
           ctas={[
             { texto: "Quero um projeto", href: `${caminho}#formulario`, principal: true, rastreio: `servico-${slug}` },
             { texto: "Ver o que está incluído", href: `${caminho}#escopo` },
