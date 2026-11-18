@@ -11,8 +11,6 @@ export function alternates(locale: Locale, caminhoPt: string): Metadata["alterna
     languages: {
       [HTML_LANG.pt]: url("pt"),
       [HTML_LANG.en]: url("en"),
-      [HTML_LANG.es]: url("es"),
-      [HTML_LANG.ca]: url("ca"),
       "x-default": url("pt"),
     },
   };

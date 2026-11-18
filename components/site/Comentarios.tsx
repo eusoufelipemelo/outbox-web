@@ -9,6 +9,7 @@ import FormComentario from "@/components/site/FormComentario";
 export default async function Comentarios({ slug }: { slug: string }) {
   const { t, locale } = getT();
   const lista = await comentariosAprovados(slug);
+  if (!lista) return null;
   const data = (v: string) =>
     new Date(v).toLocaleDateString(INTL[locale], { day: "2-digit", month: "long", year: "numeric" });
 

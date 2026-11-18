@@ -186,7 +186,7 @@ export default function Navbar() {
             <ArrowUpRight className="h-5 w-5" />
           </Link>
           {mostraIdiomas && (
-            <nav aria-label={t("Idioma")} className="mt-8 grid grid-cols-4 gap-2">
+            <nav aria-label={t("Idioma")} className="mt-8 grid grid-cols-2 gap-2">
               {LOCALES.map((l) => (
                 <a
                   key={l}

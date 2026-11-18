@@ -22,6 +22,14 @@ const nextConfig: NextConfig = {
     ],
   },
 
+  // Espanhol e catalão saíram do site em 18/11/2026: os links antigos levam ao português.
+  async redirects() {
+    return ["es", "ca"].flatMap((l) => [
+      { source: `/${l}`, destination: "/", permanent: true },
+      { source: `/${l}/:path*`, destination: "/:path*", permanent: true },
+    ]);
+  },
+
   // IndexNow: /<chave>.txt é respondido pela rota que confere a chave no OutBox CMS
   async rewrites() {
     return [{ source: "/:key([a-f0-9]{32}).txt", destination: "/api/outbox/indexnow/:key" }];

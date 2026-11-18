@@ -4,7 +4,7 @@ import { readdirSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
 const BASE = join(process.cwd(), "lib/i18n/blog");
-const IDIOMAS = ["en", "es", "ca"];
+const IDIOMAS = ["en"];
 const imports = [];
 const mapa = [];
 let n = 0;

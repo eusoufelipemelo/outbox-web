@@ -74,7 +74,7 @@ export async function POST(request: Request) {
     const empresa = (body.empresa ?? "").trim().slice(0, 160);
     const telefone = (body.telefone ?? "").trim().slice(0, 40);
     const comercial = origem === "felipemelo";
-    const IDIOMAS: Record<string, string> = { en: "Inglês", es: "Espanhol", ca: "Catalão" };
+    const IDIOMAS: Record<string, string> = { en: "Inglês" };
     const idioma = IDIOMAS[(body.idioma ?? "").trim()] ?? null;
 
     if (!nome || !email || !servico) {

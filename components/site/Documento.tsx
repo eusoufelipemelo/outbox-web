@@ -29,7 +29,7 @@ export default function Documento({ locale, children }: { locale: Locale; childr
     image: `${SITE.url}/og.png`,
     sameAs: [SITE.instagramBrand, SITE.instagramPersonal],
     areaServed: "BR",
-    availableLanguage: ["pt-BR", "en", "es", "ca"],
+    availableLanguage: ["pt-BR", "en"],
     knowsAbout: [
       t("Desenvolvimento de sistemas personalizados"),
       t("Criação de sites com SEO e GEO"),

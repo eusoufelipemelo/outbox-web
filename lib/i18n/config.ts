@@ -1,23 +1,24 @@
 /**
- * Idiomas do site. O português fica na raiz (/, /blog...) e os outros
- * ganham prefixo (/en, /es, /ca). O texto em português é a própria chave
+ * Idiomas do site. O português fica na raiz (/, /blog...) e o inglês
+ * ganha prefixo (/en). Espanhol e catalão saíram em 18/11/2026: /es e /ca
+ * redirecionam para o português (next.config.ts). O texto em português é a própria chave
  * do dicionário: t("Começar projeto") devolve a tradução, ou o próprio
  * português quando ela ainda não existe.
  */
 
-export const LOCALES = ["pt", "en", "es", "ca"] as const;
+export const LOCALES = ["pt", "en"] as const;
 export type Locale = (typeof LOCALES)[number];
 
 /** Os idiomas com prefixo na URL. */
-export const OUTROS_IDIOMAS = ["en", "es", "ca"] as const;
+export const OUTROS_IDIOMAS = ["en"] as const;
 export type OutroIdioma = (typeof OUTROS_IDIOMAS)[number];
 
-export const HTML_LANG: Record<Locale, string> = { pt: "pt-BR", en: "en", es: "es", ca: "ca" };
-export const OG_LOCALE: Record<Locale, string> = { pt: "pt_BR", en: "en_US", es: "es_ES", ca: "ca_ES" };
-export const NOME_IDIOMA: Record<Locale, string> = { pt: "Português", en: "English", es: "Español", ca: "Català" };
-export const SIGLA_IDIOMA: Record<Locale, string> = { pt: "PT", en: "EN", es: "ES", ca: "CA" };
+export const HTML_LANG: Record<Locale, string> = { pt: "pt-BR", en: "en" };
+export const OG_LOCALE: Record<Locale, string> = { pt: "pt_BR", en: "en_US" };
+export const NOME_IDIOMA: Record<Locale, string> = { pt: "Português", en: "English" };
+export const SIGLA_IDIOMA: Record<Locale, string> = { pt: "PT", en: "EN" };
 /** Locale para datas e números. */
-export const INTL: Record<Locale, string> = { pt: "pt-BR", en: "en-US", es: "es-ES", ca: "ca-ES" };
+export const INTL: Record<Locale, string> = { pt: "pt-BR", en: "en-US" };
 
 export type Dict = Record<string, string>;
 export type Vars = Record<string, string | number>;
@@ -45,7 +46,7 @@ export function localizar(locale: Locale, href: string): string {
 
 /** Tira o prefixo de idioma do caminho: "/en/blog" vira "/blog". */
 export function caminhoBase(pathname: string): string {
-  const m = pathname.match(/^\/(en|es|ca)(?=\/|$)/);
+  const m = pathname.match(/^\/en(?=\/|$)/);
   if (!m) return pathname || "/";
   return pathname.slice(m[0].length) || "/";
 }

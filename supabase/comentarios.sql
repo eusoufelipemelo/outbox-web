@@ -8,7 +8,7 @@
 create table if not exists public.comentarios (
   id             uuid primary key default gen_random_uuid(),
   post_slug      text not null,
-  idioma         text not null default 'pt' check (idioma in ('pt','en','es','ca')),
+  idioma         text not null default 'pt' check (idioma in ('pt','en')),
   nome           text not null check (char_length(nome) between 2 and 80),
   email          text not null,
   texto          text not null check (char_length(texto) between 3 and 2000),

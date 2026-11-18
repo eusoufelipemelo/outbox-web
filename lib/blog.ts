@@ -16,7 +16,7 @@ export type Post = {
   published_at: string | null;
   created_at: string;
   updated_at: string | null;
-  /** Em /en, /es e /ca: true quando o artigo já tem tradução para o idioma. */
+  /** Em /en: true quando o artigo já tem tradução para o idioma. */
   traduzido?: boolean;
   /** Campos extras dos artigos vindos do OutBox CMS (SEO + GEO). */
   cms?: {

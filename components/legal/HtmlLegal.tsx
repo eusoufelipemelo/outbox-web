@@ -7,13 +7,11 @@ import { DICIONARIOS } from "@/lib/i18n/dicionarios";
 import { alternates } from "@/lib/i18n/meta";
 import { getLocale } from "@/lib/i18n/server";
 import en from "@/lib/i18n/legal/en.json";
-import es from "@/lib/i18n/legal/es.json";
-import ca from "@/lib/i18n/legal/ca.json";
 
 /* O texto dos documentos em português é JSX nas próprias páginas; nas outras
    línguas ele vem pronto em HTML (lib/i18n/legal/<idioma>.json). O marcador
    abaixo é onde entra o botão de rever a escolha de cookies. */
-const HTML: Record<Exclude<Locale, "pt">, Partial<Record<DocLegal, string>>> = { en, es, ca };
+const HTML: Record<Exclude<Locale, "pt">, Partial<Record<DocLegal, string>>> = { en };
 const MARCADOR = "<div data-gerenciar-cookies></div>";
 
 export function metadataLegal(doc: DocLegal, locale: Locale): Metadata {
