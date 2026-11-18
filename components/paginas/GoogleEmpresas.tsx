@@ -220,11 +220,11 @@ export default function GoogleEmpresas() {
       <main>
         {/* Topo */}
         {/* Mesmo modelo dos serviços: foto ao fundo, texto alinhado à esquerda */}
-        <section className="relative overflow-hidden pt-[44svh] pb-20 md:flex md:min-h-[min(100svh,880px)] md:items-center md:pt-36 md:pb-28">
+        <section className="relative overflow-hidden pt-[44svh] pb-20 md:flex md:min-h-[clamp(660px,54vw,840px)] md:items-center md:pt-32 md:pb-24">
           <FundoHero imagem="/img/servicos-hero/google-empresas" />
 
           <div className="container-outbox relative z-10 flex w-full flex-col items-start text-left">
-            <div className="max-w-[600px]">
+            <div className="max-w-[560px] xl:max-w-[640px]">
             <nav aria-label={t("Você está em")} className="mb-8">
               <ol className="flex items-center gap-1.5 text-[13.5px] text-[var(--color-fg-muted)]">
                 <li>
@@ -246,7 +246,7 @@ export default function GoogleEmpresas() {
             </Revelar>
 
             <Revelar atraso={0.05}>
-              <h1 className="mt-7 max-w-[20ch] font-display text-[clamp(2.3rem,5.6vw,4.2rem)] leading-[1.04] text-white">
+              <h1 className="mt-6 font-display text-[clamp(2.1rem,3.6vw,3.15rem)] leading-[1.06] text-white text-balance">
                 {t("Mais chances de")} <span className="text-brand-gradient">{t("ser encontrado no Google")}</span> {t("e")}{" "}
                 <span className="text-brand-gradient">{t("citado pelas IAs")}</span>
                 {t(", com artigos novos todo mês.")}
@@ -254,7 +254,7 @@ export default function GoogleEmpresas() {
             </Revelar>
 
             <Revelar atraso={0.1}>
-              <p className="mt-7 max-w-[60ch] text-[17px] leading-relaxed text-[var(--color-fg-muted)] md:text-lg">
+              <p className="mt-6 max-w-[54ch] text-[16.5px] leading-relaxed text-[var(--color-fg-muted)] md:text-[17px]">
                 {t("Artigos pensados para o seu nicho e a sua cidade, publicados no seu site e divulgados no seu Perfil da Empresa no Google. Para ampliar as chances de aparecer na busca e nas pesquisas com IA, como ChatGPT, Gemini e as respostas com IA do Google.")}
               </p>
             </Revelar>

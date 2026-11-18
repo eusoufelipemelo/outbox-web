@@ -135,7 +135,7 @@ export function FundoHero({ imagem, foco = "direita" }: { imagem: string; foco?:
               alt=""
               fetchPriority="high"
               decoding="async"
-              className={`hero-bg__foto h-full w-full object-cover ${centro ? "object-center" : "object-[82%_50%] md:object-[72%_50%]"}`}
+              className={`hero-bg__foto h-full w-full object-cover ${centro ? "object-center md:object-[50%_28%]" : "object-[82%_50%] md:object-[100%_32%]"}`}
             />
           </picture>
         </div>
@@ -188,7 +188,7 @@ export function Topo({
     <section
       className={`relative overflow-hidden pb-16 md:pb-24 ${
         imagem
-          ? "pt-[44svh] md:flex md:min-h-[min(100svh,880px)] md:items-center md:pt-36"
+          ? "pt-[44svh] md:flex md:min-h-[clamp(660px,54vw,840px)] md:items-center md:pt-32"
           : "pt-36 md:pt-44"
       }`}
     >
@@ -202,22 +202,34 @@ export function Topo({
       <div
         className={`container-outbox relative z-10 w-full ${lado ? "grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]" : ""}`}
       >
-        <div className={lado ? "" : imagem ? "max-w-[600px]" : "max-w-[860px]"}>
+        <div className={lado ? "" : imagem ? "max-w-[560px] xl:max-w-[640px]" : "max-w-[860px]"}>
           <Migalhas itens={migalhas} />
           <Revelar>
             <Rotulo>{t(rotulo)}</Rotulo>
           </Revelar>
           <Revelar atraso={0.05}>
-            <h1 className="mt-7 max-w-[20ch] font-display text-[clamp(2.3rem,5.6vw,4.2rem)] leading-[1.04] text-white">
+            <h1
+              className={
+                imagem
+                  ? "mt-6 font-display text-[clamp(2.1rem,3.6vw,3.15rem)] leading-[1.06] text-white text-balance"
+                  : "mt-7 max-w-[20ch] font-display text-[clamp(2.3rem,5.6vw,4.2rem)] leading-[1.04] text-white"
+              }
+            >
               {titulo}
             </h1>
           </Revelar>
           <Revelar atraso={0.1}>
-            <p className="mt-7 max-w-[60ch] text-[17px] leading-relaxed text-[var(--color-fg-muted)] md:text-lg">
+            <p
+              className={
+                imagem
+                  ? "mt-6 max-w-[54ch] text-[16.5px] leading-relaxed text-[var(--color-fg-muted)] md:text-[17px]"
+                  : "mt-7 max-w-[60ch] text-[17px] leading-relaxed text-[var(--color-fg-muted)] md:text-lg"
+              }
+            >
               {t(apoio)}
             </p>
           </Revelar>
-          <Revelar atraso={0.15} className="mt-10">
+          <Revelar atraso={0.15} className={imagem ? "mt-8" : "mt-10"}>
             <Botoes ctas={ctas} />
           </Revelar>
           {nota && (
