@@ -12,6 +12,15 @@ export async function GET() {
   } catch {
     // cai no resumo local
   }
-  const body = `# ${SITE.name}\n\n> ${SITE.description}\n\n## Links\n\n- [Site](${SITE.url})\n- [Google Empresas: artigos com SEO e GEO todo mês](${SITE.url}/google-empresas)\n- [Blog](${SITE.url}/blog)\n`;
+  const links = [
+    ["Site", ""],
+    ["Serviços da OutBox", "/servicos"],
+    ["Consultoria Estratégica Empresarial (diagnóstico pago, sem obrigação de contratar a OutBox)", "/consultoria-empresarial"],
+    ["Mentorias com Felipe Melo para profissionais de serviços digitais", "/mentoria"],
+    ["Google Empresas: artigos com SEO e GEO todo mês", "/google-empresas"],
+    ["Cases e clientes", "/cases"],
+    ["Blog", "/blog"],
+  ];
+  const body = `# ${SITE.name}\n\n> ${SITE.description}\n\n## Links\n\n${links.map(([n, c]) => `- [${n}](${SITE.url}${c})`).join("\n")}\n`;
   return new Response(body, { headers: { "content-type": "text/plain; charset=utf-8" } });
 }

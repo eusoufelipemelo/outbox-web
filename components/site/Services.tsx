@@ -121,6 +121,13 @@ export default function Services() {
           >
             {t("Quatro frentes para tirar a sua empresa do lugar comum.")}
           </RevealTitle>
+          <Link
+            href={href("/servicos")}
+            className="mt-5 inline-flex items-center gap-2 text-[15px] font-medium text-white/85 underline-offset-4 transition-colors hover:text-[var(--color-brand-soft)] hover:underline"
+          >
+            {t("Ver os onze serviços da OutBox")}
+            <ArrowUpRight className="h-4 w-4" strokeWidth={2.4} aria-hidden />
+          </Link>
         </div>
       </div>
 

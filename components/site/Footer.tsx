@@ -71,12 +71,12 @@ export default function Footer() {
             </h2>
             <ul className="mt-3 flex flex-col">
               {[
-                { href: "/#servicos", label: "Serviços" },
+                { href: "/servicos", label: "Serviços" },
                 { href: "/consultoria-empresarial", label: "Consultoria Empresarial" },
                 { href: "/mentoria", label: "Mentorias" },
                 { href: "/#processo", label: "Processo" },
                 { href: "/#sobre", label: "Sobre" },
-                { href: "/#depoimentos", label: "Clientes" },
+                { href: "/cases", label: "Cases" },
                 { href: "/google-empresas", label: "Google Empresas" },
                 { href: "/blog", label: "Blog" },
                 { href: "/#contato", label: "Contato" },

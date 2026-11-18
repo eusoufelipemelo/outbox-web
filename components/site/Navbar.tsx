@@ -6,16 +6,20 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Globe, Menu, X } from "lucide-react";
 import { useI18n } from "@/lib/i18n/client";
+import { MenuServicos, ServicosMobile } from "@/components/site/MenuServicos";
 import { caminhoBase, localizar, LOCALES, NOME_IDIOMA, SIGLA_IDIOMA, temTraducao, type Locale } from "@/lib/i18n/config";
 
+/* Menu do briefing de 18/11/2026: Serviços (submenu) · Consultoria ·
+   Mentorias · Cases · Sobre · Blog. O Google Empresas está dentro de Serviços. */
 const LINKS = [
-  { href: "/#servicos", label: "Serviços" },
   { href: "/consultoria-empresarial", label: "Consultoria" },
   { href: "/mentoria", label: "Mentorias" },
-  { href: "/google-empresas", label: "Google Empresas" },
+  { href: "/cases", label: "Cases" },
   { href: "/#sobre", label: "Sobre" },
   { href: "/blog", label: "Blog" },
 ];
+
+const ROTAS_SERVICO = ["/servicos", "/google-empresas"];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -50,7 +54,7 @@ export default function Navbar() {
       <header data-nav className="fixed inset-x-0 top-4 z-50 px-4">
         <nav
           aria-label={t("Navegação principal")}
-          className={`container-outbox flex items-center justify-between gap-4 rounded-full border py-2.5 pl-5 pr-2.5 transition-all duration-500 ${
+          className={`container-outbox relative flex items-center justify-between gap-4 rounded-full border py-2.5 pl-5 pr-2.5 transition-all duration-500 ${
             scrolled
               ? "border-white/12 bg-black/70 shadow-[0_10px_40px_rgba(0,0,0,0.5)] backdrop-blur-xl"
               : "border-white/8 bg-black/35 backdrop-blur-md"
@@ -73,6 +77,9 @@ export default function Navbar() {
           </Link>
 
           <ul className="hidden items-center gap-0.5 lg:flex">
+            <li>
+              <MenuServicos ativo={ROTAS_SERVICO.some((r) => atual(r))} />
+            </li>
             {LINKS.map((l) => (
               <li key={l.href}>
                 <Link
@@ -161,6 +168,7 @@ export default function Navbar() {
         }`}
       >
         <div className="flex min-h-full flex-col justify-center gap-2 px-8 py-24">
+          <ServicosMobile aoNavegar={() => setOpen(false)} />
           {LINKS.map((l, i) => (
             <Link
               key={l.href}

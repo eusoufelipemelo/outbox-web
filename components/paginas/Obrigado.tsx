@@ -43,7 +43,7 @@ export default function Obrigado({ origem }: { origem?: string }) {
   const m = MENSAGENS[ehJornada(origem) ? origem : "padrao"];
   const links = [
     { rotulo: "Ler o blog", href: "/blog" },
-    { rotulo: "Conhecer os serviços", href: "/#servicos" },
+    { rotulo: "Conhecer os serviços", href: "/servicos" },
     { rotulo: "Voltar ao início", href: "/" },
   ];
 

@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { LEGAL_LINKS, SITE } from "@/lib/site";
 import { getPublishedPosts } from "@/lib/blog";
 import { HTML_LANG, LOCALES, localizar } from "@/lib/i18n/config";
+import { SERVICOS } from "@/lib/servicos";
 
 export const revalidate = 3600;
 
@@ -23,6 +24,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     ...emTodosIdiomas("/", { lastModified: agora, changeFrequency: "monthly", priority: 1 }),
     ...emTodosIdiomas("/google-empresas", { lastModified: agora, changeFrequency: "monthly", priority: 0.9 }),
+    ...emTodosIdiomas("/consultoria-empresarial", { lastModified: agora, changeFrequency: "monthly", priority: 0.9 }),
+    ...emTodosIdiomas("/servicos", { lastModified: agora, changeFrequency: "monthly", priority: 0.9 }),
+    ...SERVICOS.flatMap((s) =>
+      emTodosIdiomas(`/servicos/${s.slug}`, { lastModified: agora, changeFrequency: "monthly", priority: 0.8 }),
+    ),
+    ...emTodosIdiomas("/mentoria", { lastModified: agora, changeFrequency: "monthly", priority: 0.8 }),
+    ...emTodosIdiomas("/mentoria/individual", { lastModified: agora, changeFrequency: "monthly", priority: 0.7 }),
+    ...emTodosIdiomas("/mentoria/grupo", { lastModified: agora, changeFrequency: "monthly", priority: 0.7 }),
+    ...emTodosIdiomas("/cases", { lastModified: agora, changeFrequency: "monthly", priority: 0.7 }),
     { url: `${SITE.url}/felipemelo`, lastModified: agora, changeFrequency: "monthly", priority: 0.8 },
     ...emTodosIdiomas("/blog", { lastModified: agora, changeFrequency: "weekly", priority: 0.8 }),
     ...LEGAL_LINKS.flatMap((l) =>

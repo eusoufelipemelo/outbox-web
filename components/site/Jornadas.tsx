@@ -21,7 +21,7 @@ const CAMINHOS = [
     rotulo: "Preciso de execução",
     texto: "Contratar a OutBox para desenvolver ou gerenciar soluções digitais.",
     cta: "Ver os serviços",
-    href: "/#servicos",
+    href: "/servicos",
     rastreio: "jornada-servicos",
   },
   {
