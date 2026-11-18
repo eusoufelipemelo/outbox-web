@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { Compass } from "lucide-react";
 import Ambience from "@/components/site/Ambience";
 import Navbar from "@/components/site/Navbar";
 import Footer from "@/components/site/Footer";
@@ -136,32 +134,6 @@ export function metadataConsultoria(locale: Locale): Metadata {
 export default function Consultoria() {
   const { t, locale } = getT();
 
-  const retrato = (
-    <figure className="relative mx-auto max-w-[460px]">
-      <div aria-hidden className="absolute -inset-4 rounded-[36px] bg-gradient-to-br from-[var(--color-brand)]/25 via-transparent to-transparent opacity-80 blur-2xl" />
-      <div className="relative overflow-hidden rounded-[var(--radius-xl2)] border border-white/10">
-        <Image
-          src="/img/felipe-retrato.jpg"
-          alt={t("Felipe Melo, fundador da OutBox Group")}
-          width={920}
-          height={1100}
-          sizes="(max-width: 1024px) 90vw, 460px"
-          className="h-[440px] w-full object-cover object-top md:h-[520px]"
-          priority
-        />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
-        <figcaption className="absolute inset-x-5 bottom-5">
-          <p className="font-display text-[22px] leading-tight text-white">Felipe Melo</p>
-          <p className="mt-1 text-[13.5px] text-white/75">{t("Conduz cada diagnóstico pessoalmente")}</p>
-        </figcaption>
-      </div>
-      <p className="relative mt-4 flex items-center justify-center gap-2 rounded-full border border-white/10 bg-black/40 px-4 py-2.5 text-center text-[13px] text-white/80">
-        <Compass aria-hidden className="h-4 w-4 shrink-0 text-[var(--color-brand)]" />
-        {t("Serviço pago, independente da contratação de projetos")}
-      </p>
-    </figure>
-  );
-
   return (
     <>
       <script
@@ -190,7 +162,9 @@ export default function Consultoria() {
             { texto: "Quero conhecer a consultoria", href: `${CAMINHO}#formulario`, principal: true, rastreio: "consultoria" },
             { texto: "Ver como funciona", href: `${CAMINHO}#como-funciona` },
           ]}
-          lado={retrato}
+          imagem="/img/consultoria/felipe-consultoria"
+          focoImagem="centro"
+          nota="Serviço pago, independente da contratação de projetos"
         />
 
         <Secao

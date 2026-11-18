@@ -18,6 +18,7 @@ import AboutFelipe from "@/components/site/AboutFelipe";
 import ScrollEffects from "@/components/ui/ScrollEffects";
 import { Revelar } from "@/components/ui/revelar";
 import PlanosGE from "@/components/google-empresas/PlanosGE";
+import { FundoHero } from "@/components/oferta/Blocos";
 import VantagensGE from "@/components/google-empresas/VantagensGE";
 import { SITE } from "@/lib/site";
 import {
@@ -218,16 +219,16 @@ export default function GoogleEmpresas() {
 
       <main>
         {/* Topo */}
-        <section className="relative overflow-hidden pt-36 pb-20 md:pt-44 md:pb-28">
-          <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="glow glow--brand absolute -top-40 left-1/2 h-[480px] w-[640px] -translate-x-1/2" />
-          </div>
+        {/* Mesmo modelo dos serviços: foto ao fundo, texto alinhado à esquerda */}
+        <section className="relative overflow-hidden pt-[44svh] pb-20 md:flex md:min-h-[min(100svh,880px)] md:items-center md:pt-36 md:pb-28">
+          <FundoHero imagem="/img/servicos-hero/google-empresas" />
 
-          <div className="container-outbox relative z-10 flex flex-col items-center text-center">
+          <div className="container-outbox relative z-10 flex w-full flex-col items-start text-left">
+            <div className="max-w-[600px]">
             <nav aria-label={t("Você está em")} className="mb-8">
               <ol className="flex items-center gap-1.5 text-[13.5px] text-[var(--color-fg-muted)]">
                 <li>
-                  <Link href={href("/")} className="inline-flex min-h-11 min-w-11 items-center justify-center px-1 transition-colors hover:text-white">
+                  <Link href={href("/")} className="inline-flex min-h-11 items-center px-1 transition-colors hover:text-white">
                     {t("Início")}
                   </Link>
                 </li>
@@ -245,7 +246,7 @@ export default function GoogleEmpresas() {
             </Revelar>
 
             <Revelar atraso={0.05}>
-              <h1 className="mt-7 max-w-[19ch] font-display text-[clamp(2.3rem,6vw,4.4rem)] leading-[1.04] text-white">
+              <h1 className="mt-7 max-w-[20ch] font-display text-[clamp(2.3rem,5.6vw,4.2rem)] leading-[1.04] text-white">
                 {t("Mais chances de")} <span className="text-brand-gradient">{t("ser encontrado no Google")}</span> {t("e")}{" "}
                 <span className="text-brand-gradient">{t("citado pelas IAs")}</span>
                 {t(", com artigos novos todo mês.")}
@@ -253,12 +254,12 @@ export default function GoogleEmpresas() {
             </Revelar>
 
             <Revelar atraso={0.1}>
-              <p className="mx-auto mt-7 max-w-[60ch] text-[17px] leading-relaxed text-[var(--color-fg-muted)] md:text-lg">
+              <p className="mt-7 max-w-[60ch] text-[17px] leading-relaxed text-[var(--color-fg-muted)] md:text-lg">
                 {t("Artigos pensados para o seu nicho e a sua cidade, publicados no seu site e divulgados no seu Perfil da Empresa no Google. Para ampliar as chances de aparecer na busca e nas pesquisas com IA, como ChatGPT, Gemini e as respostas com IA do Google.")}
               </p>
             </Revelar>
 
-            <Revelar atraso={0.15} className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
+            <Revelar atraso={0.15} className="mt-10 flex flex-col items-stretch gap-4 sm:flex-row sm:items-center">
               <BotaoWhatsapp />
               <a
                 href="#planos"
@@ -269,7 +270,7 @@ export default function GoogleEmpresas() {
             </Revelar>
 
             <Revelar atraso={0.2} className="mt-12 w-full">
-              <ul className="mx-auto grid max-w-[760px] gap-3 text-[14.5px] sm:grid-cols-3">
+              <ul className="grid gap-3 text-[14.5px] sm:grid-cols-3">
                 {[
                   t("De 4 a 10 artigos por mês"),
                   t("No seu site e no seu Perfil"),
@@ -277,13 +278,14 @@ export default function GoogleEmpresas() {
                 ].map((item) => (
                   <li
                     key={item}
-                    className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3.5 text-white/85"
+                    className="rounded-2xl border border-white/10 bg-black/45 px-4 py-3.5 text-white/85 backdrop-blur-sm"
                   >
                     {item}
                   </li>
                 ))}
               </ul>
             </Revelar>
+            </div>
           </div>
         </section>
 

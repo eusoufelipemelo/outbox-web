@@ -105,6 +105,55 @@ export function Migalhas({
   );
 }
 
+export type FocoImagem = "direita" | "centro";
+
+/**
+ * Fundo de foto do topo, no modelo da home. No celular a foto fica em cima e
+ * se dissolve no fundo. No computador: com foco "direita" ela ocupa o topo
+ * inteiro (a pessoa já está à direita na foto); com foco "centro" ela ocupa só
+ * a direita do topo e se dissolve para a esquerda, para a pessoa do centro da
+ * foto não ficar atrás do texto. Arquivos: `<imagem>-2400.webp` e `<imagem>-1200.webp`.
+ */
+export function FundoHero({ imagem, foco = "direita" }: { imagem: string; foco?: FocoImagem }) {
+  const centro = foco === "centro";
+  return (
+    <>
+      <div
+        aria-hidden
+        className={`absolute inset-x-0 top-0 h-[54svh] overflow-hidden [mask-image:linear-gradient(to_bottom,#000_55%,transparent_100%)] md:h-auto ${
+          centro
+            ? "md:inset-y-0 md:left-[42%] md:right-0 md:[mask-image:linear-gradient(to_right,transparent_0%,#000_30%)]"
+            : "md:inset-0 md:[mask-image:none]"
+        }`}
+      >
+        <div className="hero-bg h-full w-full">
+          <picture>
+            <source media="(max-width: 767px)" srcSet={`${imagem}-1200.webp`} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`${imagem}-2400.webp`}
+              alt=""
+              fetchPriority="high"
+              decoding="async"
+              className={`hero-bg__foto h-full w-full object-cover ${centro ? "object-center" : "object-[82%_50%] md:object-[72%_50%]"}`}
+            />
+          </picture>
+        </div>
+      </div>
+      {/* Sombras para o texto ler bem: lado esquerdo no computador, topo no celular */}
+      <div
+        aria-hidden
+        className={`absolute inset-x-0 top-0 h-[54svh] bg-[linear-gradient(to_bottom,rgba(0,0,0,0.5)_0%,transparent_35%)] md:inset-0 md:h-auto ${
+          centro
+            ? "md:bg-[linear-gradient(to_right,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.6)_40%,transparent_60%)]"
+            : "md:bg-[linear-gradient(to_right,rgba(0,0,0,0.94)_0%,rgba(0,0,0,0.72)_38%,rgba(0,0,0,0.15)_68%,transparent_85%)]"
+        }`}
+      />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 hidden h-40 bg-gradient-to-t from-black to-transparent md:block" />
+    </>
+  );
+}
+
 /**
  * Topo da página: migalhas, rótulo, H1, apoio e os CTAs. `lado` é o visual da
  * direita (opcional). `imagem` vira o fundo do topo, no modelo da home: a cena
@@ -119,6 +168,8 @@ export function Topo({
   ctas,
   lado,
   imagem,
+  focoImagem = "direita",
+  nota,
 }: {
   migalhas: { rotulo: string; href?: string }[];
   rotulo: string;
@@ -127,6 +178,10 @@ export function Topo({
   ctas: Cta[];
   lado?: ReactNode;
   imagem?: string;
+  /** Onde está a pessoa na foto: "direita" (fundo inteiro) ou "centro" (a foto ocupa a direita do topo). */
+  focoImagem?: FocoImagem;
+  /** Selo curto abaixo dos botões. */
+  nota?: string;
 }) {
   const { t } = getT();
   return (
@@ -138,38 +193,7 @@ export function Topo({
       }`}
     >
       {imagem ? (
-        <>
-          <div
-            aria-hidden
-            className="absolute inset-x-0 top-0 h-[54svh] overflow-hidden [mask-image:linear-gradient(to_bottom,#000_55%,transparent_100%)] md:inset-0 md:h-auto md:[mask-image:none]"
-          >
-            <div className="hero-bg h-full w-full">
-              <picture>
-                <source
-                  media="(max-width: 767px)"
-                  srcSet={`${imagem}-1200.webp`}
-                />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`${imagem}-2400.webp`}
-                  alt=""
-                  fetchPriority="high"
-                  decoding="async"
-                  className="hero-bg__foto h-full w-full object-cover object-[82%_50%] md:object-[72%_50%]"
-                />
-              </picture>
-            </div>
-          </div>
-          {/* Sombras para o texto ler bem: lado esquerdo no computador, base no celular */}
-          <div
-            aria-hidden
-            className="absolute inset-x-0 top-0 h-[54svh] bg-[linear-gradient(to_bottom,rgba(0,0,0,0.5)_0%,transparent_35%)] md:inset-0 md:h-auto md:bg-[linear-gradient(to_right,rgba(0,0,0,0.94)_0%,rgba(0,0,0,0.72)_38%,rgba(0,0,0,0.15)_68%,transparent_85%)]"
-          />
-          <div
-            aria-hidden
-            className="absolute inset-x-0 bottom-0 hidden h-40 bg-gradient-to-t from-black to-transparent md:block"
-          />
-        </>
+        <FundoHero imagem={imagem} foco={focoImagem} />
       ) : (
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="glow glow--brand absolute -top-40 left-[30%] h-[480px] w-[640px] -translate-x-1/2" />
@@ -196,6 +220,11 @@ export function Topo({
           <Revelar atraso={0.15} className="mt-10">
             <Botoes ctas={ctas} />
           </Revelar>
+          {nota && (
+            <Revelar atraso={0.2}>
+              <p className="mt-6 inline-flex rounded-full border border-white/12 bg-black/50 px-4 py-2 text-[13px] text-white/80 backdrop-blur-sm">{t(nota)}</p>
+            </Revelar>
+          )}
         </div>
         {lado && <Revelar atraso={0.1}>{lado}</Revelar>}
       </div>

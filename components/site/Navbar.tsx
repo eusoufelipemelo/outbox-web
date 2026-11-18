@@ -14,6 +14,7 @@ import { caminhoBase, localizar, LOCALES, NOME_IDIOMA, SIGLA_IDIOMA, temTraducao
 const LINKS = [
   { href: "/consultoria-empresarial", label: "Consultoria" },
   { href: "/mentoria", label: "Mentorias" },
+  { href: "/google-empresas", label: "Google Empresas" },
   { href: "/cases", label: "Cases" },
   { href: "/#sobre", label: "Sobre" },
   { href: "/blog", label: "Blog" },
@@ -85,7 +86,7 @@ export default function Navbar() {
                 <Link
                   href={h(l.href)}
                   aria-current={atual(l.href) ? "page" : undefined}
-                  className={`cursor-pointer whitespace-nowrap rounded-full px-2 py-2 text-[14px] transition-colors duration-200 hover:text-white xl:px-3.5 xl:text-[14.5px] ${
+                  className={`cursor-pointer whitespace-nowrap rounded-full px-1.5 py-2 text-[14px] transition-colors duration-200 hover:text-white xl:px-3 xl:text-[14.5px] ${
                     atual(l.href) ? "text-white" : "text-white/70"
                   }`}
                 >
@@ -107,10 +108,10 @@ export default function Navbar() {
                   aria-expanded={idiomasAberto}
                   aria-haspopup="true"
                   aria-label={t("Idioma: {idioma}", { idioma: NOME_IDIOMA[locale] })}
-                  className="flex h-11 cursor-pointer items-center gap-1.5 rounded-full px-3 text-[13.5px] font-medium text-white/75 transition-colors hover:text-white"
+                  className="flex h-11 cursor-pointer items-center gap-1.5 rounded-full px-2 text-[13.5px] font-medium text-white/75 transition-colors hover:text-white xl:px-3"
                 >
                   <Globe className="h-4 w-4" strokeWidth={2} aria-hidden />
-                  {SIGLA_IDIOMA[locale]}
+                  <span className="hidden xl:inline">{SIGLA_IDIOMA[locale]}</span>
                 </button>
                 {idiomasAberto && (
                   <ul className="absolute right-0 top-full z-10 min-w-[160px] rounded-2xl border border-white/12 bg-black/90 p-1.5 shadow-[0_18px_40px_rgba(0,0,0,0.5)] backdrop-blur-xl">
@@ -136,9 +137,9 @@ export default function Navbar() {
             )}
             <Link
               href={h("/#contato")}
-              className="borda-viva group hidden cursor-pointer items-center gap-2.5 whitespace-nowrap rounded-full bg-white py-2 pl-2 pr-4 text-[14.5px] font-medium text-black transition-all duration-300 hover:bg-white/90 sm:flex"
+              className="borda-viva group hidden cursor-pointer items-center gap-2.5 whitespace-nowrap rounded-full bg-white min-h-12 py-2 pl-4 pr-4 text-[14.5px] font-medium text-black transition-all duration-300 hover:bg-white/90 sm:flex xl:pl-2"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-brand)] transition-transform duration-300 group-hover:rotate-45">
+              <span className="hidden h-8 w-8 items-center justify-center rounded-full bg-[var(--color-brand)] transition-transform duration-300 group-hover:rotate-45 xl:flex">
                 <ArrowUpRight className="h-4 w-4 text-white" strokeWidth={2.4} />
               </span>
               {t("Falar sobre meu negócio")}

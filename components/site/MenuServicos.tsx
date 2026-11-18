@@ -45,7 +45,7 @@ export function MenuServicos({ ativo }: { ativo: boolean }) {
         onClick={() => setAberto((v) => !v)}
         aria-expanded={aberto}
         aria-controls="menu-servicos"
-        className={`flex cursor-pointer items-center gap-1 whitespace-nowrap rounded-full px-2 py-2 text-[14px] transition-colors duration-200 hover:text-white xl:px-3.5 xl:text-[14.5px] ${
+        className={`flex cursor-pointer items-center gap-1 whitespace-nowrap rounded-full px-1.5 py-2 text-[14px] transition-colors duration-200 hover:text-white xl:px-3 xl:text-[14.5px] ${
           ativo || aberto ? "text-white" : "text-white/70"
         }`}
       >
