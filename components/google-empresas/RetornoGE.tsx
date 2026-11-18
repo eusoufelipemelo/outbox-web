@@ -6,7 +6,10 @@ import { useEntrar } from "./useEntrar";
 import s from "./vantagens.module.css";
 import { useI18n } from "@/lib/i18n/client";
 
-/* A conta é feita ao contrário, como no simulador da proposta: em vez de
+/* Briefing de 18/11/2026: faturamento não é lucro. A conta usa a MARGEM que
+   a pessoa informa, e o resultado é marcado como simulação.
+
+   A conta é feita ao contrário, como no simulador da proposta: em vez de
    prometer contatos, parte do quanto o próprio cliente ganha com um cliente
    novo e responde quantos clientes pagam o plano. É matemática, não promessa. */
 
@@ -17,17 +20,21 @@ const MAX_ARTIGOS_ANO = Math.max(...planos.map((p) => p.artigos * 12));
 export default function RetornoGE() {
   const [planoId, setPlanoId] = useState<Plano["id"]>("autoridade");
   const [valor, setValor] = useState(1500);
+  const [margem, setMargem] = useState(30);
   const idValor = useId();
+  const idMargem = useId();
   const { t } = useI18n();
   const barras = useEntrar<HTMLDivElement>(s.entra);
 
   const plano = planos.find((p) => p.id === planoId)!;
-  const clientes = valor > 0 ? Math.ceil(plano.preco / valor) : null;
-  const sobra = clientes === 1 ? valor - plano.preco : 0;
+  /** O que de fato sobra com um cliente novo, depois dos custos. */
+  const lucro = Math.round((valor * margem) / 100);
+  const clientes = lucro > 0 ? Math.ceil(plano.preco / lucro) : null;
+  const sobra = clientes === 1 ? lucro - plano.preco : 0;
   /* Contrato mínimo: implantação + 6 mensalidades. Quantos clientes no período cobrem tudo. */
   const MESES_MINIMO = 6;
   const totalMinimo = GE_IMPLANTACAO.valor + plano.preco * MESES_MINIMO;
-  const clientesMinimo = valor > 0 ? Math.ceil(totalMinimo / valor) : null;
+  const clientesMinimo = lucro > 0 ? Math.ceil(totalMinimo / lucro) : null;
 
   const colunas = [
     { nome: t("Sem conteúdo"), artigos: 0, id: "nenhum" as const },
@@ -40,7 +47,7 @@ export default function RetornoGE() {
         {t("Como o investimento se paga?")}
       </h3>
       <p className="mt-3 max-w-[54ch] leading-relaxed text-[var(--color-fg-muted)]">
-        {t("Faça a conta com o seu número. Diga quanto entra, em média, com um cliente novo e veja quantos clientes cobrem o plano e a implantação.")}
+        {t("Faça a conta com os seus números: quanto entra, em média, com um cliente novo e quanto disso é margem. Veja quantos clientes cobrem o plano e a implantação.")}
       </p>
 
       {/* Escolha do plano */}
@@ -86,13 +93,35 @@ export default function RetornoGE() {
         />
       </div>
 
+      {/* Margem: faturamento não é lucro */}
+      <label htmlFor={idMargem} className="mt-5 block text-[14.5px] font-medium text-white/85">
+        {t("Quanto disso é margem, depois dos custos?")}
+      </label>
+      <div className="mt-2.5 flex items-center gap-3 rounded-2xl border border-white/12 bg-white/[0.04] px-4 focus-within:border-[var(--color-brand)]">
+        <input
+          id={idMargem}
+          type="number"
+          inputMode="numeric"
+          min={1}
+          max={100}
+          step={5}
+          value={margem || ""}
+          onChange={(e) => setMargem(Math.min(100, Math.max(0, Math.round(Number(e.target.value) || 0))))}
+          className="min-h-[54px] w-full bg-transparent text-[22px] font-semibold text-white outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
+        />
+        <span className="text-[17px] font-semibold text-white/50">%</span>
+      </div>
+      <p className="mt-2 text-[13px] text-[var(--color-fg-subtle)]">
+        {t("Margem por cliente: {valor}", { valor: formatarReais(lucro) })}
+      </p>
+
       {/* Resultado */}
       <div
         aria-live="polite"
         className="mt-6 rounded-2xl border border-[var(--color-brand)]/45 bg-[var(--color-brand)]/10 p-5"
       >
         {clientes === null ? (
-          <p className="text-[15px] text-white/85">{t("Digite um valor para ver a conta.")}</p>
+          <p className="text-[15px] text-white/85">{t("Digite o valor e a margem para ver a conta.")}</p>
         ) : (
           <>
             <p className="flex flex-wrap items-baseline gap-x-3">
@@ -131,6 +160,10 @@ export default function RetornoGE() {
           </>
         )}
       </div>
+
+      <p className="mt-3 text-[12.5px] leading-relaxed text-[var(--color-fg-subtle)]">
+        {t("Simulação. Usa a margem que você informar e não considera custo de aquisição, prazo de pagamento nem quantos contatos viram clientes. Não é promessa de resultado.")}
+      </p>
 
       {/* Páginas acumuladas em 12 meses */}
       <div ref={barras} className="mt-8 border-t border-white/8 pt-7">

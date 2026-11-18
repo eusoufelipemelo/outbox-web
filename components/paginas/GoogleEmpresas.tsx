@@ -246,15 +246,15 @@ export default function GoogleEmpresas() {
 
             <Revelar atraso={0.05}>
               <h1 className="mt-7 max-w-[19ch] font-display text-[clamp(2.3rem,6vw,4.4rem)] leading-[1.04] text-white">
-                {t("Seja")} <span className="text-brand-gradient">{t("encontrado no Google")}</span> {t("e")}{" "}
-                <span className="text-brand-gradient">{t("citado pelas IAs")}</span>{" "}
-                {t("com artigos novos todo mês.")}
+                {t("Mais chances de")} <span className="text-brand-gradient">{t("ser encontrado no Google")}</span> {t("e")}{" "}
+                <span className="text-brand-gradient">{t("citado pelas IAs")}</span>
+                {t(", com artigos novos todo mês.")}
               </h1>
             </Revelar>
 
             <Revelar atraso={0.1}>
               <p className="mx-auto mt-7 max-w-[60ch] text-[17px] leading-relaxed text-[var(--color-fg-muted)] md:text-lg">
-                {t("Artigos pensados para o seu nicho e a sua cidade, publicados no seu site e divulgados no seu Perfil da Empresa no Google. Para aparecer na busca, no ChatGPT, no Gemini e nos resumos com IA do Google.")}
+                {t("Artigos pensados para o seu nicho e a sua cidade, publicados no seu site e divulgados no seu Perfil da Empresa no Google. Para ampliar as chances de aparecer na busca e nas pesquisas com IA, como ChatGPT, Gemini e as respostas com IA do Google.")}
               </p>
             </Revelar>
 
@@ -428,10 +428,10 @@ export default function GoogleEmpresas() {
             <Revelar className="mx-auto max-w-[52ch] text-center">
               <Rotulo>{t("Planos")}</Rotulo>
               <h2 className={`mt-6 ${TITULO_SECAO}`}>
-                {t("Quantos artigos a sua empresa precisa por mês?")}
+                {t("Escolha o ritmo certo para o momento da sua empresa.")}
               </h2>
               <p className="mt-5 leading-relaxed text-[var(--color-fg-muted)]">
-                {t("Todos os planos têm artigos com SEO e GEO, publicação no seu site e resumo no Perfil da Empresa no Google. O que muda é o volume e o quanto a gente investe na sua cidade.")}
+                {t("Os planos variam em volume, profundidade de gestão e acompanhamento. Todos têm artigos com SEO e GEO, publicação no seu site e resumo no Perfil da Empresa no Google. A equipe da OutBox ajuda a identificar o formato mais adequado, considerando o seu mercado, a estrutura do site e os objetivos do negócio.")}
               </p>
             </Revelar>
 

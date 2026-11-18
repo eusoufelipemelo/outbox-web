@@ -101,6 +101,9 @@ export default function ConsequenciasGE() {
             {t("Empresa sem conteúdo")}
           </span>
         </div>
+        <p className="mt-3 text-[12.5px] leading-relaxed text-[var(--color-fg-subtle)]">
+          {t("Simulação ilustrativa: o gráfico mostra só a quantidade de páginas publicadas, não posição nem visitas.")}
+        </p>
       </div>
 
       <ol className="mt-8 flex flex-col gap-5 border-t border-white/8 pt-7">

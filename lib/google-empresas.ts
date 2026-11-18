@@ -28,7 +28,7 @@ export const GE_PROBLEMAS = [
   {
     titulo: "O concorrente aparece primeiro",
     texto:
-      "Ninguém compara dez empresas antes de chamar. A pessoa clica em quem respondeu a pergunta dela, e quem respondeu fica com o cliente.",
+      "Ninguém compara dez empresas antes de chamar. A pessoa clica em quem respondeu a pergunta dela, e quem respondeu tem mais chance de ficar com o cliente.",
   },
 ] as const;
 
@@ -43,7 +43,7 @@ export const GE_PASSOS = [
     numero: "02",
     titulo: "Artigo com SEO e GEO",
     texto:
-      "Cada artigo traz resposta direta logo no início, perguntas frequentes e fontes reais, no formato que o Google e as IAs conseguem ler e citar.",
+      "Cada artigo traz resposta direta logo no início, perguntas frequentes e fontes reais, no formato que facilita a leitura pelo Google e pelas IAs.",
   },
   {
     numero: "03",
@@ -84,6 +84,8 @@ export type Plano = {
   porArtigo: number;
   destaque: boolean;
   resumo: string;
+  /** Momento da empresa para o qual o plano foi pensado. */
+  perfil: string;
 };
 
 /**
@@ -99,6 +101,7 @@ export const GE_PLANOS: Plano[] = [
     porArtigo: 225,
     destaque: false,
     resumo: "Um artigo por semana para tirar o site e o perfil da inércia.",
+    perfil: "Para começar",
   },
   {
     id: "autoridade",
@@ -108,7 +111,8 @@ export const GE_PLANOS: Plano[] = [
     porArtigo: 159,
     destaque: true,
     resumo:
-      "Volume para cobrir as perguntas do seu mercado e virar referência na sua cidade.",
+      "Volume para cobrir as perguntas do seu mercado e trabalhar para virar referência na sua cidade.",
+    perfil: "Para expandir a cobertura, com acompanhamento",
   },
   {
     id: "crescimento",
@@ -117,7 +121,8 @@ export const GE_PLANOS: Plano[] = [
     preco: 1390,
     porArtigo: 232,
     destaque: false,
-    resumo: "Mais temas por mês para ganhar espaço nas buscas mais disputadas.",
+    resumo: "Mais temas por mês para disputar espaço nas buscas mais concorridas.",
+    perfil: "Para construir consistência",
   },
 ];
 
@@ -182,7 +187,7 @@ export function formatarReais(valor: number) {
 
 export const GE_VANTAGENS_SEO = [
   {
-    titulo: "Aparecer entre os primeiros do mapa",
+    titulo: "Mais força no resultado local",
     texto:
       "O Google declara que ordena o resultado local por relevância, distância e destaque. Perfil completo, atualizado e ligado a um site com conteúdo trabalha nos dois critérios que você controla.",
   },
@@ -197,20 +202,20 @@ export const GE_VANTAGENS_SEO = [
       "O anúncio some no dia em que o pagamento para. O artigo continua no ar, mês após mês, somando páginas que trabalham por você.",
   },
   {
-    titulo: "Cliente que chega mais decidido",
+    titulo: "Cliente que chega mais informado",
     texto:
-      "Quem leu a sua resposta antes de chamar já entendeu o que você faz e por que confiar. A conversa começa mais perto do fechamento.",
+      "Quem leu a sua resposta antes de chamar já entendeu o que você faz e por que confiar. A conversa tende a começar mais perto do fechamento.",
   },
 ] as const;
 
 export const GE_VANTAGENS_GEO = [
   {
-    titulo: "Ser citado como fonte na resposta",
+    titulo: "Mais chance de ser citado como fonte",
     texto:
-      "Resposta direta, perguntas frequentes e dados estruturados são o formato que as IAs conseguem ler, entender e citar com o seu nome.",
+      "Resposta direta, perguntas frequentes e dados estruturados facilitam que as IAs leiam, entendam e, possivelmente, citem o seu nome.",
   },
   {
-    titulo: "Presença em todas as IAs, não só em uma",
+    titulo: "Conteúdo que serve para várias IAs",
     texto:
       "As IAs consultam a web aberta. Conteúdo claro e consistente no seu próprio site aumenta a chance de a sua empresa ser mencionada em qualquer uma delas.",
   },
@@ -222,7 +227,7 @@ export const GE_VANTAGENS_GEO = [
   {
     titulo: "Ocupar o espaço antes do concorrente",
     texto:
-      "Uma resposta de IA cita poucas empresas. Quem constrói conteúdo primeiro ocupa esse espaço, e quem chega depois precisa disputar com quem já está lá.",
+      "Uma resposta de IA cita poucas empresas. Quem constrói conteúdo antes tende a ocupar esse espaço, e quem chega depois precisa disputar com quem já está lá.",
   },
 ] as const;
 
@@ -245,12 +250,12 @@ export const GE_CONSEQUENCIAS = [
   {
     quando: "Hoje",
     texto:
-      "Quem pesquisa encontra o concorrente que respondeu a pergunta. A sua empresa nem entra na comparação.",
+      "Quem pesquisa encontra o concorrente que respondeu a pergunta. A sua empresa pode nem entrar na comparação.",
   },
   {
     quando: "Em 3 meses",
     texto:
-      "As IAs citam quem tem conteúdo sobre o seu segmento na sua cidade. Sem conteúdo, o seu nome não tem de onde sair.",
+      "As IAs tendem a citar quem tem conteúdo sobre o seu segmento na sua cidade. Sem conteúdo, o seu nome tem menos de onde sair.",
   },
   {
     quando: "Em 6 meses",
@@ -260,6 +265,6 @@ export const GE_CONSEQUENCIAS = [
   {
     quando: "Em 12 meses",
     texto:
-      "Para alcançar, você começa do zero enquanto ele soma 120. Recuperar o espaço custa mais tempo e mais dinheiro do que começar agora.",
+      "Para alcançar, você começa do zero enquanto ele soma 120. Recuperar o espaço tende a custar mais tempo e dinheiro do que começar agora.",
   },
 ] as const;

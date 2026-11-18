@@ -28,12 +28,12 @@ type Bloco = {
 
 const ic = "h-4 w-4";
 const BLOCOS: Bloco[] = [
-  { cena: 1, texto: "1º no mapa da região", icone: <MapPin className={ic} />, forte: true, lado: "e", topo: "17%", dx: "120px", dy: "110px", atraso: 0.5 },
+  { cena: 1, texto: "Perfil completo no mapa", icone: <MapPin className={ic} />, forte: true, lado: "e", topo: "17%", dx: "120px", dy: "110px", atraso: 0.5 },
   { cena: 1, texto: "Perfil ativo e completo", icone: <Star className={ic} />, lado: "d", topo: "47%", dx: "-120px", dy: "-20px", atraso: 0.9 },
-  { cena: 2, texto: "Citada como fonte pela IA", icone: <Sparkles className={ic} />, forte: true, lado: "d", topo: "15%", dx: "-120px", dy: "120px", atraso: 0.6 },
+  { cena: 2, texto: "Pode ser citada pela IA", icone: <Sparkles className={ic} />, forte: true, lado: "d", topo: "15%", dx: "-120px", dy: "120px", atraso: 0.6 },
   { cena: 2, texto: "Resposta com o seu nome", icone: <TrendingUp className={ic} />, lado: "e", topo: "58%", dx: "120px", dy: "-60px", atraso: 1 },
   { cena: 3, texto: "Novo contato no WhatsApp", icone: <MessageCircle className={ic} />, forte: true, lado: "e", topo: "30%", dx: "120px", dy: "60px", atraso: 0.5 },
-  { cena: 3, texto: "Cliente já chega decidido", icone: <UserCheck className={ic} />, lado: "d", topo: "64%", dx: "-120px", dy: "-80px", atraso: 0.9 },
+  { cena: 3, texto: "Cliente chega mais informado", icone: <UserCheck className={ic} />, lado: "d", topo: "64%", dx: "-120px", dy: "-80px", atraso: 0.9 },
 ];
 
 export default function CelularGE() {
@@ -58,7 +58,7 @@ export default function CelularGE() {
       ref={ref}
       className={s.palco}
       role="img"
-      aria-label={t("Animação de um celular laranja: a empresa aparece em primeiro no mapa do Google, é citada como fonte por uma inteligência artificial e recebe um novo contato no WhatsApp.")}
+      aria-label={t("Simulação ilustrativa em um celular laranja: a empresa aparece no mapa do Google, é citada por uma inteligência artificial e recebe um novo contato no WhatsApp.")}
     >
       <div className={s.halo} aria-hidden />
 

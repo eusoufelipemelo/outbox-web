@@ -63,16 +63,16 @@ export const SERVICES = [
     slug: "sites",
     number: "02",
     name: "Sites com Performance, SEO, GEO e Blog",
-    tagline: "Encontrado no Google e recomendado pelas IAs",
+    tagline: "Preparado para o Google e para as pesquisas com IA",
     description:
-      "Site rápido, bonito e construído para ser achado. Otimizamos para SEO, que coloca você no Google, e para GEO, a camada nova que faz a sua marca ser lida e recomendada pelo ChatGPT, Gemini e demais inteligências artificiais. Com blog e painel administrativo próprio para você publicar sozinho.",
+      "Site rápido, bonito e construído para ser achado. Otimizamos para SEO, que coloca você no Google, e para GEO, a camada nova que organiza o conteúdo para ser compreendido e, possivelmente, citado em pesquisas com IA, como ChatGPT e Gemini. Com blog e painel administrativo próprio para você publicar sozinho.",
     bullets: [
       "Carregamento rápido e nota alta de performance",
       "SEO técnico e conteúdo estruturado",
-      "GEO: presença nas respostas das IAs",
+      "GEO: conteúdo preparado para pesquisas com IA",
       "Blog com painel administrativo personalizado",
     ],
-    outcome: "Mais visitantes qualificados chegando sem depender só de anúncio.",
+    outcome: "Mais chances de ser encontrado por quem já está procurando, sem depender só de anúncio.",
   },
   {
     slug: "branding",
@@ -146,7 +146,7 @@ export const COMPARISON = {
   others: [
     "Template repetido que você já viu em outro lugar",
     "Site bonito que ninguém encontra no Google",
-    "Invisível para o ChatGPT e para as IAs",
+    "Sem estrutura para ser entendido pelas pesquisas com IA",
     "Cada post novo depende de um orçamento",
     "Prazo indefinido, resposta a conta-gotas",
     "Proposta em PDF pesado e desatualizado",
@@ -154,7 +154,7 @@ export const COMPARISON = {
   outbox: [
     "Projeto desenhado do zero para a sua marca",
     "Construído para performance e SEO desde a base",
-    "Otimizado com GEO para as IAs te indicarem",
+    "Conteúdo estruturado para facilitar a leitura e a possível citação em pesquisas com IA",
     "Painel próprio: você publica quando quiser",
     "Material na mão, prazo curto e combinado",
     "Apresentação em link, atualizada em tempo real",
@@ -215,7 +215,7 @@ export const FAQ = [
   },
   {
     q: "O que é GEO e por que isso importa agora?",
-    a: "GEO é a otimização para os motores generativos, ou seja, para as inteligências artificiais. Hoje muita gente não pesquisa mais só no Google: pergunta ao ChatGPT, ao Gemini ou à Meta AI. Sites em estrutura antiga não são lidos por essas ferramentas e ficam de fora da recomendação. Construímos para os dois mundos: buscas tradicionais e respostas de IA.",
+    a: "GEO é a otimização para os motores generativos, ou seja, para as inteligências artificiais. Hoje muita gente não pesquisa mais só no Google: pergunta ao ChatGPT, ao Gemini ou à Meta AI. Estrutura, acesso e qualidade do conteúdo podem afetar a capacidade dessas ferramentas de encontrar e usar as informações do seu site. Construímos pensando nos dois mundos, buscas tradicionais e pesquisas com IA, sem prometer posição nem citação.",
   },
   {
     q: "Eu consigo publicar no blog sozinho?",

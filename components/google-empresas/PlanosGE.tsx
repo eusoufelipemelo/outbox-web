@@ -60,6 +60,7 @@ function CardPlano({ plano, atraso }: { plano: Plano; atraso: number }) {
         )}
 
         <div className="relative z-10 flex h-full flex-col">
+          <p className="text-[12.5px] font-medium text-[var(--color-fg-subtle)]">{t(plano.perfil)}</p>
           <h3
             id={`plano-${plano.id}`}
             className={`font-display text-[22px] leading-tight ${d ? "text-[var(--color-brand-soft)]" : "text-white"}`}
@@ -196,6 +197,9 @@ export default function PlanosGE() {
             <p className="mt-2 max-w-[38ch] text-[13.5px] leading-relaxed text-[var(--color-fg-muted)]">
               {t("Vale para qualquer plano e é cobrada à parte da mensalidade.")}
             </p>
+            <p className="mt-5 max-w-[42ch] text-[14.5px] leading-relaxed text-white/80">
+              {t("É a estrutura que prepara o projeto para funcionar: antes das publicações recorrentes, organizamos as informações e as configurações do Perfil da Empresa no Google, do site e do blog, e o fluxo dos conteúdos, conforme o escopo contratado.")}
+            </p>
           </div>
           <div>
             <p className="text-[15px] font-medium text-white">{t("O que a implantação inclui")}</p>
@@ -210,6 +214,25 @@ export default function PlanosGE() {
               ))}
             </ul>
           </div>
+        </div>
+      </Revelar>
+
+      <Revelar className="mt-5">
+        <div className="rounded-[var(--radius-xl2)] border border-white/8 bg-white/[0.025] p-6 md:p-7">
+          <p className="text-[15px] font-medium text-white">{t("Antes de escolher, vale saber")}</p>
+          <ul className="mt-4 grid gap-3 md:grid-cols-2">
+            {[
+              "Os artigos são publicados no blog do seu site. Se você ainda não tem site com blog, ele é orçado à parte.",
+              "Os acessos ao site e ao Perfil da Empresa no Google são fornecidos por você.",
+              "SEO local, capa personalizada, relatório mensal e prioridade na produção fazem parte do Plano Autoridade.",
+              "Mais artigos ampliam as páginas que podem ser encontradas, mas visibilidade também depende de concorrência, qualidade e tempo.",
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-3 text-[14.5px] leading-relaxed text-[var(--color-fg-muted)]">
+                <span aria-hidden className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand)]" />
+                {t(item)}
+              </li>
+            ))}
+          </ul>
         </div>
       </Revelar>
 

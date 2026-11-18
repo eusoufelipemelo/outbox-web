@@ -76,6 +76,9 @@ export default function VantagensGE({ tituloClasse }: { tituloClasse: string }) 
         <div className="mt-10 grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
           <div className="min-w-0">
             <CelularGE />
+            <p className="mt-3 text-center text-[12.5px] text-[var(--color-fg-subtle)]">
+              {t("Simulação ilustrativa. Não representa resultado garantido.")}
+            </p>
           </div>
 
           <div className="flex min-w-0 flex-col gap-9">
