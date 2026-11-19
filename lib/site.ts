@@ -15,6 +15,11 @@ export const SITE = {
   phoneE164: "+5547996597775",
   whatsappNumber: "5547996597775",
 
+  /** Telefone com DDD da sede (14): o mesmo DDD do endereço ajuda o SEO local.
+      O WhatsApp acima continua sendo o canal dos botões. */
+  telefoneSede: "(14) 9.9764-6257",
+  telefoneSedeE164: "+5514997646257",
+
   instagramBrand: "https://instagram.com/otbxgroup",
   instagramBrandHandle: "@otbxgroup",
   instagramPersonal: "https://instagram.com/eusoufelipemelo",

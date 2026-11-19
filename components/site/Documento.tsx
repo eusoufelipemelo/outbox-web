@@ -25,7 +25,7 @@ export default function Documento({ locale, children }: { locale: Locale; childr
     url: SITE.url,
     description: t(SITE.description),
     email: SITE.email,
-    telephone: SITE.phoneE164,
+    telephone: [SITE.telefoneSedeE164, SITE.phoneE164],
     taxID: SITE.cnpj,
     address: {
       "@type": "PostalAddress",

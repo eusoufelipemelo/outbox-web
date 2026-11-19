@@ -7,10 +7,11 @@ import type { Locale } from "@/lib/i18n/config";
  * atendimento é por WhatsApp e videochamada. Por isso o site fala em "atender
  * empresas" da região, nunca em "visite nosso escritório".
  *
- * PENDENTE DE APROVAÇÃO: a lista de cidades abaixo foi montada pela proximidade
- * com a sede e pelo Google Trends (Ourinhos e Bauru aparecem entre as cidades
- * paulistas que mais buscam "criar site"). Basta editar aqui para mudar em todo
- * o site (títulos, dados estruturados, página regional e rodapé).
+ * A OutBox atende todo o Brasil e o exterior. A lista de cidades não limita o
+ * atendimento: ela existe para quem busca um serviço "em Ourinhos", "em Bauru"
+ * etc. encontrar a OutBox (SEO local). Montada pela proximidade com a sede e
+ * pelo Google Trends (Ourinhos e Bauru aparecem entre as cidades paulistas que
+ * mais buscam "criar site"). Editar aqui muda o site inteiro.
  */
 
 export const SEDE = { cidade: "Santa Cruz do Rio Pardo", uf: "SP", estado: "São Paulo" } as const;
@@ -47,10 +48,11 @@ export function tituloLocal(titulo: string, locale: Locale) {
 /** Acrescenta a região atendida ao fim da descrição, em português. */
 export function descricaoLocal(descricao: string, locale: Locale) {
   if (locale !== "pt") return descricao;
-  return `${descricao} Atendemos ${SEDE.cidade}, Ourinhos, Bauru, Marília e todo o Brasil.`;
+  return `${descricao} Sede em ${SEDE.cidade}, atendendo Ourinhos, Bauru, Marília, todo o Brasil e o exterior.`;
 }
 
-/** areaServed do schema.org: as cidades, o estado e o país (atendimento online). */
+/** areaServed do schema.org: as cidades da região, o estado, o Brasil e o
+    exterior (atendimento online, em português e inglês). */
 export function areaServedJsonLd() {
   return [
     ...CIDADES.map((c) => ({
@@ -60,5 +62,6 @@ export function areaServedJsonLd() {
     })),
     { "@type": "State", name: SEDE.estado },
     { "@type": "Country", name: "Brasil" },
+    { "@type": "Place", name: "Exterior (atendimento online)" },
   ];
 }

@@ -96,7 +96,7 @@ export default function MapaOutBox() {
           CEP {E.cep}
         </address>
         <p className="mt-4 max-w-[38ch] text-[14.5px] leading-relaxed text-[var(--color-fg-muted)]">
-          {t("Atendemos empresas de todo o Brasil on-line. Para falar com a gente, use o formulário acima ou o WhatsApp.")}
+          {t("Atendemos empresas de todo o Brasil e do exterior on-line. Para falar com a gente, use o formulário acima ou o WhatsApp.")}
         </p>
         <a
           href={LINK_GOOGLE}

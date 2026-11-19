@@ -109,6 +109,16 @@ export default function Footer() {
                 >
                   <Phone className="h-4 w-4 shrink-0 text-[var(--color-brand)]" />
                   {SITE.phoneDisplay}
+                  <span className="text-[13px] text-[var(--color-fg-subtle)]">WhatsApp</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`tel:${SITE.telefoneSedeE164}`}
+                  className="group flex min-h-11 cursor-pointer items-center gap-3 text-[15px] text-[var(--color-fg-muted)] transition-colors duration-200 hover:text-white"
+                >
+                  <Phone className="h-4 w-4 shrink-0 text-[var(--color-brand)]" />
+                  {SITE.telefoneSede}
                 </a>
               </li>
               <li>
@@ -126,7 +136,7 @@ export default function Footer() {
                 <address className="not-italic leading-relaxed">
                   {SITE.endereco.rua}, {SITE.endereco.bairro}
                   <br />
-                  {SITE.endereco.cidade}, {SITE.endereco.cep}
+                  {SITE.endereco.cidade}, <span className="whitespace-nowrap">{SITE.endereco.cep}</span>
                   {locale === "pt" && (
                     <Link
                       href={ROTA_REGIAO}

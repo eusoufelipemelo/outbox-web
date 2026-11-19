@@ -81,16 +81,16 @@ export function metadataGoogleEmpresas(locale: Locale): Metadata {
 
 function jsonLd(locale: Locale, t: (pt: string, vars?: Vars) => string) {
   const URL_PAGINA = urlPagina(locale);
-  const provedor = { "@id": `${SITE.url}/#organizacao` };
+  const provedor = { "@id": `${SITE.url}/#empresa` };
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "ProfessionalService",
-        "@id": `${SITE.url}/#organizacao`,
+        "@id": `${SITE.url}/#empresa`,
         name: SITE.name,
         url: SITE.url,
-        telephone: SITE.phoneE164,
+        telephone: [SITE.telefoneSedeE164, SITE.phoneE164],
         email: SITE.email,
         logo: `${SITE.url}/brand/outbox-logo-512.png`,
         address: {

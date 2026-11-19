@@ -23,7 +23,7 @@ import { jsonLdOferta } from "@/lib/jsonld";
  */
 
 const TITULO = `Agência digital em ${SEDE.cidade} (${SEDE.uf}): sites, sistemas e identidade visual`;
-const DESCRICAO = `A OutBox tem sede em ${SEDE.cidade} e cria sites, sistemas, logo e identidade visual, além de cuidar do Google Meu Negócio, para empresas de Ourinhos, Bauru, Marília, Assis e de toda a região, com atendimento por WhatsApp e videochamada.`;
+const DESCRICAO = `A OutBox tem sede em ${SEDE.cidade} e cria sites, sistemas, logo e identidade visual, além de cuidar do Google Meu Negócio, para empresas de Ourinhos, Bauru, Marília, Assis e de toda a região, com atendimento por WhatsApp e videochamada também em todo o Brasil e no exterior.`;
 const MIGALHAS = [{ rotulo: "Início", href: "/" }, { rotulo: `${SEDE.cidade} e região` }];
 
 export const metadataRegiao: Metadata = {
@@ -66,7 +66,7 @@ const ETAPAS = [
 const FAQ = [
   {
     q: "A OutBox atende empresas de Ourinhos, Bauru e Marília?",
-    a: `Sim. A OutBox tem sede em ${SEDE.cidade} e atende empresas de toda a região, como Ourinhos, Bauru, Marília, Assis, Botucatu e Avaré, e também de outros estados. O atendimento é por WhatsApp e videochamada.`,
+    a: `Sim. A OutBox tem sede em ${SEDE.cidade} e atende empresas de toda a região, como Ourinhos, Bauru, Marília, Assis, Botucatu e Avaré, e também de todo o Brasil e do exterior. O atendimento é por WhatsApp e videochamada.`,
   },
   {
     q: "Posso ir até a sede para conversar?",
@@ -127,7 +127,7 @@ function Rota() {
         })}
         <li className="relative pl-8">
           <span aria-hidden className="absolute left-[3px] top-1.5 h-[9px] w-[9px] rounded-full bg-white/25" />
-          <p className="text-[15px] text-[var(--color-fg-muted)]">E empresas de todo o Brasil, por videochamada.</p>
+          <p className="text-[15px] text-[var(--color-fg-muted)]">E empresas de todo o Brasil e do exterior, por videochamada.</p>
         </li>
       </ol>
     </div>
@@ -154,7 +154,7 @@ export default function Regiao() {
           migalhas={MIGALHAS}
           rotulo={`${SEDE.cidade} e região`}
           titulo={`Agência digital em ${SEDE.cidade} e região.`}
-          apoio={`Sites, sistemas, logo, identidade visual e Google Meu Negócio feitos pela OutBox, com sede em ${SEDE.cidade} (${SEDE.uf}). Atendemos por WhatsApp e videochamada empresas de Ourinhos, Bauru, Marília, Assis e de todo o Brasil.`}
+          apoio={`Sites, sistemas, logo, identidade visual e Google Meu Negócio feitos pela OutBox, com sede em ${SEDE.cidade} (${SEDE.uf}). Atendemos por WhatsApp e videochamada empresas de Ourinhos, Bauru, Marília, Assis, de todo o Brasil e do exterior.`}
           ctas={[
             { texto: "Falar sobre meu projeto", href: `${ROTA_REGIAO}#formulario`, principal: true, rastreio: "regiao" },
             { texto: "Ver os serviços", href: "/servicos" },

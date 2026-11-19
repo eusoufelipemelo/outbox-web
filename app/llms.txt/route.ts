@@ -23,7 +23,7 @@ export async function GET() {
     ["Cases e clientes", "/cases"],
     ["Blog", "/blog"],
   ];
-  const sede = `Sede: ${SITE.endereco.rua}, ${SITE.endereco.bairro}, ${SITE.endereco.cidade} (sem atendimento presencial; atendimento por WhatsApp e videochamada). Atende ${CIDADES.map((c) => c.nome).join(", ")} e todo o Brasil.`;
+  const sede = `Sede: ${SITE.endereco.rua}, ${SITE.endereco.bairro}, ${SITE.endereco.cidade} (sem atendimento presencial; atendimento por WhatsApp e videochamada). Atende todo o Brasil e o exterior; na região da sede: ${CIDADES.map((c) => c.nome).join(", ")}. Telefone ${SITE.telefoneSede}, WhatsApp ${SITE.phoneDisplay}.`;
   const body = `# ${SITE.name}\n\n> ${SITE.description}\n\n${sede}\n\n## Links\n\n${links.map(([n, c]) => `- [${n}](${SITE.url}${c})`).join("\n")}\n`;
   return new Response(body, { headers: { "content-type": "text/plain; charset=utf-8" } });
 }
