@@ -114,8 +114,20 @@ export type FocoImagem = "direita" | "centro";
  * a direita do topo e se dissolve para a esquerda, para a pessoa do centro da
  * foto não ficar atrás do texto. Arquivos: `<imagem>-2400.webp` e `<imagem>-1200.webp`.
  */
-export function FundoHero({ imagem, foco = "direita" }: { imagem: string; foco?: FocoImagem }) {
+export function FundoHero({
+  imagem,
+  foco = "direita",
+  ancorarTopo = false,
+}: {
+  imagem: string;
+  foco?: FocoImagem;
+  /** Retrato já recortado com a cabeça logo abaixo do menu: alinha pelo topo. */
+  ancorarTopo?: boolean;
+}) {
   const centro = foco === "centro";
+  const posicao = centro
+    ? `object-center ${ancorarTopo ? "md:object-[50%_0%]" : "md:object-[50%_28%]"}`
+    : `object-[82%_50%] ${ancorarTopo ? "md:object-[100%_0%]" : "md:object-[100%_32%]"}`;
   return (
     <>
       <div
@@ -135,7 +147,7 @@ export function FundoHero({ imagem, foco = "direita" }: { imagem: string; foco?:
               alt=""
               fetchPriority="high"
               decoding="async"
-              className={`hero-bg__foto h-full w-full object-cover ${centro ? "object-center md:object-[50%_28%]" : "object-[82%_50%] md:object-[100%_32%]"}`}
+              className={`hero-bg__foto h-full w-full object-cover ${posicao}`}
             />
           </picture>
         </div>
@@ -169,6 +181,7 @@ export function Topo({
   lado,
   imagem,
   focoImagem = "direita",
+  ancorarTopo = false,
   nota,
 }: {
   migalhas: { rotulo: string; href?: string }[];
@@ -180,6 +193,8 @@ export function Topo({
   imagem?: string;
   /** Onde está a pessoa na foto: "direita" (fundo inteiro) ou "centro" (a foto ocupa a direita do topo). */
   focoImagem?: FocoImagem;
+  /** Repassa ao FundoHero: foto alinhada pelo topo. */
+  ancorarTopo?: boolean;
   /** Selo curto abaixo dos botões. */
   nota?: string;
 }) {
@@ -193,7 +208,7 @@ export function Topo({
       }`}
     >
       {imagem ? (
-        <FundoHero imagem={imagem} foco={focoImagem} />
+        <FundoHero imagem={imagem} foco={focoImagem} ancorarTopo={ancorarTopo} />
       ) : (
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="glow glow--brand absolute -top-40 left-[30%] h-[480px] w-[640px] -translate-x-1/2" />

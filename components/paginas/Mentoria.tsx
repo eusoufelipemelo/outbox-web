@@ -173,7 +173,7 @@ export default function Mentoria({ pagina }: { pagina: PaginaMentoria }) {
           <>
             <Topo
               migalhas={MIGALHAS.entrada}
-              imagem="/img/mentoria/felipe-mentoria-v2"
+              imagem="/img/mentoria/felipe-mentoria-v3" ancorarTopo
               rotulo="Aprenda o que existe por trás de uma operação digital"
               titulo={
                 <>
@@ -214,7 +214,7 @@ export default function Mentoria({ pagina }: { pagina: PaginaMentoria }) {
           <>
             <Topo
               migalhas={MIGALHAS.individual}
-              imagem="/img/mentoria/felipe-mentoria-v2"
+              imagem="/img/mentoria/felipe-mentoria-v3" ancorarTopo
               rotulo="Mentoria individual"
               titulo={
                 <>
@@ -258,7 +258,7 @@ export default function Mentoria({ pagina }: { pagina: PaginaMentoria }) {
           <>
             <Topo
               migalhas={MIGALHAS.grupo}
-              imagem="/img/mentoria/felipe-mentoria-v2"
+              imagem="/img/mentoria/felipe-mentoria-v3" ancorarTopo
               rotulo="Mentoria em grupo · lista de interesse"
               titulo={
                 <>

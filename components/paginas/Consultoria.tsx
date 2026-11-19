@@ -162,7 +162,7 @@ export default function Consultoria() {
             { texto: "Quero conhecer a consultoria", href: `${CAMINHO}#formulario`, principal: true, rastreio: "consultoria" },
             { texto: "Ver como funciona", href: `${CAMINHO}#como-funciona` },
           ]}
-          imagem="/img/consultoria/felipe-consultoria-v2"
+          imagem="/img/consultoria/felipe-consultoria-v3" ancorarTopo
           focoImagem="centro"
           nota="Serviço pago, independente da contratação de projetos"
         />
