@@ -54,12 +54,31 @@ export default async function BlogSection() {
   );
 }
 
-export function PostCard({ post, delay = 0 }: { post: Post; delay?: number }) {
+/**
+ * Card de artigo. `topo`: o card está na primeira dobra (índice do blog), então
+ * entra sem animação e com a capa priorizada, porque é a maior pintura da tela.
+ * `nivel`: h2 quando o card é o primeiro nível abaixo do H1 da página.
+ */
+export function PostCard({
+  post,
+  delay = 0,
+  topo = false,
+  prioridade = false,
+  nivel = "h3",
+}: {
+  post: Post;
+  delay?: number;
+  topo?: boolean;
+  /** Só o primeiro card do topo: a capa é baixada antes de tudo. */
+  prioridade?: boolean;
+  nivel?: "h2" | "h3";
+}) {
   const { t, href, locale } = getT();
+  const Titulo = nivel;
   return (
     <article
-      className="reveal card-dark group flex flex-col overflow-hidden"
-      style={{ transitionDelay: `${delay}ms` }}
+      className={`${topo ? "" : "reveal "}card-dark group flex flex-col overflow-hidden`}
+      style={topo ? undefined : { transitionDelay: `${delay}ms` }}
     >
       <Link href={href(`/blog/${post.slug}`)} className="flex flex-1 flex-col">
         <div className="relative h-[190px] overflow-hidden bg-gradient-to-br from-white/8 to-transparent">
@@ -68,6 +87,7 @@ export function PostCard({ post, delay = 0 }: { post: Post; delay?: number }) {
               src={post.cover_url}
               alt=""
               fill
+              priority={prioridade}
               sizes="(max-width: 768px) 100vw, 33vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
@@ -95,9 +115,9 @@ export function PostCard({ post, delay = 0 }: { post: Post; delay?: number }) {
         </div>
 
         <div className="flex flex-1 flex-col p-6">
-          <h3 className="font-display text-[19px] leading-snug text-white transition-colors duration-300 group-hover:text-[var(--color-brand)]">
+          <Titulo className="font-display text-[19px] leading-snug text-white transition-colors duration-300 group-hover:text-[var(--color-brand)]">
             {post.title}
-          </h3>
+          </Titulo>
           {post.excerpt && (
             <p className="mt-3 flex-1 text-[14.5px] leading-relaxed text-[var(--color-fg-muted)]">
               {post.excerpt}

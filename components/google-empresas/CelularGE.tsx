@@ -57,6 +57,9 @@ export default function CelularGE() {
     <div
       ref={ref}
       className={s.palco}
+      // Nasce pausado: o loop só roda quando o palco está na tela (o
+      // observador acima liga e desliga), não durante o carregamento.
+      data-pausado="1"
       role="img"
       aria-label={t("Simulação ilustrativa em um celular laranja: a empresa aparece no mapa do Google, é citada por uma inteligência artificial e recebe um novo contato no WhatsApp.")}
     >

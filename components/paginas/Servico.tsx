@@ -20,6 +20,7 @@ import { DICIONARIOS } from "@/lib/i18n/dicionarios";
 import { jsonLdOferta } from "@/lib/jsonld";
 import { CATALOGO, rotaServico } from "@/lib/catalogo";
 import { nomeServico, servicoPorSlug, SERVICOS } from "@/lib/servicos";
+import { descricaoLocal, tituloLocal } from "@/lib/regiao";
 import { SITE } from "@/lib/site";
 
 /* Modelo único das páginas de serviço (briefing de 18/11/2026, seção 05):
@@ -44,10 +45,15 @@ export function metadataServico(slug: string, locale: Locale): Metadata {
   if (!s) return {};
   const t = (pt: string) => traduzir(DICIONARIOS[locale], pt);
   return {
-    title: t(s.seo.titulo),
-    description: t(s.seo.descricao),
+    title: tituloLocal(t(s.seo.titulo), locale),
+    description: descricaoLocal(t(s.seo.descricao), locale),
     alternates: alternates(locale, `/servicos/${slug}`),
-    openGraph: { type: "website", locale: OG_LOCALE[locale], title: `${t(s.seo.titulo)} · ${SITE.name}`, description: t(s.seo.descricao) },
+    openGraph: {
+      type: "website",
+      locale: OG_LOCALE[locale],
+      title: `${tituloLocal(t(s.seo.titulo), locale)} · ${SITE.name}`,
+      description: descricaoLocal(t(s.seo.descricao), locale),
+    },
   };
 }
 

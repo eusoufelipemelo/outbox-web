@@ -1,4 +1,4 @@
-import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
+import { createPublicClient, isSupabaseConfigured } from "@/lib/supabase/server";
 import { INTL, type Locale } from "@/lib/i18n/config";
 import { getCmsPost, listCmsPosts, type CmsFaq, type CmsPost, type CmsSource } from "@/lib/outbox-cms";
 
@@ -128,7 +128,7 @@ async function getLocalPosts(limit?: number): Promise<{
   }
 
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
     let query = supabase
       .from("posts")
       .select("*")
@@ -160,7 +160,7 @@ async function getLocalPostBySlug(slug: string): Promise<Post | null> {
   }
 
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from("posts")
       .select("*")

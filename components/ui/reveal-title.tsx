@@ -1,59 +1,62 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { TextReveal, type TextRevealProps } from "@/components/ui/text-reveal";
+import { createElement, useEffect, useRef, useState, type JSX } from "react";
 
-type Props = Omit<TextRevealProps, "trigger"> & {
+type Props = {
+  children: string;
+  as?: keyof JSX.IntrinsicElements;
+  className?: string;
   /** Fração do elemento visível para disparar. */
   threshold?: number;
 };
 
 /**
  * Título que revela palavra a palavra quando entra na tela.
- * Respeita quem prefere menos movimento.
+ *
+ * O título existe no HTML desde o servidor (o Google e as IAs leem sem rodar
+ * JavaScript). A animação é só CSS, com opacidade e deslocamento, que rodam na
+ * GPU. As palavras só ficam escondidas quando o JavaScript está ativo (classe
+ * `js` no <html>), então uma falha de script nunca deixa o título invisível.
+ * O texto fica uma vez só no DOM (palavras em <span>, sem cópia escondida).
  */
-export default function RevealTitle({
-  threshold = 0.25,
-  as = "h2",
-  per = "word",
-  preset = "fade-in-blur",
-  speedReveal = 1.3,
-  ...rest
-}: Props) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
-  const [reduced, setReduced] = useState(false);
-
-  useEffect(() => {
-    setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  }, []);
+export default function RevealTitle({ children, as = "h2", className, threshold = 0.25 }: Props) {
+  const ref = useRef<HTMLElement>(null);
+  const [visto, setVisto] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setVisto(true);
+      return;
+    }
     const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          io.unobserve(el);
+      ([entrada]) => {
+        if (entrada.isIntersecting) {
+          setVisto(true);
+          io.disconnect();
         }
       },
-      { threshold, rootMargin: "0px 0px -6% 0px" }
+      { threshold, rootMargin: "0px 0px -6% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
   }, [threshold]);
 
-  return (
-    <div ref={ref}>
-      <TextReveal
-        as={as}
-        per={per}
-        preset={preset}
-        speedReveal={speedReveal}
-        trigger={reduced ? true : inView}
-        {...rest}
-      />
-    </div>
+  let i = 0;
+  const partes = children.split(/(\s+)/).map((p, k) =>
+    p.trim() ? (
+      <span key={k} className="rt-palavra" style={{ "--i": i++ } as React.CSSProperties}>
+        {p}
+      </span>
+    ) : (
+      p
+    ),
+  );
+
+  return createElement(
+    as,
+    { ref, className: `rt ${className ?? ""}`, "data-visto": visto ? "" : undefined },
+    ...partes,
   );
 }

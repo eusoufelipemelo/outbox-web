@@ -20,6 +20,7 @@ import { Revelar } from "@/components/ui/revelar";
 import PlanosGE from "@/components/google-empresas/PlanosGE";
 import { FundoHero } from "@/components/oferta/Blocos";
 import VantagensGE from "@/components/google-empresas/VantagensGE";
+import { descricaoLocal } from "@/lib/regiao";
 import { SITE } from "@/lib/site";
 import {
   GE_CONDICOES,
@@ -40,7 +41,7 @@ import { DICIONARIOS } from "@/lib/i18n/dicionarios";
 
 const urlPagina = (locale: Locale) => `${SITE.url}${localizar(locale, GE_ROTA)}`;
 /* O layout acrescenta " · OutBox Group" ao título: o total fica em 53 caracteres. */
-const TITULO = "Google Empresas: artigos com SEO e GEO";
+const TITULO = "Google Meu Negócio e Google Empresas: artigos com SEO e GEO";
 const DESCRICAO =
   "Artigos com SEO e GEO publicados todo mês no seu site e no Perfil da Empresa no Google, para aparecer na busca e nas IAs. Planos a partir de R$ 900.";
 const OG_IMAGEM = "/google-empresas-og.png";
@@ -48,7 +49,7 @@ const OG_IMAGEM = "/google-empresas-og.png";
 export function metadataGoogleEmpresas(locale: Locale): Metadata {
   const t = (pt: string) => traduzir(DICIONARIOS[locale], pt);
   const titulo = t(TITULO);
-  const descricao = t(DESCRICAO);
+  const descricao = descricaoLocal(t(DESCRICAO), locale);
   return {
     title: titulo,
     description: descricao,
@@ -326,7 +327,7 @@ export default function GoogleEmpresas() {
         </section>
 
         {/* Como funciona */}
-        <section id="como-funciona" className="relative py-20 md:py-28">
+        <section id="como-funciona" className="cv-auto relative py-20 md:py-28">
           <div className="container-outbox">
             <Revelar className="max-w-[44ch]">
               <Rotulo>{t("Como funciona")}</Rotulo>
@@ -367,7 +368,7 @@ export default function GoogleEmpresas() {
         </section>
 
         {/* GEO */}
-        <section id="geo" className="relative py-20 md:py-28">
+        <section id="geo" className="cv-auto relative py-20 md:py-28">
           <div className="container-outbox">
             <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
               <Revelar>
@@ -422,7 +423,7 @@ export default function GoogleEmpresas() {
         <VantagensGE tituloClasse={TITULO_SECAO} />
 
         {/* Planos */}
-        <section id="planos" className="relative scroll-mt-24 py-20 md:py-28">
+        <section id="planos" className="cv-auto relative scroll-mt-24 py-20 md:py-28">
           <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
             <div className="glow glow--brand absolute left-1/2 top-1/3 h-[560px] w-[760px] -translate-x-1/2 opacity-70" />
           </div>

@@ -100,7 +100,7 @@ export default function CookieConsent() {
         <button
           type="button"
           onClick={() => decidir("aceito")}
-          className="cursor-pointer rounded-full bg-[var(--color-brand)] px-5 py-3 text-[14.5px] font-medium text-white transition-all duration-300 hover:bg-[var(--color-brand-deep)]"
+          className="cursor-pointer rounded-full bg-[var(--color-brand-cta)] px-5 py-3 text-[14.5px] font-medium text-white transition-all duration-300 hover:bg-[var(--color-brand-deep)]"
         >
           {t("Aceitar")}
         </button>

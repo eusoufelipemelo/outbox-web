@@ -15,6 +15,7 @@ import { alternates } from "@/lib/i18n/meta";
 import { OG_LOCALE, traduzir, type Locale } from "@/lib/i18n/config";
 import { DICIONARIOS } from "@/lib/i18n/dicionarios";
 import { jsonLdOferta } from "@/lib/jsonld";
+import { descricaoLocal, tituloLocal } from "@/lib/regiao";
 import { SITE } from "@/lib/site";
 
 /* Consultoria Estratégica Empresarial (briefing de 18/11/2026, seção 03).
@@ -124,10 +125,10 @@ const CAMPOS: CampoLead[] = [
 export function metadataConsultoria(locale: Locale): Metadata {
   const t = (pt: string) => traduzir(DICIONARIOS[locale], pt);
   return {
-    title: t(TITULO),
-    description: t(DESCRICAO),
+    title: tituloLocal(t(TITULO), locale),
+    description: descricaoLocal(t(DESCRICAO), locale),
     alternates: alternates(locale, CAMINHO),
-    openGraph: { type: "website", locale: OG_LOCALE[locale], title: `${t(TITULO)} · ${SITE.name}`, description: t(DESCRICAO) },
+    openGraph: { type: "website", locale: OG_LOCALE[locale], title: `${tituloLocal(t(TITULO), locale)} · ${SITE.name}`, description: descricaoLocal(t(DESCRICAO), locale) },
   };
 }
 

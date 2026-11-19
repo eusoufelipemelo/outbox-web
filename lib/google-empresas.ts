@@ -146,6 +146,10 @@ export const GE_CONDICOES = {
 
 export const GE_FAQ = [
   {
+    q: "O Perfil da Empresa no Google é o mesmo que o Google Meu Negócio?",
+    a: "Sim. O Google Meu Negócio passou a se chamar Perfil da Empresa no Google, e muita gente ainda chama de Google Empresas. É a ficha da sua empresa que aparece na busca e no Google Maps, com endereço, horário, fotos, avaliações e publicações. É nela, e no seu site, que a OutBox publica os artigos todo mês.",
+  },
+  {
     q: "Preciso ter um site para contratar?",
     a: "Não. Se você ainda não tem site, a OutBox cria um com blog e painel próprio para receber os artigos. Se já tem, a gente adapta o que existe. O site é orçado à parte, porque o escopo muda de empresa para empresa.",
   },

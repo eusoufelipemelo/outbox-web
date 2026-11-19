@@ -112,7 +112,7 @@ export type FocoImagem = "direita" | "centro";
  * se dissolve no fundo. No computador: com foco "direita" ela ocupa o topo
  * inteiro (a pessoa já está à direita na foto); com foco "centro" ela ocupa só
  * a direita do topo e se dissolve para a esquerda, para a pessoa do centro da
- * foto não ficar atrás do texto. Arquivos: `<imagem>-2400.webp` e `<imagem>-1200.webp`.
+ * foto não ficar atrás do texto. Arquivos: `<imagem>-{760,1200,1600,2400}.{avif,webp}`.
  */
 export function FundoHero({
   imagem,
@@ -140,7 +140,28 @@ export function FundoHero({
       >
         <div className="hero-bg h-full w-full">
           <picture>
-            <source media="(max-width: 767px)" srcSet={`${imagem}-1200.webp`} />
+            <source
+              media="(max-width: 767px)"
+              type="image/avif"
+              srcSet={`${imagem}-760.avif 760w, ${imagem}-1200.avif 1200w`}
+              sizes="100vw"
+            />
+            <source
+              media="(max-width: 767px)"
+              type="image/webp"
+              srcSet={`${imagem}-760.webp 760w, ${imagem}-1200.webp 1200w`}
+              sizes="100vw"
+            />
+            <source
+              type="image/avif"
+              srcSet={`${imagem}-1600.avif 1600w, ${imagem}-2400.avif 2400w`}
+              sizes={centro ? "58vw" : "100vw"}
+            />
+            <source
+              type="image/webp"
+              srcSet={`${imagem}-1600.webp 1600w, ${imagem}-2400.webp 2400w`}
+              sizes={centro ? "58vw" : "100vw"}
+            />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`${imagem}-2400.webp`}
@@ -170,7 +191,7 @@ export function FundoHero({
  * Topo da página: migalhas, rótulo, H1, apoio e os CTAs. `lado` é o visual da
  * direita (opcional). `imagem` vira o fundo do topo, no modelo da home: a cena
  * à direita e o texto à esquerda no computador; no celular, a imagem em cima e
- * o texto embaixo. Espera dois arquivos: `<imagem>-2400.webp` e `<imagem>-1200.webp`.
+ * o texto embaixo. Arquivos: `<imagem>-{760,1200,1600,2400}.{avif,webp}`.
  */
 export function Topo({
   migalhas,

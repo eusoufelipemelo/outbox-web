@@ -189,7 +189,7 @@ export default function Navbar() {
           <Link
             href={h("/#contato")}
             onClick={() => setOpen(false)}
-            className="mt-8 flex items-center justify-center gap-2 rounded-full bg-[var(--color-brand)] px-6 py-4 font-medium text-white"
+            className="mt-8 flex items-center justify-center gap-2 rounded-full bg-[var(--color-brand-cta)] px-6 py-4 font-medium text-white"
           >
             {t("Falar sobre meu negócio")}
             <ArrowUpRight className="h-5 w-5" />

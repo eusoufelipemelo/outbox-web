@@ -16,6 +16,7 @@ import { DICIONARIOS } from "@/lib/i18n/dicionarios";
 import { jsonLdOferta } from "@/lib/jsonld";
 import { CATALOGO, GRUPOS, rotaServico } from "@/lib/catalogo";
 import { servicoPorSlug } from "@/lib/servicos";
+import { descricaoLocal, tituloLocal } from "@/lib/regiao";
 import { SITE } from "@/lib/site";
 
 /** /servicos: os onze serviços da OutBox, por grupo. */
@@ -31,10 +32,10 @@ const RESUMO_GE = "Organize a sua presença nas buscas locais com informações 
 export function metadataCatalogo(locale: Locale): Metadata {
   const t = (pt: string) => traduzir(DICIONARIOS[locale], pt);
   return {
-    title: t(TITULO),
-    description: t(DESCRICAO),
+    title: tituloLocal(t(TITULO), locale),
+    description: descricaoLocal(t(DESCRICAO), locale),
     alternates: alternates(locale, "/servicos"),
-    openGraph: { type: "website", locale: OG_LOCALE[locale], title: `${t(TITULO)} · ${SITE.name}`, description: t(DESCRICAO) },
+    openGraph: { type: "website", locale: OG_LOCALE[locale], title: `${tituloLocal(t(TITULO), locale)} · ${SITE.name}`, description: descricaoLocal(t(DESCRICAO), locale) },
   };
 }
 

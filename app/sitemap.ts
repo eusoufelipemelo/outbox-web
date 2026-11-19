@@ -3,6 +3,7 @@ import { LEGAL_LINKS, SITE } from "@/lib/site";
 import { getPublishedPosts } from "@/lib/blog";
 import { HTML_LANG, LOCALES, localizar } from "@/lib/i18n/config";
 import { SERVICOS } from "@/lib/servicos";
+import { ROTA_REGIAO } from "@/lib/regiao";
 
 export const revalidate = 3600;
 
@@ -34,6 +35,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...emTodosIdiomas("/mentoria/grupo", { lastModified: agora, changeFrequency: "monthly", priority: 0.7 }),
     ...emTodosIdiomas("/cases", { lastModified: agora, changeFrequency: "monthly", priority: 0.7 }),
     { url: `${SITE.url}/felipemelo`, lastModified: agora, changeFrequency: "monthly", priority: 0.8 },
+    // Página regional (SEO local): só em português.
+    { url: `${SITE.url}${ROTA_REGIAO}`, lastModified: agora, changeFrequency: "monthly", priority: 0.9 },
     ...emTodosIdiomas("/blog", { lastModified: agora, changeFrequency: "weekly", priority: 0.8 }),
     ...LEGAL_LINKS.flatMap((l) =>
       emTodosIdiomas(l.href, { lastModified: agora, changeFrequency: "yearly", priority: 0.3 }),

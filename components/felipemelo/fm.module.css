@@ -9,7 +9,7 @@
   min-height: 100vh;
   background: #fbf9f8;
   color: #1f1f1f;
-  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
 }
 .pagina :is(a, button, input, select, textarea):focus-visible {
   outline: 2.5px solid #f15532;

@@ -233,7 +233,7 @@ export default function FormularioLead({
       <button
         type="submit"
         disabled={enviando}
-        className="group flex min-h-14 cursor-pointer items-center justify-center gap-2.5 rounded-full bg-[var(--color-brand)] px-6 py-4 text-[15px] font-medium text-white transition-all duration-300 hover:bg-[var(--color-brand-deep)] hover:shadow-[0_14px_40px_rgba(241,85,50,0.35)] disabled:opacity-60"
+        className="group flex min-h-14 cursor-pointer items-center justify-center gap-2.5 rounded-full bg-[var(--color-brand-cta)] px-6 py-4 text-[15px] font-medium text-white transition-all duration-300 hover:bg-[var(--color-brand-deep)] hover:shadow-[0_14px_40px_rgba(241,85,50,0.35)] disabled:opacity-60"
       >
         {enviando ? (
           <>

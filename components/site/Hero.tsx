@@ -17,29 +17,44 @@ export default function Hero() {
       {/* Palco com a imagem de fundo: zoom lento e as luzes de neon pulsando */}
       <div className="relative flex min-h-[100svh] items-end overflow-hidden md:min-h-[min(100svh,960px)] md:items-center">
         <div aria-hidden className="hero-bg absolute inset-x-0 top-0 h-[74svh] md:inset-0 md:h-auto">
+          {/* Cada tela baixa só o tamanho de que precisa, em AVIF (com WebP de
+              reserva). A foto é a maior pintura da página: chega primeiro. */}
           <picture>
-            <source media="(max-width: 767px)" srcSet="/img/hero/hero-mobile.webp" type="image/webp" />
-            <source media="(max-width: 767px)" srcSet="/img/hero/hero-mobile.jpg" />
-            <source srcSet="/img/hero/hero-desktop.webp" type="image/webp" />
+            <source
+              media="(max-width: 767px)"
+              type="image/avif"
+              srcSet="/img/hero/hero-mobile-480.avif 480w, /img/hero/hero-mobile-760.avif 760w, /img/hero/hero-mobile-1080.avif 1080w"
+              sizes="100vw"
+            />
+            <source
+              media="(max-width: 767px)"
+              type="image/webp"
+              srcSet="/img/hero/hero-mobile-480.webp 480w, /img/hero/hero-mobile-760.webp 760w, /img/hero/hero-mobile-1080.webp 1080w"
+              sizes="100vw"
+            />
+            <source
+              type="image/avif"
+              srcSet="/img/hero/hero-desktop-1280.avif 1280w, /img/hero/hero-desktop-1920.avif 1920w, /img/hero/hero-desktop-2560.avif 2560w"
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcSet="/img/hero/hero-desktop-1280.webp 1280w, /img/hero/hero-desktop-1920.webp 1920w, /img/hero/hero-desktop-2560.webp 2560w"
+              sizes="100vw"
+            />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/img/hero/hero-desktop.jpg"
+              src="/img/hero/hero-desktop-1920.webp"
               alt=""
               fetchPriority="high"
               decoding="async"
               className="hero-bg__foto h-full w-full object-cover object-[50%_40%] md:object-[70%_50%]"
             />
           </picture>
-          <picture>
-            <source media="(max-width: 767px)" srcSet="/img/hero/neon-mobile.webp" />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/img/hero/neon-desktop.webp"
-              alt=""
-              decoding="async"
-              className="hero-bg__neon absolute inset-0 h-full w-full object-cover object-[50%_40%] md:object-[70%_50%]"
-            />
-          </picture>
+          {/* Luzes de neon pulsando: decoração, então a imagem só é baixada
+              depois do primeiro gesto da pessoa (fundo por CSS em .anim-ok),
+              sem disputar banda com a foto no carregamento. */}
+          <div className="hero-bg__neon hero-neon absolute inset-0" />
         </div>
 
         {/* Sombras para o texto ler bem: lado esquerdo no desktop, base no celular */}

@@ -81,7 +81,7 @@ export const SERVICOS: Servico[] = [
     ],
     relacionados: ["sites-com-blog", "landing-pages", "identidade-visual"],
     seo: {
-      titulo: "Criação de site profissional",
+      titulo: "Criação de sites para empresas",
       descricao: "Site profissional com clareza, performance e experiência mobile, para explicar o valor da sua empresa e facilitar novos negócios.",
     },
   },
@@ -301,8 +301,8 @@ export const SERVICOS: Servico[] = [
     ],
     relacionados: ["apresentacoes-comerciais", "sites", "landing-pages"],
     seo: {
-      titulo: "Identidade visual e branding",
-      descricao: "Identidade visual completa, posicionamento e manual de marca para a sua empresa transmitir o valor que entrega, em todos os pontos de contato.",
+      titulo: "Criação de logo e identidade visual",
+      descricao: "Criação de logo, identidade visual completa, posicionamento e manual de marca para a sua empresa transmitir o valor que entrega, em todos os pontos de contato.",
     },
   },
   {
@@ -412,8 +412,8 @@ export const SERVICOS: Servico[] = [
     ],
     relacionados: ["micro-saas", "gestao-ecommerce", "sites"],
     seo: {
-      titulo: "Desenvolvimento de sistemas personalizados",
-      descricao: "Sistemas sob medida para tirar a operação das planilhas: processos mapeados, controle de acesso, painéis, relatórios e automações.",
+      titulo: "Desenvolvimento de sistemas para empresas",
+      descricao: "Sistemas de gestão sob medida para tirar a operação das planilhas: processos mapeados, controle de acesso, painéis, relatórios e automações.",
     },
   },
   {

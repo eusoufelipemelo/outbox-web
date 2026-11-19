@@ -128,7 +128,7 @@ export default function FormComentario({ slug }: { slug: string }) {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="flex min-h-12 shrink-0 cursor-pointer items-center justify-center gap-2.5 rounded-full bg-[var(--color-brand)] px-6 py-3 text-[15px] font-medium text-white transition-colors duration-300 hover:bg-[var(--color-brand-deep)] disabled:opacity-60"
+          className="flex min-h-12 shrink-0 cursor-pointer items-center justify-center gap-2.5 rounded-full bg-[var(--color-brand-cta)] px-6 py-3 text-[15px] font-medium text-white transition-colors duration-300 hover:bg-[var(--color-brand-deep)] disabled:opacity-60"
         >
           {status === "sending" ? (
             <>

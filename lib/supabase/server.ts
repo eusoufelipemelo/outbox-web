@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
 export const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
 export const SUPABASE_ANON_KEY =
@@ -39,5 +40,20 @@ export function createAdminClient() {
 
   return createServerClient(SUPABASE_URL, SUPABASE_SERVICE_KEY, {
     cookies: { getAll: () => [], setAll: () => {} },
+  });
+}
+
+/**
+ * Cliente de leitura pública (sem sessão e sem cookies), para o blog e as
+ * páginas abertas. Ler cookies tornaria a página dinâmica e o Next deixaria
+ * de servir a versão pronta em cache (ISR). As leituras ficam em cache por
+ * 60 s e a tag "posts" permite atualizar na hora ao publicar.
+ */
+export function createPublicClient() {
+  return createSupabaseClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+    global: {
+      fetch: (input, init) => fetch(input, { ...init, next: { revalidate: 60, tags: ["posts"] } }),
+    },
   });
 }

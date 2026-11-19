@@ -4,6 +4,7 @@ import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { LEGAL_LINKS, SITE, whatsappLink } from "@/lib/site";
 import { getT } from "@/lib/i18n/server";
 import VoltarAoTopo from "@/components/site/VoltarAoTopo";
+import { ROTA_REGIAO, SEDE } from "@/lib/regiao";
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -15,7 +16,7 @@ function InstagramIcon({ className }: { className?: string }) {
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const { t, href } = getT();
+  const { t, href, locale } = getT();
 
   return (
     <footer className="relative overflow-hidden border-t border-white/8 pt-20 pb-10">
@@ -119,9 +120,22 @@ export default function Footer() {
                   {SITE.email}
                 </a>
               </li>
-              <li className="flex min-h-11 items-center gap-3 text-[15px] text-[var(--color-fg-muted)]">
-                <MapPin className="h-4 w-4 shrink-0 text-[var(--color-brand)]" />
-                {SITE.city}
+              <li className="flex min-h-11 items-start gap-3 py-2.5 text-[15px] text-[var(--color-fg-muted)]">
+                <MapPin className="mt-1 h-4 w-4 shrink-0 text-[var(--color-brand)]" />
+                {/* Nome, endereço e telefone iguais em todo lugar ajudam o SEO local. */}
+                <address className="not-italic leading-relaxed">
+                  {SITE.endereco.rua}, {SITE.endereco.bairro}
+                  <br />
+                  {SITE.endereco.cidade}, {SITE.endereco.cep}
+                  {locale === "pt" && (
+                    <Link
+                      href={ROTA_REGIAO}
+                      className="mt-1 block text-white/80 underline-offset-4 transition-colors hover:text-[var(--color-brand-soft)] hover:underline"
+                    >
+                      Atendimento em {SEDE.cidade} e região
+                    </Link>
+                  )}
+                </address>
               </li>
             </ul>
 

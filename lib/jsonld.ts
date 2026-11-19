@@ -1,4 +1,5 @@
 import { SITE } from "@/lib/site";
+import { areaServedJsonLd } from "@/lib/regiao";
 import { localizar, traduzir, type Locale } from "@/lib/i18n/config";
 import { DICIONARIOS } from "@/lib/i18n/dicionarios";
 
@@ -31,8 +32,8 @@ export function jsonLdOferta({
       url: url(caminho),
       ...(tipo === "Service"
         ? {
-            provider: { "@type": "ProfessionalService", name: SITE.name, url: SITE.url },
-            areaServed: { "@type": "Country", name: "Brasil" },
+            provider: { "@type": "ProfessionalService", "@id": `${SITE.url}/#empresa`, name: SITE.name, url: SITE.url },
+            areaServed: areaServedJsonLd(),
           }
         : {}),
     },

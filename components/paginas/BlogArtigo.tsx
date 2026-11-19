@@ -248,7 +248,7 @@ export default async function BlogArtigo({ slug }: { slug: string }) {
                   <div className="mt-7 flex flex-wrap justify-center gap-3">
                     <Link
                       href={href("/#contato")}
-                      className="cursor-pointer rounded-full bg-[var(--color-brand)] px-6 py-3.5 text-[14.5px] font-medium text-white transition-all duration-300 hover:bg-[var(--color-brand-deep)]"
+                      className="cursor-pointer rounded-full bg-[var(--color-brand-cta)] px-6 py-3.5 text-[14.5px] font-medium text-white transition-all duration-300 hover:bg-[var(--color-brand-deep)]"
                     >
                       {t("Falar com a OutBox")}
                     </Link>

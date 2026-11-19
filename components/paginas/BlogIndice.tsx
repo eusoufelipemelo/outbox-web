@@ -6,7 +6,6 @@ import WhatsAppFloat from "@/components/site/WhatsAppFloat";
 import ScrollEffects from "@/components/ui/ScrollEffects";
 import { PostCard } from "@/components/site/BlogSection";
 import { getPublishedPosts } from "@/lib/blog";
-import RevealTitle from "@/components/ui/reveal-title";
 import AboutFelipe from "@/components/site/AboutFelipe";
 import { getT } from "@/lib/i18n/server";
 import { localizarPost } from "@/lib/i18n/blog";
@@ -46,12 +45,10 @@ export default async function BlogIndice() {
               />
               {t("Blog da OutBox")}
             </span>
-            <RevealTitle
-              as="h1"
-              className="mx-auto mt-7 max-w-[18ch] font-display text-[clamp(2.2rem,5.5vw,4rem)] leading-[1.04] text-white"
-            >
+            {/* Título do topo sem animação de entrada: é o primeiro texto da tela. */}
+            <h1 className="mx-auto mt-7 max-w-[18ch] font-display text-[clamp(2.2rem,5.5vw,4rem)] leading-[1.04] text-white">
               {t("Ideias que fazem a sua marca crescer.")}
-            </RevealTitle>
+            </h1>
             <p className="reveal mx-auto mt-6 max-w-[58ch] text-[17px] leading-relaxed text-[var(--color-fg-muted)]">
               {t("Performance, SEO, GEO, branding e tecnologia explicados sem jargão, do jeito que a gente conversa com os nossos clientes.")}
             </p>
@@ -67,7 +64,7 @@ export default async function BlogIndice() {
             ) : (
               <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {posts.map((post, i) => (
-                  <PostCard key={post.id} post={post} delay={(i % 3) * 90} />
+                  <PostCard key={post.id} post={post} delay={(i % 3) * 90} nivel="h2" topo={i < 3} prioridade={i === 0} />
                 ))}
               </div>
             )}
