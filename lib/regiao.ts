@@ -19,7 +19,8 @@ export const SEDE = { cidade: "Santa Cruz do Rio Pardo", uf: "SP", estado: "São
 /** Rota da página regional (só em português: é busca local no Brasil). */
 export const ROTA_REGIAO = "/agencia-digital-santa-cruz-do-rio-pardo";
 
-/** Cidades atendidas, da mais próxima da sede para a mais distante. */
+/** Cidades atendidas, da mais próxima da sede para a mais distante: as mesmas
+    20 áreas de cobertura do Perfil da Empresa no Google (19/11/2026). */
 export const CIDADES = [
   { nome: "Santa Cruz do Rio Pardo", grupo: "Sede" },
   { nome: "Ourinhos", grupo: "Vizinhança" },
@@ -35,6 +36,12 @@ export const CIDADES = [
   { nome: "Bauru", grupo: "Polos da região" },
   { nome: "Botucatu", grupo: "Polos da região" },
   { nome: "Avaré", grupo: "Polos da região" },
+  { nome: "Cândido Mota", grupo: "Polos da região" },
+  { nome: "Palmital", grupo: "Polos da região" },
+  { nome: "Paraguaçu Paulista", grupo: "Polos da região" },
+  { nome: "Lençóis Paulista", grupo: "Polos da região" },
+  { nome: "Jaú", grupo: "Polos da região" },
+  { nome: "São Paulo", grupo: "Capital" },
 ] as const;
 
 /** As cidades que cabem numa frase (título, descrição, rodapé). */

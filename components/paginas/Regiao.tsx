@@ -98,7 +98,7 @@ const CAMPOS: CampoLead[] = [
 
 /** A rota da OutBox: da sede para as cidades vizinhas e os polos da região. */
 function Rota() {
-  const grupos = ["Sede", "Vizinhança", "Polos da região"] as const;
+  const grupos = ["Sede", "Vizinhança", "Polos da região", "Capital"] as const;
   return (
     <div className="card-dark p-6 md:p-8">
       <p className="text-[14px] text-[var(--color-fg-muted)]">Onde a OutBox atende</p>
