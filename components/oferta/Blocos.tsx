@@ -145,8 +145,8 @@ export function FundoHero({ imagem, foco = "direita" }: { imagem: string; foco?:
         aria-hidden
         className={`absolute inset-x-0 top-0 h-[54svh] bg-[linear-gradient(to_bottom,rgba(0,0,0,0.5)_0%,transparent_35%)] md:inset-0 md:h-auto ${
           centro
-            ? "md:bg-[linear-gradient(to_right,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.6)_40%,transparent_60%)]"
-            : "md:bg-[linear-gradient(to_right,rgba(0,0,0,0.94)_0%,rgba(0,0,0,0.72)_38%,rgba(0,0,0,0.15)_68%,transparent_85%)]"
+            ? "md:bg-[linear-gradient(to_right,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.82)_45%,rgba(0,0,0,0.3)_62%,transparent_72%)]"
+            : "md:bg-[linear-gradient(to_right,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.8)_42%,rgba(0,0,0,0.35)_60%,transparent_80%)]"
         }`}
       />
       <div aria-hidden className="absolute inset-x-0 bottom-0 hidden h-40 bg-gradient-to-t from-black to-transparent md:block" />
@@ -188,7 +188,7 @@ export function Topo({
     <section
       className={`relative overflow-hidden pb-16 md:pb-24 ${
         imagem
-          ? "pt-[44svh] md:flex md:min-h-[clamp(660px,54vw,840px)] md:items-center md:pt-32"
+          ? "pt-[44svh] md:flex md:min-h-[min(100svh,960px)] md:items-center md:pt-[120px]"
           : "pt-36 md:pt-44"
       }`}
     >
@@ -202,7 +202,7 @@ export function Topo({
       <div
         className={`container-outbox relative z-10 w-full ${lado ? "grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]" : ""}`}
       >
-        <div className={lado ? "" : imagem ? "max-w-[560px] xl:max-w-[640px]" : "max-w-[860px]"}>
+        <div className={lado ? "" : imagem ? "max-w-[640px] xl:max-w-[700px]" : "max-w-[860px]"}>
           <Migalhas itens={migalhas} />
           <Revelar>
             <Rotulo>{t(rotulo)}</Rotulo>
@@ -211,7 +211,7 @@ export function Topo({
             <h1
               className={
                 imagem
-                  ? "mt-6 font-display text-[clamp(2.1rem,3.6vw,3.15rem)] leading-[1.06] text-white text-balance"
+                  ? "mt-8 font-display text-[clamp(2.4rem,5.2vw,4.4rem)] leading-[1.03] text-white text-balance"
                   : "mt-7 max-w-[20ch] font-display text-[clamp(2.3rem,5.6vw,4.2rem)] leading-[1.04] text-white"
               }
             >
@@ -222,14 +222,14 @@ export function Topo({
             <p
               className={
                 imagem
-                  ? "mt-6 max-w-[54ch] text-[16.5px] leading-relaxed text-[var(--color-fg-muted)] md:text-[17px]"
+                  ? "mt-7 max-w-[52ch] text-[17px] leading-relaxed text-white/80 md:text-lg"
                   : "mt-7 max-w-[60ch] text-[17px] leading-relaxed text-[var(--color-fg-muted)] md:text-lg"
               }
             >
               {t(apoio)}
             </p>
           </Revelar>
-          <Revelar atraso={0.15} className={imagem ? "mt-8" : "mt-10"}>
+          <Revelar atraso={0.15} className="mt-10">
             <Botoes ctas={ctas} />
           </Revelar>
           {nota && (
