@@ -5,7 +5,7 @@ import HeroCta from "@/components/site/HeroCta";
 import { getT } from "@/lib/i18n/server";
 
 const STATS = [
-  { value: "250+", label: "Projetos entregues", highlight: false },
+  { value: "1.250+", label: "Projetos entregues", highlight: false },
   { value: "15 anos", label: "De estrada em criação", highlight: true },
   { value: "500+", label: "Clientes atendidos", highlight: false },
 ];

@@ -25,7 +25,7 @@ export function fmWhatsapp(assunto?: string) {
 /** Os três números que resumem a estrada, todos já publicados no site da OutBox. */
 export const FM_NUMEROS = [
   { valor: "15", sufixo: "anos", rotulo: "criando marcas e presença digital" },
-  { valor: "250", sufixo: "+", rotulo: "projetos entregues" },
+  { valor: "1.250", sufixo: "+", rotulo: "projetos entregues" },
   { valor: "500", sufixo: "+", rotulo: "clientes atendidos" },
 ] as const;
 

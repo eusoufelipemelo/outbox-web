@@ -198,12 +198,12 @@ export default function Consultoria() {
                 <dl className="grid grid-cols-3 gap-3">
                   {[
                     ["15", "anos com marcas e soluções digitais"],
-                    ["250+", "projetos entregues"],
+                    ["1.250+", "projetos entregues"],
                     ["500+", "clientes atendidos"],
                   ].map(([n, r]) => (
-                    <div key={r} className="card-dark flex flex-col justify-between p-5">
+                    <div key={r} className="card-dark flex flex-col justify-between p-4 sm:p-5">
                       <dt className="order-2 mt-2 text-[13px] leading-snug text-[var(--color-fg-muted)]">{t(r)}</dt>
-                      <dd className="order-1 font-display text-[2rem] leading-none text-white">{n}</dd>
+                      <dd className="order-1 font-display text-[clamp(1.35rem,6.4vw,2rem)] leading-none text-white">{t(n)}</dd>
                     </div>
                   ))}
                 </dl>
