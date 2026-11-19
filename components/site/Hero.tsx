@@ -64,7 +64,7 @@ export default function Hero() {
 
         <div className="container-outbox relative z-10 pb-14 pt-[56svh] md:pb-14 md:pt-[112px]">
           <div className="flex flex-col items-center text-center md:max-w-[600px] md:items-start md:text-left">
-            <span className="pill reveal">
+            <span className="pill">
               <span
                 aria-hidden
                 className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"
@@ -72,7 +72,7 @@ export default function Hero() {
               {t("Agência de tecnologia e criação")}
             </span>
 
-            <h1 className="reveal-words mt-8 max-w-[16ch] font-display text-[clamp(2.5rem,5.6vw,4.6rem)] leading-[1.03] text-white">
+            <h1 className="mt-8 max-w-[16ch] font-display text-[clamp(2.5rem,5.6vw,4.6rem)] leading-[1.03] text-white">
               {t("Sua marca no digital, feita para")}{" "}
               <span className="text-brand-gradient">{t("vender")}</span> {t("e para ser")}{" "}
               <span className="text-brand-gradient">{t("encontrada")}</span>.

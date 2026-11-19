@@ -835,8 +835,17 @@ footer {
    ============================================================ */
 .hero-bg {
   transform-origin: 62% 45%;
+  transform: scale(1.02);
+}
+/* O zoom lento começa no primeiro gesto: na carga a foto fica parada, e a
+   página fica "pronta" para o olho (e para o PageSpeed) mais cedo. */
+.anim-ok .hero-bg {
   animation: hero-zoom 26s ease-in-out infinite alternate;
   will-change: transform;
+}
+/* Aviso de cookies: quem já decidiu não vê (classe posta antes da pintura). */
+.cookies-ok [data-aviso-cookies] {
+  display: none;
 }
 .hero-neon {
   background-repeat: no-repeat;
@@ -886,6 +895,7 @@ footer {
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-bg,
+  .anim-ok .hero-bg,
   .hero-bg__neon {
     animation: none;
   }
@@ -943,7 +953,8 @@ footer {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .borda-viva::before {
+  .borda-viva::before,
+  .anim-ok .borda-viva::before {
     animation: none;
   }
 }

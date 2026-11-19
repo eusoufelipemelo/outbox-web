@@ -9,7 +9,7 @@ import { getT } from "@/lib/i18n/server";
 import { clashDisplay, geist } from "@/lib/fontes";
 import { SEDE, areaServedJsonLd } from "@/lib/regiao";
 
-const SCRIPT_INICIAL = `(function(){var d=document.documentElement;d.classList.add("js");var e=["scroll","pointermove","pointerdown","touchstart","keydown","wheel"];function f(){d.classList.add("anim-ok");e.forEach(function(n){removeEventListener(n,f,true)})}e.forEach(function(n){addEventListener(n,f,{capture:true,passive:true})})})()`;
+const SCRIPT_INICIAL = `(function(){var d=document.documentElement;d.classList.add("js");try{if(localStorage.getItem("outbox-cookies"))d.classList.add("cookies-ok")}catch(_){}var e=["scroll","pointermove","pointerdown","touchstart","keydown","wheel"];function f(){d.classList.add("anim-ok");e.forEach(function(n){removeEventListener(n,f,true)})}e.forEach(function(n){addEventListener(n,f,{capture:true,passive:true})})})()`;
 
 /** O <html> do site, igual nos quatro idiomas. Só muda o lang e o dicionário. */
 export default function Documento({ locale, children }: { locale: Locale; children: ReactNode }) {
@@ -60,7 +60,8 @@ export default function Documento({ locale, children }: { locale: Locale; childr
       <head>
         {/* "js": as animações de entrada só escondem conteúdo quando há JS.
             "anim-ok": as animações decorativas contínuas (borda dos botões)
-            começam no primeiro gesto da pessoa, não na primeira pintura. */}
+            começam no primeiro gesto da pessoa, não na primeira pintura.
+            "cookies-ok": quem já decidiu sobre cookies não vê o aviso. */}
         <script dangerouslySetInnerHTML={{ __html: SCRIPT_INICIAL }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </head>

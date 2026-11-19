@@ -16,7 +16,10 @@ type Escolha = "aceito" | "recusado";
  * hierarquia e um clique só, como a LGPD espera.
  */
 export default function CookieConsent() {
-  const [visivel, setVisivel] = useState(false);
+  // Nasce visível no HTML do servidor: o aviso já vem na primeira pintura
+  // (sem "pular" na tela depois). Quem já decidiu nem chega a vê-lo: o script
+  // inicial do Documento põe .cookies-ok no <html> e o CSS esconde o aviso.
+  const [visivel, setVisivel] = useState(true);
   const [saindo, setSaindo] = useState(false);
   const { t, href } = useI18n();
 
@@ -27,14 +30,12 @@ export default function CookieConsent() {
     } catch {
       // Navegador bloqueando armazenamento: mostra o aviso mesmo assim.
     }
-    if (!salvo) {
-      const timer = setTimeout(() => setVisivel(true), 900);
-      return () => clearTimeout(timer);
-    }
+    if (salvo) setVisivel(false);
   }, []);
 
   useEffect(() => {
     const abrir = () => {
+      document.documentElement.classList.remove("cookies-ok");
       setSaindo(false);
       setVisivel(true);
     };
@@ -58,6 +59,7 @@ export default function CookieConsent() {
   return (
     <div
       role="dialog"
+      data-aviso-cookies=""
       aria-live="polite"
       aria-label={t("Aviso sobre cookies")}
       className={`fixed inset-x-4 bottom-4 z-[70] mx-auto max-w-[560px] rounded-[var(--radius-xl2)] border border-white/12 bg-[#0c0c0f]/97 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-all duration-300 md:right-6 md:left-auto md:mx-0 ${
