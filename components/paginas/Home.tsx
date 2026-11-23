@@ -7,6 +7,7 @@ import MentoriaHome from "@/components/site/MentoriaHome";
 import Services from "@/components/site/Services";
 import Process from "@/components/site/Process";
 import Comparison from "@/components/site/Comparison";
+import SelosEntrega from "@/components/site/SelosEntrega";
 import AboutFelipe from "@/components/site/AboutFelipe";
 import Testimonials3D from "@/components/site/Testimonials3D";
 import BlogSection from "@/components/site/BlogSection";
@@ -29,6 +30,7 @@ export default function Home() {
         <Services />
         <Process />
         <Comparison />
+        <SelosEntrega />
         <DiagnosticoHome />
         <AboutFelipe />
         <Testimonials3D />

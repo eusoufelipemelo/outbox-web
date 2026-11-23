@@ -1060,3 +1060,30 @@ footer {
     opacity: 0;
   }
 }
+
+/* ============================================================
+   Selos de entrega (home): o anel de texto gira um pouco quando a
+   pessoa passa o mouse no selo. Nada se move sozinho.
+   ============================================================ */
+.selo-giro {
+  transform-box: view-box;
+  transform-origin: 100px 100px;
+  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.selo {
+  transition: border-color 0.3s ease;
+}
+.selo:hover {
+  border-color: rgba(241, 85, 50, 0.35);
+}
+.selo:hover .selo-giro {
+  transform: rotate(48deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .selo-giro {
+    transition: none;
+  }
+  .selo:hover .selo-giro {
+    transform: none;
+  }
+}
