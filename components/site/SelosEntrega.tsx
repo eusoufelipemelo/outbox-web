@@ -129,7 +129,7 @@ export default function SelosEntrega() {
   }).format(new Date(`${MEDIDO_EM}T12:00:00Z`));
 
   return (
-    <section id="selos" className="relative overflow-hidden py-24 md:py-32">
+    <section id="selos" className="cv-auto relative overflow-hidden py-24 md:py-32">
       <div className="container-outbox relative z-10">
         <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-end lg:gap-16">
           <div>
