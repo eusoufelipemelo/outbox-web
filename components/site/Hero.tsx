@@ -4,6 +4,7 @@ import { preload } from "react-dom";
 import { Sparkles } from "lucide-react";
 import HeroCta from "@/components/site/HeroCta";
 import { getT } from "@/lib/i18n/server";
+import estilos from "./hero.module.css";
 
 const STATS = [
   { value: "1.250+", label: "Projetos entregues", highlight: false },
@@ -38,7 +39,7 @@ export default function Hero() {
     <section className="relative overflow-hidden pb-24 md:pb-32">
       {/* Palco com a imagem de fundo: zoom lento e as luzes de neon pulsando */}
       <div className="relative flex min-h-[100svh] items-end overflow-hidden md:min-h-[min(100svh,960px)] md:items-center">
-        <div aria-hidden className="hero-bg absolute inset-x-0 top-0 h-[74svh] md:inset-0 md:h-auto">
+        <div aria-hidden className={`hero-bg ${estilos.previa} absolute inset-x-0 top-0 h-[74svh] md:inset-0 md:h-auto`}>
           {/* Cada tela baixa só o tamanho de que precisa, em AVIF (com WebP de
               reserva). A foto é a maior pintura da página: chega primeiro. */}
           <picture>

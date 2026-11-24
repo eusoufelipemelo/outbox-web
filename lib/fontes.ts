@@ -20,5 +20,9 @@ export const geist = localFont({
   style: "normal",
   variable: "--font-geist",
   display: "swap",
+  // Sem pré-carregar: a fonte do texto corrido não pode disputar banda com a
+  // foto do topo (o LCP) no celular. O texto já nasce com a reserva de mesmas
+  // medidas e troca sem pular quando a Geist chega.
+  preload: false,
   fallback: ["system-ui", "Arial", "sans-serif"],
 });

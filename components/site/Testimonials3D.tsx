@@ -1,15 +1,12 @@
-"use client";
-
 import Image from "next/image";
 import { Marquee } from "@/components/ui/marquee";
 import RevealTitle from "@/components/ui/reveal-title";
 import { TESTIMONIALS } from "@/lib/site";
-import { useI18n } from "@/lib/i18n/client";
+import { getT } from "@/lib/i18n/server";
 
 type Depoimento = (typeof TESTIMONIALS)[number];
 
-function CartaoDepoimento({ quote, name, role, avatar }: Depoimento) {
-  const { t } = useI18n();
+function CartaoDepoimento({ quote, name, role, avatar, t }: Depoimento & { t: (pt: string) => string }) {
   return (
     <figure className="w-[290px] shrink-0 rounded-[var(--radius-xl2)] border border-white/12 bg-white/[0.055] p-6 transition-colors duration-300 hover:border-[var(--color-brand)]/50">
       <span
@@ -42,6 +39,9 @@ function CartaoDepoimento({ quote, name, role, avatar }: Depoimento) {
   );
 }
 
+/* Componente de servidor: os cartões chegam prontos no HTML e não custam
+   hidratação (antes eram ~30 cartões hidratados no celular). */
+
 /** Divide os depoimentos em colunas alternadas. */
 const colunas = [
   TESTIMONIALS.filter((_, i) => i % 3 === 0),
@@ -51,7 +51,7 @@ const colunas = [
 ];
 
 export default function Testimonials3D() {
-  const { t } = useI18n();
+  const { t } = getT();
   return (
     <section
       id="depoimentos"
@@ -105,7 +105,7 @@ export default function Testimonials3D() {
               className="[--duration:46s] [--gap:1rem]"
             >
               {coluna.map((d) => (
-                <CartaoDepoimento key={`${i}-${d.name}`} {...d} />
+                <CartaoDepoimento key={`${i}-${d.name}`} {...d} t={t} />
               ))}
             </Marquee>
           ))}
