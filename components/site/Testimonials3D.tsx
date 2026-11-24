@@ -55,7 +55,10 @@ export default function Testimonials3D() {
   return (
     <section
       id="depoimentos"
-      className="relative overflow-hidden py-24 md:py-32"
+      // Fora da primeira tela e a seção mais pesada (cartões em 3D): o
+      // navegador só a desenha quando ela chega perto. A altura reservada é a
+      // real, para a rolagem não pular.
+      className="relative overflow-hidden py-24 [content-visibility:auto] [contain-intrinsic-size:auto_940px] md:py-32 md:[contain-intrinsic-size:auto_1040px]"
     >
       <div className="container-outbox relative z-10">
         <div className="mx-auto max-w-[44ch] text-center">
@@ -98,7 +101,7 @@ export default function Testimonials3D() {
               vertical
               pauseOnHover
               reverse={i % 2 === 1}
-              repeat={3}
+              repeat={coluna.length >= 4 ? 2 : 3}
               className="[--duration:46s] [--gap:1rem]"
             >
               {coluna.map((d) => (

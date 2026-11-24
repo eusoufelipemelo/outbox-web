@@ -879,6 +879,13 @@ footer {
 html:not(.anim-ok) .animate-pulse-dot {
   animation: none;
 }
+/* Faixas que correm (depoimentos, logos) e o pulso do botão do WhatsApp:
+   paradas na carga, começam no primeiro gesto da pessoa. */
+html:not(.anim-ok) .animate-marquee,
+html:not(.anim-ok) .animate-marquee-vertical,
+html:not(.anim-ok) .animate-ping {
+  animation-play-state: paused;
+}
 @keyframes hero-zoom {
   from {
     transform: scale(1.02) translate3d(0, 0, 0);

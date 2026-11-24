@@ -4,12 +4,10 @@ const nextConfig: NextConfig = {
   // Gera o servidor mínimo para rodar em container (EasyPanel).
   output: "standalone",
 
-  // CSS dentro do HTML: o navegador pinta a primeira tela sem esperar mais
-  // uma viagem ao servidor pelo arquivo .css (no PageSpeed, que mede dos EUA,
-  // essa viagem custava centenas de milissegundos no celular).
-  experimental: {
-    inlineCss: true,
-  },
+  // inlineCss foi testado em 24/11/2026 e saiu: o Next manda o CSS duas vezes
+  // (no <style> e no payload do React) e o HTML da home dobrou de 300 KB para
+  // 600 KB. Ler o HTML era o maior custo do celular no PageSpeed (1,3 s de
+  // processador), então o CSS continua num arquivo, com cache de um ano.
 
   images: {
     // AVIF primeiro (cerca de 40% menor que WebP), WebP para quem não aceita.
