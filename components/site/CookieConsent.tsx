@@ -62,7 +62,7 @@ export default function CookieConsent() {
       data-aviso-cookies=""
       aria-live="polite"
       aria-label={t("Aviso sobre cookies")}
-      className={`fixed inset-x-4 bottom-4 z-[70] mx-auto max-w-[560px] rounded-[var(--radius-xl2)] border border-white/12 bg-[#0c0c0f]/97 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-all duration-300 md:right-6 md:left-auto md:mx-0 ${
+      className={`fixed inset-x-4 bottom-4 z-[70] mx-auto max-w-[560px] rounded-[var(--radius-xl2)] border border-white/12 bg-[#0c0c0f] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.6)] transition-all duration-300 md:right-6 md:left-auto md:mx-0 ${
         saindo
           ? "pointer-events-none translate-y-3 opacity-0"
           : "translate-y-0 opacity-100"

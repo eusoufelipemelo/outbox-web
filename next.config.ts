@@ -4,6 +4,13 @@ const nextConfig: NextConfig = {
   // Gera o servidor mínimo para rodar em container (EasyPanel).
   output: "standalone",
 
+  // CSS dentro do HTML: o navegador pinta a primeira tela sem esperar mais
+  // uma viagem ao servidor pelo arquivo .css (no PageSpeed, que mede dos EUA,
+  // essa viagem custava centenas de milissegundos no celular).
+  experimental: {
+    inlineCss: true,
+  },
+
   images: {
     // AVIF primeiro (cerca de 40% menor que WebP), WebP para quem não aceita.
     formats: ["image/avif", "image/webp"],
@@ -38,7 +45,15 @@ const nextConfig: NextConfig = {
   },
 
   async headers() {
+    // Imagens, marca e fontes da pasta public mudam raramente: cache de 30
+    // dias no navegador (antes era max-age=0, revalidando a cada visita).
+    const estaticos = {
+      key: "Cache-Control",
+      value: "public, max-age=2592000, stale-while-revalidate=86400",
+    };
     return [
+      { source: "/img/:path*", headers: [estaticos] },
+      { source: "/brand/:path*", headers: [estaticos] },
       {
         source: "/:path*",
         headers: [

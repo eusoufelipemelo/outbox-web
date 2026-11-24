@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { preload } from "react-dom";
 import { Sparkles } from "lucide-react";
 import HeroCta from "@/components/site/HeroCta";
 import { getT } from "@/lib/i18n/server";
@@ -10,8 +11,29 @@ const STATS = [
   { value: "500+", label: "Clientes atendidos", highlight: false },
 ];
 
+const FOTO_CELULAR = "/img/hero/hero-mobile-480.avif 480w, /img/hero/hero-mobile-760.avif 760w, /img/hero/hero-mobile-1080.avif 1080w";
+const FOTO_COMPUTADOR = "/img/hero/hero-desktop-1280.avif 1280w, /img/hero/hero-desktop-1920.avif 1920w, /img/hero/hero-desktop-2560.avif 2560w";
+
 export default function Hero() {
   const { t, href } = getT();
+  // A foto do topo é o LCP: o pedido sai já do <head>, antes de o navegador
+  // chegar à imagem no meio do HTML. Uma por tamanho de tela.
+  preload("/img/hero/hero-mobile-760.avif", {
+    as: "image",
+    type: "image/avif",
+    imageSrcSet: FOTO_CELULAR,
+    imageSizes: "100vw",
+    fetchPriority: "high",
+    media: "(max-width: 767px)",
+  });
+  preload("/img/hero/hero-desktop-1920.avif", {
+    as: "image",
+    type: "image/avif",
+    imageSrcSet: FOTO_COMPUTADOR,
+    imageSizes: "100vw",
+    fetchPriority: "high",
+    media: "(min-width: 768px)",
+  });
   return (
     <section className="relative overflow-hidden pb-24 md:pb-32">
       {/* Palco com a imagem de fundo: zoom lento e as luzes de neon pulsando */}
@@ -23,7 +45,7 @@ export default function Hero() {
             <source
               media="(max-width: 767px)"
               type="image/avif"
-              srcSet="/img/hero/hero-mobile-480.avif 480w, /img/hero/hero-mobile-760.avif 760w, /img/hero/hero-mobile-1080.avif 1080w"
+              srcSet={FOTO_CELULAR}
               sizes="100vw"
             />
             <source
@@ -34,7 +56,7 @@ export default function Hero() {
             />
             <source
               type="image/avif"
-              srcSet="/img/hero/hero-desktop-1280.avif 1280w, /img/hero/hero-desktop-1920.avif 1920w, /img/hero/hero-desktop-2560.avif 2560w"
+              srcSet={FOTO_COMPUTADOR}
               sizes="100vw"
             />
             <source
@@ -47,7 +69,6 @@ export default function Hero() {
               src="/img/hero/hero-desktop-1920.webp"
               alt=""
               fetchPriority="high"
-              decoding="async"
               className="hero-bg__foto h-full w-full object-cover object-[50%_40%] md:object-[70%_50%]"
             />
           </picture>

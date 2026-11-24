@@ -867,8 +867,17 @@ footer {
   mix-blend-mode: screen;
   opacity: 0.6;
   filter: brightness(1.3) saturate(1.35);
+}
+/* O pulsar do neon também espera o primeiro gesto: na carga a camada fica
+   parada (e vazia, a imagem só vem com .anim-ok). */
+.anim-ok .hero-bg__neon {
   animation: hero-neon 2.8s ease-in-out infinite;
   will-change: opacity;
+}
+/* O pontinho que pulsa anima box-shadow (pintura a cada quadro): só depois
+   do primeiro gesto, para não pesar na carga do celular. */
+html:not(.anim-ok) .animate-pulse-dot {
+  animation: none;
 }
 @keyframes hero-zoom {
   from {
